@@ -222,7 +222,7 @@ public class EntityStand extends EntityLiving
 					int slot = tempArmor.getBodyPart();
 					if(this.armor[slot] == null){
 						this.setArmor(slot,is);
-						is.stackSize--;
+						is.shrink(1);
 					}
 					ep.setCurrentItemOrArmor(0, is);
 				}
@@ -262,7 +262,7 @@ public class EntityStand extends EntityLiving
 
 	public void giveItemToPlayer(World world, EntityPlayer ep, ItemStack is){
 		if(world != null && ep != null && is != null){
-			is.stackSize = 1;
+			is.setCount(1);
 			EntityItem ei = new EntityItem(world,ep.posX,ep.posY,ep.posZ,is);
 			world.spawnEntityInWorld(ei);
 		}

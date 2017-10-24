@@ -186,16 +186,16 @@ public class BlockHopper extends BlockTerraContainer
 
 				if (itemstack != null)
 				{
-					while (itemstack.stackSize > 0)
+					while (itemstack.getCount() > 0)
 					{
 						int j1 = this.random.nextInt(21) + 10;
 
-						if (j1 > itemstack.stackSize)
+						if (j1 > itemstack.getCount())
 						{
-							j1 = itemstack.stackSize;
+							j1 = itemstack.getCount();
 						}
 
-						itemstack.stackSize -= j1;
+						itemstack.shrink(j1);
 						EntityItem entityitem = new EntityItem(world, x + 0.5f, y + 0.5f, z + 0.5f, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound())

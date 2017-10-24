@@ -105,7 +105,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		if (world.getTileEntity(x, y, z) instanceof TEIngotPile && world.getBlock(x,y,z) == TFCBlocks.ingotPile)
 		{
 			te = (TEIngotPile)world.getTileEntity(x, y, z);
-			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit())
+			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).getCount() < te.getInventoryStackLimit())
 			{
 				fullStack = false;
 				te.injectContents(0, 1);
@@ -205,8 +205,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 
 				if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
 				{
-
-					itemstack.stackSize = itemstack.stackSize-1;
+					itemstack.shrink(1);
 					world.addBlockEvent(x,y,z,TFCBlocks.ingotPile,0,0);
 					return true;
 
@@ -219,12 +218,12 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(te != null)
 				{
 					te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
-					if(te.storage[0] != null && te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64) 
+					if(te.storage[0] != null && te.contentsMatch(0,itemstack) && te.storage[0].getCount() < 64)
 					{
 						te.injectContents(0,1);
 						te.validate();
 					} 
-					else if(te.storage[0] != null && !te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64) 
+					else if(te.storage[0] != null && !te.contentsMatch(0,itemstack) && te.storage[0].getCount() < 64)
 					{
 						return false;
 					}
@@ -236,7 +235,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 					{
 						if(createPile(itemstack, entityplayer, world, x, y, z, side, dir))
 						{
-							itemstack.stackSize = itemstack.stackSize-1;
+							itemstack.shrink(1);
 							/*if (world.getTileEntity(x,y,z) != null)
 							{
 								//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
@@ -247,7 +246,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 						return true;
 
 					}
-					itemstack.stackSize = itemstack.stackSize-1;
+					itemstack.shrink(1);
 					/*if (world.getTileEntity(x,y,z) != null)
 					{
 						//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
@@ -262,25 +261,13 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				int m = itemstack.getItemDamage();
 				if(side == 1)
 				{
-					if (m>=16){
-						world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
-					else{
-						world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
+					world.setBlock(x, y+1, z, TFCBlocks.ingotPile, m, 0x2);
+					itemstack.shrink(1);
 				}
 				else if(side == 0 && world.isAirBlock(x, y-1, z))
 				{
-					if(m >=16){
-						world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
-					else{
-						world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
-						itemstack.stackSize = itemstack.stackSize-1;
-					}
+					world.setBlock(x, y-1, z, TFCBlocks.ingotPile, m, 0x2);
+					itemstack.shrink(1);
 				}
 				else if(side == 2 && world.isAirBlock(x, y, z-1))
 				{
@@ -320,7 +307,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			{
 				TEIngotPile ip = (TEIngotPile)te;
 
-				if (ip.storage[0] == null || ip.storage[0].stackSize < 64)
+				if (ip.storage[0] == null || ip.storage[0].getCount() < 64)
 				{
 					return false;
 				}
@@ -339,7 +326,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.ingotPile, m | 8, 0x2);
 			}
-			itemstack.stackSize = itemstack.stackSize-1;
+			itemstack.shrink(1);
 		}
 		else if(m >= 16)
 		{
@@ -348,7 +335,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.ingotPile, m-8 | 8, 0x2);
 			}
-			itemstack.stackSize = itemstack.stackSize-1;
+			itemstack.shrink(1);
 		}
 
 	}

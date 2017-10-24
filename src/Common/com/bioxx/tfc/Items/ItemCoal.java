@@ -57,13 +57,13 @@ public class ItemCoal extends ItemTerra
 				if(meta < 8)
 				{
 					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
-					is.stackSize--;
+					is.shrink(1);
 					return true;
 				}
 				else if(side == 1 && world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
 				{
 					world.setBlock(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.charcoal, 1, 0x2);
-					is.stackSize--;
+					is.shrink(1);
 					return true;
 				}
 			}
@@ -74,7 +74,7 @@ public class ItemCoal extends ItemTerra
 				if(meta < 8)
 				{
 					world.setBlockMetadataWithNotify(x + map[side][0], y + map[side][1], z + map[side][2], meta + 1, 3);
-					is.stackSize--;
+					is.shrink(1);
 					return true;
 				}
 			}
@@ -82,7 +82,7 @@ public class ItemCoal extends ItemTerra
 			if(world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
 			{
 				world.setBlock(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.charcoal, 1, 0x2);
-				is.stackSize--;
+				is.shrink(1);
 				TFCBlocks.charcoal.onNeighborBlockChange(world, x + map[side][0], y + map[side][1], z + map[side][2], world.getBlock(x + map[side][0], y + map[side][1], z + map[side][2]));
 			}
 			return true;

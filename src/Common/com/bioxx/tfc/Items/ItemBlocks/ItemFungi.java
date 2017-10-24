@@ -59,7 +59,7 @@ public class ItemFungi extends ItemTerraBlock
 				{
 					par2World.setBlock(i, j + 1, k, TFCBlocks.fungi, par1ItemStack.getItemDamage(), 0x3);
 					par2World.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F, TFCBlocks.fungi.stepSound.func_150496_b(), (TFCBlocks.fungi.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.fungi.stepSound.getPitch() * 0.8F);
-					if (!par3EntityPlayer.capabilities.isCreativeMode) --par1ItemStack.stackSize;
+					if (!par3EntityPlayer.capabilities.isCreativeMode) par1ItemStack.shrink(1);
 				}
 			}
 			return par1ItemStack;

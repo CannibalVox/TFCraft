@@ -93,9 +93,9 @@ public class ContainerAnvil extends ContainerTFC
 				if(slothammer.getHasStack())
 					return null;
 				ItemStack stack = slotStack.copy();
-				stack.stackSize = 1;
+				stack.setCount(1);
 				slothammer.putStack(stack);
-				slotStack.stackSize--;
+				slotStack.shrink(1);
 			}
 			// Input & Weld Slots
 			else
@@ -108,20 +108,20 @@ public class ContainerAnvil extends ContainerTFC
 					else
 					{
 						ItemStack stack = slotStack.copy();
-						stack.stackSize = 1;
+						stack.setCount(1);
 						slotinput[j].putStack(stack);
-						slotStack.stackSize--;
+						slotStack.shrink(1);
 						break;
 					}
 				}
 			}
 
-			if(slotStack.stackSize <= 0)
+			if(slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

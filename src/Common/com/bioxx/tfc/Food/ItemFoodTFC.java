@@ -459,7 +459,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
 				foodstats.stomachLevel += eatAmount*tasteFactor;
 				if(FoodStatsTFC.reduceFood(is, eatAmount))
-					is.stackSize = 0;
+					is.setCount(0);
 			}
 			else
 			{
@@ -487,7 +487,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 				float decay = Math.max(Food.getDecay(is), 0);
 				float eatAmount = Math.min(weight - decay, 5f);
 				if(FoodStatsTFC.reduceFood(is, eatAmount))
-					is.stackSize = 0;
+					is.setCount(0);
 			}
 			world.playSoundAtEntity(entity, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		}

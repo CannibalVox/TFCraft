@@ -61,8 +61,8 @@ public class BarrelRecipe
 
 	public Boolean matches(ItemStack item, FluidStack fluid)
 	{
-		boolean iStack = removesLiquid ? true : recipeIS != null && item != null && fluid != null && recipeFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/recipeFluid.amount);
-		boolean fStack = !removesLiquid ? true : recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.stackSize*recipeOutFluid.amount;
+		boolean iStack = removesLiquid ? true : recipeIS != null && item != null && fluid != null && recipeFluid != null && item.getCount() >= (int)Math.ceil(fluid.amount/recipeFluid.amount);
+		boolean fStack = !removesLiquid ? true : recipeFluid != null && item != null && fluid != null && recipeOutFluid != null && fluid.amount >= item.getCount()*recipeOutFluid.amount;
 
 		boolean anyStack = !removesLiquid && !sealedRecipe && this.recipeOutIS == null && allowAnyStack;
 		boolean itemsEqual = item == null && recipeIS == null || OreDictionary.itemMatches(recipeIS, item, false);
@@ -121,8 +121,8 @@ public class BarrelRecipe
 		String s = "";
 		if(this.recipeOutIS != null)
 		{
-			if(recipeOutIS.stackSize > 1)
-				s += recipeOutIS.stackSize+"x ";
+			if(recipeOutIS.getCount() > 1)
+				s += recipeOutIS.getCount()+"x ";
 			s += recipeOutIS.getDisplayName();
 		}
 		if(recipeOutFluid != null && !this.recipeFluid.isFluidEqual(recipeOutFluid))
@@ -141,7 +141,7 @@ public class BarrelRecipe
 		int div = 0;
 		if(inIS != null && recipeIS != null)
 		{
-			runs = inIS.stackSize/this.recipeIS.stackSize;
+			runs = inIS.getCount()/this.recipeIS.getCount();
 			div = inFS.amount/this.getInFluid().amount;
 		}
 		return Math.min(runs, div);
@@ -156,7 +156,7 @@ public class BarrelRecipe
 		{
 			stackList.clear();
 			outStack = recipeOutIS.copy();
-			int outputCount = outStack.stackSize * this.getnumberOfRuns(inIS, inFS);
+			int outputCount = outStack.getCount() * this.getnumberOfRuns(inIS, inFS);
 			int maxStackSize = outStack.getMaxStackSize();
 			Item item = outStack.getItem();
 			int damage = outStack.getItemDamage();
@@ -180,7 +180,7 @@ public class BarrelRecipe
 		{
 			stackList.clear();
 			outStack = inIS.copy();
-			outStack.stackSize -= inFS.amount / this.recipeOutFluid.amount;
+			outStack.setCount(outStack.getCount() - inFS.amount / this.recipeOutFluid.amount);
 			stackList.push(outStack);
 		}
 		if (outStack == null)
@@ -212,7 +212,7 @@ public class BarrelRecipe
 			}
 			else if (inIS != null)
 			{
-				fs.amount *= inIS.stackSize;
+				fs.amount *= inIS.getCount();
 			}
 			return fs;
 		}

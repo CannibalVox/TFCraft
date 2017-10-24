@@ -86,9 +86,9 @@ public class FoodCraftingHandler
 
 					if (grainWeight > 0)
 					{
-						inputStack.stackSize++;
-						if (inputStack.stackSize > 2)
-							inputStack.stackSize = 2;
+						inputStack.grow(1);
+						if (inputStack.getCount() > 2)
+							inputStack.setCount(2);
 					}
 				}
 			}
@@ -181,15 +181,15 @@ public class FoodCraftingHandler
 				{
 					Food.setWeight(is, inputWeight);
 					Food.setDecay(is, inputDecay);
-					is.stackSize++;
-					if(is.stackSize > 2)
-						is.stackSize = 2;
+					is.grow(1);
+					if(is.getCount() > 2)
+						is.setCount(2);
 				}
 			}
 		}
 
-		if(craftResult.stackSize == 0)
-			craftResult.stackSize = 1;
+		if(craftResult.getCount() == 0)
+			craftResult.setCount(1);
 
 		if (itemCount == 1) // Trimming decay with a knife from the inventory, not the crafting grid.
 		{
@@ -226,9 +226,9 @@ public class FoodCraftingHandler
 					if (!FoodCraftingHandler.preCrafted)
 					{
 						// Increase the knife's stack size so it will remain in the grid when crafting completes
-						itemstack.stackSize++;
-						if (itemstack.stackSize > 2)
-							itemstack.stackSize = 2;
+						itemstack.grow(1);
+						if (itemstack.getCount() > 2)
+							itemstack.setCount(2);
 					}
 				}
 
@@ -243,18 +243,18 @@ public class FoodCraftingHandler
 						if (finalWeight / 2f < 1) // Food is too small to split
 						{
 							// Increase the knife's stack size so it will remain in the grid when crafting completes
-							itemstack.stackSize++;
-							if (itemstack.stackSize > 2)
-								itemstack.stackSize = 2;
+							itemstack.grow(1);
+							if (itemstack.getCount() > 2)
+								itemstack.setCount(2);
 						}
 						else
 						{
 							FoodCraftingHandler.damageItem(player, craftingInv, i, itemstack.getItem());
 							Food.setWeight(craftingInv.getStackInSlot(foodSlot), Helper.roundNumber(finalWeight / 2f, 100));
 							// Increase the food's stack size so it will remain in the grid when crafting completes
-							craftingInv.getStackInSlot(foodSlot).stackSize++;
-							if (craftingInv.getStackInSlot(foodSlot).stackSize > 2)
-								craftingInv.getStackInSlot(foodSlot).stackSize = 2;
+							craftingInv.getStackInSlot(foodSlot).grow(1);
+							if (craftingInv.getStackInSlot(foodSlot).getCount() > 2)
+								craftingInv.getStackInSlot(foodSlot).setCount(2);
 						}
 					}
 				}
@@ -487,8 +487,8 @@ public class FoodCraftingHandler
 		if (infusion != null)
 			Food.setInfusion(craftResult, infusion);
 
-		if (craftResult.stackSize == 0)
-			craftResult.stackSize = 1;
+		if (craftResult.getCount() == 0)
+			craftResult.setCount(1);
 	}
 
 	public static boolean refiningGrain(ItemStack craftResult, IInventory iinventory)
@@ -562,7 +562,7 @@ public class FoodCraftingHandler
 				inputStack = ItemFoodTFC.createTag(inputStack, Helper.roundNumber(grainWeight, 100), 0);
 
 				if (grainWeight > 0)
-					inputStack.stackSize++ ;
+					inputStack.grow(1);
 			}
 		}
 		else if(craftResult.hasTagCompound() && craftResult.getTagCompound().hasKey(Food.WEIGHT_TAG))
@@ -617,9 +617,9 @@ public class FoodCraftingHandler
 				if (is.getItemDamage() != 0 || entityplayer.capabilities.isCreativeMode)
 				{
 					iinventory.setInventorySlotContents(index, is);
-					iinventory.getStackInSlot(index).stackSize++;
-					if(iinventory.getStackInSlot(index).stackSize > 2)
-						iinventory.getStackInSlot(index).stackSize = 2;
+					iinventory.getStackInSlot(index).grow(1);
+					if(iinventory.getStackInSlot(index).getCount() > 2)
+						iinventory.getStackInSlot(index).setCount(2);
 				}
 			}
 		}

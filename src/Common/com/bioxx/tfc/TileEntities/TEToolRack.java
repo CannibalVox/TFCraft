@@ -52,7 +52,7 @@ public class TEToolRack extends NetworkTileEntity implements IInventory
 		return storage[index] != null &&
 				storage[index].getItem() == is.getItem() &&
 				storage[index].getItemDamage() == is.getItemDamage() &&
-				storage[index].stackSize < storage[index].getMaxStackSize();
+				storage[index].getCount() < storage[index].getMaxStackSize();
 	}
 
 	@Override
@@ -60,14 +60,14 @@ public class TEToolRack extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i].stackSize <= j)
+			if(storage[i].getCount() <= j)
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			return itemstack1;
 		}
@@ -147,7 +147,7 @@ public class TEToolRack extends NetworkTileEntity implements IInventory
 	public void injectContents(int index, int count)
 	{
 		if(storage[index] != null)
-			storage[index] = new ItemStack(storage[index].getItem(),storage[index].stackSize+count,storage[index].getItemDamage());
+			storage[index] = new ItemStack(storage[index].getItem(),storage[index].getCount()+count,storage[index].getItemDamage());
 	}
 
 	@Override
@@ -160,8 +160,8 @@ public class TEToolRack extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack) 
 	{
 		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	@Override

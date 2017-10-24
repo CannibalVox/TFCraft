@@ -157,7 +157,7 @@ public class TEFarmland extends NetworkTileEntity
 	public boolean fertilize(ItemStack is, boolean isOrganic)
 	{
 		nutrients[3] = getSoilMax();
-		--is.stackSize;
+		is.shrink(1);
 		return true;
 	}
 

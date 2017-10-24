@@ -28,7 +28,7 @@ public class ItemClay extends ItemLooseRock
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		//TerraFirmaCraft.log.info(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
-		if(itemstack.stackSize >= 5)
+		if(itemstack.getCount() >= 5)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 			pi.specialCraftingType = new ItemStack(specialCraftingType, 1, 0);

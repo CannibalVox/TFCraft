@@ -30,7 +30,7 @@ public class ItemCustomPotion extends ItemPotion
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-			--is.stackSize;
+			is.shrink(1);
 		}
 
 		if (!world.isRemote)
@@ -62,7 +62,7 @@ public class ItemCustomPotion extends ItemPotion
 				broken = true;
 			}
 
-			if (!broken && is.stackSize <= 0)
+			if (!broken && is.getCount() <= 0)
 			{
 				return new ItemStack(TFCItems.glassBottle);
 			}

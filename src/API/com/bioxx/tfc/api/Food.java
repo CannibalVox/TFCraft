@@ -198,7 +198,7 @@ public class Food
 		NBTTagCompound nbt = getNBT(is);
 		nbt.setFloat(DECAY_TAG, Helper.roundNumber(value, 10000));
 		if(value > getWeight(is))
-			is.stackSize = 0;
+			is.setCount(0);
 	}
 
 	public static float getDecay(ItemStack is)
@@ -230,7 +230,7 @@ public class Food
 		NBTTagCompound nbt = getNBT(is);
 		nbt.setFloat(WEIGHT_TAG, Helper.roundNumber(value, 100));
 		if(getDecay(is) > value || value <= 0)
-			is.stackSize = 0;
+			is.setCount(0);
 	}
 
 	public static float getWeight(ItemStack is)

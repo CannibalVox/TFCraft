@@ -99,7 +99,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 							}
 						}
 						mold = new ItemStack(TFCItems.ceramicMold, 1);
-						mold.stackSize = 1;
+						mold.setCount(1);
 						mold.setItemDamage(1);
 					}
 				}
@@ -200,15 +200,15 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				{
 					if(fireItemStacks[7] != null && 
 							fireItemStacks[7].getItem() == output.getItem() && 
-							fireItemStacks[7].stackSize + output.stackSize <= fireItemStacks[7].getMaxStackSize())
+							fireItemStacks[7].getCount() + output.getCount() <= fireItemStacks[7].getMaxStackSize())
 					{
-						fireItemStacks[7].stackSize += output.stackSize; 
+						fireItemStacks[7].grow(output.getCount());
 					}
 					else if(fireItemStacks[8] != null && 
 							fireItemStacks[8].getItem() == output.getItem() && 
-							fireItemStacks[8].stackSize + output.stackSize <= fireItemStacks[8].getMaxStackSize())
+							fireItemStacks[8].getCount() + output.getCount() <= fireItemStacks[8].getMaxStackSize())
 					{
-						fireItemStacks[8].stackSize += output.stackSize; 
+						fireItemStacks[8].grow(output.getCount());
 					}
 					else if(fireItemStacks[7] == null)
 					{
@@ -218,11 +218,11 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					{
 						fireItemStacks[8] = output.copy();
 					}
-					else if (fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() &&
-								fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize() ||
+					else if (fireItemStacks[7].getCount() == fireItemStacks[7].getMaxStackSize() &&
+								fireItemStacks[8].getCount() == fireItemStacks[8].getMaxStackSize() ||
 								fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].getItem() != output.getItem() ||
-								fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].getItem() != output.getItem() ||
-								fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize())
+								fireItemStacks[7].getCount() == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].getItem() != output.getItem() ||
+								fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].getCount() == fireItemStacks[8].getMaxStackSize())
 					{
 						fireItemStacks[1] = output.copy();
 					}
@@ -236,14 +236,14 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	{
 		if(fireItemStacks[slot] != null)
 		{
-			if(fireItemStacks[slot].stackSize <= amount)
+			if(fireItemStacks[slot].getCount() <= amount)
 			{
 				ItemStack itemstack = fireItemStacks[slot];
 				fireItemStacks[slot] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = fireItemStacks[slot].splitStack(amount);
-			if(fireItemStacks[slot].stackSize == 0)
+			if(fireItemStacks[slot].getCount() == 0)
 				fireItemStacks[slot] = null;
 			return itemstack1;
 		}
@@ -348,8 +348,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	public void setInventorySlotContents(int slot, ItemStack is)
 	{
 		fireItemStacks[slot] = is;
-		if(is != null && is.stackSize > getInventoryStackLimit())
-			is.stackSize = getInventoryStackLimit();
+		if(is != null && is.getCount() > getInventoryStackLimit())
+			is.setCount(getInventoryStackLimit());
 	}
 
 	@Override
@@ -412,7 +412,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 					if (item == TFCItems.logs || item == Item.getItemFromBlock(TFCBlocks.peat))
 					{
-						for (int c = 0; c < is.stackSize; c++)
+						for (int c = 0; c < is.getCount(); c++)
 						{
 							if (fireItemStacks[0] == null) // Secondary check for empty input slot.
 							{
@@ -421,12 +421,12 @@ public class TEFirepit extends TEFireEntity implements IInventory
 								 * Do not change to fireItemStacks[0] = is;
 								 */
 								setInventorySlotContents(0, new ItemStack(item, 1, is.getItemDamage()));
-								is.stackSize--;
+								is.shrink(1);
 								handleFuelStack(); // Attempt to shift the fuel down so more fuel can be added within the same for loop.
 							}
 						}
 
-						if (is.stackSize == 0)
+						if (is.getCount() == 0)
 							entity.setDead();
 					}
 				}
@@ -492,14 +492,14 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			//do a last minute check to verify stack size
 			if(fireItemStacks[7] != null)
 			{
-				if(fireItemStacks[7].stackSize <= 0)
-					fireItemStacks[7].stackSize = 1;
+				if(fireItemStacks[7].getCount() <= 0)
+					fireItemStacks[7].setCount(1);
 			}
 
 			if(fireItemStacks[8] != null)
 			{
-				if(fireItemStacks[8].stackSize <= 0)
-					fireItemStacks[8].stackSize = 1;
+				if(fireItemStacks[8].getCount() <= 0)
+					fireItemStacks[8].setCount(1);
 			}
 
 			if(fuelTimeLeft <= 0)

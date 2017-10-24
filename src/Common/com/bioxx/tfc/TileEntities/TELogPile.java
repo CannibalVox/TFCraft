@@ -52,9 +52,9 @@ public class TELogPile extends TileEntity implements IInventory
 		else
 		{
 			ItemStack is = storage[slot].copy();
-			is.stackSize = 1;
-			storage[slot].stackSize--;
-			if(storage[slot].stackSize == 0)
+			is.setCount(1);
+			storage[slot].shrink(1);
+			if(storage[slot].getCount() == 0)
 				storage[slot] = null;
 			if(this.getNumberOfLogs() == 0)
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
@@ -86,17 +86,17 @@ public class TELogPile extends TileEntity implements IInventory
 		return storage[index] != null &&
 				storage[index].getItem() == is.getItem() &&
 				storage[index].getItemDamage() == is.getItemDamage() &&
-				storage[index].stackSize < storage[index].getMaxStackSize() &&
-				storage[index].stackSize + 1 <= this.getInventoryStackLimit();
+				storage[index].getCount() < storage[index].getMaxStackSize() &&
+				storage[index].getCount() + 1 <= this.getInventoryStackLimit();
 	}
 
 	public int getNumberOfLogs()
 	{
 		int[] count = new int[4];
-		count[0] = storage[0] != null ? storage[0].stackSize : 0;
-		count[1] = storage[1] != null ? storage[1].stackSize : 0;
-		count[2] = storage[2] != null ? storage[2].stackSize : 0;
-		count[3] = storage[3] != null ? storage[3].stackSize : 0;
+		count[0] = storage[0] != null ? storage[0].getCount() : 0;
+		count[1] = storage[1] != null ? storage[1].getCount() : 0;
+		count[2] = storage[2] != null ? storage[2].getCount() : 0;
+		count[3] = storage[3] != null ? storage[3].getCount() : 0;
 		return count[0] + count[1] + count[2] + count[3];
 	}
 
@@ -106,14 +106,14 @@ public class TELogPile extends TileEntity implements IInventory
 		if(storage[slot] != null)
 		{
 			ItemStack is;
-			if(storage[slot].stackSize <= amount)
+			if(storage[slot].getCount() <= amount)
 			{
 				is = storage[slot];
 				storage[slot] = null;
 				return is;
 			}
 
-			if(storage[slot].stackSize == 0)
+			if(storage[slot].getCount() == 0)
 				storage[slot] = null;
 
 			is = storage[slot].splitStack(amount);
@@ -169,7 +169,7 @@ public class TELogPile extends TileEntity implements IInventory
 	{
 		if(storage[index] != null)
 		{
-			storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
+			storage[index] = new ItemStack(storage[index].getItem(), storage[index].getCount() + count, storage[index].getItemDamage());
 		}
 	}
 
@@ -189,8 +189,8 @@ public class TELogPile extends TileEntity implements IInventory
 	public void setInventorySlotContents(int slot, ItemStack is)
 	{
 		storage[slot] = is;
-		if(is != null && is.stackSize > getInventoryStackLimit())
-			is.stackSize = getInventoryStackLimit();
+		if(is != null && is.getCount() > getInventoryStackLimit())
+			is.setCount(getInventoryStackLimit());
 	}
 
 	@Override

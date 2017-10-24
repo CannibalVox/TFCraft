@@ -344,7 +344,7 @@ public class BlockBarrel extends BlockTerraContainer
 					&& !te.getSealed())
 			{
 				ItemStack tmp = equippedItem.copy();
-				tmp.stackSize = 1;
+				tmp.setCount(1);
 				ItemStack is = te.addLiquid(tmp);
 
 				// If we cannot add the liquid to the barrel, open the interface.
@@ -353,12 +353,12 @@ public class BlockBarrel extends BlockTerraContainer
 					return false;
 				}
 
-				equippedItem.stackSize--;
+				equippedItem.shrink(1);
 
-				if (equippedItem.stackSize == 0)
+				if (equippedItem.getCount() == 0)
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 
-				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
+				if ( equippedItem.getCount() == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 				else
 				{
@@ -377,7 +377,7 @@ public class BlockBarrel extends BlockTerraContainer
 			else if(FluidContainerRegistry.isEmptyContainer(equippedItem) || equippedItem.getItem() instanceof IFluidContainerItem)
 			{
 				ItemStack tmp = equippedItem.copy();
-				tmp.stackSize = 1;
+				tmp.setCount(1);
 				ItemStack is = te.removeLiquid(tmp);
 
 				// If we cannot remove the liquid from the barrel, open the interface.
@@ -391,12 +391,9 @@ public class BlockBarrel extends BlockTerraContainer
 					ItemCustomBucketMilk.createTag(is, 20f);
 				}
 
-				equippedItem.stackSize--;
+				equippedItem.shrink(1);
 
-				if (equippedItem.stackSize == 0)
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-
-				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
+				if ( equippedItem.getCount() == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 				else
 				{
@@ -415,7 +412,7 @@ public class BlockBarrel extends BlockTerraContainer
 			else if(equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel)
 			{
 				ItemStack is = equippedItem.copy();
-				is.stackSize = 1;
+				is.setCount(1);
 				if(equippedItem.hasTagCompound())
 				{
 					if(equippedItem.getTagCompound().hasKey("fluidNBT") && !equippedItem.getTagCompound().hasKey("Items") && te.getFluidLevel() < te.getMaxLiquid())
@@ -449,7 +446,7 @@ public class BlockBarrel extends BlockTerraContainer
 							nbt.setBoolean("Sealed", true);
 							is.setTagCompound(nbt);
 							te.actionEmpty();
-							equippedItem.stackSize--;
+							equippedItem.shrink(1);
 							TFC_Core.giveItemToPlayer(is, player);
 						}
 						else if(is.getItem() instanceof ItemLargeVessel)
@@ -470,7 +467,7 @@ public class BlockBarrel extends BlockTerraContainer
 							nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
 							nbt.setBoolean("Sealed", true);
 							is.setTagCompound(nbt);
-							equippedItem.stackSize--;
+							equippedItem.shrink(1);
 							TFC_Core.giveItemToPlayer(is, player);
 						}
 						return true;

@@ -621,8 +621,8 @@ public class WAILAData implements IWailaDataProvider
 		ItemStack storage[] = getStorage(tag, accessor.getTileEntity());
 		ItemStack flux = storage[TEAnvil.FLUX_SLOT];
 
-		if (flux != null && flux.getItem() == TFCItems.powder && flux.getItemDamage() == 0 && flux.stackSize > 0)
-			currenttip.add(TFC_Core.translate("item.Powder.Flux.name") + " : " + flux.stackSize);
+		if (flux != null && flux.getItem() == TFCItems.powder && flux.getItemDamage() == 0 && flux.getCount() > 0)
+			currenttip.add(TFC_Core.translate("item.Powder.Flux.name") + " : " + flux.getCount());
 
 		return currenttip;
 	}
@@ -863,7 +863,7 @@ public class WAILAData implements IWailaDataProvider
 
 			for (int j = 10; j <= 13; j++) // Molds are stored in slots 7 through 9 per te.getMold()
 			{
-				if (storage[j] != null && storage[j].getItem() == TFCItems.ceramicMold && storage[j].stackSize > 0)
+				if (storage[j] != null && storage[j].getItem() == TFCItems.ceramicMold && storage[j].getCount() > 0)
 					hasMold = true;
 			}
 			if (hasMold)
@@ -909,12 +909,12 @@ public class WAILAData implements IWailaDataProvider
 				if (storage[j] != null && !counted[j]) // Make sure the slot is not empty, and has not already been accounted for
 				{
 					String log = storage[j].getDisplayName() + " : ";
-					int count = storage[j].stackSize;
+					int count = storage[j].getCount();
 					for (int k = j + 1; k < storage.length; k++) // Loop through all slots after the one being checked
 					{
 						if (storage[k] != null && storage[j].isItemEqual(storage[k])) // Make sure the comparison slot isn't empty, and see if it's the same type of log
 						{
-							count += storage[k].stackSize; // Increase the count for that log type
+							count += storage[k].getCount(); // Increase the count for that log type
 							counted[k] = true; // Mark the combined slot as accounted for
 						}
 					}
@@ -939,10 +939,10 @@ public class WAILAData implements IWailaDataProvider
 			LoomRecipe recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
 			int maxStrings = recipe.getReqSize();
 
-			if (storage[0].stackSize < maxStrings) // The loom isn't full yet
+			if (storage[0].getCount() < maxStrings) // The loom isn't full yet
 			{
 				String name = storage[0].getDisplayName() + " : ";
-				currenttip.add(name + storage[0].stackSize + "/" + maxStrings);
+				currenttip.add(name + storage[0].getCount() + "/" + maxStrings);
 			}
 			else // Weaving in progress
 			{

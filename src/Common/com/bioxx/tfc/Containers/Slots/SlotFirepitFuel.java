@@ -31,7 +31,7 @@ public class SlotFirepitFuel extends Slot
 	@Override
 	public void putStack(ItemStack par1ItemStack)
 	{
-		if (par1ItemStack != null) par1ItemStack.stackSize = 1;
+		if (par1ItemStack != null) par1ItemStack.setCount(1);
 		super.putStack(par1ItemStack);
 	}
 }

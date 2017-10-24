@@ -183,10 +183,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					{
 						temperature *= 0.9f;
 						cookDelay = 40;
-						if(stackToSmelt.stackSize <= 1)
+						if(stackToSmelt.getCount() <= 1)
 							storage[0] = null;
 						else
-							storage[0].stackSize--;
+							storage[0].getCount()--;
 						updateGui((byte) 0);
 					}
 				}
@@ -214,7 +214,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					TFC_ItemHeat.setTemp(storage[1], inTemp+temp);
 					//TerraFirmaCraft.log.info(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
-					storage[1].stackSize = 1;
+					storage[1].setCount(1);
 					updateGui((byte) 1);
 				}
 				outputTick = 0;
@@ -228,8 +228,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				currentAlloy = null;
 			}
 
-			if(storage[1] != null && storage[1].stackSize <= 0)
-				storage[1].stackSize = 1;
+			if(storage[1] != null && storage[1].getCount() <= 0)
+				storage[1].setCount(1);
 			if (inputTick > 10)
 				inputTick = 0;
 			if (outputTick >= 2)
@@ -322,14 +322,14 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i].stackSize <= j)
+			if(storage[i].getCount() <= j)
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			return itemstack1;
 		}

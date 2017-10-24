@@ -65,7 +65,7 @@ public class ItemGrill extends ItemTerraBlock
 				}
 				else
 					return false;  // don't delete misplaced Grill
-				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
+				player.inventory.mainInventory.get(player.inventory.currentItem).shrink(1);
 				return true;
 			}
 		}

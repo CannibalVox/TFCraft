@@ -62,12 +62,12 @@ public class ContainerNestBox extends ContainerTFC
 					return null;
 			}*/
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

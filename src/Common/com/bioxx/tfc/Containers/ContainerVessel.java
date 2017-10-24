@@ -65,7 +65,7 @@ public class ContainerVessel extends ContainerTFC
 				if(byte0 >= 0 && byte0 < 4)
 				{
 					ItemStack is = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-					if(is.stackSize >= 1)
+					if(is.getCount() >= 1)
 						this.containerInv.setInventorySlotContents(byte0, is);
 					else
 						this.containerInv.setInventorySlotContents(byte0, null);
@@ -187,12 +187,12 @@ public class ContainerVessel extends ContainerTFC
 					return null;
 			}
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

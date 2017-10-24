@@ -253,7 +253,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		{
 			if (!ep.capabilities.isCreativeMode)
 			{
-				stack.stackSize--;
+				stack.shrink(1);
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,stack);
 			}
 			worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
@@ -476,7 +476,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		ItemStack itemstack = player.getHeldItem();
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
 			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
-				itemstack.stackSize--;
+				itemstack.shrink(1);
 			}
 			return true;
 		}

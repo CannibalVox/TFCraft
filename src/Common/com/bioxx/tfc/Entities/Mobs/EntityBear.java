@@ -584,7 +584,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		{
 			if (this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player))
 			{
-				itemstack.stackSize--;
+				itemstack.shrink(1);
 			}
 			return true;
 		}

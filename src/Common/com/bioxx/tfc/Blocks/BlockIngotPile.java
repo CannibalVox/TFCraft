@@ -63,14 +63,14 @@ public class BlockIngotPile extends BlockTerraContainer
 
 				if (!entityplayer.isSneaking() && tileentityingotpile.getStackInSlot(0) != null)
 				{
-					if (tileentityingotpile.getStackInSlot(0).stackSize > 0)
+					if (tileentityingotpile.getStackInSlot(0).getCount() > 0)
 						tileentityingotpile.injectContents(0, -1);
 
 					world.spawnEntityInWorld(new EntityItem(world,tileentityingotpile.xCoord,
 							tileentityingotpile.yCoord + 1, tileentityingotpile.zCoord, new ItemStack(tileentityingotpile.getStackInSlot(0).getItem(), 1, tileentityingotpile.getStackInSlot(0).getItemDamage())));
 					world.notifyBlockOfNeighborChange(x, y + 1, z, this);
 
-					if (tileentityingotpile.getStackInSlot(0).stackSize < 1)
+					if (tileentityingotpile.getStackInSlot(0).getCount() < 1)
 						world.setBlockToAir(x, y, z);
 
 					world.markBlockForUpdate(x, y, z);
@@ -86,8 +86,8 @@ public class BlockIngotPile extends BlockTerraContainer
 		TEIngotPile teip = (TEIngotPile)world.getTileEntity(x, y, z);
 		TEIngotPile teipBottom = (TEIngotPile)world.getTileEntity(x, y - 1, z);
 
-		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
-		int topSize = teip.getStackInSlot(0).stackSize;
+		int bottomSize = teipBottom.getStackInSlot(0).getCount();
+		int topSize = teip.getStackInSlot(0).getCount();
 
 		if(bottomSize < 64)
 		{
@@ -120,8 +120,8 @@ public class BlockIngotPile extends BlockTerraContainer
 		TEIngotPile teip = (TEIngotPile)world.getTileEntity(x, y + 1, z);
 		TEIngotPile teipBottom = (TEIngotPile)world.getTileEntity(x, y, z);
 
-		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
-		int topSize = teip.getStackInSlot(0).stackSize;
+		int bottomSize = teipBottom.getStackInSlot(0).getCount();
+		int topSize = teip.getStackInSlot(0).getCount();
 
 		if(bottomSize < 64)
 		{
@@ -157,7 +157,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te != null && te.getStackInSlot(0) != null)
-			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).stackSize + 7) / 8) * 0.125, (double)z + 1);
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).getCount() + 7) / 8) * 0.125, (double)z + 1);
 		//else
 
 		return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + 0.25, (double)z + 1);
@@ -171,7 +171,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
-			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).stackSize + 7) / 8) * 0.125, (double)z + 1);
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).getCount() + 7) / 8) * 0.125, (double)z + 1);
 		else
 			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + 0.25, (double)z + 1);
 	}
@@ -184,7 +184,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		TEIngotPile te = (TEIngotPile)bAccess.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
-			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getStackInSlot(0).stackSize + 7)/8)*0.125), 1f);
+			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getStackInSlot(0).getCount() + 7)/8)*0.125), 1f);
 		else
 			this.setBlockBounds(0f, 0f, 0f, 0f, 0.25f, 0f);
 	}
@@ -237,7 +237,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		{
 			TEIngotPile te = ((TEIngotPile) world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
 
-			return te.getStackInSlot(0) != null ? te.getStackInSlot(0).stackSize : 0;
+			return te.getStackInSlot(0) != null ? te.getStackInSlot(0).getCount() : 0;
 		}
 
 		return 0;
@@ -291,14 +291,14 @@ public class BlockIngotPile extends BlockTerraContainer
 					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
 					EntityItem var12;
 
-					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
+					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.getCount() > 0; world.spawnEntityInWorld(var12))
 					{
 						int var11 = this.random.nextInt(21) + 10;
 
-						if (var11 > var7.stackSize)
-							var11 = var7.stackSize;
+						if (var11 > var7.getCount())
+							var11 = var7.getCount();
 
-						var7.stackSize -= var11;
+						var7.setCount(var7.getCount() - var11);
 						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
 						float var13 = 0.05F;
 						var12.motionX = (float)this.random.nextGaussian() * var13;

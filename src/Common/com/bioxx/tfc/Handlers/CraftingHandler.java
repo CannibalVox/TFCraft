@@ -309,9 +309,9 @@ public class CraftingHandler
 				if (item.getItemDamage() != 0 || entityplayer.capabilities.isCreativeMode)
 				{
 					iinventory.setInventorySlotContents(index, item);
-					iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;
-					if(iinventory.getStackInSlot(index).stackSize > 2)
-						iinventory.getStackInSlot(index).stackSize = 2;
+					iinventory.getStackInSlot(index).grow(1);
+					if(iinventory.getStackInSlot(index).getCount() > 2)
+						iinventory.getStackInSlot(index).setCount(2);
 				}
 			}
 		}

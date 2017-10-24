@@ -105,7 +105,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						{
 							te.inventory[0] = new ItemStack(this, 1, itemstack.getItemDamage());
 							te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
-							itemstack.stackSize--;
+							itemstack.shrink(1);
 							world.markBlockForUpdate(x, y + offset, z);
 						}
 					}
@@ -115,7 +115,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						{
 							te.inventory[1] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
-							itemstack.stackSize--;
+							itemstack.shrink(1);
 							world.markBlockForUpdate(x, y + offset, z);
 						}
 					}
@@ -125,7 +125,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						{
 							te.inventory[2] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
-							itemstack.stackSize--;
+							itemstack.shrink(1);
 							world.markBlockForUpdate(x, y + offset, z);
 						}
 					}
@@ -134,7 +134,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						{
 							te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
-							itemstack.stackSize--;
+							itemstack.shrink(1);
 							world.markBlockForUpdate(x, y + offset, z);
 						}
 				}

@@ -39,9 +39,9 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 		else if (inIS != null)
 		{
 			if(keepstacksize)
-				out.stackSize = inIS.stackSize;
+				out.setCount(inIS.getCount());
 			else
-				out.stackSize *= inIS.stackSize;
+				out.setCount(out.getCount() * inIS.getCount());
 		}
 
 		Stack<ItemStack> result = new Stack<ItemStack>();
@@ -65,7 +65,7 @@ public class BarrelMultiItemRecipe extends BarrelRecipe
 		}
 		else if (inIS != null)
 		{
-			fs.amount *= inIS.stackSize;
+			fs.amount *= inIS.getCount();
 		}
 		return fs;
 	}

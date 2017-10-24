@@ -285,13 +285,14 @@ public class BlockAnvil extends BlockTerraContainer
 					float var9 = world.rand.nextFloat() * 0.8F + 0.1F;
 					EntityItem var12;
 
-					for (float var10 = world.rand.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
+					for (float var10 = world.rand.nextFloat() * 0.8F + 0.1F; var7.getCount() > 0; world.spawnEntityInWorld(var12))
 					{
 						int var11 = world.rand.nextInt(21) + 10;
 
-						if (var11 > var7.stackSize)
-							var11 = var7.stackSize;
-						var7.stackSize -= var11;
+						if (var11 > var7.getCount())
+							var11 = var7.getCount();
+						var7.shrink(var11);
+
 						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
 						float var13 = 0.05F;
 						var12.motionX = (float)world.rand.nextGaussian() * var13;

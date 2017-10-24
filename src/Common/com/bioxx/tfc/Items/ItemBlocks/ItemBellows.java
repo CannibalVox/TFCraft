@@ -27,7 +27,7 @@ public class ItemBellows extends ItemTerraBlock
 			if(side == 1 && world.getBlock(x, y, z).isNormalCube() && world.getBlock(x, y, z).isOpaqueCube() && world.isAirBlock(x, y+1, z))
 			{
 				world.setBlock( x, y+1, z, TFCBlocks.bellows, l, 0x2);
-				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
+				player.inventory.mainInventory.get(player.inventory.currentItem).shrink(1);
 				return true;
 			}
 		}

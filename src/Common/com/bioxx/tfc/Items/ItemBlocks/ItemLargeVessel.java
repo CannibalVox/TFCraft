@@ -99,7 +99,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 							ItemStack onlyItem = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 							if( onlyItem != null )
 							{
-								arraylist.add(EnumChatFormatting.GOLD + Integer.toString(onlyItem.stackSize)+"x " + onlyItem.getDisplayName() );
+								arraylist.add(EnumChatFormatting.GOLD + Integer.toString(onlyItem.getCount())+"x " + onlyItem.getDisplayName() );
 							}
 						}
 					}
@@ -165,15 +165,15 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 						volume = 1000;
 					}
 
-					if (is.stackSize == 1)
+					if (is.getCount() == 1)
 					{
 						ItemBarrels.fillItemBarrel(is, new FluidStack(fluid, volume), MAX_LIQUID);
 					}
 					else
 					{
-						is.stackSize--;
+						is.shrink(1);
 						ItemStack outIS = is.copy();
-						outIS.stackSize = 1;
+						outIS.setCount(1);
 						ItemBarrels.fillItemBarrel(outIS, new FluidStack(fluid, volume), MAX_LIQUID);
 						if (!player.inventory.addItemStackToInventory(outIS))
 						{
@@ -229,7 +229,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				if(te.canAddItem(0))
 				{
 					te.inventory[0] = stack.copy();
-					te.inventory[0].stackSize = 1;
+					te.inventory[0].setCount(1);
 					world.markBlockForUpdate(x, y, z);
 					return true;
 				}

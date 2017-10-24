@@ -260,8 +260,6 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 									super.harvestBlock(world, entityplayer, i + x, j + y, k + z, meta);
 
 									itemstack.damageItem(1, entityplayer);
-									if (itemstack.stackSize == 0)
-										entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
 								}
 							}
 						}

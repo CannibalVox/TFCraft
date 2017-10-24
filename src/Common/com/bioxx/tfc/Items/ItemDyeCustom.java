@@ -102,7 +102,7 @@ public class ItemDyeCustom extends ItemTerra
 				{
 					if (!par3World.isRemote)
 					{
-						par1ItemStack.stackSize--;
+						par1ItemStack.shrink(1);
 					}
 					return true;
 				}
@@ -122,7 +122,7 @@ public class ItemDyeCustom extends ItemTerra
 			if (!entitysheep.getSheared() && entitysheep.getFleeceColor() != var4)
 			{
 				entitysheep.setFleeceColor(var4);
-				--par1ItemStack.stackSize;
+				par1ItemStack.shrink(1);
 			}
 
 			return true;

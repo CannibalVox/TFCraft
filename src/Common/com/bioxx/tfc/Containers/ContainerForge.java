@@ -90,9 +90,9 @@ public class ContainerForge extends ContainerTFC
 						else
 						{
 							ItemStack stack = slotStack.copy();
-							stack.stackSize = 1;
+							stack.setCount(1);
 							slotfuel[j].putStack(stack);
-							slotStack.stackSize--;
+							slotStack.shrink(1);
 							j = -1;
 							break;
 						}
@@ -105,12 +105,12 @@ public class ContainerForge extends ContainerTFC
 					return null;
 			}
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

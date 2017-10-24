@@ -84,7 +84,7 @@ public class ItemLooseRock extends ItemTerra
 		else
 			pi.specialCraftingTypeAlternate = null;
 
-		if(is.stackSize > 1)
+		if(is.getCount() > 1)
 		{
 			player.openGui(TerraFirmaCraft.instance, 28, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}

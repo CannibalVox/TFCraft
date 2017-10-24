@@ -116,7 +116,7 @@ public class ItemFirestarter extends ItemTerra
 							if(entity.getEntityItem().getItem() == TFCItems.straw)
 								hasStraw = 40;
 							else if(entity.getEntityItem().getItem() == TFCItems.stick)
-								numsticks+=entity.getEntityItem().stackSize;
+								numsticks+=entity.getItem().getCount();
 						}
 
 						if (chance > 70 - hasStraw && numsticks >= 3)
@@ -124,7 +124,7 @@ public class ItemFirestarter extends ItemTerra
 							for (Iterator iterator = list.iterator(); iterator.hasNext();)
 							{
 								EntityItem entity = (EntityItem) iterator.next();
-								if (entity.getEntityItem().getItem() == TFCItems.stick || entity.getEntityItem().getItem() == TFCItems.straw)
+								if (entity.getItem().getItem() == TFCItems.stick || entity.getEntityItem().getItem() == TFCItems.straw)
 									entity.setDead();
 							}
 							world.setBlock(x, y + 1, z, TFCBlocks.firepit, 1, 2);
@@ -133,7 +133,7 @@ public class ItemFirestarter extends ItemTerra
 
 					stack.damageItem(1, player);
 					if(stack.getItemDamage() >= stack.getMaxDamage())
-						stack.stackSize = 0;
+						stack.setCount(0);
 				}
 				else if(isCoal)
 				{

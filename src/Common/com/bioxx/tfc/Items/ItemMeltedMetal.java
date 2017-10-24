@@ -102,8 +102,8 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if(itemstack.stackSize <= 0) {
-			itemstack.stackSize = 1;
+		if(itemstack.getCount() <= 0) {
+			itemstack.setCount(1);
 		}
 
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);

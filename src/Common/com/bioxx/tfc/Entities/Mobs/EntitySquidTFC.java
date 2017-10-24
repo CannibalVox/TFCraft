@@ -47,7 +47,7 @@ public class EntitySquidTFC extends EntitySquid
 			String name = itemstack.stackTagCompound.getString("ItemName");
 
 			this.setCustomNameTag(name);
-			itemstack.stackSize--;
+			itemstack.shrink(1);
 
 			return true;
 		}

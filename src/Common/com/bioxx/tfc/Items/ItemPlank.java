@@ -200,7 +200,7 @@ public class ItemPlank extends ItemTerra
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
-			is.stackSize--;
+			is.shrink(1);
 			return true;
 		}
 		return false;

@@ -70,7 +70,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 		ItemStack[] inventory = loadInventory(item);
 		for(ItemStack i : inventory)
 			if(i!=null && i.getItem() instanceof ItemArrow)
-				n += i.stackSize;
+				n += i.getCount();
 
 		return n;
 	}
@@ -81,7 +81,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 		ItemStack[] inventory = loadInventory(item);
 		for(ItemStack i : inventory)
 			if(i!=null && i.getItem() instanceof ItemJavelin)
-				n += i.stackSize;
+				n += i.getCount();
 
 		return n;
 	}
@@ -154,16 +154,16 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 		{
 			if(inventory[i] != null && inventory[i].isItemEqual(ammo))
 			{
-				if(ammo.stackSize + inventory[i].stackSize <= ammo.getMaxStackSize())
+				if(ammo.getCount() + inventory[i].getCount() <= ammo.getMaxStackSize())
 				{
-					inventory[i].stackSize += ammo.stackSize;
+					inventory[i].grow(ammo.getCount());
 					ammo = null;
 				}
-				else if(ammo.stackSize + inventory[i].stackSize > ammo.getMaxStackSize())
+				else if(ammo.getCount() + inventory[i].getCount() > ammo.getMaxStackSize())
 				{
-					int diff = ammo.getMaxStackSize() - inventory[i].stackSize;
-					inventory[i].stackSize = ammo.getMaxStackSize();
-					ammo.stackSize -= diff;
+					int diff = ammo.getMaxStackSize() - inventory[i].getCount();
+					inventory[i].setCount(ammo.getMaxStackSize());
+					ammo.shrink(diff);
 				}
 			}
 			else if(inventory[i] == null)
@@ -184,10 +184,10 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 			if(inventory[i] != null && inventory[i].getItem() instanceof IQuiverAmmo && ((IQuiverAmmo)inventory[i].getItem()).getAmmoType() == ammoType)
 			{
 				ItemStack out = inventory[i].copy();
-				out.stackSize = 1;
+				out.setCount(1);
 				if(shouldConsume)
-					inventory[i].stackSize--;
-				if(inventory[i].stackSize <= 0)
+					inventory[i].shrink(1);
+				if(inventory[i].getCount() <= 0)
 					inventory[i] = null;
 				saveInventory(quiver, inventory);
 				return out;

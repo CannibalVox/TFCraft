@@ -105,7 +105,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 
 			if (!world.isRemote && m != null && stack != null)
 			{
-				if (input != null && input.getItem() == TFCItems.ceramicMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
+				if (input != null && input.getItem() == TFCItems.ceramicMold && input.getItemDamage() == 1 && input.getCount() == 1 && metalAmount > 0)
 				{
 					int amt = 99;
 					ItemStack is = new ItemStack(m.meltedItem, 1, amt);
@@ -141,7 +141,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 						nbt.setInteger("MetalAmount", metalAmount - 1);
 					}
 				}
-				else if (input != null &&input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0 &&
+				else if (input != null &&input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.getCount() == 1 && metalAmount > 0 &&
 							("Copper".equals(m.name) || "Bronze".equals(m.name) || "Bismuth Bronze".equals(m.name) || "Black Bronze".equals(m.name)))
 				{
 					int amt = -1;
@@ -232,17 +232,17 @@ public class ContainerLiquidVessel extends ContainerTFC
 					slotStack.getItem() instanceof ItemPotteryMold && slotStack.getItemDamage() > 0))
 			{
 				ItemStack stack = slotStack.copy();
-				stack.stackSize = 1;
+				stack.setCount(1);
 				outputSlot.putStack(stack);
-				slotStack.stackSize--;
+				slotStack.shrink(1);
 			}
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

@@ -176,8 +176,8 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 					{
 						wood++;
 						ItemStack itemStack = is.copy();
-						is.stackSize--;
-						itemStack.stackSize = 1;
+						is.shrink(1);
+						itemStack.setCount(1);
 						this.setInventorySlotContents(i, itemStack);
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 						return true;
@@ -192,7 +192,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 					{
 						wood++;
 						ItemStack itemStack = is.copy();
-						itemStack.stackSize = 1;
+						itemStack.setCount(1);
 						this.setInventorySlotContents(i, itemStack);
 					}
 				}
@@ -210,7 +210,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			if (!player.capabilities.isCreativeMode)
 			{
 				straw++;
-				is.stackSize--;
+				is.shrink(1);
 			}
 			else
 			{
@@ -238,8 +238,8 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		inventory[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	public void ejectContents()

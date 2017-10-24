@@ -105,7 +105,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		if (itemstack1 == null)
 		{
 			par3EntityPlayer.setCurrentItemOrArmor(i /*+ 1*/, par1ItemStack.copy()); //Forge: Vanilla bug fix associated with fixed setCurrentItemOrArmor indexs for players.
-			par1ItemStack.stackSize = 0;
+			par1ItemStack.setCount(0);
 		}
 
 		return par1ItemStack;

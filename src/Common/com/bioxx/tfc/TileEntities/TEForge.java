@@ -150,7 +150,7 @@ public class TEForge extends TEFireEntity implements IInventory
 							if (units > 100)
 							{
 								units-= 100;
-								moldIS.stackSize--;
+								moldIS.shrink(1);
 								if(!addToStorage(outputCopy.copy()))
 								{
 									EntityItem ei = new EntityItem(worldObj, xCoord + 0.5, yCoord + 1.5, zCoord + 0.5, outputCopy);
@@ -162,7 +162,7 @@ public class TEForge extends TEFireEntity implements IInventory
 							{
 								outputCopy.setItemDamage(100-units);
 								units = 0;
-								moldIS.stackSize--;
+								moldIS.shrink(1);
 								fireItemStacks[i] = outputCopy.copy();
 							}
 						}
@@ -210,19 +210,19 @@ public class TEForge extends TEFireEntity implements IInventory
 
 	private ItemStack getMold()
 	{
-		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.ceramicMold && fireItemStacks[10].stackSize > 0)
+		if(fireItemStacks[10] != null && fireItemStacks[10].getItem() == TFCItems.ceramicMold && fireItemStacks[10].getCount() > 0)
 		{
 			return fireItemStacks[10];
 		}
-		else if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.ceramicMold && fireItemStacks[11].stackSize > 0)
+		else if(fireItemStacks[11] != null && fireItemStacks[11].getItem() == TFCItems.ceramicMold && fireItemStacks[11].getCount() > 0)
 		{
 			return fireItemStacks[11];
 		}
-		else if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.ceramicMold && fireItemStacks[12].stackSize > 0)
+		else if(fireItemStacks[12] != null && fireItemStacks[12].getItem() == TFCItems.ceramicMold && fireItemStacks[12].getCount() > 0)
 		{
 			return fireItemStacks[12];
 		}
-		else if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.ceramicMold && fireItemStacks[13].stackSize > 0)
+		else if(fireItemStacks[13] != null && fireItemStacks[13].getItem() == TFCItems.ceramicMold && fireItemStacks[13].getCount() > 0)
 		{
 			return fireItemStacks[13];
 		}
@@ -234,7 +234,7 @@ public class TEForge extends TEFireEntity implements IInventory
 	{
 		if(fireItemStacks[i] != null)
 		{
-			if(fireItemStacks[i].stackSize <= j)
+			if(fireItemStacks[i].getCount() <= j)
 			{
 				ItemStack is = fireItemStacks[i];
 				fireItemStacks[i] = null;
@@ -242,7 +242,7 @@ public class TEForge extends TEFireEntity implements IInventory
 			}
 
 			ItemStack isSplit = fireItemStacks[i].splitStack(j);
-			if(fireItemStacks[i].stackSize == 0)
+			if(fireItemStacks[i].getCount() == 0)
 				fireItemStacks[i] = null;
 			return isSplit;
 		}
@@ -384,8 +384,8 @@ public class TEForge extends TEFireEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		fireItemStacks[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	@Override
@@ -478,8 +478,8 @@ public class TEForge extends TEFireEntity implements IInventory
 			{
 				if(fireItemStacks[c] != null)
 				{
-					if(fireItemStacks[c].stackSize <= 0)
-						fireItemStacks[c].stackSize = 1;
+					if(fireItemStacks[c].getCount() <= 0)
+						fireItemStacks[c].setCount(1);
 				}
 			}
 		}

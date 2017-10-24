@@ -261,7 +261,7 @@ public class EntityLivingHandler
 				if (equipment.getEquipType(item) == EquipType.BACK && (equipment == TFCItems.quiver || equipment.getTooHeavyToCarry(item)))
 				{
 					player.inventory.setInventorySlotContents(36, item.copy());
-					item.stackSize = 0;
+					item.setCount(0);
 					event.item.setEntityItemStack(item);
 				}
 			}
@@ -279,7 +279,7 @@ public class EntityLivingHandler
 					else
 					{
 						is = item;
-						is.stackSize = 0;
+						is.setCount(0);
 						event.item.setEntityItemStack(is);
 						event.setResult(Result.DENY);
 					}
@@ -301,7 +301,7 @@ public class EntityLivingHandler
 						if(is == null)
 						{
 							is = item;
-							is.stackSize = 0;
+							is.setCount(0);
 							event.item.setEntityItemStack(is);
 							event.setResult(Result.DENY);
 						}

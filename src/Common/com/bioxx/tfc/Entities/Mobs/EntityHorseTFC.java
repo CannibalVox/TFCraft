@@ -665,7 +665,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
 			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
-				itemstack.stackSize--;
+				itemstack.shrink(1);
 			}
 			return true;
 		}
@@ -713,9 +713,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 				if (flag)
 				{
-					if (!player.capabilities.isCreativeMode && --itemstack.stackSize == 0)
+					if (!player.capabilities.isCreativeMode)
 					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+						itemstack.shrink(1);
 					}
 
 					return true;

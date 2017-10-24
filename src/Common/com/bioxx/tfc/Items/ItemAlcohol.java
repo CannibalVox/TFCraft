@@ -84,7 +84,7 @@ public class ItemAlcohol extends ItemTerra
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-			--is.stackSize;
+			is.shrink(1);
 		}
 
 		if (!world.isRemote)
@@ -147,7 +147,7 @@ public class ItemAlcohol extends ItemTerra
 		if (!player.capabilities.isCreativeMode && !player.inventory.addItemStackToInventory(new ItemStack(TFCItems.glassBottle)))
 		{
 			// If we couldn't fit the empty bottle in the inventory, and we drank the last alcohol bottle, put the empty bottle in the empty held slot
-			if (is.stackSize == 0)
+			if (is.getCount() == 0)
 				return new ItemStack(TFCItems.glassBottle);
 			// If we couldn't fit the empty bottle in the inventory, and there is more alcohol left in the stack, drop the bottle on the ground
 			else

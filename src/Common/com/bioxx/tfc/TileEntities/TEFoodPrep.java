@@ -174,7 +174,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 			consumeFoodWeight(saladWeights, getStackInSlot(1), getStackInSlot(2), getStackInSlot(3), getStackInSlot(4));
 
-			TFC_Core.getItemInInventory(TFCItems.potteryBowl, this).stackSize--;
+			TFC_Core.getItemInInventory(TFCItems.potteryBowl, this).shrink(1);
 		}
 	}
 
@@ -340,7 +340,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 				Food.setWeight(is, oldW - weights[i]);
 				float newW = Food.getWeight(is);
 				if (newW <= 0 || newW <= Food.getDecay(is))
-					is.stackSize = 0;
+					is.setCount(0);
 			}
 		}
 	}
@@ -383,14 +383,14 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i].stackSize <= j)
+			if(storage[i].getCount() <= j)
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			return itemstack1;
 		}

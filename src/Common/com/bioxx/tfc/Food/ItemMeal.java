@@ -220,7 +220,7 @@ public class ItemMeal extends ItemTerra implements IFood
 				//Now remove the eaten amount from the itemstack.
 				if (FoodStatsTFC.reduceFood(is, eatAmount))
 				{
-					is.stackSize = 0;
+					is.setCount(0);
 				}
 			}
 			else

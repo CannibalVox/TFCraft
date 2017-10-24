@@ -36,7 +36,7 @@ public class SlotFirepitIn extends Slot
 	public void putStack(ItemStack is)
 	{
 		if (is != null)
-			is.stackSize = 1;
+			is.setCount(1);
 		if (this.inventory != null)
 			super.putStack(is);
 	}

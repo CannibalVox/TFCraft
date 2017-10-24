@@ -446,7 +446,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		}
 		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
 			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
-				itemstack.stackSize--;
+				itemstack.shrink(1);
 			}
 			return true;
 		}

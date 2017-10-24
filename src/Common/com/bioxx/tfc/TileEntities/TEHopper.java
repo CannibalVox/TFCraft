@@ -142,7 +142,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		{
 			ItemStack itemstack;
 
-			if (this.storage[i].stackSize <= amount)
+			if (this.storage[i].getCount() <= amount)
 			{
 				itemstack = this.storage[i];
 				this.storage[i] = null;
@@ -152,7 +152,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			{
 				itemstack = this.storage[i].splitStack(amount);
 
-				if (this.storage[i].stackSize == 0)
+				if (this.storage[i].getCount() == 0)
 				{
 					this.storage[i] = null;
 				}
@@ -193,9 +193,9 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 	{
 		this.storage[i] = is;
 
-		if (is != null && is.stackSize > this.getInventoryStackLimit())
+		if (is != null && is.getCount() > this.getInventoryStackLimit())
 		{
-			is.stackSize = this.getInventoryStackLimit();
+			is.setCount(this.getInventoryStackLimit());
 		}
 	}
 
@@ -281,12 +281,12 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 			{
 				for(int i = 0; i < storage.length; i++)
 				{
-					if (storage[i] == null || ItemStack.areItemStacksEqual(storage[i], pressBlock) && storage[i].stackSize < storage[i].getMaxStackSize())
+					if (storage[i] == null || ItemStack.areItemStacksEqual(storage[i], pressBlock) && storage[i].getCount() < storage[i].getMaxStackSize())
 					{
 						if(storage[i] == null)
 							storage[i] = pressBlock;
 						else
-							storage[i].stackSize++;
+							storage[i].grow(1);
 						this.pressBlock = null;
 						break;
 					}
@@ -325,7 +325,7 @@ public class TEHopper extends NetworkTileEntity implements IHopper
 		ItemStack item = getPressableItem();
 		if(item != null)
 		{
-			if(item.stackSize > 0)
+			if(item.getCount() > 0)
 				Food.setWeight(item, Food.getWeight(item) - 0.64f);//0.64 per cycle leads to 250mB per stack of olives
 
 			if(barrel != null && barrel.canAcceptLiquids() && !barrel.getSealed())

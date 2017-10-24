@@ -52,7 +52,7 @@ public class ItemCustomLilyPad extends ItemColored
 					par2World.spawnParticle("splash", i, j + 2, k, 0.0D, 0.0D, 0.0D);
 					par2World.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F, "random.splash", 0.5F, TFCBlocks.lilyPad.stepSound.getPitch() * 0.8F);
 					if (!par3EntityPlayer.capabilities.isCreativeMode)
-						--par1ItemStack.stackSize;
+						par1ItemStack.shrink(1);
 				}
 			}
 			return par1ItemStack;

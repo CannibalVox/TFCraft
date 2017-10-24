@@ -97,14 +97,14 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i] .stackSize <= j)
+			if(storage[i] .getCount() <= j)
 			{
 				ItemStack is = storage[i];
 				storage[i] = null;
 				return is;
 			}
 			ItemStack isSplit = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			return isSplit;
 		}
@@ -185,7 +185,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		for(ItemStack is : storage)
 		{
 			if(is != null && is.getItem() == Items.gunpowder)
-				count+=is.stackSize;
+				count+=is.getCount();
 		}
 		return count;
 	}
@@ -285,7 +285,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public ItemStack addLiquid(ItemStack is)
 	{
-		if(is == null || is.stackSize > 1)
+		if(is == null || is.getCount() > 1)
 			return is;
 		if(FluidContainerRegistry.isFilledContainer(is))
 		{
@@ -313,7 +313,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	 */
 	public ItemStack removeLiquid(ItemStack is)
 	{
-		if(is == null || is.stackSize > 1)
+		if(is == null || is.getCount() > 1)
 			return is;
 		if(FluidContainerRegistry.isEmptyContainer(is))
 		{
@@ -677,7 +677,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if (this.getFluidLevel() > 0 && getInputStack() != null)
 			{
 				int count = 1;
-				while(this.getInputStack().stackSize > getInputStack().getMaxStackSize())
+				while(this.getInputStack().getCount() > getInputStack().getMaxStackSize())
 				{
 					ItemStack is = getInputStack().splitStack(getInputStack().getMaxStackSize());
 					if(count < this.storage.length && this.getStackInSlot(count) == null)
@@ -725,7 +725,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						((IFluidContainerItem) container.getItem()).drain(container, ((IFluidContainerItem)container.getItem()).getCapacity(container), true);
 					}
 				}
-				else if (inLiquid != null && container != null && container.stackSize == 1)
+				else if (inLiquid != null && container != null && container.getCount() == 1)
 				{
 					if(addLiquid(inLiquid))
 					{

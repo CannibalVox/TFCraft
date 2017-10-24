@@ -82,7 +82,7 @@ public class FloraIndex
 	public ItemStack getOutput(Random r, int i)
 	{
 		ItemStack is = output.copy();
-		is.stackSize += r.nextInt(i);
+		is.grow(r.nextInt(i));
 		return is;
 	}
 

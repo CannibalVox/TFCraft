@@ -28,7 +28,7 @@ public class SlotQuern extends Slot
 	@Override
 	public void putStack(ItemStack is)
 	{
-		if (is != null) is.stackSize = 1;
+		if (is != null) is.setCount(1);
 		super.putStack(is);
 	}
 }

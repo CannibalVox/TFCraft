@@ -118,7 +118,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 				te = (TEMetalSheet) world.getTileEntity(sides[0] + x, sides[1] + y, sides[2] + z); //isValid prevents ClassCastException
 				te.metalID = this.metalID;
 				te.sheetStack = itemstack.copy();
-				te.sheetStack.stackSize = 1; // stackSize is always 1 until the block is broken, and then updated based on the sides.
+				te.sheetStack.setCount(1); // stackSize is always 1 until the block is broken, and then updated based on the sides.
 				te.toggleBySide(flipSide(side), true);
 				isSuccessful = true;
 			}
@@ -129,7 +129,7 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 
 			if(isSuccessful)
 			{
-				itemstack.stackSize--;
+				itemstack.shrink(1);
 			}
 
 		}

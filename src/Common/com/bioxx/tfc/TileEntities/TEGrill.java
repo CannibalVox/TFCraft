@@ -231,14 +231,14 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i].stackSize <= j)
+			if(storage[i].getCount() <= j)
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			return itemstack1;
 		}

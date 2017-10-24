@@ -87,14 +87,12 @@ public class ContainerHorseInventoryTFC extends ContainerTFC
 				return null;
 			}
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
-				return null;
-
+			if (slotStack.getCount() == origStack.getCount()
 			slot.onPickupFromSlot(player, slotStack);
 		}
 

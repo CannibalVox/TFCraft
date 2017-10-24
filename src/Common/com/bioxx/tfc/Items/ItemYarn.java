@@ -63,7 +63,7 @@ public class ItemYarn extends ItemTerra
 				}
 			}
 
-			if(is.stackSize < length)
+			if(is.getCount() < length)
 				return false;
 
 			for(int i = 1; i <= length; i++)
@@ -73,7 +73,7 @@ public class ItemYarn extends ItemTerra
 				int zCoord = z+(map[2] * i);
 				int meta = (side & 4) >> 2;
 				world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.smokeRack, meta, 2);
-				is.stackSize--;
+				is.shrink(1);
 			}
 
 			return true;

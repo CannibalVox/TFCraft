@@ -69,18 +69,18 @@ public class TESluice extends TileEntity implements IInventory
 				if (stackInSlot == is && stackInSlot.getItemDamage() == is.getItemDamage())
 				{
 					// match, add to this slot but make sure it fits
-					if(stackInSlot.stackSize + is.stackSize > this.getInventoryStackLimit())
+					if(stackInSlot.getCount() + is.getCount() > this.getInventoryStackLimit())
 					{
 						// doesn't fit, add as much as possible then leave the remaining for the next slot
-						int size = getInventoryStackLimit() - stackInSlot.stackSize;
-						stackInSlot.stackSize += size;
-						is.stackSize -= size;
+						int size = getInventoryStackLimit() - stackInSlot.getCount();
+						stackInSlot.grow(size);
+						is.shrink(size);
 						continue;
 					}
 					else
 					{
 						// it fits, add it
-						stackInSlot.stackSize += is.stackSize;
+						stackInSlot.grow(is.getCount());
 					}
 					return;
 				}
@@ -104,14 +104,14 @@ public class TESluice extends TileEntity implements IInventory
 	{
 		if(sluiceItemStacks[i] != null)
 		{
-			if(sluiceItemStacks[i].stackSize <= j)
+			if(sluiceItemStacks[i].getCount() <= j)
 			{
 				ItemStack itemstack = sluiceItemStacks[i];
 				sluiceItemStacks[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = sluiceItemStacks[i].splitStack(j);
-			if(sluiceItemStacks[i].stackSize == 0)
+			if(sluiceItemStacks[i].getCount() == 0)
 				sluiceItemStacks[i] = null;
 			return itemstack1;
 		}
@@ -126,7 +126,7 @@ public class TESluice extends TileEntity implements IInventory
 		float f = random.nextFloat() * 0.8F + 0.1F;
 		float f1 = random.nextFloat() * 2.0F + 0.4F;
 		float f2 = random.nextFloat() * 0.8F + 0.1F;
-		EntityItem entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(is.getItem(), is.stackSize, is.getItemDamage()));
+		EntityItem entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(is.getItem(), is.getCount(), is.getItemDamage()));
 		float f3 = 0.05F;
 		entityitem.motionX = (float)random.nextGaussian() * f3;
 		entityitem.motionY = (float)random.nextGaussian() * f3 + 0.2F;
@@ -196,8 +196,8 @@ public class TESluice extends TileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		sluiceItemStacks[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	@Override
@@ -250,7 +250,7 @@ public class TESluice extends TileEntity implements IInventory
 				if(item == Item.getItemFromBlock(TFCBlocks.gravel)|| item == Item.getItemFromBlock(TFCBlocks.gravel2) || 
 						item == Item.getItemFromBlock(TFCBlocks.sand) || item == Item.getItemFromBlock(TFCBlocks.sand2))
 				{
-					int stackSize = entity.getEntityItem().stackSize;
+					int stackSize = entity.getItem().getCount();
 					int accept = (50 + 19 - soilAmount) / 20;
 					if (stackSize <= accept)
 					{

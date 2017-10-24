@@ -75,12 +75,13 @@ public class BlockSmokeRack extends BlockTerraContainer
 			int meta = world.getBlockMetadata(x, y, z);
 			TESmokeRack te = (TESmokeRack) world.getTileEntity(x, y, z);
 			ItemStack yarn = TFC_Core.getItemInInventory(TFCItems.woolYarn, entityplayer.inventory);
+			ItemStack currentItem = entityplayer.inventory.getCurrentItem();
 			if((meta & 1) == 0 && hitZ < 0.5)
 			{
-				if(te.getStackInSlot(0) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
+				if(te.getStackInSlot(0) == null && yarn != null && isItemValid(currentItem))
 				{
-					te.setInventorySlotContents(0, entityplayer.inventory.getCurrentItem().copy());
-					entityplayer.inventory.getCurrentItem().stackSize--;
+					te.setInventorySlotContents(0, currentItem.copy());
+					currentItem.setCount(currentItem.getCount()-1);
 					entityplayer.inventory.consumeInventoryItem(TFCItems.woolYarn);
 					flag = true;
 				}
@@ -92,10 +93,10 @@ public class BlockSmokeRack extends BlockTerraContainer
 			}
 			else if((meta & 1) == 0 && hitZ >= 0.5)
 			{ 
-				if(te.getStackInSlot(1) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
+				if(te.getStackInSlot(1) == null && yarn != null && isItemValid(currentItem))
 				{
-					te.setInventorySlotContents(1, entityplayer.inventory.getCurrentItem().copy());
-					entityplayer.inventory.getCurrentItem().stackSize--;
+					te.setInventorySlotContents(1, currentItem.copy());
+					currentItem.setCount(currentItem.getCount()-1);
 					entityplayer.inventory.consumeInventoryItem(TFCItems.woolYarn);
 					flag = true;
 				}
@@ -107,10 +108,10 @@ public class BlockSmokeRack extends BlockTerraContainer
 			}
 			else if((meta & 1) == 1 && hitX < 0.5)
 			{
-				if(te.getStackInSlot(0) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
+				if(te.getStackInSlot(0) == null && yarn != null && isItemValid(currentItem))
 				{
-					te.setInventorySlotContents(0, entityplayer.inventory.getCurrentItem().copy());
-					entityplayer.inventory.getCurrentItem().stackSize--;
+					te.setInventorySlotContents(0, currentItem.copy());
+					currentItem.setCount(currentItem.getCount()-1);
 					entityplayer.inventory.consumeInventoryItem(TFCItems.woolYarn);
 					flag = true;
 				}
@@ -122,10 +123,10 @@ public class BlockSmokeRack extends BlockTerraContainer
 			}
 			else if((meta & 1) == 1 && hitX >= 0.5)
 			{ 
-				if(te.getStackInSlot(1) == null && yarn != null && isItemValid(entityplayer.inventory.getCurrentItem()))
+				if(te.getStackInSlot(1) == null && yarn != null && isItemValid(currentItem))
 				{
-					te.setInventorySlotContents(1, entityplayer.inventory.getCurrentItem().copy());
-					entityplayer.inventory.getCurrentItem().stackSize--;
+					te.setInventorySlotContents(1,currentItem.copy());
+					currentItem.setCount(currentItem.getCount()-1);
 					entityplayer.inventory.consumeInventoryItem(TFCItems.woolYarn);
 					return true;
 				}

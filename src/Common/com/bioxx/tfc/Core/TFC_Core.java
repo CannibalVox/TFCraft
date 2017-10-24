@@ -1009,12 +1009,12 @@ public class TFC_Core
 		for (int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
 			ItemStack is = iinv.getStackInSlot(i);
-			if (is != null && iinv.getStackInSlot(i).stackSize <= 0)
+			if (is != null && iinv.getStackInSlot(i).getCount() <= 0)
 				iinv.setInventorySlotContents(i, null);
 
 			if (is != null)
 			{
-				if(is.stackSize == 0)
+				if(is.getCount() == 0)
 				{
 					iinv.setInventorySlotContents(i, null);
 					continue;
@@ -1053,7 +1053,7 @@ public class TFC_Core
 		for (int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
 			ItemStack is = iinv.getStackInSlot(i);
-			if (is != null && iinv.getStackInSlot(i).stackSize <= 0)
+			if (is != null && iinv.getStackInSlot(i).getCount() <= 0)
 				iinv.setInventorySlotContents(i, null);
 
 			if (is != null)
@@ -1079,7 +1079,7 @@ public class TFC_Core
 		for (int i = 0; !world.isRemote && i < iinv.length; i++)
 		{
 			ItemStack is = iinv[i];
-			if (is != null && iinv[i].stackSize <= 0)
+			if (is != null && iinv[i].getCount() <= 0)
 				iinv[i] = null;
 
 			if (is != null)
@@ -1173,7 +1173,7 @@ public class TFC_Core
 			if(is.getItem() instanceof IFood)
 				is = ((IFood)is.getItem()).onDecayed(is, world, x, y, z);
 			else
-				is.stackSize = 0;
+				is.setCount(0);
 		}
 
 		return is;

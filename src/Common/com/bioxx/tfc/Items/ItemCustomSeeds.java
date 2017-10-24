@@ -71,7 +71,7 @@ public class ItemCustomSeeds extends ItemTerra
 				te.cropId = cropId;
 				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
 				world.markBlockForUpdate(x, y, z);
-				--stack.stackSize;
+				stack.shrink(1);
 				return true;
 			}
 			else

@@ -210,7 +210,7 @@ public class BlockCrop extends BlockContainer
 								world.setBlockToAir(i + x, j, k + z);
 
 								itemstack.damageItem(1, player);
-								if (itemstack.stackSize == 0)
+								if (itemstack.getCount() == 0)
 									player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 							}
 						}

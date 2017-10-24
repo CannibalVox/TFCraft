@@ -64,7 +64,7 @@ public class ItemFlowers extends ItemTerraBlock
 				{
 					world.setBlock(i, j + 1, k, this.field_150939_a, is.getItemDamage(), 0x3);
 					world.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F, this.field_150939_a.stepSound.func_150496_b(), (this.field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F, this.field_150939_a.stepSound.getPitch() * 0.8F);
-					if (!player.capabilities.isCreativeMode) --is.stackSize;
+					if (!player.capabilities.isCreativeMode) is.shrink(1);
 				}
 			}
 			return is;

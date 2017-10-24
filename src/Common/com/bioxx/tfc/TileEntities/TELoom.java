@@ -69,14 +69,14 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if (storage[i].stackSize <= j)
+			if (storage[i].getCount() <= j)
 			{
 				ItemStack is = storage[i];
 				storage[i] = null;
 				return is;
 			}
 			ItemStack isSplit = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			return isSplit;
 		}
@@ -100,16 +100,16 @@ public class TELoom extends NetworkTileEntity implements IInventory
 				{
 					if(this.getStringCount() < recipe.getReqSize())
 					{
-						i.stackSize--;
-						this.storage[0].stackSize++;
+						i.shrink(1);
+						this.storage[0].grow(1);
 						updateLoom();
 					}
 				}
 			}
 			else if(LoomManager.getInstance().hasPotentialRecipes(i)){
-				i.stackSize--;
+				i.shrink(1);
 				ItemStack is = i.copy();
-				is.stackSize = 1;
+				is.setCount(1);
 				this.setInventorySlotContents(0, is);
 			}
 		}
@@ -204,7 +204,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public int getStringCount(){
-		return this.storage[0] != null? this.storage[0].stackSize: 0;
+		return this.storage[0] != null? this.storage[0].getCount(): 0;
 	}
 
 	public void setString(ItemStack is){
@@ -215,7 +215,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public void setStringCount(int count){
-		if(this.storage[0] != null)this.storage[0].stackSize = count;
+		if(this.storage[0] != null)this.storage[0].setCount(count);
 		if(!worldObj.isRemote){
 			this.updateLoom();
 		}

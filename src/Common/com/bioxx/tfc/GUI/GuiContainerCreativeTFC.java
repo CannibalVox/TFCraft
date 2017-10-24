@@ -120,7 +120,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 					this.mc.thePlayer.entityDropItem(itemstack, 1.5F);
 					this.mc.playerController.sendPacketDropItem/*func_78752_a*/(itemstack);
 
-					if (inventoryplayer.getItemStack().stackSize == 0)
+					if (inventoryplayer.getItemStack().getCount() == 0)
 						inventoryplayer.setItemStack((ItemStack)null);
 				}
 			}
@@ -176,7 +176,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 						if (itemstack2 != null && par3 >= 0 && par3 < 9)
 						{
 							itemstack3 = itemstack2.copy();
-							itemstack3.stackSize = itemstack3.getMaxStackSize();
+							itemstack3.setCount(itemstack3.getMaxStackSize());
 							this.mc.thePlayer.inventory.setInventorySlotContents(par3, itemstack3);
 							this.mc.thePlayer.inventoryContainer.detectAndSendChanges();
 						}
@@ -189,7 +189,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 						if (inventoryplayer.getItemStack() == null && par1Slot.getHasStack())
 						{
 							itemstack3 = par1Slot.getStack().copy();
-							itemstack3.stackSize = itemstack3.getMaxStackSize();
+							itemstack3.setCount( itemstack3.getMaxStackSize());
 							inventoryplayer.setItemStack(itemstack3);
 						}
 
@@ -201,7 +201,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 						if (itemstack2 != null)
 						{
 							itemstack3 = itemstack2.copy();
-							itemstack3.stackSize = par3 == 0 ? 1 : itemstack3.getMaxStackSize();
+							itemstack3.setCount(par3 == 0 ? 1 : itemstack3.getMaxStackSize());
 							this.mc.thePlayer.entityDropItem(itemstack3, 1.5F);
 							this.mc.playerController.sendPacketDropItem/*func_78752_a*/(itemstack3);
 						}
@@ -214,17 +214,17 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 						if (par3 == 0)
 						{
 							if (flag)
-								itemstack.stackSize = itemstack.getMaxStackSize();
-							else if (itemstack.stackSize < itemstack.getMaxStackSize())
-								++itemstack.stackSize;
+								itemstack.setCount(itemstack.getMaxStackSize());
+							else if (itemstack.getCount() < itemstack.getMaxStackSize())
+								itemstack.grow(1);
 						}
-						else if (itemstack.stackSize <= 1)
+						else if (itemstack.getCount() <= 1)
 						{
 							inventoryplayer.setItemStack((ItemStack)null);
 						}
 						else
 						{
-							--itemstack.stackSize;
+							itemstack.grow(1);
 						}
 					}
 					else if (itemstack2 != null && itemstack == null)
@@ -233,7 +233,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 						itemstack = inventoryplayer.getItemStack();
 
 						if (flag)
-							itemstack.stackSize = itemstack.getMaxStackSize();
+							itemstack.setCount(itemstack.getMaxStackSize());
 					}
 					else
 					{

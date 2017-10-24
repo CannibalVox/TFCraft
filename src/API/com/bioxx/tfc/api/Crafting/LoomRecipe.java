@@ -14,12 +14,12 @@ public class LoomRecipe
 	{
 		this.inItemStack = inputItem;
 		this.outItemStack = outIS;
-		this.inSize = inputItem.stackSize;
+		this.inSize = inputItem.getCount();
 	}
 
 	public Boolean matches(ItemStack item)
 	{
-		boolean iStack = inItemStack != null && item != null && item.stackSize == inItemStack.stackSize;
+		boolean iStack = inItemStack != null && item != null && item.getCount() == inItemStack.getCount();
 
 		boolean itemsEqual = OreDictionary.itemMatches(inItemStack, item, false);
 
@@ -28,7 +28,7 @@ public class LoomRecipe
 
 	public Boolean resultMatches(ItemStack item)
 	{
-		boolean iStack = outItemStack != null && item != null && item.stackSize == outItemStack.stackSize;
+		boolean iStack = outItemStack != null && item != null && item.getCount() == outItemStack.getCount();
 
 		boolean itemsEqual = OreDictionary.itemMatches(outItemStack, item, false);
 

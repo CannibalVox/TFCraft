@@ -26,13 +26,13 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 		if (par1 < 1.0F)
 			par1 = 1.0F;
 
-		for (int i = 0; i < this.armorInventory.length; ++i)
+		for (int i = 0; i < this.armorInventory.size(); ++i)
 		{
-			if (this.armorInventory[i] != null && this.armorInventory[i].getItem() instanceof ItemArmor)
+			if (this.armorInventory.get(i) != null && this.armorInventory.get(i).getItem() instanceof ItemArmor)
 			{
-				this.armorInventory[i].damageItem((int) par1, this.player);
-				if (this.armorInventory[i].stackSize == 0)
-					this.armorInventory[i] = null;
+				this.armorInventory.get(i).damageItem((int) par1, this.player);
+				if (this.armorInventory.get(i).getCount() == 0)
+					this.armorInventory.set(i, null);
 			}
 		}
 	}
@@ -154,7 +154,7 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 		{
 			ItemStack itemstack;
 
-			if (aitemstack[par1].stackSize <= par2)
+			if (aitemstack[par1].getCount() <= par2)
 			{
 				itemstack = aitemstack[par1];
 				aitemstack[par1] = null;
@@ -164,7 +164,7 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 			{
 				itemstack = aitemstack[par1].splitStack(par2);
 
-				if (aitemstack[par1].stackSize == 0)
+				if (aitemstack[par1].getCount() == 0)
 				{
 					aitemstack[par1] = null;
 				}

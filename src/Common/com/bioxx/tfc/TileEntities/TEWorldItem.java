@@ -89,7 +89,7 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		storage[i].stackSize -= j;
+		storage[i].shrink(j);
 		return storage[i];
 	}
 

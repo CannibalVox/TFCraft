@@ -44,7 +44,7 @@ public class ItemCustomMinecart extends ItemTerra
 				world.spawnEntityInWorld(new EntityCustomMinecart(world, x + 0.5F, y + 0.5F, z + 0.5F));
 			}
 
-			--itemstack.stackSize;
+			itemstack.shrink(1);
 			return true;
 		}
 		else

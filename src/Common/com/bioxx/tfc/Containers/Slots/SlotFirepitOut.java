@@ -30,7 +30,7 @@ public class SlotFirepitOut extends Slot
 	public void putStack(ItemStack par1ItemStack) {
 		if (par1ItemStack != null && par1ItemStack.getItem() == TFCItems.ceramicMold && par1ItemStack.getItemDamage() == 1)
 		{
-			par1ItemStack.stackSize = 1;
+			par1ItemStack.setCount(1);
 			slotMax = 1;
 		}
 		else

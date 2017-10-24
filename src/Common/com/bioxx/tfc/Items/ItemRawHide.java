@@ -51,7 +51,7 @@ public class ItemRawHide extends ItemLooseRock
 					world.func_147480_a/*destroyBlock*/(x2, y, z2, false);
 					world.setBlock(x, y, z, TFCBlocks.strawHideBed, d, 2);
 					world.setBlock(x2, y, z2, TFCBlocks.strawHideBed, d+8, 2);
-					itemstack.stackSize--;
+					itemstack.shrink(1);
 				}
 			}
 			else if(itemstack.getItem() == TFCItems.soakedHide && side == ForgeDirection.UP.ordinal() )

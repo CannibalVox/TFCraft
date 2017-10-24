@@ -23,14 +23,14 @@ public class TEWorkbench extends TileEntity implements IInventory
 	{
 		if(craftingMatrix[i] != null)
 		{
-			if(craftingMatrix[i].stackSize <= j)
+			if(craftingMatrix[i].getCount() <= j)
 			{
 				ItemStack itemstack = craftingMatrix[i];
 				craftingMatrix[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = craftingMatrix[i].splitStack(j);
-			if(craftingMatrix[i].stackSize == 0)
+			if(craftingMatrix[i].getCount() == 0)
 				craftingMatrix[i] = null;
 			return itemstack1;
 		}
@@ -72,8 +72,8 @@ public class TEWorkbench extends TileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack) 
 	{
 		craftingMatrix[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	@Override

@@ -98,11 +98,11 @@ public class HeatIndex
 		if(outputMax - outputMin > 0) 
 		{
 			rand = outputMin + r.nextInt(outputMax - outputMin);
-			return new ItemStack(getOutputItem(),output.stackSize, 100-rand);
+			return new ItemStack(getOutputItem(),output.getCount(), 100-rand);
 		}
 		else 
 		{
-			return new ItemStack(getOutputItem(),output.stackSize, outputMin);
+			return new ItemStack(getOutputItem(),output.getCount(), outputMin);
 		}
 	}
 

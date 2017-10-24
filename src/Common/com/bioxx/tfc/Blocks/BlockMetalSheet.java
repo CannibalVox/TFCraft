@@ -80,7 +80,7 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 				if(te.southExists()) stack++;
 				if(te.eastExists()) stack++;
 				if(te.westExists()) stack++;
-				te.sheetStack.stackSize = stack;
+				te.sheetStack.setCount(stack);
 				EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
 				world.spawnEntityInWorld(ei);					
 			}

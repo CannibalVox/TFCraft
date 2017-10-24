@@ -191,14 +191,14 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	{
 		if (storage[i] != null)
 		{
-			if (storage[i].stackSize <= j)
+			if (storage[i].getCount() <= j)
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if (storage[i].stackSize == 0)
+			if (storage[i].getCount() == 0)
 			{
 				storage[i] = null;
 			}
@@ -361,8 +361,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		storage[i] = itemstack;
-		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if (itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	public void createTuyereBlock()
@@ -467,16 +467,16 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 							itemstack.getItemDamage() == 1 /*||
 							item == TFCItems.Coke*/)
 					{
-						for (int c = 0; c < itemstack.stackSize; c++)
+						for (int c = 0; c < itemstack.getCount(); c++)
 						{
 							if (getTotalCount() < 40 && charcoalCount < (this.maxValidStackSize*4))
 							{
 								charcoalCount++;
-								itemstack.stackSize--;
+								itemstack.shrink(1);
 							}
 						}
 
-						if (itemstack.stackSize == 0)
+						if (itemstack.getCount() == 0)
 							entity.setDead();
 					}
 					/*
@@ -488,7 +488,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 								!isOre && item instanceof ISmeltable && ((ISmeltable) item).getMetalType(itemstack) == Global.PIGIRON &&
 								index != null)
 					{
-						int c = itemstack.stackSize;
+						int c = itemstack.getCount();
 						int nonConsumedOre = 0;
 						for (; c > 0; c--)
 						{
@@ -509,7 +509,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 							entity.setDead();
 						else
 						{
-							itemstack.stackSize = c + nonConsumedOre;
+							itemstack.setCount(c + nonConsumedOre);
 							entity.setEntityItemStack(itemstack);
 						}
 					}
@@ -606,8 +606,8 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 			ItemStack is = entity.getEntityItem();
 			if (!entity.isDead && is.getItemDamage() == 0 && is.getItem() == TFCItems.powder)
 			{
-				is.stackSize--;
-				if(is.stackSize == 0)
+				is.shrink(1);
+				if(is.getCount() == 0)
 					entity.setDead();
 				else
 					entity.setEntityItemStack(is);

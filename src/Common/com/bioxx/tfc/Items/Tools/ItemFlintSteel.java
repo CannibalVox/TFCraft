@@ -71,7 +71,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					{
 						EntityItem entity = (EntityItem) iterator.next();
 						if (entity.getEntityItem().getItem() == TFCItems.stick)
-							numsticks += entity.getEntityItem().stackSize;
+							numsticks += entity.getItem().getCount();
 					}
 
 					if (numsticks >= 3)

@@ -170,7 +170,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						this.setInventorySlotContents(INPUT1_SLOT, output);
 
 						if(anvilItemStacks[INPUT2_SLOT] != null)
-							anvilItemStacks[INPUT2_SLOT].stackSize--;
+							anvilItemStacks[INPUT2_SLOT].shrink(1);
 					}
 
 					workRecipe = null;
@@ -180,8 +180,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				}
 			}
 		}
-		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].stackSize < 1)
-			anvilItemStacks[INPUT1_SLOT].stackSize = 1;
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getCount() < 1)
+			anvilItemStacks[INPUT1_SLOT].setCount(1);
 	}
 
 	public void increaseSkills(AnvilRecipe recipe)
@@ -562,8 +562,8 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				if(result != null)
 				{
 					TFC_ItemHeat.setTemp(result, (TFC_ItemHeat.getTemp(anvilItemStacks[2]) + TFC_ItemHeat.getTemp(anvilItemStacks[3])) / 2);
-					if(result.stackSize <= 0)
-						result.stackSize = 1;
+					if(result.getCount() <= 0)
+						result.setCount(1);
 					setInventorySlotContents(WELDOUT_SLOT, result);
 					setInventorySlotContents(WELD1_SLOT, null);
 					setInventorySlotContents(WELD2_SLOT, null);
@@ -593,14 +593,14 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	{
 		if(anvilItemStacks[i] != null)
 		{
-			if(anvilItemStacks[i].stackSize <= j)
+			if(anvilItemStacks[i].getCount() <= j)
 			{
 				ItemStack itemstack = anvilItemStacks[i];
 				anvilItemStacks[i] = null;
 				return itemstack;
 			}
 			ItemStack itemstack1 = anvilItemStacks[i].splitStack(j);
-			if(anvilItemStacks[i].stackSize == 0)
+			if(anvilItemStacks[i].getCount() == 0)
 				anvilItemStacks[i] = null;
 			return itemstack1;
 		}
@@ -763,11 +763,11 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
 		{
-			if(itemstack.stackSize > getInventoryStackLimit())
-				itemstack.stackSize = getInventoryStackLimit();
-			if(itemstack.stackSize <= 0)
+			if(itemstack.getCount() > getInventoryStackLimit())
+				itemstack.setCount(getInventoryStackLimit());
+			if(itemstack.getCount() <= 0)
 				itemstack = null;
 		}
 		anvilItemStacks[i] = itemstack;

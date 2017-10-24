@@ -195,10 +195,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		else
 		{
 			player.inventory.mainInventory[active] = player.inventory.mainInventory[nextJav].copy();
-			if (--player.inventory.mainInventory[nextJav].stackSize <= 0)
-			{
-				player.inventory.mainInventory[nextJav] = null;
-			}
+			player.inventory.mainInventory.get(nextJav).shrink(1);
 		}
 		return true;
 	}

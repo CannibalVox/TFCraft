@@ -13,8 +13,8 @@ public class TELeatherRack extends NetworkTileEntity
 	public void setLeather(ItemStack is)
 	{
 		leatherItem = is.copy();
-		leatherItem.stackSize = 1;
-		is.stackSize--;
+		leatherItem.setCount(1);
+		is.shrink(1);
 	}
 
 	public void workArea(int coord)

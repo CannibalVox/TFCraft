@@ -50,7 +50,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 				if(world.rand.nextInt(50) == 0)
 				{
 					world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-					is.stackSize--;
+					is.shrink(1);
 				}
 				else
 				{

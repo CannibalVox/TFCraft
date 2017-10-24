@@ -55,7 +55,7 @@ public class ItemWoodDoor extends ItemTerra
 				{
 					int var12 = MathHelper.floor_double((player.rotationYaw + 180.0F) * 4.0F / 360.0F - 0.5D) & 3;
 					placeDoorBlock(world, i, j, k, var12, var11);
-					--is.stackSize;
+					is.shrink(1);
 					return true;
 				}
 			}

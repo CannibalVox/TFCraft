@@ -60,9 +60,9 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 						world.markBlockForUpdate(x, y, z);
 					}
 
-					if (!player.capabilities.isCreativeMode && --itemstack.stackSize <= 0)
+					if (!player.capabilities.isCreativeMode)
 					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+						itemstack.shrink(1);
 					}
 
 					return true;					

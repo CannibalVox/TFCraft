@@ -85,7 +85,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 				ItemStack itemstack = ei.getEntityItem();
 
 				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
-				if (itemstack.stackSize <= 0)
+				if (itemstack.getCount() <= 0)
 					flag = true;
 				else if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(itemstack))
 					flag = false;

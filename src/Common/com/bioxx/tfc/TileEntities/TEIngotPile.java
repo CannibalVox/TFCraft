@@ -58,7 +58,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 
 	public int getStack()
 	{
-		return storage[0].stackSize;
+		return storage[0].getCount();
 	}
 
 	public String getType()
@@ -88,12 +88,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	{
 		if(storage[index] != null)
 		{
-			if(storage[index].stackSize == 0)
+			if(storage[index].getCount() == 0)
 				return true;
 		}
 
 		return storage[index].getItem() == is.getItem() &&storage[index].getItem() == is.getItem() &&
-				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize + 1 <= this.getInventoryStackLimit();
+				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].getCount() + 1 <= this.getInventoryStackLimit();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	{
 		if(storage[i] != null)
 		{
-			if(storage[i].stackSize <= j)
+			if(storage[i].getCount() <= j)
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
@@ -109,7 +109,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
+			if(storage[i].getCount() == 0)
 				storage[i] = null;
 			updateNeighbours();
 			return itemstack1;
@@ -176,9 +176,9 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	{
 		if(storage[index] != null)
 		{
-			if(storage[index].stackSize > 0)
+			if(storage[index].getCount() > 0)
 			{
-				storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
+				storage[index] = new ItemStack(storage[index].getItem(), storage[index].getCount() + count, storage[index].getItemDamage());
 				worldObj.markBlockForUpdate( xCoord, yCoord, zCoord );
 			}
 		}
@@ -200,8 +200,8 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack) 
 	{
 		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if(itemstack != null && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 	}
 
 	public void updateNeighbours()

@@ -513,7 +513,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 			{
 				if (this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player))
 				{
-					itemstack.stackSize--;
+					itemstack.shrink(1);
 				}
 				return true;
 			}
@@ -523,12 +523,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				{
 					if (!player.capabilities.isCreativeMode)
 					{
-						--itemstack.stackSize;
-					}
-
-					if (itemstack.stackSize <= 0)
-					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+						itemstack.shrink(1);
 					}
 
 					if (!this.worldObj.isRemote)
@@ -561,9 +556,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				{
 					this.setCollarColor(i);
 
-					if (!player.capabilities.isCreativeMode && --itemstack.stackSize <= 0)
+					if (!player.capabilities.isCreativeMode)
 					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+						itemstack.shrink(1);
 					}
 				}
 

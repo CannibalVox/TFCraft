@@ -115,13 +115,13 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			if(bag[0] != null)
 			{
 				types[0] = ((ISmeltable)bag[0].getItem()).getMetalType(bag[0]);
-				metalAmounts[0] = ((ISmeltable)bag[0].getItem()).getMetalReturnAmount(bag[0]) * bag[0].stackSize;
+				metalAmounts[0] = ((ISmeltable)bag[0].getItem()).getMetalReturnAmount(bag[0]) * bag[0].getCount();
 			}
 
 			if(bag[1] != null)
 			{
 				types[1] = ((ISmeltable)bag[1].getItem()).getMetalType(bag[1]);
-				metalAmounts[1] = ((ISmeltable)bag[1].getItem()).getMetalReturnAmount(bag[1]) * bag[1].stackSize;
+				metalAmounts[1] = ((ISmeltable)bag[1].getItem()).getMetalReturnAmount(bag[1]) * bag[1].getCount();
 
 				if(mergeMetals(types[0], types[1], metalAmounts[0], metalAmounts[1]) != metalAmounts[0])
 				{
@@ -134,7 +134,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			if(bag[2] != null)
 			{
 				types[2] = ((ISmeltable)bag[2].getItem()).getMetalType(bag[2]);
-				metalAmounts[2] = ((ISmeltable)bag[2].getItem()).getMetalReturnAmount(bag[2]) * bag[2].stackSize;
+				metalAmounts[2] = ((ISmeltable)bag[2].getItem()).getMetalReturnAmount(bag[2]) * bag[2].getCount();
 
 				if(mergeMetals(types[0], types[2], metalAmounts[0], metalAmounts[2]) != metalAmounts[0])
 				{
@@ -152,7 +152,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			if(bag[3] != null)
 			{
 				types[3] = ((ISmeltable)bag[3].getItem()).getMetalType(bag[3]);
-				metalAmounts[3] = ((ISmeltable)bag[3].getItem()).getMetalReturnAmount(bag[3]) * bag[3].stackSize;
+				metalAmounts[3] = ((ISmeltable)bag[3].getItem()).getMetalReturnAmount(bag[3]) * bag[3].getCount();
 
 				if(mergeMetals(types[0], types[3], metalAmounts[0], metalAmounts[3]) != metalAmounts[0])
 				{
@@ -301,7 +301,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			TFC_Core.handleItemTicking(bag, world, x, y, z, 0.5f);
 			for(ItemStack i : bag)
 			{
-				if(i != null && i.stackSize == 0)
+				if(i != null && i.getCount() == 0)
 					i = null;
 			}
 			saveContents(is, bag);
@@ -406,7 +406,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					if(byte0 >= 0 && byte0 < 4)
 					{
 						ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-						if(itemstack.stackSize > 0)
+						if(itemstack.getCount() > 0)
 						{
 							if(itemstack.getItem() instanceof ItemFoodTFC)
 							{
@@ -420,7 +420,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight + "oz" + ds);
 							}
 							else
-								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
+								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getCount() + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
 						}
 					}
 				}

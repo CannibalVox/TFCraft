@@ -45,7 +45,7 @@ public class ItemReeds extends Item
 		{
 			return false;
 		}
-		else if (is.stackSize == 0)
+		else if (is.getCount() == 0)
 		{
 			return false;
 		}
@@ -62,7 +62,7 @@ public class ItemReeds extends Item
 						this.reeds.onPostBlockPlaced(world, x, y, z, i1);
 					}
 					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, this.reeds.stepSound.func_150496_b(), (this.reeds.stepSound.getVolume() + 1.0F) / 2.0F, this.reeds.stepSound.getPitch() * 0.8F);
-					--is.stackSize;
+					is.shrink(1);
 				}
 			}
 			return true;

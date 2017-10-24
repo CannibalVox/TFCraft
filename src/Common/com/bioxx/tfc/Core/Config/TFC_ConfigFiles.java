@@ -286,9 +286,9 @@ public class TFC_ConfigFiles
 				{
 					if (currentValue != enabled) // if we need to change states
 					{
-						recipesTFC.getRecipeOutput().stackSize = enabled ? 4 : 2;
+						recipesTFC.getRecipeOutput().setCount(enabled ? 4 : 2);
 						if (enableDebugMode)
-							TerraFirmaCraft.LOG.info("Crafting option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().stackSize);
+							TerraFirmaCraft.LOG.info("Crafting option {} changed from {} to {}. Stacksize {}", name, currentValue, enabled, recipesTFC.getRecipeOutput().getCount());
 						field.setBoolean(null, enabled); // Keep the field up to date as well
 						currentValue = enabled;
 					}

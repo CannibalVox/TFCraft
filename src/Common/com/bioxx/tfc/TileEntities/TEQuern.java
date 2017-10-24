@@ -121,30 +121,30 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 			}
 			else
 			{
-				if(storage[0].stackSize == qr.getInItem().stackSize)
+				if(storage[0].getCount() == qr.getInItem().getCount())
 				{
 					storage[0] = null;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 				else
-					storage[0].stackSize -= qr.getInItem().stackSize;
+					storage[0].shrink(qr.getInItem().getCount());
 
 				if(storage[1] == null)
 					storage[1] = qr.getResult().copy();
-				else if(storage[1].stackSize < storage[1].getMaxStackSize())
+				else if(storage[1].getCount() < storage[1].getMaxStackSize())
 				{
-					if((qr.getResult().stackSize + storage[1].stackSize) > storage[1].getMaxStackSize())
+					if((qr.getResult().getCount() + storage[1].getCount()) > storage[1].getMaxStackSize())
 					{
-						int amountleft = qr.getResult().stackSize - (storage[1].getMaxStackSize() - storage[1].stackSize);
+						int amountleft = qr.getResult().getCount() - (storage[1].getMaxStackSize() - storage[1].getCount());
 						ItemStack tossStack = qr.getResult().copy();
-						tossStack.stackSize = tossStack.getMaxStackSize();
+						tossStack.setCount(tossStack.getMaxStackSize());
 						ejectItem(tossStack);
 						ItemStack remainStack = qr.getResult().copy();
-						remainStack.stackSize = amountleft;
+						remainStack.setCount(amountleft);
 						storage[1] = remainStack;
 					}
 					else
-						storage[1].stackSize += qr.getResult().stackSize;
+						storage[1].grow(qr.getResult().getCount());
 				}
 				else
 				{
@@ -163,7 +163,7 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 		{
 			// Use a non-player, non-null entity so the handstone is damaged even when the player is in creative mode
 			storage[slot].damageItem(slot, new EntityCowTFC(this.worldObj));
-			if(storage[slot].stackSize == 0 || storage[slot].getItemDamage() == storage[slot].getMaxDamage())
+			if(storage[slot].getCount() == 0 || storage[slot].getItemDamage() == storage[slot].getMaxDamage())
 			{
 				setInventorySlotContents(slot, null);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -176,14 +176,14 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 	{
 		if(storage[slot] != null)
 		{
-			if(storage[slot].stackSize <= amount)
+			if(storage[slot].getCount() <= amount)
 			{
 				ItemStack itemstack = storage[slot];
 				setInventorySlotContents(slot, null);
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[slot].splitStack(amount);
-			if(storage[slot].stackSize == 0)
+			if(storage[slot].getCount() == 0)
 				setInventorySlotContents(slot, null);
 			return itemstack1;
 		}
@@ -248,8 +248,8 @@ public class TEQuern extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int slot, ItemStack is)
 	{
 		storage[slot] = is;
-		if(is != null && is.stackSize > getInventoryStackLimit())
-			is.stackSize = getInventoryStackLimit();
+		if(is != null && is.getCount() > getInventoryStackLimit())
+			is.setCount(getInventoryStackLimit());
 	}
 
 	@Override

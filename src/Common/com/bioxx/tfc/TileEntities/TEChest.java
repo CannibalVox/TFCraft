@@ -63,7 +63,7 @@ public class TEChest extends TileEntityChest implements IInventory
 		if (this.chestContents[par1] != null)
 		{
 			ItemStack var3;
-			if (this.chestContents[par1].stackSize <= par2)
+			if (this.chestContents[par1].getCount() <= par2)
 			{
 				var3 = this.chestContents[par1];
 				this.chestContents[par1] = null;
@@ -73,7 +73,7 @@ public class TEChest extends TileEntityChest implements IInventory
 			else
 			{
 				var3 = this.chestContents[par1].splitStack(par2);
-				if (this.chestContents[par1].stackSize == 0)
+				if (this.chestContents[par1].getCount() == 0)
 					this.chestContents[par1] = null;
 				this.markDirty();
 				return var3;
@@ -100,8 +100,8 @@ public class TEChest extends TileEntityChest implements IInventory
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
 		this.chestContents[par1] = par2ItemStack;
-		if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
+		if (par2ItemStack != null && par2ItemStack.getCount() > this.getInventoryStackLimit())
+			par2ItemStack.setCount(this.getInventoryStackLimit());
 		this.markDirty();
 	}
 

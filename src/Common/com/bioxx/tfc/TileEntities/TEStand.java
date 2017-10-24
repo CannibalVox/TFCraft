@@ -58,14 +58,14 @@ public class TEStand extends TileEntity implements IInventory
 	{
 		if(items[i] != null && !isTop)
 		{
-			if(items[i].stackSize <= j)
+			if(items[i].getCount() <= j)
 			{
 				ItemStack itemstack2 = items[i];
 				items[i] = null;
 				return itemstack2;
 			}
 			ItemStack itemstack1 = items[i].splitStack(j);
-			if(items[i].stackSize == 0)
+			if(items[i].getCount() == 0)
 				items[i] = null;
 			return itemstack1;
 		}
@@ -146,8 +146,8 @@ public class TEStand extends TileEntity implements IInventory
 			if(items[i]==null || itemstack == null)
 				items[i] = itemstack;
 
-			if(items[i] != null && items[i].stackSize > getInventoryStackLimit())
-				items[i].stackSize = getInventoryStackLimit();
+			if(items[i] != null && items[i].getCount() > getInventoryStackLimit())
+				items[i].setCount(getInventoryStackLimit());
 		}
 	}
 

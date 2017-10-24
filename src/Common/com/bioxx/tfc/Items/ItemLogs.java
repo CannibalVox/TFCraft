@@ -82,19 +82,19 @@ public class ItemLogs extends ItemTerra
 			{
 				TELogPile lp = (TELogPile)te;
 
-				if (lp.storage[0] == null || lp.storage[0].stackSize < 4)
+				if (lp.storage[0] == null || lp.storage[0].getCount() < 4)
 				{
 					return false;
 				}
-				if (lp.storage[1] == null || lp.storage[1].stackSize < 4)
+				if (lp.storage[1] == null || lp.storage[1].getCount() < 4)
 				{
 					return false;
 				}
-				if (lp.storage[2] == null || lp.storage[2].stackSize < 4)
+				if (lp.storage[2] == null || lp.storage[2].getCount() < 4)
 				{
 					return false;
 				}
-				if (lp.storage[3] == null || lp.storage[3].stackSize < 4)
+				if (lp.storage[3] == null || lp.storage[3].getCount() < 4)
 				{
 					return false;
 				}
@@ -145,7 +145,7 @@ public class ItemLogs extends ItemTerra
 				if(world.canPlaceEntityOnSide(TFCBlocks.logPile, x, y, z, false, side, entityplayer, itemstack))
 					if (createPile(itemstack, entityplayer, world, x, y, z, side, dir)) 
 					{
-						itemstack.stackSize = itemstack.stackSize-1;
+						itemstack.shrink(1);
 						playSound(world, x, y, z);
 					}
 				return true;
@@ -192,7 +192,7 @@ public class ItemLogs extends ItemTerra
 
 					}
 					playSound(world, x, y, z);
-					itemstack.stackSize = itemstack.stackSize-1;
+					itemstack.shrink(1);
 					return true;
 				}
 
@@ -205,13 +205,13 @@ public class ItemLogs extends ItemTerra
 				if(side == 0 && block.canPlaceBlockAt(world, x, y-1, z) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y-1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y-1, z, block, m,0x2);
-					itemstack.stackSize = itemstack.stackSize-1;
+					itemstack.shrink(1);
 					playSound(world, x, y, z);
 				}
 				else if(side == 1 && block.canPlaceBlockAt(world, x, y+1, z) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y+1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y+1, z, block, m,0x2);
-					itemstack.stackSize = itemstack.stackSize-1;
+					itemstack.shrink(1);
 					playSound(world, x, y, z);
 				}
 				else if(side == 2 && block.canPlaceBlockAt(world, x, y, z-1) && world.canPlaceEntityOnSide(TFCBlocks.woodVert, x, y, z-1, false, side, null, itemstack))
@@ -256,12 +256,12 @@ public class ItemLogs extends ItemTerra
 
 		if (side == 2 || side == 3) {
 			world.setBlock(x, y, z, log, meta, 0x2);
-			itemstack.stackSize = itemstack.stackSize-1;
+			itemstack.shrink(1);
 			playSound(world, x, y, z);
 		}
 		else if (side == 4 || side == 5) {
 			world.setBlock(x, y, z, log, meta | 8, 0x2);
-			itemstack.stackSize = itemstack.stackSize-1;
+			itemstack.shrink(1);
 			playSound(world, x, y, z);
 		}
 	}

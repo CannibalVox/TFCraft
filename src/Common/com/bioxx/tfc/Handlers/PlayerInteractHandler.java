@@ -88,7 +88,7 @@ public class PlayerInteractHandler
 
 		if (is.getItem() == Items.stick)
 		{
-			int count = is.stackSize;
+			int count = is.getCount();
 			item.delayBeforeCanPickup = 100;
 			item.setDead();
 			item.setInvisible(true);
@@ -99,7 +99,7 @@ public class PlayerInteractHandler
 		}
 		else if (is.getItem() == Item.getItemFromBlock(Blocks.planks) && is.getItemDamage() == 0) // Only Oak
 		{
-			int count = is.stackSize;
+			int count = is.getCount();
 			item.delayBeforeCanPickup = 100;
 			item.setDead();
 			item.setInvisible(true);
@@ -110,7 +110,7 @@ public class PlayerInteractHandler
 		}
 		else if (is.getItem() == Item.getItemFromBlock(Blocks.lit_pumpkin))
 		{
-			int count = is.stackSize;
+			int count = is.getCount();
 			item.delayBeforeCanPickup = 100;
 			item.setDead();
 			item.setInvisible(true);

@@ -262,21 +262,21 @@ public class TEBloomery extends NetworkTileEntity
 						if (entity.getEntityItem().getItem() == TFCItems.coal &&
 							entity.getEntityItem().getItemDamage() == 1 /*|| entity.getEntityItem().getItem() == TFCItems.Coke*/)
 						{
-							for (int c = 0; c < entity.getEntityItem().stackSize; c++)
+							for (int c = 0; c < entity.getItem().getCount(); c++)
 							{
 								if (charcoalCount + oreCount < (2 * maxCount) && charcoalCount < maxCount)
 								{
 									charcoalCount++;
-									entity.getEntityItem().stackSize--;
+									entity.getItem().shrink(1);
 								}
 							}
-							if (entity.getEntityItem().stackSize == 0)
+							if (entity.getItem().getCount() == 0)
 								entity.setDead();
 						}
 						/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-						else if (entity.getEntityItem().getItem() instanceof ItemOre && ((ItemOre) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
+						else if (entity.getItem().getItem() instanceof ItemOre && ((ItemOre) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
 						{
-							int c = entity.getEntityItem().stackSize;
+							int c = entity.getItem().getCount();
 							while (c > 0)
 							{
 								if (charcoalCount + oreCount < (2 * maxCount) && oreCount < maxCount && outCount < 1000)
@@ -295,12 +295,12 @@ public class TEBloomery extends NetworkTileEntity
 							if (c == 0)
 								entity.setDead();
 							else
-								entity.getEntityItem().stackSize = c;
+								entity.getItem().setCount(c);
 						}
 						else if (entity.getEntityItem().getItem() instanceof ISmeltable &&
 									((ISmeltable) entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
 						{
-							int c = entity.getEntityItem().stackSize;
+							int c = entity.getItem().getCount();
 							while (c > 0)
 							{
 								if (((ISmeltable) entity.getEntityItem().getItem()).getMetalReturnAmount(entity.getEntityItem()) < 100 && oreCount < maxCount && outCount < 1000)
@@ -320,7 +320,7 @@ public class TEBloomery extends NetworkTileEntity
 							if (c == 0)
 								entity.setDead();
 							else
-								entity.getEntityItem().stackSize = c;
+								entity.getItem().setCount(c);
 						}
 					}
 				}

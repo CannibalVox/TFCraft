@@ -64,18 +64,18 @@ public class ContainerBlastFurnace extends ContainerTFC
 					if(slotTuyere.getHasStack())
 						return null;
 					ItemStack stack = slotStack.copy();
-					stack.stackSize = 1;
+					stack.setCount(1);
 					slotTuyere.putStack(stack);
-					slotStack.stackSize--;
+					slotStack.shrink(1);
 				}
 			}
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

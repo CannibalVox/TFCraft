@@ -48,7 +48,7 @@ public class ItemSalad extends ItemMeal
 		is = super.onEaten(is, world, player);
 
 		// If the last of the salad has been eaten
-		if (is.stackSize == 0)
+		if (is.getCount() == 0)
 		{
 			// Blows always break OR 50% chance the bowl is broken, and the sound is played
 			if (TFCCrafting.enableBowlsAlwaysBreak || world.rand.nextInt(2) == 0)

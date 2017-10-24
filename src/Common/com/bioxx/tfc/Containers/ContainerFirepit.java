@@ -82,9 +82,9 @@ public class ContainerFirepit extends ContainerTFC
 					if(slotfuel[0].getHasStack())
 						return null;
 					ItemStack stack = slotStack.copy();
-					stack.stackSize = 1;
+					stack.setCount(1);
 					slotfuel[0].putStack(stack);
-					slotStack.stackSize--;
+					slotStack.shrink(1);
 				}
 				// No ores, but anything else with a heat index to the input slot
 				else if (!(slotStack.getItem() instanceof ItemOre) && manager.findMatchingIndex(slotStack) != null)
@@ -92,18 +92,18 @@ public class ContainerFirepit extends ContainerTFC
 					if(slotinput.getHasStack())
 						return null;
 					ItemStack stack = slotStack.copy();
-					stack.stackSize = 1;
+					stack.setCount(1);
 					slotinput.putStack(stack);
-					slotStack.stackSize--;
+					slotStack.shrink(1);
 				}
 			}
 
-			if (slotStack.stackSize <= 0)
+			if (slotStack.getCount() <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
-			if (slotStack.stackSize == origStack.stackSize)
+			if (slotStack.getCount() == origStack.getCount())
 				return null;
 
 			slot.onPickupFromSlot(player, slotStack);

@@ -77,7 +77,7 @@ public class ShapedRecipesTFC implements IRecipe
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventorycrafting)
 	{
-		return new ItemStack(recipeOutput.getItem(), recipeOutput.stackSize, recipeOutput.getItemDamage());
+		return new ItemStack(recipeOutput.getItem(), recipeOutput.getCount(), recipeOutput.getItemDamage());
 	}
 
 	@Override

@@ -175,7 +175,7 @@ public class ItemGoldPan extends ItemTerra
 								if (world.rand.nextInt(100) == 0)
 								{
 									world.playSoundAtEntity(player, TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-									is.stackSize--;
+									is.shrink(1);
 								}
 								else
 									is.setItemDamage(0);

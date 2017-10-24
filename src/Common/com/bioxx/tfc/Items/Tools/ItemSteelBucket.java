@@ -76,7 +76,8 @@ public class ItemSteelBucket extends ItemTerra
 					return is;
 				}
 
-				if (--is.stackSize <= 0)
+				is.shrink(1);
+				if (is.getCount() <= 0)
 				{
 					return event.result;
 				}
@@ -116,7 +117,8 @@ public class ItemSteelBucket extends ItemTerra
 						{
 							world.setBlockToAir(i, j, k);
 
-							if (--is.stackSize <= 0)
+							is.shrink(1);
+							if (is.getCount() <= 0)
 							{
 								return filledIS;
 							}

@@ -20,13 +20,13 @@ public class TESRBase extends TileEntitySpecialRenderer
 			@Override
 			public byte getMiniBlockCount(ItemStack stack, byte original)
 			{
-				return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 15) + 1);
+				return SignedBytes.saturatedCast(Math.min(stack.getCount() / 32, 15) + 1);
 			}
 
 			@Override
 			public byte getMiniItemCount(ItemStack stack, byte original)
 			{
-				return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 7) + 1);
+				return SignedBytes.saturatedCast(Math.min(stack.getCount() / 32, 7) + 1);
 			}
 
 			@Override

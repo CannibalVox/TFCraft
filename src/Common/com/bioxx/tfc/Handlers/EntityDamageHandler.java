@@ -373,7 +373,7 @@ public class EntityDamageHandler
 					if (itemstack != null && object instanceof EntityLiving)
 					{
 						itemstack.hitEntity((EntityLiving)object, player);
-						if (itemstack.stackSize <= 0)
+						if (itemstack.getCount() <= 0)
 							player.destroyCurrentEquippedItem();
 					}
 

@@ -64,19 +64,19 @@ public class ItemWoodSupport extends ItemTerraBlock
 	{
 		if(y < 250 && y > 0 && side == 1 && isValidUnder(world, x, y, z, side))
 		{
-			if(!player.isSneaking() && world.isAirBlock(x, y+1, z) && world.isAirBlock(x, y+2, z) && world.isAirBlock(x, y+3, z) && itemstack.stackSize >= 3 &&
+			if(!player.isSneaking() && world.isAirBlock(x, y+1, z) && world.isAirBlock(x, y+2, z) && world.isAirBlock(x, y+3, z) && itemstack.getCount() >= 3 &&
 					world.getBlock(x, y, z) != TFCBlocks.woodSupportV && world.getBlock(x, y, z) != TFCBlocks.woodSupportV2 )
 			{
 				placeBlockAt(getBlock(), itemstack, player, world, x, y+1, z, itemstack.getItemDamage(), 2);
 				placeBlockAt(getBlock(), itemstack, player, world, x, y+2, z, itemstack.getItemDamage(), 2);
 				placeBlockAt(getBlock(), itemstack, player, world, x, y+3, z, itemstack.getItemDamage(), 2);
-				itemstack.stackSize-=3;
+				itemstack.shrink(3);
 				return true;
 			}
 			else
 			{
 				placeBlockAt(getBlock(), itemstack, player, world, x, y+1, z, itemstack.getItemDamage(), 3);
-				itemstack.stackSize--;
+				itemstack.shrink(1);
 				return true;
 			}
 		}
@@ -101,13 +101,13 @@ public class ItemWoodSupport extends ItemTerraBlock
 					}
 				}
 			}
-			if (itemstack.stackSize >= dist - 1)
+			if (itemstack.getCount() >= dist - 1)
 				for(int j = dist-1; j >= 1 && shouldGen; j--)
 				{
 					if(world.getBlock(x, y-j, z).isReplaceable(world, x, y-j, z))
 					{
 						placeBlockAt(getBlock(), itemstack, player, world, x, y-j, z, itemstack.getItemDamage(), 3);
-						--itemstack.stackSize;
+						itemstack.shrink(1);
 						world.markBlockForUpdate(x, y - j, z);
 					}
 					else break;
@@ -147,7 +147,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 					total = 1;
 					dir = ForgeDirection.getOrientation(side);
 				}
-				if(itemstack.stackSize < total)
+				if(itemstack.getCount() < total)
 					return false;
 				int i1 = this.getMetadata(itemstack.getItemDamage());
 				int count = 0;
@@ -157,7 +157,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 					if (placeBlockAt(b, itemstack, player, world, x+(dir.offsetX*count), y, z+(dir.offsetZ*count), j1, 2))
 					{
 						world.playSoundEffect((float) x + dir.offsetX * count + 0.5F, y + 0.5F, (float) z + dir.offsetZ * count + 0.5F, b.stepSound.func_150496_b(), (b.stepSound.getVolume() + 1.0F) / 2.0F, b.stepSound.getPitch() * 0.8F);
-						--itemstack.stackSize;
+						itemstack.shrink(1);
 					}
 					count++;
 					if(count >= total)
