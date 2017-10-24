@@ -41,7 +41,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	public BlockEarlyBloomery()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		setBlockBounds(0.0F, 0.0F, 0.0f, 0.0f, 0.0F, 0.0F);
 	}
@@ -146,32 +146,32 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	private boolean isNorthStackValid(World world, int x, int y, int z)
 	{
-		return (world.getBlock(x, y, z).getMaterial() == Material.rock ||
-				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+		return (world.getBlock(x, y, z).getMaterial() == Material.ROCK ||
+				world.getBlock(x, y, z).getMaterial() == Material.IRON) &&
 				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isSouthFaceSolid(world, x, y, z); //Since its the North Block, we need to make sure the South side facing the stack is solid
 	}
 
 	private boolean isSouthStackValid(World world, int x, int y, int z)
 	{
-		return (world.getBlock(x, y, z).getMaterial() == Material.rock ||
-				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+		return (world.getBlock(x, y, z).getMaterial() == Material.ROCK ||
+				world.getBlock(x, y, z).getMaterial() == Material.IRON) &&
 				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isNorthFaceSolid(world, x, y, z);//Since its the South Block, we need to make sure the North side facing the stack is solid
 	}
 
 	private boolean isEastStackValid(World world, int x, int y, int z)
 	{
-		return (world.getBlock(x, y, z).getMaterial() == Material.rock ||
-				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+		return (world.getBlock(x, y, z).getMaterial() == Material.ROCK ||
+				world.getBlock(x, y, z).getMaterial() == Material.IRON) &&
 				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isWestFaceSolid(world, x, y, z);//Since its the East Block, we need to make sure the West side facing the stack is solid
 	}
 
 	private boolean isWestStackValid(World world, int x, int y, int z)
 	{
-		return (world.getBlock(x, y, z).getMaterial() == Material.rock ||
-				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+		return (world.getBlock(x, y, z).getMaterial() == Material.ROCK ||
+				world.getBlock(x, y, z).getMaterial() == Material.IRON) &&
 				world.getBlock(x, y, z).isNormalCube() ||
 				TFC_Core.isEastFaceSolid(world, x, y, z); //Since its the West Block, we need to make sure the East side facing the stack is solid
 	}
@@ -187,7 +187,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 		boolean l = false;
 		boolean r = false;
-		if((world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.rock || world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.iron) && world.getBlock(x - map[0], y, z - map[1]).isOpaqueCube())
+		if((world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.ROCK || world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.IRON) && world.getBlock(x - map[0], y, z - map[1]).isOpaqueCube())
 			l = true;
 
 		if (!l && world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.detailed || world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.stoneSlabs)
@@ -218,7 +218,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 				l = false;
 		}
 
-		if((world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.rock || world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.iron) && world.getBlock(x + map[0], y, z + map[1]).isOpaqueCube())
+		if((world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.ROCK || world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.IRON) && world.getBlock(x + map[0], y, z + map[1]).isOpaqueCube())
 			r = true;
 
 		if (!r && world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.detailed || world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.stoneSlabs)
@@ -262,7 +262,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 		boolean b = false;
 		boolean t = false;
-		if((world.getBlock(x, y - 1, z).getMaterial() == Material.rock || world.getBlock(x, y - 1, z).getMaterial() == Material.iron) && world.getBlock(x, y - 1, z).isOpaqueCube())
+		if((world.getBlock(x, y - 1, z).getMaterial() == Material.ROCK || world.getBlock(x, y - 1, z).getMaterial() == Material.IRON) && world.getBlock(x, y - 1, z).isOpaqueCube())
 			b = true;
 
 		if (!b && world.getBlock(x, y - 1, z) == TFCBlocks.detailed || world.getBlock(x, y - 1, z) == TFCBlocks.stoneSlabs)
@@ -291,7 +291,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 				b = false;
 		}
 
-		if((world.getBlock(x, y + 1, z).getMaterial() == Material.rock || world.getBlock(x, y + 1, z).getMaterial() == Material.iron) && world.getBlock(x, y + 1, z).isOpaqueCube())
+		if((world.getBlock(x, y + 1, z).getMaterial() == Material.ROCK || world.getBlock(x, y + 1, z).getMaterial() == Material.IRON) && world.getBlock(x, y + 1, z).isOpaqueCube())
 			t = true;
 
 		if (!t && world.getBlock(x, y + 1, z) == TFCBlocks.detailed || world.getBlock(x, y + 1, z) == TFCBlocks.stoneSlabs)

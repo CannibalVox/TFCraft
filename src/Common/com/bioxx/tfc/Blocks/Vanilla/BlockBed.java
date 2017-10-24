@@ -44,7 +44,7 @@ public class BlockBed extends BlockDirectional
 
 	public BlockBed()
 	{
-		super(Material.grass);
+		super(Material.GRASS);
 		this.setBounds();
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}

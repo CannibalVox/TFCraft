@@ -20,7 +20,7 @@ public class BlockPeat extends BlockTerra
 {
 	public BlockPeat()
 	{
-		super(Material.ground);
+		super(Material.GROUND);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 

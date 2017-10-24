@@ -42,7 +42,7 @@ public class BlockHopper extends BlockTerraContainer
 
 	public BlockHopper()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 

@@ -35,7 +35,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 	private String[] woodNames;
 	public BlockStand()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.125f, 0, 0.125f, 0.875f, 1, 0.875f);
 		woodNames = new String[16];

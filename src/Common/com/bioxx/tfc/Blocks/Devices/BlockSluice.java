@@ -33,7 +33,7 @@ public class BlockSluice extends BlockContainer
 
 	public BlockSluice()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		needsRandomTick = true;
 		//		entity = new TileEntityTerraSluice();
 		//		entity.canUpdate();

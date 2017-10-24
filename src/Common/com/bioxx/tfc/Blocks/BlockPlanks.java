@@ -30,7 +30,7 @@ public class BlockPlanks extends BlockTerra
 
 	public BlockPlanks(Material material)
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);

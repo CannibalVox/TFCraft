@@ -23,7 +23,7 @@ public class BlockThatch extends BlockTerra
 {
 	public BlockThatch()
 	{
-		super(Material.grass);
+		super(Material.GRASS);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
 		this.lightOpacity = 255;

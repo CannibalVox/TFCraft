@@ -10,7 +10,7 @@ public class BlockFireBrick extends BlockTerra
 {
 	public BlockFireBrick()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 

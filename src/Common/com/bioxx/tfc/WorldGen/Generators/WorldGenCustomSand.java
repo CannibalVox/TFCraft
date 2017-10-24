@@ -28,7 +28,7 @@ public class WorldGenCustomSand extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random par2Random, int x, int y, int z)
 	{
-		if (world.getBlock(x, y, z).getMaterial() != Material.water)
+		if (world.getBlock(x, y, z).getMaterial() != Material.WATER)
 		{
 			return false;
 		}

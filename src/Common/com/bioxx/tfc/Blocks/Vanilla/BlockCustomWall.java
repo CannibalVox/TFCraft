@@ -156,7 +156,7 @@ public class BlockCustomWall extends BlockWall
 	{
 		Block block = access.getBlock(i, j, k);
 		if (block != this && block != Blocks.fence_gate && block != TFCBlocks.fenceGate && block != TFCBlocks.fenceGate2 && !(block instanceof BlockCustomWall))
-			return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
+			return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.GOURD : false;
 		else
 			return true;
 	}

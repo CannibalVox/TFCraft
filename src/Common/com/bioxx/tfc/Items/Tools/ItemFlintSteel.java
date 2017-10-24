@@ -60,7 +60,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 			}
 			// Attempt to create fire pit
 			else if (side == 1 && TFC_Core.isTopFaceSolid(world, x, y, z) && world.isAirBlock(x, y + 1, z) &&
-					block.getMaterial() != Material.wood && block.getMaterial() != Material.cloth)
+					block.getMaterial() != Material.WOOD && block.getMaterial() != Material.CLOTH)
 			{
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
 				int numsticks = 0;

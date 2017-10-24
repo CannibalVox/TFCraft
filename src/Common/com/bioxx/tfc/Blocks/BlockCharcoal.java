@@ -23,7 +23,7 @@ public class BlockCharcoal extends BlockTerra
 {
 	public BlockCharcoal()
 	{
-		super(Material.ground);
+		super(Material.GROUND);
 	}
 
 	@Override

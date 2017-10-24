@@ -152,7 +152,7 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 		TEFenceGate te = (TEFenceGate) world.getTileEntity(x, y, z);
 		boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
 
-		if (flag || block.getMaterial() != Material.air && block.canProvidePower())
+		if (flag || block.getMaterial() != Material.AIR && block.canProvidePower())
 		{
 			if (flag && !te.getOpen())
 			{

@@ -31,7 +31,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 
 	public BlockCustomCactus()
 	{
-		super(Material.cactus);
+		super(Material.CACTUS);
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 	}

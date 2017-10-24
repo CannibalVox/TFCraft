@@ -39,7 +39,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	
 	public BlockChestTFC()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 		woodNames = Global.WOOD_ALL;

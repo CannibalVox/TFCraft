@@ -134,7 +134,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	{
 		if(!world.isRemote)
 		{
-			if(world.getBlock(x, y, z).getMaterial() != Material.water)
+			if(world.getBlock(x, y, z).getMaterial() != Material.WATER)
 			{
 				this.doBeforeFall(world, x, y, z);
 			}

@@ -85,7 +85,7 @@ public class EntityFishTFC extends EntitySquid
 	@Override
 	public boolean isInWater()
 	{
-		return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.0200000238418579D, 0.0D), Material.water, this);
+		return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.0200000238418579D, 0.0D), Material.WATER, this);
 	}
 
 	/**

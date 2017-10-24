@@ -57,7 +57,7 @@ public class ItemKnife extends ItemWeapon implements IKnife
 			Material mat = world.getBlock(x, y, z).getMaterial();
 
 			if(side == 1 && id.isSideSolid(world, x, y, z, ForgeDirection.UP) &&!TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y + 1, z) &&
-					(mat == Material.wood || mat == Material.rock || mat == Material.iron))
+					(mat == Material.WOOD || mat == Material.ROCK || mat == Material.IRON))
 			{
 				world.setBlock(x, y + 1, z, TFCBlocks.foodPrep);
 				TEFoodPrep te = (TEFoodPrep) world.getTileEntity(x, y + 1, z);

@@ -32,7 +32,7 @@ public class BlockSmokeRack extends BlockTerraContainer
 {
 	public BlockSmokeRack()
 	{
-		super(Material.circuits);
+		super(Material.CIRCUITS);
 	}
 
 	@Override

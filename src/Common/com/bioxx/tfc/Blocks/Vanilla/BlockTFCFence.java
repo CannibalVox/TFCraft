@@ -194,7 +194,7 @@ public class BlockTFCFence extends BlockFence
 		if (TFCBlocks.canFenceConnectTo(block))
 			return true;
 		else
-			return block != this && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
+			return block != this && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.GOURD : false;
 	}
 
 	public static boolean isBlockAFence(Block block)

@@ -222,22 +222,22 @@ public class TFC_CoreRender
 			renderblocks.setRenderBounds(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
 			renderblocks.renderStandardBlock(block, i, j, k);
 		}
-		if(blockAccess.getBlock(i-1, j, k).getMaterial() == Material.leaves || blockAccess.getBlock(i-1, j, k) == TFCBlocks.fruitTreeWood)
+		if(blockAccess.getBlock(i-1, j, k).getMaterial() == Material.LEAVES || blockAccess.getBlock(i-1, j, k) == TFCBlocks.fruitTreeWood)
 		{
 			renderblocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
 			renderblocks.renderStandardBlock(block, i, j, k);
 		}
-		if(blockAccess.getBlock(i+1, j, k).getMaterial() == Material.leaves || blockAccess.getBlock(i+1, j, k) == TFCBlocks.fruitTreeWood)
+		if(blockAccess.getBlock(i+1, j, k).getMaterial() == Material.LEAVES || blockAccess.getBlock(i+1, j, k) == TFCBlocks.fruitTreeWood)
 		{
 			renderblocks.setRenderBounds(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
 			renderblocks.renderStandardBlock(block, i, j, k);
 		}
-		if(blockAccess.getBlock(i, j, k-1).getMaterial() == Material.leaves || blockAccess.getBlock(i, j, k-1) == TFCBlocks.fruitTreeWood)
+		if(blockAccess.getBlock(i, j, k-1).getMaterial() == Material.LEAVES || blockAccess.getBlock(i, j, k-1) == TFCBlocks.fruitTreeWood)
 		{
 			renderblocks.setRenderBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
 			renderblocks.renderStandardBlock(block, i, j, k);
 		}
-		if(blockAccess.getBlock(i, j, k+1).getMaterial() == Material.leaves || blockAccess.getBlock(i, j, k+1) == TFCBlocks.fruitTreeWood)
+		if(blockAccess.getBlock(i, j, k+1).getMaterial() == Material.LEAVES || blockAccess.getBlock(i, j, k+1) == TFCBlocks.fruitTreeWood)
 		{
 			renderblocks.setRenderBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
 			renderblocks.renderStandardBlock(block, i, j, k);

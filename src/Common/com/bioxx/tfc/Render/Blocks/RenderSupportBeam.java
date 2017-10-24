@@ -321,11 +321,11 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 
 	public static boolean isSurroundedByWater(IBlockAccess access, int i, int j, int k)
 	{
-		if(access.getBlock(i, j+1, k).getMaterial() == Material.water)
+		if(access.getBlock(i, j+1, k).getMaterial() == Material.WATER)
 			return true;
 
-		return access.getBlock(i + 1, j, k).getMaterial() == Material.water ||access.getBlock(i - 1, j, k).getMaterial() == Material.water ||
-				access.getBlock(i, j, k + 1).getMaterial() == Material.water || access.getBlock(i, j, k - 1).getMaterial() == Material.water;
+		return access.getBlock(i + 1, j, k).getMaterial() == Material.WATER ||access.getBlock(i - 1, j, k).getMaterial() == Material.WATER ||
+				access.getBlock(i, j, k + 1).getMaterial() == Material.WATER || access.getBlock(i, j, k - 1).getMaterial() == Material.WATER;
 	}
 
 	@Override

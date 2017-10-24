@@ -78,7 +78,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		if (this.getArmorMaterial() == ArmorMaterial.CLOTH)
+		if (this.getArmorMaterial() == ArmorMaterial.LEATHER)
 		{
 			this.itemIcon = registerer.registerIcon("minecraft:" + getIconString());
 			overlayIcon = registerer.registerIcon("minecraft:" + LEATHER_NAMES[this.armorType]);
@@ -182,7 +182,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	@Override
 	public EnumWeight getWeight(ItemStack is)
 	{
-		if (this.getArmorMaterial() == ArmorMaterial.CLOTH)
+		if (this.getArmorMaterial() == ArmorMaterial.LEATHER)
 			return EnumWeight.LIGHT;
 		return EnumWeight.HEAVY;
 	}

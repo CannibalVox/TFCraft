@@ -247,7 +247,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 						{
 							for (int y = -1; y < 2; y++)
 							{
-								if (world.getBlock(i + x, j + y, k + z).getMaterial() == Material.leaves &&
+								if (world.getBlock(i + x, j + y, k + z).getMaterial() == Material.LEAVES &&
 									entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem) != null)
 								{
 									entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);

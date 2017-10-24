@@ -102,7 +102,7 @@ public class WorldGenFissure implements IWorldGenerator
 
 		Block block = world.getBlock(x,y,z);
 
-		if(block != null && block.getMaterial() == Material.water)
+		if(block != null && block.getMaterial() == Material.WATER)
 			return;
 		if(underground)
 			y-= 20+rand.nextInt(depth);
@@ -110,13 +110,13 @@ public class WorldGenFissure implements IWorldGenerator
 		int stability = TFC_Climate.getStability(world, x, z);
 		if(checkStability && stability == 0)
 			return;
-		if(stability == 1 && fillBlock != null && fillBlock.getMaterial() == Material.water)
+		if(stability == 1 && fillBlock != null && fillBlock.getMaterial() == Material.WATER)
 			fillBlock = TFCBlocks.hotWater;
 		if(!TFC_Core.isGround(block))
 			return;
 
 		DataLayer dl = TFC_Climate.getRockLayer(world, x, y, z, 2);
-		BlockMeta rockLayer = fillBlock != null ? new BlockMeta(dl.block, dl.data2) : new BlockMeta(Blocks.air, -1);
+		BlockMeta rockLayer = fillBlock != null ? new BlockMeta(dl.block, dl.data2) : new BlockMeta(Blocks.AIR, -1);
 		if(rockLayer.block == null)
 			return;
 		List<ByteCoord> map = getCollapseMap(world, x, y - creviceDepth, z);
@@ -138,7 +138,7 @@ public class WorldGenFissure implements IWorldGenerator
 					carve(world, x + b.x + rx, y + b.y + d, z + b.z + rz, rockLayer.block, rockLayer.meta);
 				}
 			}
-			if(fillBlock != null && fillBlock.getMaterial() == Material.lava)
+			if(fillBlock != null && fillBlock.getMaterial() == Material.LAVA)
 				world.setBlock(x + b.x, y + b.y-poolDepth-1, z + b.z, rockLayer.block, rockLayer.meta, 2);
 		}
 
@@ -149,30 +149,30 @@ public class WorldGenFissure implements IWorldGenerator
 
 	private void carve(World world, int x, int y, int z, Block block, int meta)
 	{
-		if(world.getBlock(x, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z)))
+		if(world.getBlock(x, y, z).getMaterial() != Material.AIR && TFC_Core.isGround(world.getBlock(x, y, z)))
 			world.setBlock(x, y, z, Blocks.air, 0, 3);
-		if(world.getBlock(x - 1, y, z).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x - 1, y, z)))
+		if(world.getBlock(x - 1, y, z).getMaterial() != Material.AIR && TFC_Core.isRawStone(world.getBlock(x - 1, y, z)))
 			world.setBlock(x - 1, y, z, block, meta, 3);
-		if(world.getBlock(x + 1, y, z).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x + 1, y, z)))
+		if(world.getBlock(x + 1, y, z).getMaterial() != Material.AIR && TFC_Core.isRawStone(world.getBlock(x + 1, y, z)))
 			world.setBlock(x + 1, y, z, block, meta, 3);
-		if(world.getBlock(x, y, z - 1).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x, y, z - 1)))
+		if(world.getBlock(x, y, z - 1).getMaterial() != Material.AIR && TFC_Core.isRawStone(world.getBlock(x, y, z - 1)))
 			world.setBlock(x, y, z - 1, block, meta, 3);
-		if(world.getBlock(x, y, z + 1).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x, y, z + 1)))
+		if(world.getBlock(x, y, z + 1).getMaterial() != Material.AIR && TFC_Core.isRawStone(world.getBlock(x, y, z + 1)))
 			world.setBlock(x, y, z + 1, block, meta, 3);
 	}
 
 	private void fill(World world, int x, int y, int z, Block block, int meta, Block fill)
 	{
 		world.setBlock(x, y, z, fill, 0, 2);
-		if(world.getBlock(x - 1, y, z).getMaterial() == Material.air)
+		if(world.getBlock(x - 1, y, z).getMaterial() == Material.AIR)
 			world.setBlock(x - 1, y, z, block, meta, 2);
-		if(world.getBlock(x + 1, y, z).getMaterial() == Material.air)
+		if(world.getBlock(x + 1, y, z).getMaterial() == Material.AIR)
 			world.setBlock(x + 1, y, z, block, meta, 2);
-		if(world.getBlock(x, y, z - 1).getMaterial() == Material.air)
+		if(world.getBlock(x, y, z - 1).getMaterial() == Material.AIR)
 			world.setBlock(x, y, z - 1, block, meta, 2);
-		if(world.getBlock(x, y, z + 1).getMaterial() == Material.air)
+		if(world.getBlock(x, y, z + 1).getMaterial() == Material.AIR)
 			world.setBlock(x, y, z + 1, block, meta, 2);
-		if(world.getBlock(x, y - 1, z).getMaterial() == Material.air)
+		if(world.getBlock(x, y - 1, z).getMaterial() == Material.AIR)
 			world.setBlock(x, y - 1, z, block, meta, 2);
 	}
 
@@ -225,7 +225,7 @@ public class WorldGenFissure implements IWorldGenerator
 
 		DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
 		DataLayer dl2 = TFC_Climate.getRockLayer(world, i, j, k, 2);
-		BlockMeta rockLayer = fillBlock != null && fillBlock.getMaterial() == Material.lava ? 
+		BlockMeta rockLayer = fillBlock != null && fillBlock.getMaterial() == Material.LAVA ?
 				new BlockMeta(dl2.block, dl2.data2) : new BlockMeta(dl.block, dl.data2);
 
 				int worldX;

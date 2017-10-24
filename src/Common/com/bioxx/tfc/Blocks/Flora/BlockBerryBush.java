@@ -54,7 +54,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	public BlockBerryBush()
 	{
-		super(Material.plants);
+		super(Material.PLANTS);
 		metaNames = new String[]{"Wintergreen", "Blueberry", "Raspberry", "Strawberry", "Blackberry", "Bunchberry", "Cranberry", "Snowberry", "Elderberry", "Gooseberry", "Cloudberry"};
 		icons = new IIcon[metaNames.length];
 		iconsBerries = new IIcon[metaNames.length];

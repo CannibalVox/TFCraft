@@ -66,7 +66,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 	public boolean generate (World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int height = random.nextInt (2) + 3;
-		while (world.getBlock(xCoord, yCoord - 1, zCoord).getMaterial() == Material.water)
+		while (world.getBlock(xCoord, yCoord - 1, zCoord).getMaterial() == Material.WATER)
 		{
 			yCoord-- ;
 		}

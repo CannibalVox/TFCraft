@@ -25,7 +25,7 @@ public class BlockFlora extends BlockTerra
 
 	public BlockFlora()
 	{
-		super(Material.plants);
+		super(Material.PLANTS);
 		metaNames = new String[]{"Golden Rod", "Cat Tails"};
 		icons = new IIcon[metaNames.length];
 		this.setBlockBounds(0.3f, 0.0f, 0.3f, 0.7f, 0.7f, 0.7f);

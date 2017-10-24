@@ -32,7 +32,7 @@ public class BlockIngotPile extends BlockTerraContainer
 
 	public BlockIngotPile()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 	}
 
 	@Override

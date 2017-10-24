@@ -24,7 +24,7 @@ public abstract class BlockTerra extends Block
 {
 	protected BlockTerra()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	protected BlockTerra(Material material)
@@ -91,13 +91,13 @@ public abstract class BlockTerra extends Block
 		{
 		case Cave:   return isSideSolid(world, x, y, z, UP);
 		case Plains: return TFC_Core.isSoil(this) || TFC_Core.isFarmland(this);
-		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
+		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.WATER && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isSand(this) || TFC_Core.isGravel(this);
-			boolean hasWater = world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
-					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z - 1).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z + 1).getMaterial() == Material.water;
+			boolean hasWater = world.getBlock(x - 1, y, z    ).getMaterial() == Material.WATER ||
+					world.getBlock(x + 1, y, z    ).getMaterial() == Material.WATER ||
+					world.getBlock(x,     y, z - 1).getMaterial() == Material.WATER ||
+					world.getBlock(x,     y, z + 1).getMaterial() == Material.WATER;
 			return isBeach && hasWater;
 		default: return false;
 		}

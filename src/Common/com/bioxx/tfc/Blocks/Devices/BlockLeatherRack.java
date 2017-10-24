@@ -31,7 +31,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 
 	public BlockLeatherRack()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(null); // Removed from creative menu to help prevent the block being spawned in.
 		this.setBlockBounds(0, 0, 0, 1, 0.001f, 1); // Very flat, but still has a hitbox that can be highlighted with the cursor.
 	}
@@ -82,7 +82,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 			}
 		}
 
-		return world.getBlock(x, y - 1, z).getMaterial() == Material.wood; // Leather racks without a log underneath should not exist.
+		return world.getBlock(x, y - 1, z).getMaterial() == Material.WOOD; // Leather racks without a log underneath should not exist.
 	}
 
 	@Override

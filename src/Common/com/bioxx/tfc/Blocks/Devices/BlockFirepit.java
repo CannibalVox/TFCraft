@@ -37,7 +37,7 @@ public class BlockFirepit extends BlockTerraContainer
 
 	public BlockFirepit()
 	{
-		super(Material.ground);
+		super(Material.GROUND);
 		this.setBlockBounds(0, 0, 0, 1, 0.1f, 1);
 	}
 

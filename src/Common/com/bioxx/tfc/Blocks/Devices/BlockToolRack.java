@@ -36,7 +36,7 @@ public class BlockToolRack extends BlockTerraContainer
 
 	public BlockToolRack()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.woodNames = Global.WOOD_ALL;
 	}

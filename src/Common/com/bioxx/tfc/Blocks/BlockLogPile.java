@@ -34,7 +34,7 @@ public class BlockLogPile extends BlockTerraContainer
 
 	public BlockLogPile()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setTickRandomly(true);
 	}
 

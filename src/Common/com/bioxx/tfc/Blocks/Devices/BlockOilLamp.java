@@ -42,7 +42,7 @@ public class BlockOilLamp extends BlockTerraContainer
 	private IIcon[] icons;
 	public BlockOilLamp()
 	{
-		super(Material.circuits);
+		super(Material.CIRCUITS);
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		setLightLevel(1.0F);

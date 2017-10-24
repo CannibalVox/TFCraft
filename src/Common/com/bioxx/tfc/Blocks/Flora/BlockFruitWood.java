@@ -31,7 +31,7 @@ public class BlockFruitWood extends BlockTerraContainer
 
 	public BlockFruitWood()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setBlockBounds(0.3f, 0, 0.3f, 0.7f, 1, 0.7f); //Default block bounds set to trunk state
 	}
 

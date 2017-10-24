@@ -84,7 +84,7 @@ public class BlockCollapsible extends BlockTerraContainer
 			return true;
 
 		Material material = block.getMaterial();
-		return material == Material.water || material == Material.lava;
+		return material == Material.WATER || material == Material.LAVA;
 	}
 
 	public void dropCarvedStone(World world, int x, int y, int z)

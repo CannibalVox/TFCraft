@@ -27,7 +27,7 @@ public class BlockGrill extends BlockTerraContainer
 {
 	public BlockGrill()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		this.setBlockBounds(0, 0, 0, 1, 0.05f, 1);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}

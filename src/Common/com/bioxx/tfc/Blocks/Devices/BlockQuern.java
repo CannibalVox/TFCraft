@@ -29,7 +29,7 @@ public class BlockQuern extends BlockTerraContainer
 
 	public BlockQuern()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 

@@ -122,7 +122,7 @@ public class TFCProvider extends WorldProvider
 				if(temp <= -2)
 					salty = false;
 
-				if((mat == Material.water || mat == Material.ice) && !salty)
+				if((mat == Material.WATER || mat == Material.ICE) && !salty)
 				{
 					if(id == TFCBlocks.freshWaterStationary && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 					{
@@ -189,7 +189,7 @@ public class TFCProvider extends WorldProvider
 		if (TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) > 0)
 			return false;
 		Material material = worldObj.getBlock(x, y, z).getMaterial();
-		if (material == Material.snow)  // avoid vanilla MC to replace snow
+		if (material == Material.SNOW)  // avoid vanilla MC to replace snow
 			return false;
 		else
 			return TFCBlocks.snow.canPlaceBlockAt(worldObj, x, y, z) && material.isReplaceable();

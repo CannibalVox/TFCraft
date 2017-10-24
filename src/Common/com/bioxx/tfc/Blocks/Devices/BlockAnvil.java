@@ -42,7 +42,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 	public BlockAnvil()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 

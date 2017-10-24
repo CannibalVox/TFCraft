@@ -25,7 +25,7 @@ public class BlockCustomSnow extends BlockTerra
 {
 	public BlockCustomSnow()
 	{
-		super(Material.snow);
+		super(Material.SNOW);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 		this.setTickRandomly(true);
 	}
@@ -156,7 +156,7 @@ public class BlockCustomSnow extends BlockTerra
 		{
 			if (r.nextInt(20) == 0)
 			{
-				int max = (world.getBlock(x, y - 1, z).getMaterial() == Material.leaves) ? 3 : 7;
+				int max = (world.getBlock(x, y - 1, z).getMaterial() == Material.LEAVES) ? 3 : 7;
 				if(meta < max && canAddSnow(world, x, y, z, meta))
 				{
 					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
@@ -199,7 +199,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
  		Block block = world.getBlock(x, y, z);
  		
- 		if (block.getMaterial() == Material.snow)  // if neighbor is snow, allow up to one additional level
+ 		if (block.getMaterial() == Material.SNOW)  // if neighbor is snow, allow up to one additional level
  			return meta <= (world.getBlockMetadata(x, y, z) & 7);
 		else if (block == TFCBlocks.leaves || block == TFCBlocks.leaves2)  // 4 levels if adjacent to leaves (instead of just one level)
 			return meta < 3;  

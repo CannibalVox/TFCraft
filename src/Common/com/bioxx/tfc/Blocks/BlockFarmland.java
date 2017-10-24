@@ -38,7 +38,7 @@ public class BlockFarmland extends BlockContainer
 
 	public BlockFarmland(Block block, int tex)
 	{
-		super(Material.ground);
+		super(Material.GROUND);
 		this.setTickRandomly(true);
 		this.dirtBlock = block;
 		this.textureOffset = tex;

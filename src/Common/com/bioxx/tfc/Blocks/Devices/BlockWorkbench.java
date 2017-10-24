@@ -20,7 +20,7 @@ public class BlockWorkbench extends BlockTerra
 
 	public BlockWorkbench()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 

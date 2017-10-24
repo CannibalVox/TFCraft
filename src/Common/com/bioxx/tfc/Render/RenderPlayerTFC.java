@@ -220,7 +220,7 @@ public class RenderPlayerTFC extends RenderPlayer
 
 				float f1 = 1.0F;
 
-				if (itemarmor.getArmorMaterial() == ArmorMaterial.CLOTH)
+				if (itemarmor.getArmorMaterial() == ArmorMaterial.LEATHER)
 				{
 					int j = itemarmor.getColor(itemstack);
 					float f2 = (j >> 16 & 255) / 255.0F;

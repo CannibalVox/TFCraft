@@ -28,7 +28,7 @@ public class BlockWorldItem extends BlockTerraContainer
 {
 	public BlockWorldItem()
 	{
-		super(Material.circuits);
+		super(Material.CIRCUITS);
 		this.setBlockBounds(0F, 0.00F, 0F, 1F, 0.05F, 1F);
 	}
 

@@ -30,7 +30,7 @@ public class BlockGravel extends BlockTerra
 
 	public BlockGravel(int texOff)
 	{
-		super(Material.ground);
+		super(Material.GROUND);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
 		this.setTickRandomly(true);

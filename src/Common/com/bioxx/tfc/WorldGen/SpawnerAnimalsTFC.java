@@ -25,7 +25,7 @@ public final class SpawnerAnimalsTFC
 	 */
 	public static boolean canCreatureTypeSpawnAtLocation(EnumCreatureType par0EnumCreatureType, World par1World, int par2, int par3, int par4)
 	{
-		if (par0EnumCreatureType.getCreatureMaterial() == Material.water)
+		if (par0EnumCreatureType.getCreatureMaterial() == Material.WATER)
 		{
 			return par1World.getBlock(par2, par3, par4).getMaterial().isLiquid() &&
 					par1World.getBlock(par2, par3 - 1, par4).getMaterial().isLiquid() &&

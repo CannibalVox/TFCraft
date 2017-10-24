@@ -40,7 +40,7 @@ public class BlockLogNatural extends BlockTerra
 
 	public BlockLogNatural()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setTickRandomly(true);
 		this.woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);

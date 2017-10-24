@@ -30,7 +30,7 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 {
 	public BlockWoodConstruct()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		setBlockBounds(0.0F, 0.0F, 0.0f, 0.0f, 0.0F, 0.0F);
 	}
 

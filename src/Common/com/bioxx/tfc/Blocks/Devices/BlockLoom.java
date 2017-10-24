@@ -40,7 +40,7 @@ public class BlockLoom extends BlockTerraContainer
 
 	public BlockLoom()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 		woodNames = Global.WOOD_ALL;

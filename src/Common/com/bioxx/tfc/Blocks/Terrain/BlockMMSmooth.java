@@ -10,7 +10,7 @@ public class BlockMMSmooth extends BlockSmooth
 {
 	public BlockMMSmooth()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		names = Global.STONE_MM;
 		icons = new IIcon[names.length];

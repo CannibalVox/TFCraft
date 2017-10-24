@@ -19,7 +19,7 @@ public class BlockSpawnMeter extends BlockTerraContainer
 
 	public BlockSpawnMeter()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.setLightLevel(1F);
 	}

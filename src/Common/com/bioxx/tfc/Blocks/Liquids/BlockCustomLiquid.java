@@ -65,7 +65,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity e) 
 	{
-		if (this.blockMaterial == Material.lava)
+		if (this.blockMaterial == Material.LAVA)
 		{
 			if(e instanceof EntityItem)
 			{
@@ -82,7 +82,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	 */
 	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		if (this.blockMaterial != Material.water)
+		if (this.blockMaterial != Material.WATER)
 			return 16777215;
 		else
 			return 0x354d35;
@@ -119,23 +119,23 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	private void checkForHarden(World world, int x, int y, int z)
 	{
 		if (world.getBlock(x, y, z) == this)
-			if (this.blockMaterial == Material.lava)
+			if (this.blockMaterial == Material.LAVA)
 			{
 				boolean flag = false;
 
-				if (flag || world.getBlock(x, y, z - 1).getMaterial() == Material.water)
+				if (flag || world.getBlock(x, y, z - 1).getMaterial() == Material.WATER)
 					flag = true;
 
-				if (flag || world.getBlock(x, y, z + 1).getMaterial() == Material.water)
+				if (flag || world.getBlock(x, y, z + 1).getMaterial() == Material.WATER)
 					flag = true;
 
-				if (flag || world.getBlock(x - 1, y, z).getMaterial() == Material.water)
+				if (flag || world.getBlock(x - 1, y, z).getMaterial() == Material.WATER)
 					flag = true;
 
-				if (flag || world.getBlock(x + 1, y, z).getMaterial() == Material.water)
+				if (flag || world.getBlock(x + 1, y, z).getMaterial() == Material.WATER)
 					flag = true;
 
-				if (flag || world.getBlock(x, y + 1, z).getMaterial() == Material.water)
+				if (flag || world.getBlock(x, y + 1, z).getMaterial() == Material.WATER)
 					flag = true;
 
 				if (flag)
@@ -198,14 +198,14 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
 		case Plains: return this == TFCBlocks.grass || this == TFCBlocks.grass2 || this == TFCBlocks.dirt || this == TFCBlocks.dirt2;
-		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
+		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.WATER && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isGround(this);
 			boolean hasWater = 
-					world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
-					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z - 1).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z + 1).getMaterial() == Material.water;
+					world.getBlock(x - 1, y, z    ).getMaterial() == Material.WATER ||
+					world.getBlock(x + 1, y, z    ).getMaterial() == Material.WATER ||
+					world.getBlock(x,     y, z - 1).getMaterial() == Material.WATER ||
+					world.getBlock(x,     y, z + 1).getMaterial() == Material.WATER;
 			return isBeach && hasWater;
 		}
 
@@ -255,7 +255,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public int tickRate(World world)
 	{
-		if(this.getMaterial() == Material.lava)
+		if(this.getMaterial() == Material.LAVA)
 			return 10;
 		return 3;
 	}
@@ -263,7 +263,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public void registerBlockIcons(IIconRegister register)
 	{
-		if (this.blockMaterial == Material.lava)
+		if (this.blockMaterial == Material.LAVA)
 		{
 			this.getFluid().setIcons(register.registerIcon("lava_still"), register.registerIcon("lava_flow"));
 		}
@@ -333,7 +333,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		int meta = this.getMetaData(world, x, y, z);
 		byte b0 = 1;
 	
-		if (this.blockMaterial == Material.lava && !world.provider.isHellWorld)
+		if (this.blockMaterial == Material.LAVA && !world.provider.isHellWorld)
 		{
 			b0 = 2;
 		}
@@ -371,7 +371,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 				}
 			}
 	
-			if (this.sourceBlockCount >= 2 && this.blockMaterial == Material.water && !TFCOptions.enableFiniteWater)
+			if (this.sourceBlockCount >= 2 && this.blockMaterial == Material.WATER && !TFCOptions.enableFiniteWater)
 			{
 				// Solid block below, or source block of same liquid below.
 				if (world.getBlock(x, y - 1, z).getMaterial().isSolid() ||
@@ -381,7 +381,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 				}
 			}
 	
-			if (this.blockMaterial == Material.lava && meta < 8 && newHeight < 8 && newHeight > meta && rand.nextInt(4) != 0)
+			if (this.blockMaterial == Material.LAVA && meta < 8 && newHeight < 8 && newHeight > meta && rand.nextInt(4) != 0)
 			{
 				tickRate *= 4;
 			}
@@ -416,7 +416,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	
 		if (this.canReplace(world, x, y - 1, z)) // Can flow directly down
 		{
-			if (this.blockMaterial == Material.lava && world.getBlock(x, y - 1, z).getMaterial() == Material.water)
+			if (this.blockMaterial == Material.LAVA && world.getBlock(x, y - 1, z).getMaterial() == Material.WATER)
 			{
 				setBlockforLava(world, x, y - 1, z, 2);
 				this.func_149799_m(world, x, y - 1, z); // Sizzling Sound & Particles
@@ -475,7 +475,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		{
 			Block block = world.getBlock(x, y, z);
 
-			if (this.blockMaterial == Material.lava)
+			if (this.blockMaterial == Material.LAVA)
 			{
 				setBlockforLava(world, x, y, z, 0);
 				this.func_149799_m(world, x, y - 1, z); // Sizzling Sound & Particles
@@ -492,7 +492,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	private boolean canReplace(World world, int x, int y, int z)
 	{
 		Material material = world.getBlock(x, y, z).getMaterial();
-		if (material == this.blockMaterial || material == Material.lava)
+		if (material == this.blockMaterial || material == Material.LAVA)
 			return false;
 		else
 			return !this.canStay(world, x, y, z);

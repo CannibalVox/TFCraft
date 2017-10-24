@@ -24,7 +24,7 @@ public class BlockHotWater extends BlockCustomLiquid
 {
 	public BlockHotWater(Fluid fluid)
 	{
-		super(fluid, Material.water);
+		super(fluid, Material.WATER);
 	}
 
 	@Override

@@ -118,14 +118,14 @@ public class BlockCustomIce extends BlockIce
 		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
 		case Plains: return this == TFCBlocks.grass || this == TFCBlocks.grass2 || this == TFCBlocks.dirt || this == TFCBlocks.dirt2;
-		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
+		case Water:  return world.getBlockState(x, y, z).getMaterial() == Material.WATER && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
 			boolean isBeach = TFC_Core.isDirt(this) || TFC_Core.isSand(this);
 			boolean hasWater = 
-					world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
-					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z - 1).getMaterial() == Material.water ||
-					world.getBlock(x,     y, z + 1).getMaterial() == Material.water;
+					world.getBlock(x - 1, y, z    ).getMaterial() == Material.WATER ||
+					world.getBlock(x + 1, y, z    ).getMaterial() == Material.WATER ||
+					world.getBlock(x,     y, z - 1).getMaterial() == Material.WATER ||
+					world.getBlock(x,     y, z + 1).getMaterial() == Material.WATER;
 			return isBeach && hasWater;
 		}
 		return false;

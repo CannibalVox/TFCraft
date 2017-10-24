@@ -44,7 +44,7 @@ public class BlockDetailed extends BlockPartial
 
 	public BlockDetailed()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	@Override

@@ -8,6 +8,6 @@ public class BlockLava extends BlockCustomLiquid
 {
 	public BlockLava()
 	{
-		super(TFCFluids.LAVA, Material.lava);
+		super(TFCFluids.LAVA, Material.LAVA);
 	}
 }

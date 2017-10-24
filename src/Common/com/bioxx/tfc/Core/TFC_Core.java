@@ -483,7 +483,7 @@ public class TFC_Core
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
 		return block == TFCBlocks.saltWater || block == TFCBlocks.saltWaterStationary
-				|| mat == Material.ice && meta == 0;
+				|| mat == Material.ICE && meta == 0;
 	}
 
 	public static boolean isFreshWater(Block block)
@@ -500,7 +500,7 @@ public class TFC_Core
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)
 	{
 		return block == TFCBlocks.freshWater || block == TFCBlocks.freshWaterStationary
-				|| mat == Material.ice && meta != 0;
+				|| mat == Material.ICE && meta != 0;
 	}
 
 	public static boolean isSoil(Block block)
@@ -925,11 +925,11 @@ public class TFC_Core
 
 	public static boolean isSurroundedStone(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z + 1).getMaterial() == Material.rock &&
-				world.getBlock(x, y, z - 1).getMaterial() == Material.rock &&
-				world.getBlock(x - 1, y, z).getMaterial() == Material.rock &&
-				world.getBlock(x + 1, y, z).getMaterial() == Material.rock &&
-				world.getBlock(x, y - 1, z).getMaterial() == Material.rock;
+		return world.getBlock(x, y, z + 1).getMaterial() == Material.ROCK &&
+				world.getBlock(x, y, z - 1).getMaterial() == Material.ROCK &&
+				world.getBlock(x - 1, y, z).getMaterial() == Material.ROCK &&
+				world.getBlock(x + 1, y, z).getMaterial() == Material.ROCK &&
+				world.getBlock(x, y - 1, z).getMaterial() == Material.ROCK;
 	}
 
 	public static boolean isOreIron(ItemStack is)
@@ -1343,7 +1343,7 @@ public class TFC_Core
 	{
 		Block block = world.getBlock(x, y, z);
 
-		if (block.getMaterial() != Material.air)
+		if (block.getMaterial() != Material.AIR)
 		{
 			int l = world.getBlockMetadata(x, y, z);
 			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (l << 12));

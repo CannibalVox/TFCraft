@@ -57,7 +57,7 @@ public class TEBloomery extends NetworkTileEntity
 	{
 		Block yNegBlock = worldObj.getBlock(i, j - 1, k);
 		if(yNegBlock != TFCBlocks.molten &&
-				worldObj.getBlock(i, j - 1, k).getMaterial() != Material.rock && 
+				worldObj.getBlock(i, j - 1, k).getMaterial() != Material.ROCK &&
 				!worldObj.getBlock(i, j - 1, k).isNormalCube() && 
 				yNegBlock != TFCBlocks.charcoal)
 		{
@@ -184,7 +184,7 @@ public class TEBloomery extends NetworkTileEntity
 					Block bid = worldObj.getBlock(x, yCoord + i, z);
 					/*The stack must be air or already be molten rock*/
 					if ((bid.isAir(worldObj, x, yCoord + i, z) || bid == TFCBlocks.molten || bid == TFCBlocks.charcoal) &&
-						worldObj.getBlock(x, yCoord - 1, z).getMaterial() == Material.rock)
+						worldObj.getBlock(x, yCoord - 1, z).getMaterial() == Material.ROCK)
 					{
 						//Make sure that the Stack is surrounded by rock
 						if (isStackValid(x, yCoord + i, z))

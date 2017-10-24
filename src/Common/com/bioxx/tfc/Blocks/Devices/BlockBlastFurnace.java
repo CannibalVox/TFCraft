@@ -30,7 +30,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 
 	public BlockBlastFurnace()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 	}
 

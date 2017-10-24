@@ -58,7 +58,7 @@ public class BlockCrop extends BlockContainer
 
 	public BlockCrop()
 	{
-		super(Material.plants);
+		super(Material.PLANTS);
 		this.setBlockBounds(0, 0, 0, 1, 0.2f, 1);
 	}
 

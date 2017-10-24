@@ -106,7 +106,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	{
 		if(block == null)
 			return;
-		if (this.block.getMaterial() == Material.air)
+		if (this.block.getMaterial() == Material.AIR)
 		{
 			this.setDead();
 		}
@@ -221,7 +221,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 		}
 
 		Block block1 = world.getBlock(x, y, z);
-		return (block1.getMaterial() == Material.circuits ? true : canReplace(world, x, y, z));
+		return (block1.getMaterial() == Material.CIRCUITS ? true : canReplace(world, x, y, z));
 	}
 
 	public boolean canReplace(World world, int x, int y, int z)
@@ -325,7 +325,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 			this.tileEntityData = nbt.getCompoundTag("TileEntityData");
 		}
 
-		if (this.block.getMaterial() == Material.air)
+		if (this.block.getMaterial() == Material.AIR)
 		{
 			this.block = Blocks.sand;
 		}

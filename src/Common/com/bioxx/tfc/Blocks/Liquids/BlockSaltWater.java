@@ -8,6 +8,6 @@ public class BlockSaltWater extends BlockCustomLiquid
 {
 	public BlockSaltWater(Fluid fluid)
 	{
-		super(fluid, Material.water);
+		super(fluid, Material.WATER);
 	}
 }

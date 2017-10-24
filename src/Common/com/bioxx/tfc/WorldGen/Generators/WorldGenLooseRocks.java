@@ -29,7 +29,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	private boolean generateRocks(World world, Random random, int i, int j, int k)
 	{
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
-				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
+				(world.getBlock(i, j, k).getMaterial() == Material.GRASS || world.getBlock(i, j, k).getMaterial() == Material.ROCK) && world.getBlock(i, j, k).isOpaqueCube())
 		{
 			if(world.setBlock(i, j+1, k, TFCBlocks.worldItem, 0, 2))
 			{
@@ -114,8 +114,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	private boolean generateSticks(World world, Random random, int i, int j, int k)
 	{
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.tallGrass) && 
-				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock ||
-				world.getBlock(i, j, k) .getMaterial() == Material.sand || world.getBlock(i, j, k).getMaterial() == Material.ground) && world.getBlock(i, j, k).isOpaqueCube())
+				(world.getBlock(i, j, k).getMaterial() == Material.GRASS || world.getBlock(i, j, k).getMaterial() == Material.ROCK ||
+				world.getBlock(i, j, k) .getMaterial() == Material.SAND || world.getBlock(i, j, k).getMaterial() == Material.GROUND) && world.getBlock(i, j, k).isOpaqueCube())
 		{
 			if (world.getBiomeGenForCoords(i, k) instanceof TFCBiome) // Fixes ClassCastException
 			{
@@ -134,18 +134,18 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	private boolean isNearTree(World world, int i, int j, int k)
 	{
-		if(world.getBlock(i, j + 3, k).getMaterial() == Material.leaves ||
-				world.getBlock(i + 5, j + 3, k).getMaterial() == Material.leaves ||
-				world.getBlock(i - 5, j + 3, k).getMaterial() == Material.leaves ||
-				world.getBlock(i, j + 3, k + 5).getMaterial() == Material.leaves ||
-				world.getBlock(i, j + 3, k - 5).getMaterial() == Material.leaves)
+		if(world.getBlock(i, j + 3, k).getMaterial() == Material.LEAVES ||
+				world.getBlock(i + 5, j + 3, k).getMaterial() == Material.LEAVES ||
+				world.getBlock(i - 5, j + 3, k).getMaterial() == Material.LEAVES ||
+				world.getBlock(i, j + 3, k + 5).getMaterial() == Material.LEAVES ||
+				world.getBlock(i, j + 3, k - 5).getMaterial() == Material.LEAVES)
 			return true;
 		else
-			return world.getBlock(i, j + 6, k).getMaterial() == Material.leaves ||
-				world.getBlock(i + 5, j + 6, k).getMaterial() == Material.leaves ||
-				world.getBlock(i - 5, j + 6, k).getMaterial() == Material.leaves ||
-				world.getBlock(i, j + 6, k + 5).getMaterial() == Material.leaves ||
-				world.getBlock(i, j + 6, k - 5).getMaterial() == Material.leaves;
+			return world.getBlock(i, j + 6, k).getMaterial() == Material.LEAVES ||
+				world.getBlock(i + 5, j + 6, k).getMaterial() == Material.LEAVES ||
+				world.getBlock(i - 5, j + 6, k).getMaterial() == Material.LEAVES ||
+				world.getBlock(i, j + 6, k + 5).getMaterial() == Material.LEAVES ||
+				world.getBlock(i, j + 6, k - 5).getMaterial() == Material.LEAVES;
 	}
 
 }

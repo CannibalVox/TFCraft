@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -380,7 +381,7 @@ public class EntityFishHookTFC extends EntityFishHook
 					double d8 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (k + 1) / b0 - 0.125D + 0.125D;
 					AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getBoundingBox(this.boundingBox.minX, d7, this.boundingBox.minZ, this.boundingBox.maxX, d8, this.boundingBox.maxZ);
 
-					if (this.worldObj.isAABBInMaterial(axisalignedbb1, Material.water))
+					if (this.worldObj.isAABBInMaterial(axisalignedbb1, Material.WATER))
 						d6 += 1.0D / b0;
 				}
 

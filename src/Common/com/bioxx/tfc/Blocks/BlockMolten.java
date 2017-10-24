@@ -18,7 +18,7 @@ public class BlockMolten extends BlockTerra
 	private IIcon moltenOff;
 	public BlockMolten()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 	}
 
 	@Override

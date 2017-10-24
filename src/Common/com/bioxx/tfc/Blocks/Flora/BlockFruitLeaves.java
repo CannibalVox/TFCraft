@@ -42,7 +42,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 
 	public BlockFruitLeaves(int offset)
 	{
-		super(Material.leaves);
+		super(Material.LEAVES);
 		this.setTickRandomly(true);
 		//this.offset = offset;
 	}

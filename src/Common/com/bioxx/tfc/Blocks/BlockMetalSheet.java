@@ -40,7 +40,7 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 			"Sterling Silver","Tin","Zinc"};
 	public BlockMetalSheet()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		icons = new IIcon[metalNames.length];
 		this.setBlockBounds(0, 0, 0, 1, 1, 1);
 	}

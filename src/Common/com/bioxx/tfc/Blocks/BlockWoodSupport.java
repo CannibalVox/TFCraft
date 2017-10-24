@@ -33,7 +33,7 @@ public class BlockWoodSupport extends BlockTerra
 
 	public BlockWoodSupport(Material material)
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);

@@ -41,7 +41,7 @@ public class BlockCustomDoor extends BlockTerra
 	private IIcon[] icons = new IIcon[Global.WOOD_ALL.length * 2];
 	public BlockCustomDoor(int woodId)
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setHardness(3);
 
 		float var3 = 0.5F;
@@ -245,7 +245,7 @@ public class BlockCustomDoor extends BlockTerra
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
-		if (this.blockMaterial == Material.iron)
+		if (this.blockMaterial == Material.IRON)
 		{
 			return false; //Allow items to interact with the door
 		}
@@ -405,7 +405,7 @@ public class BlockCustomDoor extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return this.blockMaterial == Material.iron ? Items.iron_door : Items.wooden_door;
+		return this.blockMaterial == Material.IRON ? Items.iron_door : Items.wooden_door;
 	}
 
 	@Override

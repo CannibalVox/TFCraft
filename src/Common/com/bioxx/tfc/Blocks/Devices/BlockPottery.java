@@ -39,7 +39,7 @@ public class BlockPottery extends BlockTerraContainer
 
 	public BlockPottery()
 	{
-		super(Material.glass);
+		super(Material.GLASS);
 		this.setBlockBounds(0, 0, 0, 1, 0.05f, 1);
 		this.setHardness(2.0f);
 	}

@@ -21,7 +21,7 @@ public class BlockSlab extends BlockPartial
 {
 	public BlockSlab()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	@Override

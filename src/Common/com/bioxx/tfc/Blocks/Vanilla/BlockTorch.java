@@ -38,7 +38,7 @@ public class BlockTorch extends BlockTerraContainer
 	protected IIcon offIcon;
 	public BlockTorch()
 	{
-		super(Material.circuits);
+		super(Material.CIRCUITS);
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		setLightLevel(0.9375F);

@@ -19,7 +19,7 @@ public abstract class BlockTerraContainer extends BlockContainer
 {
 	public BlockTerraContainer()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	public BlockTerraContainer(Material material)

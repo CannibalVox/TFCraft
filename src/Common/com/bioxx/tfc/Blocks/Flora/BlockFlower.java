@@ -30,7 +30,7 @@ public class BlockFlower extends BlockTerra
 
 	public BlockFlower()
 	{
-		super(Material.plants);
+		super(Material.PLANTS);
 		this.setTickRandomly(true);
 		float var4 = 0.2F;
 		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);

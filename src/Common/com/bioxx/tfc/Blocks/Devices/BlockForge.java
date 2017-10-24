@@ -37,7 +37,7 @@ public class BlockForge extends BlockTerraContainer
 
 	public BlockForge()
 	{
-		super(Material.sand);
+		super(Material.SAND);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
 	}
 

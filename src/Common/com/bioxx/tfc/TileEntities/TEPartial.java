@@ -25,178 +25,178 @@ public class TEPartial extends NetworkTileEntity
 		switch(material)
 		{
 		case 1:
-			return Material.ground;
+			return Material.GROUND;
 		case 2:
-			return Material.wood;
+			return Material.WOOD;
 		case 3:
-			return Material.rock;
+			return Material.ROCK;
 		case 4:
-			return Material.iron;
+			return Material.IRON;
 		case 5:
-			return Material.water;
+			return Material.WATER;
 		case 6:
-			return Material.lava;
+			return Material.LAVA;
 		case 7:
-			return Material.leaves;
+			return Material.LEAVES;
 		case 8:
-			return Material.plants;
+			return Material.PLANTS;
 		case 9:
-			return Material.vine;
+			return Material.VINE;
 		case 10:
-			return Material.sponge;
+			return Material.SPONGE;
 		case 11:
-			return Material.cloth;
+			return Material.CLOTH;
 		case 12:
-			return Material.fire;
+			return Material.FIRE;
 		case 13:
-			return Material.sand;
+			return Material.SAND;
 		case 14:
-			return Material.circuits;
+			return Material.CIRCUITS;
 		case 15:
-			return Material.glass;
+			return Material.GLASS;
 		case 16:
-			return Material.redstoneLight;
+			return Material.REDSTONE_LIGHT;
 		case 17:
-			return Material.tnt;
+			return Material.TNT;
 		case 19:
-			return Material.ice;
+			return Material.ICE;
 		case 20:
-			return Material.snow;
+			return Material.SNOW;
 		case 21:
-			return Material.craftedSnow;
+			return Material.CRAFTED_SNOW;
 		case 22:
-			return Material.cactus;
+			return Material.CACTUS;
 		case 23:
-			return Material.clay;
+			return Material.CLAY;
 		case 24:
-			return Material.gourd;
+			return Material.GOURD;
 		case 25:
-			return Material.dragonEgg;
+			return Material.DRAGON_EGG;
 		case 26:
-			return Material.portal;
+			return Material.PORTAL;
 		case 27:
-			return Material.cake;
+			return Material.CAKE;
 		case 28:
-			return Material.web;
+			return Material.WEB;
 		case 29:
-			return Material.piston;
+			return Material.PISTON;
 		default:
-			return Material.grass;
+			return Material.GRASS;
 		}
 	}
 
 	public void setMaterial(Material mat)
 	{
-		if(mat == Material.ground) {material = 1;} 
-		else if (mat == Material.wood)
+		if(mat == Material.GROUND) {material = 1;}
+		else if (mat == Material.WOOD)
 		{
 			material = 2;
 		}
-		else if (mat == Material.rock)
+		else if (mat == Material.ROCK)
 		{
 			material = 3;
 		}
-		else if (mat == Material.iron)
+		else if (mat == Material.IRON)
 		{
 			material = 4;
 		}
-		else if (mat == Material.water)
+		else if (mat == Material.WATER)
 		{
 			material = 5;
 		}
-		else if (mat == Material.lava)
+		else if (mat == Material.LAVA)
 		{
 			material = 6;
 		}
-		else if (mat == Material.leaves)
+		else if (mat == Material.LEAVES)
 		{
 			material = 7;
 		}
-		else if (mat == Material.plants)
+		else if (mat == Material.PLANTS)
 		{
 			material = 8;
 		}
-		else if (mat == Material.vine)
+		else if (mat == Material.VINE)
 		{
 			material = 9;
 		}
-		else if (mat == Material.sponge)
+		else if (mat == Material.SPONGE)
 		{
 			material = 10;
 		}
-		else if (mat == Material.cloth)
+		else if (mat == Material.CLOTH)
 		{
 			material = 11;
 		}
-		else if (mat == Material.fire)
+		else if (mat == Material.FIRE)
 		{
 			material = 12;
 		}
-		else if (mat == Material.sand)
+		else if (mat == Material.SAND)
 		{
 			material = 13;
 		}
-		else if (mat == Material.circuits)
+		else if (mat == Material.CIRCUITS)
 		{
 			material = 14;
 		}
-		else if (mat == Material.glass)
+		else if (mat == Material.GLASS)
 		{
 			material = 15;
 		}
-		else if (mat == Material.redstoneLight)
+		else if (mat == Material.REDSTONE_LIGHT)
 		{
 			material = 16;
 		}
-		else if (mat == Material.tnt)
+		else if (mat == Material.TNT)
 		{
 			material = 17;
 		}
-		else if (mat == Material.ice)
+		else if (mat == Material.ICE)
 		{
 			material = 19;
 		}
-		else if (mat == Material.snow)
+		else if (mat == Material.SNOW)
 		{
 			material = 20;
 		}
-		else if (mat == Material.craftedSnow)
+		else if (mat == Material.CRAFTED_SNOW)
 		{
 			material = 21;
 		}
-		else if (mat == Material.cactus)
+		else if (mat == Material.CACTUS)
 		{
 			material = 22;
 		}
-		else if (mat == Material.clay)
+		else if (mat == Material.CLAY)
 		{
 			material = 23;
 		}
-		else if (mat == Material.gourd)
+		else if (mat == Material.GOURD)
 		{
 			material = 24;
 		}
-		else if (mat == Material.dragonEgg)
+		else if (mat == Material.DRAGON_EGG)
 		{
 			material = 25;
 		}
-		else if (mat == Material.portal)
+		else if (mat == Material.PORTAL)
 		{
 			material = 26;
 		}
-		else if (mat == Material.cake)
+		else if (mat == Material.CAKE)
 		{
 			material = 27;
 		}
-		else if (mat == Material.web)
+		else if (mat == Material.WEB)
 		{
 			material = 28;
 		}
-		else if (mat == Material.piston)
+		else if (mat == Material.PISTON)
 		{
 			material = 29;
 		}
-		else if (mat == Material.grass)
+		else if (mat == Material.GRASS)
 		{
 			material = 0;
 		}

@@ -121,7 +121,7 @@ public class ClientOverrides
 
 						if (!b.isAir(worldclient, x, y - 1, z))
 						{
-							if (b.getMaterial() == Material.lava)
+							if (b.getMaterial() == Material.LAVA)
 							{
 								Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySmokeFX(worldclient, x + f1, y + 0.1F - b.getBlockBoundsMinY(), z + f2, 0.0D, 0.0D, 0.0D));
 							}

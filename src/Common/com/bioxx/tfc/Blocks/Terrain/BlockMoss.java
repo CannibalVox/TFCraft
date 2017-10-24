@@ -22,7 +22,7 @@ public class BlockMoss extends BlockTerra
 {
 	public BlockMoss()
 	{
-		super(Material.vine);
+		super(Material.VINE);
 		this.setTickRandomly(true);
 		this.setCreativeTab(null);
 	}

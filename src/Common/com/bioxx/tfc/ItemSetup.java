@@ -1167,10 +1167,10 @@ public class ItemSetup extends TFCItems {
 		redSteelHelmet = 		new ItemTFCArmor(Armor.redSteelPlate, proxy.getArmorRenderID("redsteel"), 0, 50,3).setUnlocalizedName(names[i]+" Helmet"); i++;
 		steelHelmet = 			new ItemTFCArmor(Armor.steelPlate, proxy.getArmorRenderID("steel"), 0, 50,3).setUnlocalizedName(names[i]+" Helmet");
 
-		leatherHelmet = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 0, ArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
-		leatherChestplate = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 1, ArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
-		leatherLeggings = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 2, ArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
-		leatherBoots = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 3, ArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
+		leatherHelmet = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 0, ArmorMaterial.LEATHER, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
+		leatherChestplate = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 1, ArmorMaterial.LEATHER, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
+		leatherLeggings = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 2, ArmorMaterial.LEATHER, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
+		leatherBoots = new ItemTFCArmor(Armor.leather, proxy.getArmorRenderID("leather"), 3, ArmorMaterial.LEATHER, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
 
 		quiver = new ItemQuiver().setUnlocalizedName("Quiver");
 	}

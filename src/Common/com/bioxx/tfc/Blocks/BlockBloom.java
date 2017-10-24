@@ -19,7 +19,7 @@ public class BlockBloom extends BlockTerraContainer
 {
 	public BlockBloom()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 	}
 
 	@Override

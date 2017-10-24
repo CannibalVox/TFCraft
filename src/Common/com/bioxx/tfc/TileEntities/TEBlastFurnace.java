@@ -316,7 +316,7 @@ public class TEBlastFurnace extends TEFireEntity implements IInventory
 	{
 		Block yNegBlock = worldObj.getBlock(i, j-1, k);
 		if(yNegBlock != TFCBlocks.molten &&
-				worldObj.getBlock(i, j-1, k).getMaterial() != Material.rock &&
+				worldObj.getBlock(i, j-1, k).getMaterial() != Material.ROCK &&
 				!worldObj.getBlock(i, j-1, k).isNormalCube() &&
 				yNegBlock != TFCBlocks.blastFurnace && TFC_Core.isTopFaceSolid(worldObj, i, j-1, k))
 		{

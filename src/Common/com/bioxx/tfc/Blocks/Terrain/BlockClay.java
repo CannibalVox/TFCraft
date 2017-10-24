@@ -26,7 +26,7 @@ public class BlockClay extends BlockTerra
 
 	public BlockClay(int texOff)
 	{
-		super(Material.clay);
+		super(Material.CLAY);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
 	}

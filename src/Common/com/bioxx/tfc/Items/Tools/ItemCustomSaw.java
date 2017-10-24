@@ -25,7 +25,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	@Override
 	public float func_150893_a/*getStrVsBlock*/(ItemStack par1ItemStack, Block par2Block)
 	{
-		return par2Block != null && par2Block.getMaterial() == Material.wood ? this.efficiencyOnProperMaterial*1.35F : super.func_150893_a(par1ItemStack, par2Block);
+		return par2Block != null && par2Block.getMaterial() == Material.WOOD ? this.efficiencyOnProperMaterial*1.35F : super.func_150893_a(par1ItemStack, par2Block);
 	}
 
 	@Override

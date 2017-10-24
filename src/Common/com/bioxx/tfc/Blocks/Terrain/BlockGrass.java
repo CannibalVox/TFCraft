@@ -43,7 +43,7 @@ public class BlockGrass extends BlockTerra
 
 	public BlockGrass()
 	{
-		super(Material.grass);
+		super(Material.GRASS);
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
@@ -155,7 +155,7 @@ public class BlockGrass extends BlockTerra
 	private boolean isSnow(IBlockAccess access, int x, int y, int z)
 	{
 		Material material = access.getBlock(x, y, z).getMaterial();
-		return material == Material.snow || material == Material.craftedSnow;
+		return material == Material.SNOW || material == Material.CRAFTED_SNOW;
 	}
 
 
@@ -216,7 +216,7 @@ public class BlockGrass extends BlockTerra
 				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
 				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
 
-				if (TFC_Core.isGrass(this) && !TFC_Core.isDryGrass(this) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
+				if (TFC_Core.isGrass(this) && !TFC_Core.isDryGrass(this) && world.getBlock(i, j + 1, k).getMaterial() != Material.WATER && world.isAirBlock(i, j + 1, k))
 				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
 						world.setBlock(i, j + 1, k, TFCBlocks.tallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
@@ -232,7 +232,7 @@ public class BlockGrass extends BlockTerra
 					{
 						for(int z = -4; z < 5 && !nearWater; z++)
 						{
-							if (j < 250 && j > Global.SEALEVEL && world.blockExists(i + x, j - y, k + z) && world.getBlock(i + x, j - y, k + z).getMaterial() == Material.water)
+							if (j < 250 && j > Global.SEALEVEL && world.blockExists(i + x, j - y, k + z) && world.getBlock(i + x, j - y, k + z).getMaterial() == Material.WATER)
 								nearWater = true;
 						}
 					}
@@ -298,7 +298,7 @@ public class BlockGrass extends BlockTerra
 			boolean solidTopOrBottom = world.isSideSolid(x, y, z, ForgeDirection.UP) || world.isSideSolid(x, y, z, ForgeDirection.DOWN);
 
 			if (block.isOpaqueCube() && block.renderAsNormalBlock() && solidTopOrBottom &&
-				material.blocksMovement() && material != Material.leaves && material != Material.water && !block.isFoliage(world, x, y, z))
+				material.blocksMovement() && material != Material.LEAVES && material != Material.WATER && !block.isFoliage(world, x, y, z))
 			{
 				return y;
 			}

@@ -22,7 +22,7 @@ public class BlockNestBox extends BlockTerraContainer
 {
 	public BlockNestBox()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 0.4f, 0.9f);
 	}

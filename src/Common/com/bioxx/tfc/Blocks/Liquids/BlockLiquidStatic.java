@@ -79,7 +79,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		if (this.blockMaterial != Material.water)
+		if (this.blockMaterial != Material.WATER)
 			return 16777215;
 		else
 			return 0x354d35;
@@ -88,7 +88,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity e) 
 	{
-		if (this.blockMaterial == Material.lava)
+		if (this.blockMaterial == Material.LAVA)
 		{
 			if(e instanceof EntityItem)
 			{
@@ -145,15 +145,15 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 				}
 			}
 
-			if(this.getMaterial() == Material.lava)
+			if(this.getMaterial() == Material.LAVA)
 			{
-				if (world.getBlock(x, y + 1, z).getMaterial() == Material.air)
+				if (world.getBlock(x, y + 1, z).getMaterial() == Material.AIR)
 				{
 					int i = x-2+rand.nextInt(5);
 					int j = y+1+rand.nextInt(4);
 					int k = z-2+rand.nextInt(5);
 
-					if (world.getBlock(i, j, k).getMaterial() == Material.air)
+					if (world.getBlock(i, j, k).getMaterial() == Material.AIR)
 					{
 						if (this.isFlammable(world, i - 1, j, k) || this.isFlammable(world, i + 1, j, k) || 
 								this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) || 
@@ -180,7 +180,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 						z += rand.nextInt(3) - 1;
 						Block block = world.getBlock(x, y, z);
 
-						if (block.getMaterial() == Material.air)
+						if (block.getMaterial() == Material.AIR)
 						{
 							if (this.isFlammable(world, x - 1, y, z) || this.isFlammable(world, x + 1, y, z) || 
 									this.isFlammable(world, x, y, z - 1) || this.isFlammable(world, x, y, z + 1) || 
@@ -242,7 +242,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		if(this.getMaterial() == Material.lava)
+		if(this.getMaterial() == Material.LAVA)
 			icons = new IIcon[]{registerer.registerIcon("lava_still"), registerer.registerIcon("lava_flow")};
 		else
 			icons = new IIcon[]{registerer.registerIcon("water_still"), registerer.registerIcon("water_flow")};

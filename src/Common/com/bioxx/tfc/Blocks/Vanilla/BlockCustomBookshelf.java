@@ -15,7 +15,7 @@ public class BlockCustomBookshelf extends BlockTerra
 {
 	public BlockCustomBookshelf()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 	}
 

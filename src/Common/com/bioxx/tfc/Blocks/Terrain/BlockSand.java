@@ -29,7 +29,7 @@ public class BlockSand extends BlockTerra
 
 	public BlockSand(int texOff)
 	{
-		super(Material.sand);
+		super(Material.SAND);
 		this.setCreativeTab(TFCTabs.TFC_BUILDING);
 		textureOffset = texOff;
 	}

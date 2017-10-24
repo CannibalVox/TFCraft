@@ -20,10 +20,10 @@ public class WorldGenCustomReed extends WorldGenerator
 			int var9 = par5 + par2Random.nextInt(4) - par2Random.nextInt(4);
 
 			if (par1World.isAirBlock(var7, par4, var9) &&
-					(par1World.getBlock(var7 - 1, par4 - 1, var9).getMaterial() == Material.water ||
-					par1World.getBlock(var7 + 1, par4 - 1, var9).getMaterial() == Material.water ||
-					par1World.getBlock(var7, par4 - 1, var9 - 1).getMaterial() == Material.water ||
-					par1World.getBlock(var7, par4 - 1, var9 + 1).getMaterial() == Material.water))
+					(par1World.getBlock(var7 - 1, par4 - 1, var9).getMaterial() == Material.WATER ||
+					par1World.getBlock(var7 + 1, par4 - 1, var9).getMaterial() == Material.WATER ||
+					par1World.getBlock(var7, par4 - 1, var9 - 1).getMaterial() == Material.WATER ||
+					par1World.getBlock(var7, par4 - 1, var9 + 1).getMaterial() == Material.WATER))
 			{
 				int var10 = 2 + par2Random.nextInt(par2Random.nextInt(3) + 1);
 				for (int var11 = 0; var11 < var10; ++var11)

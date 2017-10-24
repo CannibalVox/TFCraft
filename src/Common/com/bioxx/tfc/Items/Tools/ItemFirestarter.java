@@ -191,8 +191,8 @@ public class ItemFirestarter extends ItemTerra
 			boolean surroundRock = TFC_Core.isSurroundedStone(world, x, y, z);
 			canBeUsed = side == 1
 					&& TFC_Core.isTopFaceSolid(world, x, y, z)
-					&& block.getMaterial() != Material.wood
-					&& block.getMaterial() != Material.cloth
+					&& block.getMaterial() != Material.WOOD
+					&& block.getMaterial() != Material.CLOTH
 					&& world.isAirBlock(x, y + 1, z)
 					&& block != TFCBlocks.charcoal
 					&& block != Blocks.coal_block
