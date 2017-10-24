@@ -202,30 +202,30 @@ public class BlockSetup extends TFCBlocks
 		TerraFirmaCraft.LOG.info(new StringBuilder().append("Loading Blocks").toString());
 
 		// Remove Items from Creative Tabs
-		Blocks.double_wooden_slab.setCreativeTab(null);
-		Blocks.wooden_slab.setCreativeTab(null);
-		Blocks.spruce_stairs.setCreativeTab(null);
-		Blocks.birch_stairs.setCreativeTab(null);
-		Blocks.jungle_stairs.setCreativeTab(null);
-		Blocks.waterlily.setCreativeTab(null);
-		Blocks.tallgrass.setCreativeTab(null);
-		Blocks.yellow_flower.setCreativeTab(null);
-		Blocks.red_flower.setCreativeTab(null);
-		Blocks.brown_mushroom.setCreativeTab(null);
-		Blocks.red_mushroom.setCreativeTab(null);
-		Blocks.bookshelf.setCreativeTab(null);
-		Blocks.torch.setCreativeTab(null);
-		Blocks.chest.setCreativeTab(null);
-		Blocks.planks.setCreativeTab(null);
-		Blocks.crafting_table.setCreativeTab(null);
-		Blocks.cactus.setCreativeTab(null);
-		Blocks.reeds.setCreativeTab(null);
-		Blocks.pumpkin.setCreativeTab(null);
-		Blocks.lit_pumpkin.setCreativeTab(null);
-		Blocks.wooden_button.setCreativeTab(null);
-		Blocks.ice.setCreativeTab(null);
-		Blocks.vine.setCreativeTab(null);
-		Blocks.flower_pot.setCreativeTab(null);
+		Blocks.DOUBLE_WOODEN_SLAB.setCreativeTab(null);
+		Blocks.WOODEN_SLAB.setCreativeTab(null);
+		Blocks.SPRUCE_STAIRS.setCreativeTab(null);
+		Blocks.BIRCH_STAIRS.setCreativeTab(null);
+		Blocks.JUNGLE_STAIRS.setCreativeTab(null);
+		Blocks.WATERLILY.setCreativeTab(null);
+		Blocks.TALLGRASS.setCreativeTab(null);
+		Blocks.YELLOW_FLOWER.setCreativeTab(null);
+		Blocks.RED_FLOWER.setCreativeTab(null);
+		Blocks.BROWN_MUSHROOM.setCreativeTab(null);
+		Blocks.RED_MUSHROOM.setCreativeTab(null);
+		Blocks.BOOKSHELF.setCreativeTab(null);
+		Blocks.TORCH.setCreativeTab(null);
+		Blocks.CHEST.setCreativeTab(null);
+		Blocks.PLANKS.setCreativeTab(null);
+		Blocks.CRAFTING_TABLE.setCreativeTab(null);
+		Blocks.CACTUS.setCreativeTab(null);
+		Blocks.REEDS.setCreativeTab(null);
+		Blocks.PUMPKIN.setCreativeTab(null);
+		Blocks.LIT_PUMPKIN.setCreativeTab(null);
+		Blocks.WOODEN_BUTTON.setCreativeTab(null);
+		Blocks.ICE.setCreativeTab(null);
+		Blocks.VINE.setCreativeTab(null);
+		Blocks.FLOWER_POT.setCreativeTab(null);
 
 		bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		torch = new BlockTorch().setHardness(0.0F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
@@ -246,7 +246,7 @@ public class BlockSetup extends TFCBlocks
 				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));*/
 		//Snow = (Block)Block.blockRegistry.getObject("snow_layer");
 		snow = new BlockCustomSnow().setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(0).setBlockTextureName("snow");
-		Blocks.snow_layer = snow;
+		Blocks.SNOW_LAYER = snow;
 		stoneIgInCobble = new BlockIgInCobble(Material.ROCK).setHardness(16F).setBlockName("IgInRockCobble");
 		stoneIgIn = new BlockIgIn(Material.ROCK).setHardness(8F).setBlockName("IgInRock");
 		stoneIgInSmooth = new BlockIgInSmooth().setHardness(16F).setBlockName("IgInRockSmooth");
@@ -461,7 +461,7 @@ public class BlockSetup extends TFCBlocks
 		tilledSoil2.setHarvestLevel("shovel", 0);
 
 		detailed.setHarvestLevel("axe", 0);
-		Blocks.oak_stairs.setHarvestLevel("axe", 0);
+		Blocks.OAK_STAIRS.setHarvestLevel("axe", 0);
 		woodConstruct.setHarvestLevel("axe", 0);
 		logNatural.setHarvestLevel("axe", 1);
 		logNatural2.setHarvestLevel("axe", 1);
@@ -484,39 +484,39 @@ public class BlockSetup extends TFCBlocks
 
 	public static void setupFire()
 	{
-		Blocks.fire.setFireInfo(logNatural, 5, 5);
-		Blocks.fire.setFireInfo(logNatural2, 5, 5);
-		Blocks.fire.setFireInfo(woodSupportV, 5, 20);
-		Blocks.fire.setFireInfo(woodSupportV2, 5, 20);
-		Blocks.fire.setFireInfo(woodSupportH, 5, 20);
-		Blocks.fire.setFireInfo(woodSupportH2, 5, 20);
-		Blocks.fire.setFireInfo(leaves, 20, 20);
-		Blocks.fire.setFireInfo(leaves2, 20, 20);
-		Blocks.fire.setFireInfo(fruitTreeWood, 5, 20);
-		Blocks.fire.setFireInfo(fruitTreeLeaves, 20, 20);
-		Blocks.fire.setFireInfo(fruitTreeLeaves2, 20, 20);
-		Blocks.fire.setFireInfo(fence, 5, 20);
-		Blocks.fire.setFireInfo(fence2, 5, 20);
-		Blocks.fire.setFireInfo(fenceGate, 5, 20);
-		Blocks.fire.setFireInfo(fenceGate2, 5, 20);
-		Blocks.fire.setFireInfo(chest, 5, 20);
-		Blocks.fire.setFireInfo(strawHideBed, 20, 20);
-		Blocks.fire.setFireInfo(thatch, 20, 20);
-		Blocks.fire.setFireInfo(woodVert, 5, 5);
-		Blocks.fire.setFireInfo(woodVert2, 5, 5);
-		Blocks.fire.setFireInfo(woodHoriz, 5, 5);
-		Blocks.fire.setFireInfo(woodHoriz2, 5, 5);
-		Blocks.fire.setFireInfo(woodHoriz3, 5, 5);
-		Blocks.fire.setFireInfo(woodHoriz4, 5, 5);
-		Blocks.fire.setFireInfo(planks, 5, 20);
-		Blocks.fire.setFireInfo(planks2, 5, 20);
-		Blocks.fire.setFireInfo(woodConstruct, 5, 20);
-		Blocks.fire.setFireInfo(berryBush, 20, 20);
-		Blocks.fire.setFireInfo(barrel, 5, 20);
-		Blocks.fire.setFireInfo(crops, 20, 20);
-		Blocks.fire.setFireInfo(logPile, 10, 10);
+		Blocks.FIRE.setFireInfo(logNatural, 5, 5);
+		Blocks.FIRE.setFireInfo(logNatural2, 5, 5);
+		Blocks.FIRE.setFireInfo(woodSupportV, 5, 20);
+		Blocks.FIRE.setFireInfo(woodSupportV2, 5, 20);
+		Blocks.FIRE.setFireInfo(woodSupportH, 5, 20);
+		Blocks.FIRE.setFireInfo(woodSupportH2, 5, 20);
+		Blocks.FIRE.setFireInfo(leaves, 20, 20);
+		Blocks.FIRE.setFireInfo(leaves2, 20, 20);
+		Blocks.FIRE.setFireInfo(fruitTreeWood, 5, 20);
+		Blocks.FIRE.setFireInfo(fruitTreeLeaves, 20, 20);
+		Blocks.FIRE.setFireInfo(fruitTreeLeaves2, 20, 20);
+		Blocks.FIRE.setFireInfo(fence, 5, 20);
+		Blocks.FIRE.setFireInfo(fence2, 5, 20);
+		Blocks.FIRE.setFireInfo(fenceGate, 5, 20);
+		Blocks.FIRE.setFireInfo(fenceGate2, 5, 20);
+		Blocks.FIRE.setFireInfo(chest, 5, 20);
+		Blocks.FIRE.setFireInfo(strawHideBed, 20, 20);
+		Blocks.FIRE.setFireInfo(thatch, 20, 20);
+		Blocks.FIRE.setFireInfo(woodVert, 5, 5);
+		Blocks.FIRE.setFireInfo(woodVert2, 5, 5);
+		Blocks.FIRE.setFireInfo(woodHoriz, 5, 5);
+		Blocks.FIRE.setFireInfo(woodHoriz2, 5, 5);
+		Blocks.FIRE.setFireInfo(woodHoriz3, 5, 5);
+		Blocks.FIRE.setFireInfo(woodHoriz4, 5, 5);
+		Blocks.FIRE.setFireInfo(planks, 5, 20);
+		Blocks.FIRE.setFireInfo(planks2, 5, 20);
+		Blocks.FIRE.setFireInfo(woodConstruct, 5, 20);
+		Blocks.FIRE.setFireInfo(berryBush, 20, 20);
+		Blocks.FIRE.setFireInfo(barrel, 5, 20);
+		Blocks.FIRE.setFireInfo(crops, 20, 20);
+		Blocks.FIRE.setFireInfo(logPile, 10, 10);
 		//Blocks.fire.setFireInfo(Charcoal, 100, 20);
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
-			Blocks.fire.setFireInfo(doors[i], 5, 20);
+			Blocks.FIRE.setFireInfo(doors[i], 5, 20);
 	}
 }

@@ -128,35 +128,35 @@ public class NEIIntegration
 			codechicken.nei.api.API.hideItem(new ItemStack(TFCItems.CloudberryLeaf));*/
 
 			// Vanilla Blocks & Items
-			API.hideItem(new ItemStack(Blocks.double_wooden_slab, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.wooden_slab, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.oak_stairs, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.acacia_stairs, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.dark_oak_stairs, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.spruce_stairs, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.birch_stairs, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.jungle_stairs, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.waterlily, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.tallgrass, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.yellow_flower, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.red_flower, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.brown_mushroom, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.red_mushroom, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.bookshelf, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.torch, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.chest, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.crafting_table, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.cactus, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.reeds, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.pumpkin, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.lit_pumpkin, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.wooden_button, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.ice, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.vine, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Blocks.flower_pot, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Items.flower_pot, 1, OreDictionary.WILDCARD_VALUE));
-			API.hideItem(new ItemStack(Items.reeds, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.DOUBLE_WOODEN_SLAB, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.WOODEN_SLAB, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.OAK_STAIRS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.ACACIA_STAIRS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.DARK_OAK_STAIRS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.SPRUCE_STAIRS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.BIRCH_STAIRS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.JUNGLE_STAIRS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.WATERLILY, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.TALLGRASS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.YELLOW_FLOWER, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.RED_FLOWER, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.BROWN_MUSHROOM, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.RED_MUSHROOM, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.BOOKSHELF, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.TORCH, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.CHEST, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.CRAFTING_TABLE, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.CACTUS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.REEDS, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.PUMPKIN, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.LIT_PUMPKIN, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.WOODEN_BUTTON, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.ICE, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.VINE, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Blocks.FLOWER_POT, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Items.FLOWER_POT, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(Items.REEDS, 1, OreDictionary.WILDCARD_VALUE));
 		}
 	}
 }

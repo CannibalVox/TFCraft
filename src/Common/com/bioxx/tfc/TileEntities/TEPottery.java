@@ -72,7 +72,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			{
 				ejectContents();
 				worldObj.removeTileEntity(xCoord, yCoord, zCoord);
-				worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+				worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.AIR);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
@@ -86,10 +86,10 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 				startPitFire();
 
 			//Make sure to keep the fire going throughout the length of the burn
-			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart <= TFC_Time.HOUR_LENGTH * TFCOptions.pitKilnBurnTime)
+			if(blockAbove != Blocks.FIRE && TFC_Time.getTotalTicks() - burnStart <= TFC_Time.HOUR_LENGTH * TFCOptions.pitKilnBurnTime)
 			{
 				if ((blockAbove.isAir(worldObj, xCoord, yCoord + 1, zCoord) || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
-					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
+					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.FIRE);
 				else
 				{
 					wood = 0;
@@ -101,7 +101,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
-			if (blockAbove == Blocks.fire && TFC_Time.getTotalTicks() >= burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.HOUR_LENGTH))
+			if (blockAbove == Blocks.FIRE && TFC_Time.getTotalTicks() >= burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.HOUR_LENGTH))
 			{
 				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
 				if(inventory[0] != null)
@@ -147,7 +147,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 		{
 			for(int z = -1; z <= 1; z++)
 			{
-				if (worldObj.blockExists(xCoord + x, yCoord + 1, zCoord + z) && worldObj.getBlock(xCoord + x, yCoord + 1, zCoord + z) == Blocks.fire)
+				if (worldObj.blockExists(xCoord + x, yCoord + 1, zCoord + z) && worldObj.getBlock(xCoord + x, yCoord + 1, zCoord + z) == Blocks.FIRE)
 					foundFire = true;
 			}
 		}
@@ -159,7 +159,7 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	{
 		if(straw == 8 && wood == 8)
 		{
-			worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
+			worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.FIRE);
 			burnStart = TFC_Time.getTotalTicks();
 		}
 	}

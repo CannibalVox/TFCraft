@@ -270,7 +270,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		}
 
 		amnt = this.rand.nextInt(3 + par2);
-		this.dropItem(Items.bone, amnt);
+		this.dropItem(Items.BONE, amnt);
 	}
 
 	@Override

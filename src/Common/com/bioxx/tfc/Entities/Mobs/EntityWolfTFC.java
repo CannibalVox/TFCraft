@@ -236,7 +236,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int) (sizeMod * ageMod * 0.9)))), 0);
-		this.dropItem(Items.bone, (int) ((rand.nextInt(3) + 1) * ageMod));
+		this.dropItem(Items.BONE, (int) ((rand.nextInt(3) + 1) * ageMod));
 	}
 	@Override
 	protected void entityInit()
@@ -517,7 +517,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				}
 				return true;
 			}
-			else if (itemstack.getItem() == Items.bone && !this.isAngry())
+			else if (itemstack.getItem() == Items.BONE && !this.isAngry())
 			{
 				if (this.getOwner() == null)
 				{
@@ -548,7 +548,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, 
 				return true;
 			}
 
-			else if (isTamed() && (itemstack.getItem() == Items.dye || itemstack.getItem() == TFCItems.dye))
+			else if (isTamed() && (itemstack.getItem() == Items.DYE || itemstack.getItem() == TFCItems.dye))
 			{
 				int i = BlockColored.func_150032_b(itemstack.getItemDamage());
 

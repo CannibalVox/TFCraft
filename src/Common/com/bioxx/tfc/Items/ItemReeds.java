@@ -27,11 +27,11 @@ public class ItemReeds extends Item
 	{
 		Block block = world.getBlock(x, y, z);
 
-		if (block == Blocks.snow_layer && (world.getBlockMetadata(x, y, z) & 7) < 1)
+		if (block == Blocks.SNOW_LAYER && (world.getBlockMetadata(x, y, z) & 7) < 1)
 		{
 			side = 1;
 		}
-		else if (block != TFCBlocks.vine && block != TFCBlocks.tallGrass && block != Blocks.deadbush)
+		else if (block != TFCBlocks.vine && block != TFCBlocks.tallGrass && block != Blocks.DEADBUSH)
 		{
 			if (side == 0) --y;
 			if (side == 1) ++y;

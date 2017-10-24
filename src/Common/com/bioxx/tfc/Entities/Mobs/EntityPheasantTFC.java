@@ -101,13 +101,13 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
-		this.dropItem(Items.feather, (int) (ageMod * this.getSizeMod() * (5 + this.rand.nextInt(10))));
+		this.dropItem(Items.FEATHER, (int) (ageMod * this.getSizeMod() * (5 + this.rand.nextInt(10))));
 
 		if(isAdult())
 		{
 			float foodWeight = ageMod * (this.getSizeMod() * 40);
 			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
-			this.dropItem(Items.bone, rand.nextInt(2) + 1);
+			this.dropItem(Items.BONE, rand.nextInt(2) + 1);
 		}
 	}
 

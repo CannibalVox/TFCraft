@@ -17,8 +17,8 @@ public class ItemCustomShovel extends ItemTerraTool
 	/** an array of the blocks this spade is effective against */
 	private static final Set<Block> BLOCKS_EFFECTIVE_AGAINST = Sets.newHashSet(new Block[]
 	{
-			Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow, Blocks.snow_layer,
-			Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium,
+			Blocks.GRASS, Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL, Blocks.SNOW, Blocks.SNOW_LAYER,
+			Blocks.CLAY, Blocks.FARMLAND, Blocks.SOUL_SAND, Blocks.MYCELIUM,
 			TFCBlocks.dirt, TFCBlocks.dirt2, TFCBlocks.grass, TFCBlocks.grass2, TFCBlocks.clayGrass,
 			TFCBlocks.clayGrass2, TFCBlocks.peatGrass, TFCBlocks.peat, TFCBlocks.clay, TFCBlocks.clay2
 	});

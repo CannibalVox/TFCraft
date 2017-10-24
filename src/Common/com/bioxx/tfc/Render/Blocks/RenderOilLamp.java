@@ -29,7 +29,7 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(0.375, 0.4375, 0.375, 0.625, 0.5, 0.625);
 		renderer.renderStandardBlock(block, x, y, z);
 		renderer.setRenderBounds(0.46875, 0.5, 0.46875, 0.53125, 0.5625F, 0.53125);
-		renderer.renderStandardBlock(Blocks.snow, x, y, z);
+		renderer.renderStandardBlock(Blocks.SNOW, x, y, z);
 		renderer.renderAllFaces = false;
 		return true;
 	}
@@ -46,7 +46,7 @@ public class RenderOilLamp implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(0.375, 0.4375, 0.375, 0.625, 0.5, 0.625);
 		renderInvBlock(block, meta, renderer);
 		renderer.setRenderBounds(0.46875, 0.5, 0.46875, 0.53125, 0.5625F, 0.53125);
-		renderInvBlock(Blocks.snow, meta, renderer);
+		renderInvBlock(Blocks.SNOW, meta, renderer);
 	}
 
 	@Override

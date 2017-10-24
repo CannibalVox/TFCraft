@@ -65,7 +65,7 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public Item getItemDropped(int i, Random r, int j)
 	{
-		return Items.snowball;
+		return Items.SNOWBALL;
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		if(!canPlaceBlockAt(world, x, y, z))
 		{
-			world.setBlock(x, y, z, Blocks.air, 0, 2);
+			world.setBlock(x, y, z, Blocks.AIR, 0, 2);
 		}
 	}
 
@@ -133,7 +133,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		if (!canPlaceBlockAt(world, x, y, z))
 		{
-			world.setBlock(x, y, z, Blocks.air, 0, 2);
+			world.setBlock(x, y, z, Blocks.AIR, 0, 2);
 			return;
 		}
 		
@@ -146,7 +146,7 @@ public class BlockCustomSnow extends BlockTerra
 				if(meta > 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 				else
-					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+					world.setBlock(x, y, z, Blocks.AIR, 0, 0x2);
 			}
 		}
 		
@@ -165,7 +165,7 @@ public class BlockCustomSnow extends BlockTerra
 		}
 		else if (temp > 10)  // to hot for snow (probably chunk loading error)
 		{
-			world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+			world.setBlock(x, y, z, Blocks.AIR, 0, 0x2);
 		}
 		else if (temp > 0 && world.isRaining())  //Raining and above freezing
 		{
@@ -174,7 +174,7 @@ public class BlockCustomSnow extends BlockTerra
 				if (meta > 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 				else
-					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+					world.setBlock(x, y, z, Blocks.AIR, 0, 0x2);
 			}
 		}
 		else if (temp > 0)  //Above freezing, not raining
@@ -184,7 +184,7 @@ public class BlockCustomSnow extends BlockTerra
 				if(meta > 0)
 					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 				else
-					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+					world.setBlock(x, y, z, Blocks.AIR, 0, 0x2);
 			}
 		}
 	}

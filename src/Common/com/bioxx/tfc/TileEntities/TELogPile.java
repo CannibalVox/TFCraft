@@ -302,9 +302,9 @@ public class TELogPile extends TileEntity implements IInventory
 		while(blocksOnFire.size() > 0)
 		{
 			Vector3f blockOnFire = blocksOnFire.poll();
-			if (worldObj.getBlock((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z) != Blocks.fire)
+			if (worldObj.getBlock((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z) != Blocks.FIRE)
 			{
-				worldObj.setBlock((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z, Blocks.fire);
+				worldObj.setBlock((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z, Blocks.FIRE);
 				worldObj.markBlockForUpdate((int) blockOnFire.x, (int) blockOnFire.y, (int) blockOnFire.z);
 			}
 		}
@@ -314,32 +314,32 @@ public class TELogPile extends TileEntity implements IInventory
 	{
 		if(isOnFire)
 		{
-			if(worldObj.getBlock(xCoord + 1, yCoord, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord + 1, yCoord, zCoord) == Blocks.FIRE)
 			{
 				worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord);
 				worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 			}
-			if(worldObj.getBlock(xCoord - 1, yCoord, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord - 1, yCoord, zCoord) == Blocks.FIRE)
 			{
 				worldObj.setBlockToAir(xCoord - 1, yCoord, zCoord);
 				worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 			}
-			if(worldObj.getBlock(xCoord, yCoord, zCoord + 1) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord, zCoord + 1) == Blocks.FIRE)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord + 1);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord + 1);
 			}
-			if(worldObj.getBlock(xCoord, yCoord, zCoord - 1) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord, zCoord - 1) == Blocks.FIRE)
 			{
 				worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord - 1);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord - 1);
 			}
-			if(worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.FIRE)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
 				worldObj.markBlockForUpdate(xCoord, yCoord + 1, zCoord);
 			}
-			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == Blocks.FIRE)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord - 1, zCoord);
 				worldObj.markBlockForUpdate(xCoord, yCoord - 1, zCoord);

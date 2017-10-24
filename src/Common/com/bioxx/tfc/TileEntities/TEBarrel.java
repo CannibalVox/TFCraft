@@ -184,7 +184,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		int count = 0;
 		for(ItemStack is : storage)
 		{
-			if(is != null && is.getItem() == Items.gunpowder)
+			if(is != null && is.getItem() == Items.GUNPOWDER)
 				count+=is.getCount();
 		}
 		return count;

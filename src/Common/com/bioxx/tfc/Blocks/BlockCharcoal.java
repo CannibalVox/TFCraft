@@ -104,7 +104,7 @@ public class BlockCharcoal extends BlockTerra
 						world.markBlockForUpdate(x, y + top, z);
 					}
 					else
-						world.setBlock(x, y, z, Blocks.air, 0, 2);
+						world.setBlock(x, y, z, Blocks.AIR, 0, 2);
 				}
 				else
 				{

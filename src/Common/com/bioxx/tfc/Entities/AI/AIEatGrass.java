@@ -99,7 +99,7 @@ public class AIEatGrass extends EntityAIBase
 			}
 			else if (TFC_Core.isLushGrass(grass))
 			{
-				this.theWorld.playAuxSFX(2001, i, j - 1, k, Block.getIdFromBlock(Blocks.grass));
+				this.theWorld.playAuxSFX(2001, i, j - 1, k, Block.getIdFromBlock(Blocks.GRASS));
 				TFC_Core.convertGrassToDirt(theWorld, i, j-1, k);
 				this.theEntity.eatGrassBonus();
 			}

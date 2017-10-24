@@ -399,11 +399,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							for (int var51 = 0; var51 < 4; ++var51)
 							{
 								if ((var47 += var49) > 0.0D)
-									idsTop[index += arrayYHeight] = Blocks.stone;
+									idsTop[index += arrayYHeight] = Blocks.STONE;
 								else if (y * 8 + var31 < seaLevel)
 									idsTop[index += arrayYHeight] = TFCBlocks.saltWaterStationary;
 								else
-									idsTop[index += arrayYHeight] = Blocks.air;
+									idsTop[index += arrayYHeight] = Blocks.AIR;
 							}
 							var34 += var38;
 							var36 += var40;
@@ -595,23 +595,23 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					int index = (arrayIndex) * 128 + height;
 					//metaBig[indexBig] = 0;
 					float temp = TFC_Climate.adjustHeightToTemp(height, bioTemp);
-					if(TFC_Core.isBeachBiome(biome.biomeID) && height > seaLevel+h && idsTop[index] == Blocks.stone)
+					if(TFC_Core.isBeachBiome(biome.biomeID) && height > seaLevel+h && idsTop[index] == Blocks.STONE)
 					{
-						idsTop[index] = Blocks.air;
+						idsTop[index] = Blocks.AIR;
 						if(h == 0)
 							h = (height-16)/4;
 					}
 					if(idsBig[indexBig] == null)
 					{
 						idsBig[indexBig] = idsTop[index];
-						if(indexBig+1 < idsBig.length && TFC_Core.isSoilOrGravel(idsBig[indexBig+1]) && idsBig[indexBig] == Blocks.air)
+						if(indexBig+1 < idsBig.length && TFC_Core.isSoilOrGravel(idsBig[indexBig+1]) && idsBig[indexBig] == Blocks.AIR)
 						{
 							for(int upCount = 1; TFC_Core.isSoilOrGravel(idsBig[indexBig+upCount]); upCount++)
-							{idsBig[indexBig+upCount] = Blocks.air;}
+							{idsBig[indexBig+upCount] = Blocks.AIR;}
 						}
 					}
 
-					if (idsBig[indexBig] == Blocks.stone)
+					if (idsBig[indexBig] == Blocks.STONE)
 					{
 						if(seaLevelOffsetMap[arrayIndex] == 0 && height-16 >= 0)
 							seaLevelOffsetMap[arrayIndex] = height-16;
@@ -698,7 +698,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 										idsBig[indexBig + c] != TFCBlocks.freshWaterStationary &&
 										idsBig[indexBig + c] != TFCBlocks.hotWater)
 								{
-									idsBig[indexBig + c] = Blocks.air;
+									idsBig[indexBig + c] = Blocks.AIR;
 									//metaBig[indexBig + c] = 0;
 									if(indexBig + c + 1 < idsBig.length && idsBig[indexBig + c + 1] == TFCBlocks.saltWaterStationary)
 									{
@@ -804,7 +804,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					if (height <= 1 + (seaLevelOffsetMap[arrayIndex] / 3) + this.rand.nextInt(3))
 					{
-						idsBig[indexBig] = Blocks.bedrock;
+						idsBig[indexBig] = Blocks.BEDROCK;
 					}
 					else if(idsBig[indexBig] == null)
 					{
@@ -821,7 +821,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						}
 					}
 
-					if (height <= 6 && stability.data1 == 1 && idsBig[indexBig] == Blocks.air)
+					if (height <= 6 && stability.data1 == 1 && idsBig[indexBig] == Blocks.AIR)
 					{
 						idsBig[indexBig] = TFCBlocks.lava;
 						metaBig[indexBig] = 0; 
@@ -838,7 +838,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	public void convertStone(int height, int indexArray, int indexBig, Block[] idsBig, byte[] metaBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
 	{
-		if(idsBig[indexBig] != null && idsBig[indexBig] != Blocks.stone)
+		if(idsBig[indexBig] != null && idsBig[indexBig] != Blocks.STONE)
 			return;
 		if(height <= TFCOptions.rockLayer3Height + seaLevelOffsetMap[indexArray])
 		{

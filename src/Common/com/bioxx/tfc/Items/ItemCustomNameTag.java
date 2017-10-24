@@ -33,13 +33,13 @@ public class ItemCustomNameTag extends ItemTerra
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass)
 	{
-		return Items.name_tag.getIcon(stack, pass);
+		return Items.NAME_TAG.getIcon(stack, pass);
 	}
 	
 	@Override
 	public IIcon getIconFromDamage(int damage)
 	{
-		return Items.name_tag.getIconFromDamage(damage);
+		return Items.NAME_TAG.getIconFromDamage(damage);
 	}
 
 	@Override

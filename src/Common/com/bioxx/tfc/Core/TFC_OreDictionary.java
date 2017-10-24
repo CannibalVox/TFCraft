@@ -342,9 +342,9 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("gemExquisiteTourmaline", new ItemStack(TFCItems.gemTourmaline, 1, 4));
 
 		//Fuel
-		OreDictionary.registerOre("gemCoal", new ItemStack(Items.coal, 1, 0));
+		OreDictionary.registerOre("gemCoal", new ItemStack(Items.COAL, 1, 0));
 		OreDictionary.registerOre("gemCoal", new ItemStack(TFCItems.coal, 1, 0));
-		OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.coal, 1, 1));
+		OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.COAL, 1, 1));
 		OreDictionary.registerOre("gemCharcoal", new ItemStack(TFCItems.coal, 1, 1));
 
 		//Stone
@@ -365,7 +365,7 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("stoneCobble", new ItemStack(TFCBlocks.stoneSedCobble, 1, WILD));
 
 		//Stone Bricks
-		OreDictionary.registerOre("stoneBricks", new ItemStack(Blocks.stonebrick));
+		OreDictionary.registerOre("stoneBricks", new ItemStack(Blocks.STONEBRICK));
 		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneIgExBrick, 1, WILD));
 		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneIgInBrick, 1, WILD));
 		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.stoneMMBrick, 1, WILD));
@@ -379,7 +379,7 @@ public class TFC_OreDictionary
 
 		//Crafting Table
 		OreDictionary.registerOre("craftingTableWood", new ItemStack(TFCBlocks.workbench));
-		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.crafting_table));
+		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.CRAFTING_TABLE));
 
 		//Dyes
 		OreDictionary.registerOre("dyeBlack", new ItemStack(TFCItems.dye, 1, 0));
@@ -404,10 +404,10 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("dyeWhite", new ItemStack(TFCItems.dye, 1, 15));
 
 		//Materials
-		OreDictionary.registerOre("materialLeather", new ItemStack(Items.leather));
+		OreDictionary.registerOre("materialLeather", new ItemStack(Items.LEATHER));
 		OreDictionary.registerOre("materialLeather", new ItemStack(TFCItems.leather));
 
-		OreDictionary.registerOre("materialString", new ItemStack(Items.string));
+		OreDictionary.registerOre("materialString", new ItemStack(Items.STRING));
 		OreDictionary.registerOre("materialString", new ItemStack(TFCItems.woolYarn));
 
 		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.woolCloth));
@@ -625,23 +625,23 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("itemJavelinSteel", new ItemStack(TFCItems.steelJavelin, 1, WILD));
 
 		//Miscellaneous Items
-		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
+		OreDictionary.registerOre("lumpClay", new ItemStack(Items.CLAY_BALL));
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.clayBall, 1, 0));
 
-		OreDictionary.registerOre("itemArrow", new ItemStack(Items.arrow));
+		OreDictionary.registerOre("itemArrow", new ItemStack(Items.ARROW));
 		OreDictionary.registerOre("itemArrow", new ItemStack(TFCItems.arrow));
 
-		OreDictionary.registerOre("itemReed", new ItemStack(Items.reeds));
+		OreDictionary.registerOre("itemReed", new ItemStack(Items.REEDS));
 		OreDictionary.registerOre("itemReed", new ItemStack(TFCItems.reeds));
 
 		OreDictionary.registerOre("itemRock", new ItemStack(TFCItems.looseRock, 1, WILD));
 
-		OreDictionary.registerOre("bucketEmpty", new ItemStack(Items.bucket));
+		OreDictionary.registerOre("bucketEmpty", new ItemStack(Items.BUCKET));
 		OreDictionary.registerOre("bucketEmpty", new ItemStack(TFCItems.woodenBucketEmpty));
 		OreDictionary.registerOre("bucketEmpty", new ItemStack(TFCItems.redSteelBucketEmpty));
 		OreDictionary.registerOre("bucketEmpty", new ItemStack(TFCItems.blueSteelBucketEmpty));
 
-		OreDictionary.registerOre("bucketWater", new ItemStack(Items.water_bucket));
+		OreDictionary.registerOre("bucketWater", new ItemStack(Items.WATER_BUCKET));
 		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.woodenBucketWater, 1, WILD));
 		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.redSteelBucketWater, 1, WILD));
 		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.woodenBucketSaltWater, 1, WILD));
@@ -653,34 +653,34 @@ public class TFC_OreDictionary
 		OreDictionary.registerOre("bucketSaltWater", new ItemStack(TFCItems.woodenBucketSaltWater, 1, WILD));
 		OreDictionary.registerOre("bucketSaltWater", new ItemStack(TFCItems.redSteelBucketSaltWater, 1, WILD));
 
-		OreDictionary.registerOre("bucketLava", new ItemStack(Items.lava_bucket));
+		OreDictionary.registerOre("bucketLava", new ItemStack(Items.LAVA_BUCKET));
 		OreDictionary.registerOre("bucketLava", new ItemStack(TFCItems.blueSteelBucketLava));
 
-		OreDictionary.registerOre("bucketMilk", new ItemStack(Items.milk_bucket));
+		OreDictionary.registerOre("bucketMilk", new ItemStack(Items.MILK_BUCKET));
 		OreDictionary.registerOre("bucketMilk", new ItemStack(TFCItems.woodenBucketMilk));
 
-		OreDictionary.registerOre("toolFlintSteel", new ItemStack(Items.flint_and_steel, 1, WILD));
+		OreDictionary.registerOre("toolFlintSteel", new ItemStack(Items.FLINT_AND_STEEL, 1, WILD));
 		OreDictionary.registerOre("toolFlintSteel", new ItemStack(TFCItems.flintSteel, 1, WILD));
 
 		//Miscellaneous Blocks
-		OreDictionary.registerOre("blockSand", new ItemStack(Blocks.sand));
+		OreDictionary.registerOre("blockSand", new ItemStack(Blocks.SAND));
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.sand, 1, WILD));
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.sand2, 1, WILD));
 
-		OreDictionary.registerOre("blockGravel", new ItemStack(Blocks.gravel));
+		OreDictionary.registerOre("blockGravel", new ItemStack(Blocks.GRAVEL));
 		OreDictionary.registerOre("blockGravel", new ItemStack(TFCBlocks.gravel, 1, WILD));
 		OreDictionary.registerOre("blockGravel", new ItemStack(TFCBlocks.gravel2, 1, WILD));
 
-		OreDictionary.registerOre("blockDirt", new ItemStack(Blocks.dirt));
+		OreDictionary.registerOre("blockDirt", new ItemStack(Blocks.DIRT));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.dirt, 1, WILD));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.dirt2, 1, WILD));
 
-		OreDictionary.registerOre("blockTorch", new ItemStack(Blocks.torch));
+		OreDictionary.registerOre("blockTorch", new ItemStack(Blocks.TORCH));
 		OreDictionary.registerOre("blockTorch", new ItemStack(TFCBlocks.torch));
 
-		OreDictionary.registerOre("blockPumpkin", new ItemStack(Blocks.pumpkin));
+		OreDictionary.registerOre("blockPumpkin", new ItemStack(Blocks.PUMPKIN));
 		OreDictionary.registerOre("blockPumpkin", new ItemStack(TFCBlocks.pumpkin));
-		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(Blocks.lit_pumpkin));
+		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(Blocks.LIT_PUMPKIN));
 		OreDictionary.registerOre("blockLitPumpkin", new ItemStack(TFCBlocks.litPumpkin));
 
 		//Seed Bags

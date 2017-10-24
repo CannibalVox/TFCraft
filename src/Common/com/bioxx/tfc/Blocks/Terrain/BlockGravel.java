@@ -75,7 +75,7 @@ public class BlockGravel extends BlockTerra
 
 		if(world.rand.nextInt(10 - fortune * 3) == 0)
 		{
-			ret.add(new ItemStack(Items.flint , 1));
+			ret.add(new ItemStack(Items.FLINT , 1));
 		}
 		else
 		{

@@ -186,7 +186,7 @@ public class BlockMoss extends BlockTerra
 	 */
 	private boolean canBePlacedOn(Block block)
 	{
-		if (block == Blocks.air)
+		if (block == Blocks.AIR)
 			return false;
 		else
 			return block.renderAsNormalBlock() && block.getMaterial().blocksMovement();

@@ -1250,17 +1250,17 @@ public class TFC_Core
 
 	public static boolean isValidCharcoalPitCover(Block block)
 	{
-		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.logPile) return false;
+		if(Blocks.FIRE.getFlammability(block) > 0 && block != TFCBlocks.logPile) return false;
 
 		return block == TFCBlocks.logPile
 				|| isCobbleStone(block)
 				|| isBrickStone(block)
 				|| isSmoothStone(block)
 				|| isGround(block)
-				|| block == Blocks.glass
-				|| block == Blocks.stained_glass
+				|| block == Blocks.GLASS
+				|| block == Blocks.STAINED_GLASS
 				|| block == TFCBlocks.metalTrapDoor
-				|| block == Blocks.iron_door
+				|| block == Blocks.IRON_DOOR
 				|| block.isOpaqueCube();
 	}
 
@@ -1317,7 +1317,7 @@ public class TFC_Core
 
 	public static void destroyBlock(World world, int x, int y, int z)
 	{
-		if(world.getBlock(x, y, z) != Blocks.air)
+		if(world.getBlock(x, y, z) != Blocks.AIR)
 		{
 			world.getBlock(x, y, z).dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlockToAir(x, y, z);

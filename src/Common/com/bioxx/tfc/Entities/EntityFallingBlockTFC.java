@@ -157,7 +157,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 					this.motionZ *= 0.699999988079071D;
 					this.motionY *= -0.5D;
 
-					if (this.worldObj.getBlock(i, j, k) != Blocks.piston_extension)
+					if (this.worldObj.getBlock(i, j, k) != Blocks.PISTON_EXTENSION)
 					{
 						this.setDead();
 
@@ -327,7 +327,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 		if (this.block.getMaterial() == Material.AIR)
 		{
-			this.block = Blocks.sand;
+			this.block = Blocks.SAND;
 		}
 	}
 

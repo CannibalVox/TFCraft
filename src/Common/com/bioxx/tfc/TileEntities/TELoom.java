@@ -500,7 +500,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public static void registerRecipes()
 	{
 		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.woolYarn,16), new ItemStack(TFCItems.woolCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/String.png"));
-		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(Items.string,24), new ItemStack(TFCItems.silkCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Silk.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(Items.STRING,24), new ItemStack(TFCItems.silkCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Silk.png"));
 		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.juteFiber,12), new ItemStack(TFCItems.burlapCloth,1)),new ResourceLocation(Reference.MOD_ID, "textures/blocks/Rope.png"));
 	}
 }

@@ -54,7 +54,7 @@ public class ItemSteelBucket extends ItemTerra
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		//float var4 = 1.0F;
-		boolean var11 = this.bucketContents == Blocks.air;
+		boolean var11 = this.bucketContents == Blocks.AIR;
 		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, var11);
 
 		if (mop == null)
@@ -102,7 +102,7 @@ public class ItemSteelBucket extends ItemTerra
 					return is;
 				}
 
-				if (this.bucketContents == Blocks.air)
+				if (this.bucketContents == Blocks.AIR)
 				{
 					if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock))
 					{
@@ -134,7 +134,7 @@ public class ItemSteelBucket extends ItemTerra
 				}
 				else
 				{
-					if (this.bucketContents == Blocks.air)
+					if (this.bucketContents == Blocks.AIR)
 					{
 						return this.getContainerItem(is);
 					}
@@ -166,7 +166,7 @@ public class ItemSteelBucket extends ItemTerra
 	 */
 	public boolean tryPlaceContainedLiquid(World world, int x, int y, int z)
 	{
-		if (this.bucketContents == Blocks.air)
+		if (this.bucketContents == Blocks.AIR)
 		{
 			return false;
 		}

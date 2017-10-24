@@ -76,12 +76,12 @@ public abstract class BlockTerra extends Block
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		if (plant == Blocks.cactus && this == Blocks.cactus)
+		if (plant == Blocks.CACTUS && this == Blocks.CACTUS)
 		{
 			return true;
 		}
 
-		if (plant == Blocks.reeds && this == Blocks.reeds)
+		if (plant == Blocks.REEDS && this == Blocks.REEDS)
 		{
 			return true;
 		}

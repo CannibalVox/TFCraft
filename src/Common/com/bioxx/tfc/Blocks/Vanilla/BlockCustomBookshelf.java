@@ -34,6 +34,6 @@ public class BlockCustomBookshelf extends BlockTerra
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return Items.book;
+		return Items.BOOK;
 	}
 }

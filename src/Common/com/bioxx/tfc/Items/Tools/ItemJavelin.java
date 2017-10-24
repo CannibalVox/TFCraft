@@ -39,7 +39,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 
 	public ItemJavelin(ToolMaterial par2EnumToolMaterial, float damage)
 	{
-		super(10F, par2EnumToolMaterial, Sets.newHashSet(new Block[] {Blocks.air}));
+		super(10F, par2EnumToolMaterial, Sets.newHashSet(new Block[] {Blocks.AIR}));
 		this.maxStackSize = 1;
 		this.weaponDamage = damage;
 		this.weaponRangeDamage = damage;

@@ -22,7 +22,7 @@ public class WorldGenBerryBush extends WorldGenerator
 	private int clusterSize;
 	private int bushHeight;
 	private int spawnRadius;
-	private Block underBlock = Blocks.air;
+	private Block underBlock = Blocks.AIR;
 
 	public WorldGenBerryBush(boolean flag, int m, int cluster, int height, int radius)
 	{
@@ -68,7 +68,7 @@ public class WorldGenBerryBush extends WorldGenerator
 	{
 		Block id = world.getBlock(i, j-1, k);
 		if ((world.canBlockSeeTheSky(i, j, k) || world.getBlockLightValue(i, j, k) > 8) &&
-			(TFC_Core.isSoil(id) && underBlock == Blocks.air ||
+			(TFC_Core.isSoil(id) && underBlock == Blocks.AIR ||
 				id == underBlock ||
 				TFC_Core.isGrass(underBlock) && id == TFC_Core.getTypeForSoil(underBlock)))
 		{

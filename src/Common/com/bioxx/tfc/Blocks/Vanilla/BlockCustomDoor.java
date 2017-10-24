@@ -405,7 +405,7 @@ public class BlockCustomDoor extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return this.blockMaterial == Material.IRON ? Items.iron_door : Items.wooden_door;
+		return this.blockMaterial == Material.IRON ? Items.IRON_DOOR : Items.wooden_door;
 	}
 
 	@Override
@@ -445,7 +445,7 @@ public class BlockCustomDoor extends BlockTerra
 			// block is the bottom half of the door
 			// check if the top half of the door still exists (or is air)
 			Block block = world.getBlock(x, y+1, z);
-			if (block != null && (block instanceof BlockCustomDoor || block == Blocks.air)) // only return an item is the top half of the door exists, or the bottom half is air.
+			if (block != null && (block instanceof BlockCustomDoor || block == Blocks.AIR)) // only return an item is the top half of the door exists, or the bottom half is air.
 			{
 				// top half of the door still exists or is air
 				// return the door item (used to return the door item when mouse pointer over the bottom half of the door)

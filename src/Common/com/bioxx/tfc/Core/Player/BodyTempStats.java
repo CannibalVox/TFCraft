@@ -142,7 +142,7 @@ public class BodyTempStats
 					if (player.worldObj.blockExists(i, j, k))
 					{
 						TileEntity te = player.worldObj.getTileEntity(i, j, k);
-						if (player.worldObj.getBlock(i, j, k) == Blocks.lava || player.worldObj.getBlock(i, j, k) == TFCBlocks.lava || te instanceof TEFireEntity)
+						if (player.worldObj.getBlock(i, j, k) == Blocks.LAVA || player.worldObj.getBlock(i, j, k) == TFCBlocks.lava || te instanceof TEFireEntity)
 						{
 							//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 							//Lava averages 700-1200 C = 950 C, assume source is lava.

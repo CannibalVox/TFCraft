@@ -132,7 +132,7 @@ public class ChiselMode_Stair extends ChiselMode {
 
             te.extraData |= hit;
             if(te.extraData == 255)
-                world.setBlock(x, y, z, Blocks.air);
+                world.setBlock(x, y, z, Blocks.AIR);
             else
                 te.broadcastPacketInRange();
 

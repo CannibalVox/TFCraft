@@ -95,8 +95,8 @@ public class BlockCustomFlowerPot extends BlockFlowerPot
 				return true;
 			
 			// Vanilla Blocks
-			if (block == Blocks.yellow_flower || block == Blocks.red_flower || block == Blocks.cactus || block == Blocks.brown_mushroom || 
-					block == Blocks.red_mushroom || block == Blocks.sapling || block == Blocks.deadbush  || block == Blocks.tallgrass && meta == 2 /*Fern*/)
+			if (block == Blocks.YELLOW_FLOWER || block == Blocks.RED_FLOWER || block == Blocks.CACTUS || block == Blocks.BROWN_MUSHROOM ||
+					block == Blocks.RED_MUSHROOM || block == Blocks.SAPLING || block == Blocks.DEADBUSH  || block == Blocks.TALLGRASS && meta == 2 /*Fern*/)
 				return true;
 		}
 		// Currently not possible to render non-ItemBlocks in the flower pot. -Kitty

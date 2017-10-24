@@ -58,7 +58,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.cactiPerChunk = 2;
 		this.waterPlantsPerChunk = 30;
 		this.reedGen = new WorldGenCustomReed();
-		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
+		this.sandGen = new WorldGenCustomSand(7, Blocks.SAND);
 		biome = par1;
 	}
 

@@ -201,7 +201,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		float ageMod = TFC_Core.getPercentGrown(this);
 
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int) (ageMod * 3 - 1)))), 0);
-		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 3) * ageMod));
+		this.dropItem(Items.BONE, (int) ((rand.nextInt(6) + 3) * ageMod));
 
 		float foodWeight = ageMod * (this.sizeMod * 4000);
 
@@ -282,7 +282,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.leather;
+		return Items.LEATHER;
 	}
 
 	@Override

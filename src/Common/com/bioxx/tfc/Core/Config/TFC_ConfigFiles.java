@@ -154,119 +154,119 @@ public class TFC_ConfigFiles
 
 		try
 		{
-			new ConversionOption("appleConversion", getAsShapeless(new ItemStack(Items.apple, 1), new ItemStack(TFCItems.redApple, 1)));
-			new ConversionOption("arrowConversion", getAsShapeless(new ItemStack(Items.arrow, 1), new ItemStack(TFCItems.arrow, 1)),
-					getAsShapeless(new ItemStack(TFCItems.arrow, 1), new ItemStack(Items.arrow, 1)));
-			new ConversionOption("bowConversion", getAsShapeless(new ItemStack(Items.bow, 1), new ItemStack(TFCItems.bow, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.bow, 1, 0), new ItemStack(Items.bow, 1)));
-			new ConversionOption("coalConversion", getAsShapeless(new ItemStack(Items.coal, 1), new ItemStack(TFCItems.coal, 1)),
-					getAsShapeless(new ItemStack(TFCItems.coal, 1), new ItemStack(Items.coal, 1)));
-			new ConversionOption("diamondConversion", getAsShapeless(new ItemStack(Items.diamond, 1), new ItemStack(TFCItems.gemDiamond,1,2)),
-					getAsShapeless(new ItemStack(Items.diamond, 2), new ItemStack(TFCItems.gemDiamond,1,3)),
-					getAsShapeless(new ItemStack(Items.diamond, 3), new ItemStack(TFCItems.gemDiamond,1,4)),
-					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,2), new ItemStack(Items.diamond)),
-					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,3), new ItemStack(Items.diamond), new ItemStack(Items.diamond)),
-					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,4), new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(Items.diamond)));
-			new ConversionOption("emeraldConversion", getAsShapeless(new ItemStack(Items.emerald, 1), new ItemStack(TFCItems.gemEmerald,1,2)),
-					getAsShapeless(new ItemStack(Items.emerald, 2), new ItemStack(TFCItems.gemEmerald,1,3)),
-					getAsShapeless(new ItemStack(Items.emerald, 3), new ItemStack(TFCItems.gemEmerald,1,4)),
-					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,2), new ItemStack(Items.emerald)),
-					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,3), new ItemStack(Items.emerald), new ItemStack(Items.emerald)),
-					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,4), new ItemStack(Items.emerald), new ItemStack(Items.emerald), new ItemStack(Items.emerald)));
-			new ConversionOption("fishConversion", getAsShapeless(new ItemStack(Items.fish, 1), new ItemStack(TFCItems.fishRaw, 1)));
-			new ConversionOption("fishingRodConversion", getAsShapeless(new ItemStack(Items.fishing_rod, 1), new ItemStack(TFCItems.fishingRod, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.fishingRod, 1, 0), new ItemStack(Items.fishing_rod, 1)));
-			new ConversionOption("flintSteelConversion", getAsShapeless(new ItemStack(Items.flint_and_steel, 1, 0), new ItemStack(TFCItems.flintSteel, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.flintSteel, 1, 0), new ItemStack(Items.flint_and_steel, 1, 0)));
-			new ConversionOption("leatherArmorConversion", getAsShapeless(new ItemStack(Items.leather_helmet, 1, 0), new ItemStack(TFCItems.leatherHelmet, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.leatherHelmet, 1, 0), new ItemStack(Items.leather_helmet, 1, 0)),
-					getAsShapeless(new ItemStack(Items.leather_chestplate, 1, 0), new ItemStack(TFCItems.leatherChestplate, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.leatherChestplate, 1, 0), new ItemStack(Items.leather_chestplate, 1, 0)),
-					getAsShapeless(new ItemStack(Items.leather_leggings, 1, 0), new ItemStack(TFCItems.leatherLeggings, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.leatherLeggings, 1, 0), new ItemStack(Items.leather_leggings, 1, 0)),
-					getAsShapeless(new ItemStack(Items.leather_boots, 1, 0), new ItemStack(TFCItems.leatherBoots, 1, 0)),
-					getAsShapeless(new ItemStack(TFCItems.leatherBoots, 1, 0), new ItemStack(Items.leather_boots, 1, 0)));
-			new ConversionOption("leatherConversion", getAsShapeless(new ItemStack(Items.leather, 1), new ItemStack(TFCItems.leather, 1)),
-					getAsShapeless(new ItemStack(TFCItems.leather, 1), new ItemStack(Items.leather, 1)));
-			new ConversionOption("stoneAxeConversion", getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.igInAxe),
-					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.igExAxe),
-					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.sedAxe),
-					getAsShapeless(new ItemStack(Items.stone_axe, 1, 0), TFCItems.mMAxe),
-					getAsShapeless(new ItemStack(TFCItems.igExAxe, 1, 0), Items.stone_axe));
-			new ConversionOption("stoneHoeConversion", getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.igInHoe),
-					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.igExHoe),
-					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.sedHoe),
-					getAsShapeless(new ItemStack(Items.stone_hoe, 1, 0), TFCItems.mMHoe),
-					getAsShapeless(new ItemStack(TFCItems.igExHoe, 1, 0), Items.stone_hoe));
-			new ConversionOption("stoneShovelConversion", getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.igInShovel),
-					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.igExShovel),
-					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.sedShovel),
-					getAsShapeless(new ItemStack(Items.stone_shovel, 1, 0), TFCItems.mMShovel),
-					getAsShapeless(new ItemStack(TFCItems.igExShovel, 1, 0), Items.stone_shovel));
-			new ConversionOption("woodButtonConversion", getAsShapeless(new ItemStack(Blocks.wooden_button, 1), new ItemStack(TFCBlocks.buttonWood, 1)),
-					getAsShapeless(new ItemStack(TFCBlocks.buttonWood, 1), new ItemStack(Blocks.wooden_button, 1)));
-			new ConversionOption("workbenchConversion", getAsShapeless(new ItemStack(Blocks.crafting_table, 1), new ItemStack(TFCBlocks.workbench, 1)),
-					getAsShapeless(new ItemStack(TFCBlocks.workbench, 1), new ItemStack(Blocks.crafting_table, 1)));
+			new ConversionOption("appleConversion", getAsShapeless(new ItemStack(Items.APPLE, 1), new ItemStack(TFCItems.redApple, 1)));
+			new ConversionOption("arrowConversion", getAsShapeless(new ItemStack(Items.ARROW, 1), new ItemStack(TFCItems.arrow, 1)),
+					getAsShapeless(new ItemStack(TFCItems.arrow, 1), new ItemStack(Items.ARROW, 1)));
+			new ConversionOption("bowConversion", getAsShapeless(new ItemStack(Items.BOW, 1), new ItemStack(TFCItems.bow, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.bow, 1, 0), new ItemStack(Items.BOW, 1)));
+			new ConversionOption("coalConversion", getAsShapeless(new ItemStack(Items.COAL, 1), new ItemStack(TFCItems.coal, 1)),
+					getAsShapeless(new ItemStack(TFCItems.coal, 1), new ItemStack(Items.COAL, 1)));
+			new ConversionOption("diamondConversion", getAsShapeless(new ItemStack(Items.DIAMOND, 1), new ItemStack(TFCItems.gemDiamond,1,2)),
+					getAsShapeless(new ItemStack(Items.DIAMOND, 2), new ItemStack(TFCItems.gemDiamond,1,3)),
+					getAsShapeless(new ItemStack(Items.DIAMOND, 3), new ItemStack(TFCItems.gemDiamond,1,4)),
+					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,2), new ItemStack(Items.DIAMOND)),
+					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,3), new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND)),
+					getAsShapeless(new ItemStack(TFCItems.gemDiamond,1,4), new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND)));
+			new ConversionOption("emeraldConversion", getAsShapeless(new ItemStack(Items.EMERALD, 1), new ItemStack(TFCItems.gemEmerald,1,2)),
+					getAsShapeless(new ItemStack(Items.EMERALD, 2), new ItemStack(TFCItems.gemEmerald,1,3)),
+					getAsShapeless(new ItemStack(Items.EMERALD, 3), new ItemStack(TFCItems.gemEmerald,1,4)),
+					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,2), new ItemStack(Items.EMERALD)),
+					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,3), new ItemStack(Items.EMERALD), new ItemStack(Items.EMERALD)),
+					getAsShapeless(new ItemStack(TFCItems.gemEmerald,1,4), new ItemStack(Items.EMERALD), new ItemStack(Items.EMERALD), new ItemStack(Items.EMERALD)));
+			new ConversionOption("fishConversion", getAsShapeless(new ItemStack(Items.FISH, 1), new ItemStack(TFCItems.fishRaw, 1)));
+			new ConversionOption("fishingRodConversion", getAsShapeless(new ItemStack(Items.FISHING_ROD, 1), new ItemStack(TFCItems.fishingRod, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.fishingRod, 1, 0), new ItemStack(Items.FISHING_ROD, 1)));
+			new ConversionOption("flintSteelConversion", getAsShapeless(new ItemStack(Items.FLINT_AND_STEEL, 1, 0), new ItemStack(TFCItems.flintSteel, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.flintSteel, 1, 0), new ItemStack(Items.FLINT_AND_STEEL, 1, 0)));
+			new ConversionOption("leatherArmorConversion", getAsShapeless(new ItemStack(Items.LEATHER_HELMET, 1, 0), new ItemStack(TFCItems.leatherHelmet, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherHelmet, 1, 0), new ItemStack(Items.LEATHER_HELMET, 1, 0)),
+					getAsShapeless(new ItemStack(Items.LEATHER_CHESTPLATE, 1, 0), new ItemStack(TFCItems.leatherChestplate, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherChestplate, 1, 0), new ItemStack(Items.LEATHER_CHESTPLATE, 1, 0)),
+					getAsShapeless(new ItemStack(Items.LEATHER_LEGGINGS, 1, 0), new ItemStack(TFCItems.leatherLeggings, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherLeggings, 1, 0), new ItemStack(Items.LEATHER_LEGGINGS, 1, 0)),
+					getAsShapeless(new ItemStack(Items.LEATHER_BOOTS, 1, 0), new ItemStack(TFCItems.leatherBoots, 1, 0)),
+					getAsShapeless(new ItemStack(TFCItems.leatherBoots, 1, 0), new ItemStack(Items.LEATHER_BOOTS, 1, 0)));
+			new ConversionOption("leatherConversion", getAsShapeless(new ItemStack(Items.LEATHER, 1), new ItemStack(TFCItems.leather, 1)),
+					getAsShapeless(new ItemStack(TFCItems.leather, 1), new ItemStack(Items.LEATHER, 1)));
+			new ConversionOption("stoneAxeConversion", getAsShapeless(new ItemStack(Items.STONE_AXE, 1, 0), TFCItems.igInAxe),
+					getAsShapeless(new ItemStack(Items.STONE_AXE, 1, 0), TFCItems.igExAxe),
+					getAsShapeless(new ItemStack(Items.STONE_AXE, 1, 0), TFCItems.sedAxe),
+					getAsShapeless(new ItemStack(Items.STONE_AXE, 1, 0), TFCItems.mMAxe),
+					getAsShapeless(new ItemStack(TFCItems.igExAxe, 1, 0), Items.STONE_AXE));
+			new ConversionOption("stoneHoeConversion", getAsShapeless(new ItemStack(Items.STONE_HOE, 1, 0), TFCItems.igInHoe),
+					getAsShapeless(new ItemStack(Items.STONE_HOE, 1, 0), TFCItems.igExHoe),
+					getAsShapeless(new ItemStack(Items.STONE_HOE, 1, 0), TFCItems.sedHoe),
+					getAsShapeless(new ItemStack(Items.STONE_HOE, 1, 0), TFCItems.mMHoe),
+					getAsShapeless(new ItemStack(TFCItems.igExHoe, 1, 0), Items.STONE_HOE));
+			new ConversionOption("stoneShovelConversion", getAsShapeless(new ItemStack(Items.STONE_SHOVEL, 1, 0), TFCItems.igInShovel),
+					getAsShapeless(new ItemStack(Items.STONE_SHOVEL, 1, 0), TFCItems.igExShovel),
+					getAsShapeless(new ItemStack(Items.STONE_SHOVEL, 1, 0), TFCItems.sedShovel),
+					getAsShapeless(new ItemStack(Items.STONE_SHOVEL, 1, 0), TFCItems.mMShovel),
+					getAsShapeless(new ItemStack(TFCItems.igExShovel, 1, 0), Items.STONE_SHOVEL));
+			new ConversionOption("woodButtonConversion", getAsShapeless(new ItemStack(Blocks.WOODEN_BUTTON, 1), new ItemStack(TFCBlocks.buttonWood, 1)),
+					getAsShapeless(new ItemStack(TFCBlocks.buttonWood, 1), new ItemStack(Blocks.WOODEN_BUTTON, 1)));
+			new ConversionOption("workbenchConversion", getAsShapeless(new ItemStack(Blocks.CRAFTING_TABLE, 1), new ItemStack(TFCBlocks.workbench, 1)),
+					getAsShapeless(new ItemStack(TFCBlocks.workbench, 1), new ItemStack(Blocks.CRAFTING_TABLE, 1)));
 
-			new VanillaRecipeOption("anvilRecipe", new ItemStack(Blocks.anvil));
-			new VanillaRecipeOption("arrowsRecipe", new ItemStack(Items.arrow, 4));
-			new VanillaRecipeOption("bedRecipe", new ItemStack(Items.bed));
-			new VanillaRecipeOption("bonemealRecipe", new ItemStack(Items.dye, 3, 15));
-			new VanillaRecipeOption("bowlRecipe", new ItemStack(Items.bowl, 4));
-			new VanillaRecipeOption("brewingRecipe", new ItemStack(Items.brewing_stand));
-			new VanillaRecipeOption("bucketRecipe", new ItemStack(Items.bucket));
-			new VanillaRecipeOption("cauldronRecipe", new ItemStack(Items.cauldron));
-			new VanillaRecipeOption("chestRecipe", new ItemStack(Blocks.chest));
-			new VanillaRecipeOption("clockRecipe", new ItemStack(Items.clock));
-			new VanillaRecipeOption("compassRecipe", new ItemStack(Items.compass));
-			new VanillaRecipeOption("dandelionYellowRecipe", new ItemStack(Items.dye, 1, 11), new ItemStack(Items.dye, 2, 11));
-			new VanillaRecipeOption("diamondArmorRecipe", new ItemStack(Items.diamond_helmet), new ItemStack(Items.diamond_chestplate), new ItemStack(Items.diamond_leggings), new ItemStack(Items.diamond_boots));
-			new VanillaRecipeOption("diamondBlockRecipe", new ItemStack(Blocks.diamond_block));
-			new VanillaRecipeOption("diamondToolsRecipe", new ItemStack(Items.diamond_pickaxe), new ItemStack(Items.diamond_axe), new ItemStack(Items.diamond_shovel), new ItemStack(Items.diamond_hoe), new ItemStack(Items.diamond_sword));
-			new VanillaRecipeOption("dispenserRecipe", new ItemStack(Blocks.dispenser));
-			new VanillaRecipeOption("dropperRecipe", new ItemStack(Blocks.dropper));
-			new VanillaRecipeOption("enchantTableRecipe", new ItemStack(Blocks.enchanting_table));
+			new VanillaRecipeOption("anvilRecipe", new ItemStack(Blocks.ANVIL));
+			new VanillaRecipeOption("arrowsRecipe", new ItemStack(Items.ARROW, 4));
+			new VanillaRecipeOption("bedRecipe", new ItemStack(Items.BED));
+			new VanillaRecipeOption("bonemealRecipe", new ItemStack(Items.DYE, 3, 15));
+			new VanillaRecipeOption("bowlRecipe", new ItemStack(Items.BOWL, 4));
+			new VanillaRecipeOption("brewingRecipe", new ItemStack(Items.BREWING_STAND));
+			new VanillaRecipeOption("bucketRecipe", new ItemStack(Items.BUCKET));
+			new VanillaRecipeOption("cauldronRecipe", new ItemStack(Items.CAULDRON));
+			new VanillaRecipeOption("chestRecipe", new ItemStack(Blocks.CHEST));
+			new VanillaRecipeOption("clockRecipe", new ItemStack(Items.CLOCK));
+			new VanillaRecipeOption("compassRecipe", new ItemStack(Items.COMPASS));
+			new VanillaRecipeOption("dandelionYellowRecipe", new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 2, 11));
+			new VanillaRecipeOption("diamondArmorRecipe", new ItemStack(Items.DIAMOND_HELMET), new ItemStack(Items.DIAMOND_CHESTPLATE), new ItemStack(Items.DIAMOND_LEGGINGS), new ItemStack(Items.diamond_boots));
+			new VanillaRecipeOption("diamondBlockRecipe", new ItemStack(Blocks.DIAMOND_BLOCK));
+			new VanillaRecipeOption("diamondToolsRecipe", new ItemStack(Items.DIAMOND_PICKAXE), new ItemStack(Items.DIAMOND_AXE), new ItemStack(Items.DIAMOND_SHOVEL), new ItemStack(Items.diamond_hoe), new ItemStack(Items.diamond_sword));
+			new VanillaRecipeOption("dispenserRecipe", new ItemStack(Blocks.DISPENSER));
+			new VanillaRecipeOption("dropperRecipe", new ItemStack(Blocks.DROPPER));
+			new VanillaRecipeOption("enchantTableRecipe", new ItemStack(Blocks.ENCHANTING_TABLE));
 			new VanillaRecipeOption("fenceGateRecipe", new ItemStack(Blocks.fence_gate));
 			new VanillaRecipeOption("fenceRecipe", new ItemStack(Blocks.fence, 2));
-			new VanillaRecipeOption("furnaceRecipe", new ItemStack(Blocks.furnace));
-			new VanillaRecipeOption("goldAppleRecipe", new ItemStack(Items.golden_apple));
-			new VanillaRecipeOption("goldArmorRecipe", new ItemStack(Items.golden_helmet), new ItemStack(Items.golden_chestplate), new ItemStack(Items.golden_leggings), new ItemStack(Items.golden_boots));
-			new VanillaRecipeOption("goldBlockRecipe", new ItemStack(Blocks.gold_block));
-			new VanillaRecipeOption("goldNuggetRecipe", new ItemStack(Items.gold_nugget, 9));
-			new VanillaRecipeOption("goldPlateRecipe", new ItemStack(Blocks.light_weighted_pressure_plate));
-			new VanillaRecipeOption("goldToolsRecipe", new ItemStack(Items.golden_pickaxe), new ItemStack(Items.golden_axe), new ItemStack(Items.golden_shovel), new ItemStack(Items.golden_hoe), new ItemStack(Items.golden_sword));
-			new VanillaRecipeOption("hopperRecipe", new ItemStack(Blocks.hopper));
-			new VanillaRecipeOption("ironArmorRecipe", new ItemStack(Items.iron_helmet), new ItemStack(Items.iron_chestplate), new ItemStack(Items.iron_leggings), new ItemStack(Items.iron_boots));
-			new VanillaRecipeOption("ironBarsRecipe", new ItemStack(Blocks.iron_bars, 16));
-			new VanillaRecipeOption("ironBlockRecipe", new ItemStack(Blocks.iron_block));
-			new VanillaRecipeOption("ironDoorRecipe", new ItemStack(Items.iron_door));
-			new VanillaRecipeOption("ironPlateRecipe", new ItemStack(Blocks.heavy_weighted_pressure_plate));
-			new VanillaRecipeOption("ironToolsRecipe", new ItemStack(Items.iron_pickaxe), new ItemStack(Items.iron_axe), new ItemStack(Items.iron_shovel), new ItemStack(Items.iron_hoe), new ItemStack(Items.iron_sword));
-			new VanillaRecipeOption("jukeboxRecipe", new ItemStack(Blocks.jukebox));
-			new VanillaRecipeOption("leatherArmorRecipe", new ItemStack(Items.leather_helmet), new ItemStack(Items.leather_chestplate), new ItemStack(Items.leather_leggings), new ItemStack(Items.leather_boots));
-			new VanillaRecipeOption("leverRecipe", new ItemStack(Blocks.lever));
-			new VanillaRecipeOption("minecartChestRecipe", new ItemStack(Items.chest_minecart));
-			new VanillaRecipeOption("minecartRecipe", new ItemStack(Items.minecart));
-			new VanillaRecipeOption("pistonRecipe", new ItemStack(Blocks.piston));
-			new VanillaRecipeOption("plankBlockRecipe", new ItemStack(Blocks.planks, 4, 0), new ItemStack(Blocks.planks, 4, 1), new ItemStack(Blocks.planks, 4, 2), new ItemStack(Blocks.planks, 4, 3), new ItemStack(Blocks.planks, 4, 4), new ItemStack(Blocks.planks, 4, 5));
-			new VanillaRecipeOption("poweredRailsRecipe", new ItemStack(Blocks.golden_rail, 6));
-			new VanillaRecipeOption("railsRecipe", new ItemStack(Blocks.rail, 16));
-			new VanillaRecipeOption("repeaterRecipe", new ItemStack(Items.repeater));
-			new VanillaRecipeOption("roseRedRecipe", new ItemStack(Items.dye, 1, 1), new ItemStack(Items.dye, 2, 1));
-			new VanillaRecipeOption("shearsRecipe", new ItemStack(Items.shears));
-			new VanillaRecipeOption("signRecipe", new ItemStack(Items.sign, 3));
-			new VanillaRecipeOption("stickRecipe", new ItemStack(Items.stick, 4));
+			new VanillaRecipeOption("furnaceRecipe", new ItemStack(Blocks.FURNACE));
+			new VanillaRecipeOption("goldAppleRecipe", new ItemStack(Items.GOLDEN_APPLE));
+			new VanillaRecipeOption("goldArmorRecipe", new ItemStack(Items.GOLDEN_HELMET), new ItemStack(Items.GOLDEN_CHESTPLATE), new ItemStack(Items.GOLDEN_LEGGINGS), new ItemStack(Items.GOLDEN_BOOTS));
+			new VanillaRecipeOption("goldBlockRecipe", new ItemStack(Blocks.GOLD_BLOCK));
+			new VanillaRecipeOption("goldNuggetRecipe", new ItemStack(Items.GOLD_NUGGET, 9));
+			new VanillaRecipeOption("goldPlateRecipe", new ItemStack(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE));
+			new VanillaRecipeOption("goldToolsRecipe", new ItemStack(Items.GOLDEN_PICKAXE), new ItemStack(Items.GOLDEN_AXE), new ItemStack(Items.GOLDEN_SHOVEL), new ItemStack(Items.GOLDEN_HOE), new ItemStack(Items.GOLDEN_SWORD));
+			new VanillaRecipeOption("hopperRecipe", new ItemStack(Blocks.HOPPER));
+			new VanillaRecipeOption("ironArmorRecipe", new ItemStack(Items.IRON_HELMET), new ItemStack(Items.IRON_CHESTPLATE), new ItemStack(Items.IRON_LEGGINGS), new ItemStack(Items.IRON_BOOTS));
+			new VanillaRecipeOption("ironBarsRecipe", new ItemStack(Blocks.IRON_BARS, 16));
+			new VanillaRecipeOption("ironBlockRecipe", new ItemStack(Blocks.IRON_BLOCK));
+			new VanillaRecipeOption("ironDoorRecipe", new ItemStack(Items.IRON_DOOR));
+			new VanillaRecipeOption("ironPlateRecipe", new ItemStack(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE));
+			new VanillaRecipeOption("ironToolsRecipe", new ItemStack(Items.IRON_PICKAXE), new ItemStack(Items.IRON_AXE), new ItemStack(Items.IRON_SHOVEL), new ItemStack(Items.IRON_HOE), new ItemStack(Items.IRON_SWORD));
+			new VanillaRecipeOption("jukeboxRecipe", new ItemStack(Blocks.JUKEBOX));
+			new VanillaRecipeOption("leatherArmorRecipe", new ItemStack(Items.LEATHER_HELMET), new ItemStack(Items.LEATHER_CHESTPLATE), new ItemStack(Items.LEATHER_LEGGINGS), new ItemStack(Items.LEATHER_BOOTS));
+			new VanillaRecipeOption("leverRecipe", new ItemStack(Blocks.LEVER));
+			new VanillaRecipeOption("minecartChestRecipe", new ItemStack(Items.CHEST_MINECART));
+			new VanillaRecipeOption("minecartRecipe", new ItemStack(Items.MINECART));
+			new VanillaRecipeOption("pistonRecipe", new ItemStack(Blocks.PISTON));
+			new VanillaRecipeOption("plankBlockRecipe", new ItemStack(Blocks.PLANKS, 4, 0), new ItemStack(Blocks.PLANKS, 4, 1), new ItemStack(Blocks.PLANKS, 4, 2), new ItemStack(Blocks.PLANKS, 4, 3), new ItemStack(Blocks.PLANKS, 4, 4), new ItemStack(Blocks.PLANKS, 4, 5));
+			new VanillaRecipeOption("poweredRailsRecipe", new ItemStack(Blocks.GOLDEN_RAIL, 6));
+			new VanillaRecipeOption("railsRecipe", new ItemStack(Blocks.RAIL, 16));
+			new VanillaRecipeOption("repeaterRecipe", new ItemStack(Items.REPEATER));
+			new VanillaRecipeOption("roseRedRecipe", new ItemStack(Items.DYE, 1, 1), new ItemStack(Items.DYE, 2, 1));
+			new VanillaRecipeOption("shearsRecipe", new ItemStack(Items.SHEARS));
+			new VanillaRecipeOption("signRecipe", new ItemStack(Items.SIGN, 3));
+			new VanillaRecipeOption("stickRecipe", new ItemStack(Items.STICK, 4));
 			new VanillaRecipeOption("stoneSlabsRecipe", new ItemStack(Blocks.stone_slab, 6), new ItemStack(Blocks.stone_slab, 6, 3));
-			new VanillaRecipeOption("stoneStairsRecipe", new ItemStack(Blocks.stone_stairs, 4));
-			new VanillaRecipeOption("stoneToolsRecipe", new ItemStack(Items.stone_pickaxe), new ItemStack(Items.stone_axe), new ItemStack(Items.stone_shovel), new ItemStack(Items.stone_hoe), new ItemStack(Items.stone_sword));
-			new VanillaRecipeOption("torchRecipe", new ItemStack(Blocks.torch, 4));
-			new VanillaRecipeOption("trapDoorRecipe", new ItemStack(Blocks.trapdoor, 2));
-			new VanillaRecipeOption("tripwireRecipe", new ItemStack(Blocks.tripwire_hook, 2));
+			new VanillaRecipeOption("stoneStairsRecipe", new ItemStack(Blocks.STONE_STAIRS, 4));
+			new VanillaRecipeOption("stoneToolsRecipe", new ItemStack(Items.STONE_PICKAXE), new ItemStack(Items.STONE_AXE), new ItemStack(Items.STONE_SHOVEL), new ItemStack(Items.STONE_HOE), new ItemStack(Items.STONE_SWORD));
+			new VanillaRecipeOption("torchRecipe", new ItemStack(Blocks.TORCH, 4));
+			new VanillaRecipeOption("trapDoorRecipe", new ItemStack(Blocks.TRAPDOOR, 2));
+			new VanillaRecipeOption("tripwireRecipe", new ItemStack(Blocks.TRIPWIRE_HOOK, 2));
 			new VanillaRecipeOption("woodDoorRecipe", new ItemStack(Items.wooden_door));
-			new VanillaRecipeOption("woodSlabsRecipe", new ItemStack(Blocks.wooden_slab, 6, 0), new ItemStack(Blocks.wooden_slab, 6, 1), new ItemStack(Blocks.wooden_slab, 6, 2), new ItemStack(Blocks.wooden_slab, 6, 3), new ItemStack(Blocks.wooden_slab, 6, 4), new ItemStack(Blocks.wooden_slab, 6, 5));
-			new VanillaRecipeOption("woodStairsRecipe", new ItemStack(Blocks.birch_stairs, 4), new ItemStack(Blocks.jungle_stairs, 4), new ItemStack(Blocks.oak_stairs, 4), new ItemStack(Blocks.spruce_stairs, 4), new ItemStack(Blocks.acacia_stairs, 4), new ItemStack(Blocks.dark_oak_stairs, 4));
-			new VanillaRecipeOption("woodToolsRecipe", new ItemStack(Items.wooden_pickaxe), new ItemStack(Items.wooden_axe), new ItemStack(Items.wooden_shovel), new ItemStack(Items.wooden_hoe), new ItemStack(Items.wooden_sword));
-			new VanillaRecipeOption("woolRecipe", new ItemStack(Blocks.wool));
+			new VanillaRecipeOption("woodSlabsRecipe", new ItemStack(Blocks.WOODEN_SLAB, 6, 0), new ItemStack(Blocks.WOODEN_SLAB, 6, 1), new ItemStack(Blocks.WOODEN_SLAB, 6, 2), new ItemStack(Blocks.WOODEN_SLAB, 6, 3), new ItemStack(Blocks.WOODEN_SLAB, 6, 4), new ItemStack(Blocks.WOODEN_SLAB, 6, 5));
+			new VanillaRecipeOption("woodStairsRecipe", new ItemStack(Blocks.BIRCH_STAIRS, 4), new ItemStack(Blocks.JUNGLE_STAIRS, 4), new ItemStack(Blocks.OAK_STAIRS, 4), new ItemStack(Blocks.SPRUCE_STAIRS, 4), new ItemStack(Blocks.ACACIA_STAIRS, 4), new ItemStack(Blocks.DARK_OAK_STAIRS, 4));
+			new VanillaRecipeOption("woodToolsRecipe", new ItemStack(Items.WOODEN_PICKAXE), new ItemStack(Items.WOODEN_AXE), new ItemStack(Items.WOODEN_SHOVEL), new ItemStack(Items.WOODEN_HOE), new ItemStack(Items.WOODEN_SWORD));
+			new VanillaRecipeOption("woolRecipe", new ItemStack(Blocks.WOOL));
 
 			/**
 			 * Custom SyncingOption for enableBowlsAlwaysBreak

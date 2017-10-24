@@ -90,7 +90,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 	{
 		super.onNeighborBlockChange(world, i, j, k, par5);
 		if(!canBlockStay(world,i,j,k))
-			world.setBlock(i, j, k, Blocks.air, 0, 2);
+			world.setBlock(i, j, k, Blocks.AIR, 0, 2);
 	}
 
 	@Override

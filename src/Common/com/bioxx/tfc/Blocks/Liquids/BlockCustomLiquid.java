@@ -194,7 +194,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 		switch (plantType)
 		{
 		case Desert: return TFC_Core.isSand(this);
-		case Nether: return this == Blocks.soul_sand;
+		case Nether: return this == Blocks.SOUL_SAND;
 		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
 		case Plains: return this == TFCBlocks.grass || this == TFCBlocks.grass2 || this == TFCBlocks.dirt || this == TFCBlocks.dirt2;
@@ -229,7 +229,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 			if(felsicLava)
 			{
 				if(rand.nextInt(10)==0 && typeOfLava == 0)
-					world.setBlock(x, y, z, Blocks.obsidian);
+					world.setBlock(x, y, z, Blocks.OBSIDIAN);
 				else
 				{
 					world.setBlock(x, y, z, TFCBlocks.stoneIgEx);

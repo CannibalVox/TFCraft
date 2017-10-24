@@ -40,17 +40,17 @@ public class EntityPigZombieTFC extends EntityZombieTFC
 		int var3 = this.rand.nextInt(2 + par2);
 		int var4;
 		for (var4 = 0; var4 < var3; ++var4)
-			this.dropItem(Items.rotten_flesh, 1);
+			this.dropItem(Items.ROTTEN_FLESH, 1);
 
 		var3 = this.rand.nextInt(2 + par2);
 		for (var4 = 0; var4 < var3; ++var4)
-			this.dropItem(Items.gold_nugget, 1);
+			this.dropItem(Items.GOLD_NUGGET, 1);
 	}
 
 	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.dropItem(Items.gold_ingot, 1);
+		this.dropItem(Items.GOLD_INGOT, 1);
 	}
 
 	/**
@@ -59,13 +59,13 @@ public class EntityPigZombieTFC extends EntityZombieTFC
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.rotten_flesh;
+		return Items.ROTTEN_FLESH;
 	}
 
 	@Override
 	protected void addRandomArmor()
 	{
-		this.setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
+		this.setCurrentItemOrArmor(0, new ItemStack(Items.GOLDEN_SWORD));
 	}
 
 	@Override

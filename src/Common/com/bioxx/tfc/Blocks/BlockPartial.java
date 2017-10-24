@@ -104,7 +104,7 @@ public class BlockPartial extends BlockTerraContainer
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		if(te.typeID >= 0)
-			return Blocks.fire.getFlammability(Block.getBlockById(te.typeID));
+			return Blocks.FIRE.getFlammability(Block.getBlockById(te.typeID));
 		else return 0;
 	}
 
@@ -113,7 +113,7 @@ public class BlockPartial extends BlockTerraContainer
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		if(te.typeID >= 0)
-			return Blocks.fire.getEncouragement(Block.getBlockById(te.typeID));
+			return Blocks.FIRE.getEncouragement(Block.getBlockById(te.typeID));
 		else return 0;
 	}
 

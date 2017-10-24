@@ -64,7 +64,7 @@ public class BlockLogNatural extends BlockTerra
 					noLogsNearby(world, x, y - 1, z + 1) && noLogsNearby(world, x, y - 1, z - 1) &&
 					noLogsNearby(world, x + 1, y - 1, z + 1) && noLogsNearby(world, x + 1, y - 1, z - 1) &&
 					noLogsNearby(world, x - 1, y - 1, z + 1) && noLogsNearby(world, x - 1, y - 1, z - 1))
-					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
+					world.setBlock(x, y, z, Blocks.AIR, 0, 0x2);
 			}
 		}
 	}
@@ -287,7 +287,7 @@ public class BlockLogNatural extends BlockTerra
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
-					world.setBlock(i + x, j + y, k + z, Blocks.air, 0, 0x2);
+					world.setBlock(i + x, j + y, k + z, Blocks.AIR, 0, 0x2);
 					if (!isStone || world.rand.nextInt(10) != 0)
 						logs++;
 					if (logs >= 16)
@@ -314,12 +314,12 @@ public class BlockLogNatural extends BlockTerra
 
 	private void notifyLeaves(World world, int x, int y, int z)
 	{
-		world.notifyBlockOfNeighborChange(x + 1, y, z, Blocks.air);
-		world.notifyBlockOfNeighborChange(x - 1, y, z, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y, z + 1, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y, z - 1, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y + 1, z, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y - 1, z, Blocks.air);
+		world.notifyBlockOfNeighborChange(x + 1, y, z, Blocks.AIR);
+		world.notifyBlockOfNeighborChange(x - 1, y, z, Blocks.AIR);
+		world.notifyBlockOfNeighborChange(x, y, z + 1, Blocks.AIR);
+		world.notifyBlockOfNeighborChange(x, y, z - 1, Blocks.AIR);
+		world.notifyBlockOfNeighborChange(x, y + 1, z, Blocks.AIR);
+		world.notifyBlockOfNeighborChange(x, y - 1, z, Blocks.AIR);
 	}
 
 }

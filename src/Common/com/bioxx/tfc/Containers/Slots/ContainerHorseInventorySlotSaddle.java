@@ -23,6 +23,6 @@ public class ContainerHorseInventorySlotSaddle extends Slot
     @Override
 	public boolean isItemValid(ItemStack par1ItemStack)
     {
-        return super.isItemValid(par1ItemStack) && par1ItemStack.getItem() == Items.saddle && !this.getHasStack();
+        return super.isItemValid(par1ItemStack) && par1ItemStack.getItem() == Items.SADDLE && !this.getHasStack();
     }
 }

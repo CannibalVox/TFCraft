@@ -66,13 +66,13 @@ public class ItemSetup extends TFCItems {
 		coal = new ItemCoal().setUnlocalizedName("coal");
 		stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
 		bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("tools/bow");
-		Items.bow = (ItemBow) bow;
+		Items.BOW = (ItemBow) bow;
 		arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFC_WEAPONS);
 		dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		glassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
 		potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
 		rope = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFC_TOOLS);
-		Items.lead = rope;
+		Items.LEAD = rope;
 
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		goldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
@@ -466,7 +466,7 @@ public class ItemSetup extends TFCItems {
 		redSteelScytheHead = new ItemMiscToolHead().setUnlocalizedName("Red Steel Scythe Blade");
 		steelScytheHead = new ItemMiscToolHead().setUnlocalizedName("Steel Scythe Blade");
 
-		woodenBucketEmpty = new ItemCustomBucket(Blocks.air).setUnlocalizedName("Wooden Bucket Empty");
+		woodenBucketEmpty = new ItemCustomBucket(Blocks.AIR).setUnlocalizedName("Wooden Bucket Empty");
 		woodenBucketWater = new ItemCustomBucket(TFCBlocks.freshWater, woodenBucketEmpty).setUnlocalizedName("Wooden Bucket Water");
 		woodenBucketSaltWater = new ItemCustomBucket(TFCBlocks.saltWater, woodenBucketEmpty).setUnlocalizedName("Wooden Bucket Salt Water");
 		woodenBucketMilk = new ItemCustomBucketMilk().setUnlocalizedName("Wooden Bucket Milk").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
@@ -515,11 +515,11 @@ public class ItemSetup extends TFCItems {
 		stoneKnife = new ItemKnife(igExToolMaterial, 40).setUnlocalizedName("Stone Knife").setMaxDamage(igExStoneUses);
 		singlePlank = new ItemPlank().setUnlocalizedName("SinglePlank");
 
-		redSteelBucketEmpty = new ItemSteelBucketRed(Blocks.air).setUnlocalizedName("Red Steel Bucket Empty");
+		redSteelBucketEmpty = new ItemSteelBucketRed(Blocks.AIR).setUnlocalizedName("Red Steel Bucket Empty");
 		redSteelBucketWater = new ItemSteelBucketRed(TFCBlocks.freshWater).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(redSteelBucketEmpty);
 		redSteelBucketSaltWater = new ItemSteelBucketRed(TFCBlocks.saltWater).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(redSteelBucketEmpty);
 
-		blueSteelBucketEmpty = new ItemSteelBucketBlue(Blocks.air).setUnlocalizedName("Blue Steel Bucket Empty");
+		blueSteelBucketEmpty = new ItemSteelBucketBlue(Blocks.AIR).setUnlocalizedName("Blue Steel Bucket Empty");
 		blueSteelBucketLava = new ItemSteelBucketBlue(TFCBlocks.lava).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(blueSteelBucketEmpty);
 
 		quern = ((ItemTerra) new ItemTerra().setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
@@ -566,7 +566,7 @@ public class ItemSetup extends TFCItems {
 				{ "Clay Spindle", "Spindle Head" }).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFC_POTTERY);
 		stoneBrick = new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick");
 		mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFC_MATERIALS);
-		vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
+		vinegar = new ItemCustomBucket(Blocks.AIR).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(woodenBucketEmpty).setCreativeTab(TFCTabs.TFC_FOODS);
 		hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		soakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		scrapedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFC_MATERIALS);
@@ -634,7 +634,7 @@ public class ItemSetup extends TFCItems {
 		jute = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute").setCreativeTab(TFCTabs.TFC_MATERIALS);
 		juteFiber = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFC_MATERIALS);
 
-		Items.reeds.setCreativeTab(null);
+		Items.REEDS.setCreativeTab(null);
 		reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(TFCTabs.TFC_MATERIALS).setTextureName("reeds");
 		//MetalLock = new ItemTerra().setUnlocalizedName("Metal Lock").setCreativeTab(TFCTabs.TFCMisc);
 		//MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setTextureName("Mud Brick Base");

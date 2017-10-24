@@ -85,7 +85,7 @@ public class DataLayer
 	public static final DataLayer PH_ALKALINE_HIGH = new DataLayer(134, "High Alkalinity", 4);
 
 	public int layerID;
-	public Block block = Blocks.air;
+	public Block block = Blocks.AIR;
 	public int data1;
 	public int data2;//used as metadata in rocks
 	public float floatdata1;

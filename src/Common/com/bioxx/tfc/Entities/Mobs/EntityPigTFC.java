@@ -191,7 +191,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		float ageMod = TFC_Core.getPercentGrown(this);
 
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * sizeMod)))), 0);
-		this.dropItem(Items.bone, (int) ((rand.nextInt(4) + 2) * ageMod));
+		this.dropItem(Items.BONE, (int) ((rand.nextInt(4) + 2) * ageMod));
 
 		float foodWeight = ageMod * (this.sizeMod * 2400);
 		TFC_Core.animalDropMeat(this, TFCItems.porkchopRaw, foodWeight);
@@ -282,7 +282,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	protected Item getDropItem()
 	{
-		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
+		return this.isBurning() ? Items.COOKED_PORKCHOP : Items.PORKCHOP;
 	}
 
 	@Override

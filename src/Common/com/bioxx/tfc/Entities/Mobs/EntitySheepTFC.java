@@ -105,8 +105,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(6, this.aiEatGrass);
 
-		this.colorCrafting.setInventorySlotContents(0, new ItemStack(Items.dye, 1, 0));
-		this.colorCrafting.setInventorySlotContents(1, new ItemStack(Items.dye, 1, 0));
+		this.colorCrafting.setInventorySlotContents(0, new ItemStack(Items.DYE, 1, 0));
+		this.colorCrafting.setInventorySlotContents(1, new ItemStack(Items.DYE, 1, 0));
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -215,7 +215,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		ItemStack itemstack = CraftingManager.getInstance().findMatchingRecipe(this.colorCrafting, ((EntitySheep) parent).worldObj);
 		int babyColor;
 
-		if (itemstack != null && itemstack.getItem() == Items.dye)
+		if (itemstack != null && itemstack.getItem() == Items.DYE)
 		{
 			babyColor = itemstack.getItemDamage();
 		}
@@ -260,7 +260,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		else
 			this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int) (ageMod * sizeMod)))), 0.0F);
 
-		this.dropItem(Items.bone, (int) ((rand.nextInt(5) + 2) * ageMod));
+		this.dropItem(Items.BONE, (int) ((rand.nextInt(5) + 2) * ageMod));
 
 		float foodWeight = ageMod * (this.sizeMod * 640);
 		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);

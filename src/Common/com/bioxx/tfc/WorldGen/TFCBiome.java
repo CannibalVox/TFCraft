@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -75,15 +76,15 @@ public class TFCBiome extends BiomeGenBase
 	{
 		super(par1);
 
-		this.topBlock = Blocks.grass;
-		this.fillerBlock = Blocks.dirt;
+		this.topBlock = Blocks.GRASS;
+		this.fillerBlock = Blocks.DIRT;
 		this.rootHeight = 0.1F;
 		this.heightVariation = 0.3F;
 		temperatureTFC = 0.5F;
 		this.rainfall = 0.5F;
-		this.spawnableMonsterList = new ArrayList<SpawnListEntry>();
-		this.spawnableCreatureList = new ArrayList<SpawnListEntry>();
-		this.spawnableWaterCreatureList = new ArrayList<SpawnListEntry>();
+		this.spawnableMonsterList = new ArrayList<Biome.SpawnListEntry>();
+		this.spawnableCreatureList = new ArrayList<Biome.SpawnListEntry>();
+		this.spawnableWaterCreatureList = new ArrayList<Biome.SpawnListEntry>();
 
 		worldGenAcaciaKoaTrees = new WorldGenAcaciaKoaTrees(false,0);
 		worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);

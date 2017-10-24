@@ -52,7 +52,7 @@ public class ItemShears extends ItemTerraTool
 	@Override
 	public boolean onBlockDestroyed(ItemStack is, World world, Block block, int x, int y, int z, EntityLivingBase entity)
 	{
-		if (block.getMaterial() != Material.LEAVES && block != Blocks.web && block != Blocks.tallgrass && block != Blocks.vine && block != Blocks.tripwire && !(block instanceof IShearable))
+		if (block.getMaterial() != Material.LEAVES && block != Blocks.WEB && block != Blocks.TALLGRASS && block != Blocks.VINE && block != Blocks.TRIPWIRE && !(block instanceof IShearable))
 		{
 			return super.onBlockDestroyed(is, world, block, x, y, z, entity);
 		}
@@ -65,13 +65,13 @@ public class ItemShears extends ItemTerraTool
 	@Override
 	public boolean func_150897_b(Block block)
 	{
-		return block == Blocks.web || block == Blocks.redstone_wire || block == Blocks.tripwire;
+		return block == Blocks.WEB || block == Blocks.REDSTONE_WIRE || block == Blocks.TRIPWIRE;
 	}
 
 	@Override
 	public float func_150893_a(ItemStack is, Block block)
 	{
-		return block != Blocks.web && block.getMaterial() != Material.LEAVES ? (block == Blocks.WOOL ? 5.0F : super.func_150893_a(is, block)) : 15.0F;
+		return block != Blocks.WEB && block.getMaterial() != Material.LEAVES ? (block == Blocks.WOOL ? 5.0F : super.func_150893_a(is, block)) : 15.0F;
 	}
 
 	/**

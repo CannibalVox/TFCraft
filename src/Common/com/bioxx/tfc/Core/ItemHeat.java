@@ -342,8 +342,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.zincSheet,1), zincRaw,new ItemStack(TFCItems.zincUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.zincSheet2x,1), zincRaw,new ItemStack(TFCItems.zincUnshaped,4,0)));
 		//Ceramics
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand2, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.GLASS, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.sand2, 1, WILDCARD_VALUE), 1, 600, new ItemStack(Blocks.GLASS, 1)));
 
 		//Food
 		//Proteins

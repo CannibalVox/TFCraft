@@ -15,6 +15,6 @@ public class SlotFoodBowl extends Slot
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack)
 	{
-		return par1ItemStack.getItem() == Items.bowl;
+		return par1ItemStack.getItem() == Items.BOWL;
 	}
 }

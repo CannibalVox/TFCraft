@@ -114,7 +114,7 @@ public class BlockCustomIce extends BlockIce
 		switch (plantType)
 		{
 		case Desert: return TFC_Core.isSand(this);
-		case Nether: return this == Blocks.soul_sand;
+		case Nether: return this == Blocks.SOUL_SAND;
 		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
 		case Plains: return this == TFCBlocks.grass || this == TFCBlocks.grass2 || this == TFCBlocks.dirt || this == TFCBlocks.dirt2;

@@ -39,7 +39,7 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 				{
 					j1 = x + (int) (1.5F + MathHelper.cos(f) * l1);
 					k1 = z + (int) (1.5F + MathHelper.sin(f) * l1);
-					this.setBlockAndNotifyAdequately(world, j1, i1 - 3 + l1 / 2, k1, Blocks.log, this.woodMetadata);
+					this.setBlockAndNotifyAdequately(world, j1, i1 - 3 + l1 / 2, k1, Blocks.LOG, this.woodMetadata);
 				}
 
 				l1 = 1 + rand.nextInt(2);
@@ -58,18 +58,18 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 
 				if (block.isAir(world, x, y + l2, z) || block.isLeaves(world, x, y + l2, z))
 				{
-					this.setBlockAndNotifyAdequately(world, x, y + l2, z, Blocks.log, this.woodMetadata);
+					this.setBlockAndNotifyAdequately(world, x, y + l2, z, Blocks.LOG, this.woodMetadata);
 
 					if (l2 > 0)
 					{
 						if (rand.nextInt(3) > 0 && world.isAirBlock(x - 1, y + l2, z))
 						{
-							this.setBlockAndNotifyAdequately(world, x - 1, y + l2, z, Blocks.vine, 8);
+							this.setBlockAndNotifyAdequately(world, x - 1, y + l2, z, Blocks.VINE, 8);
 						}
 
 						if (rand.nextInt(3) > 0 && world.isAirBlock(x, y + l2, z - 1))
 						{
-							this.setBlockAndNotifyAdequately(world, x, y + l2, z - 1, Blocks.vine, 1);
+							this.setBlockAndNotifyAdequately(world, x, y + l2, z - 1, Blocks.VINE, 1);
 						}
 					}
 				}
@@ -80,18 +80,18 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 
 					if (block.isAir(world, x + 1, y + l2, z) || block.isLeaves(world, x + 1, y + l2, z))
 					{
-						this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z, Blocks.log, this.woodMetadata);
+						this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z, Blocks.LOG, this.woodMetadata);
 
 						if (l2 > 0)
 						{
 							if (rand.nextInt(3) > 0 && world.isAirBlock(x + 2, y + l2, z))
 							{
-								this.setBlockAndNotifyAdequately(world, x + 2, y + l2, z, Blocks.vine, 2);
+								this.setBlockAndNotifyAdequately(world, x + 2, y + l2, z, Blocks.VINE, 2);
 							}
 
 							if (rand.nextInt(3) > 0 && world.isAirBlock(x + 1, y + l2, z - 1))
 							{
-								this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z - 1, Blocks.vine, 1);
+								this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z - 1, Blocks.VINE, 1);
 							}
 						}
 					}
@@ -100,18 +100,18 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 
 					if (block.isAir(world, x + 1, y + l2, z + 1) || block.isLeaves(world, x + 1, y + l2, z + 1))
 					{
-						this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z + 1, Blocks.log, this.woodMetadata);
+						this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z + 1, Blocks.LOG, this.woodMetadata);
 
 						if (l2 > 0)
 						{
 							if (rand.nextInt(3) > 0 && world.isAirBlock(x + 2, y + l2, z + 1))
 							{
-								this.setBlockAndNotifyAdequately(world, x + 2, y + l2, z + 1, Blocks.vine, 2);
+								this.setBlockAndNotifyAdequately(world, x + 2, y + l2, z + 1, Blocks.VINE, 2);
 							}
 
 							if (rand.nextInt(3) > 0 && world.isAirBlock(x + 1, y + l2, z + 2))
 							{
-								this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z + 2, Blocks.vine, 4);
+								this.setBlockAndNotifyAdequately(world, x + 1, y + l2, z + 2, Blocks.VINE, 4);
 							}
 						}
 					}
@@ -120,18 +120,18 @@ public class WorldGenMegaJungle extends WorldGenHugeTrees
 
 					if (block.isAir(world, x, y + l2, z + 1) || block.isLeaves(world, x, y + l2, z + 1))
 					{
-						this.setBlockAndNotifyAdequately(world, x, y + l2, z + 1, Blocks.log, this.woodMetadata);
+						this.setBlockAndNotifyAdequately(world, x, y + l2, z + 1, Blocks.LOG, this.woodMetadata);
 
 						if (l2 > 0)
 						{
 							if (rand.nextInt(3) > 0 && world.isAirBlock(x - 1, y + l2, z + 1))
 							{
-								this.setBlockAndNotifyAdequately(world, x - 1, y + l2, z + 1, Blocks.vine, 8);
+								this.setBlockAndNotifyAdequately(world, x - 1, y + l2, z + 1, Blocks.VINE, 8);
 							}
 
 							if (rand.nextInt(3) > 0 && world.isAirBlock(x, y + l2, z + 2))
 							{
-								this.setBlockAndNotifyAdequately(world, x, y + l2, z + 2, Blocks.vine, 4);
+								this.setBlockAndNotifyAdequately(world, x, y + l2, z + 2, Blocks.VINE, 4);
 							}
 						}
 					}

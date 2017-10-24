@@ -188,13 +188,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
-		this.dropItem(Items.feather,(int) (ageMod * this.sizeMod * (5+this.rand.nextInt(10))));
+		this.dropItem(Items.FEATHER,(int) (ageMod * this.sizeMod * (5+this.rand.nextInt(10))));
 
 		if(isAdult())
 		{
 			float foodWeight = ageMod * (this.sizeMod * 40);
 			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
-			this.dropItem(Items.bone, rand.nextInt(2)+1);
+			this.dropItem(Items.BONE, rand.nextInt(2)+1);
 		}
 	}
 
@@ -259,7 +259,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.feather;
+		return Items.FEATHER;
 	}
 
 	@Override
@@ -399,7 +399,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			if (isAdult() && player.isSneaking() && !isFood(itemstack) && attackEntityFrom(DamageSource.generic, 5))
 			{
-				player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
+				player.inventory.addItemStackToInventory(new ItemStack(Items.FEATHER, 1));
 				familiarity -= 4; //Plucking feathers decreases familiarity
 				return true;
 			}

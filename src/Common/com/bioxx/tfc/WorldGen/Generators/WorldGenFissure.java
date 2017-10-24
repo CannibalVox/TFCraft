@@ -124,7 +124,7 @@ public class WorldGenFissure implements IWorldGenerator
 		{
 			world.setBlockToAir(x + b.x, y + b.y, z + b.z);
 			for(int d = 1; d <= poolDepth; d++)
-				fill(world, x + b.x, y + b.y - d, z + b.z, rockLayer.block, rockLayer.meta, fillBlock != null ? fillBlock : Blocks.air);
+				fill(world, x + b.x, y + b.y - d, z + b.z, rockLayer.block, rockLayer.meta, fillBlock != null ? fillBlock : Blocks.AIR);
 
 			int rx = 0;
 			int rz = 0;
@@ -150,7 +150,7 @@ public class WorldGenFissure implements IWorldGenerator
 	private void carve(World world, int x, int y, int z, Block block, int meta)
 	{
 		if(world.getBlock(x, y, z).getMaterial() != Material.AIR && TFC_Core.isGround(world.getBlock(x, y, z)))
-			world.setBlock(x, y, z, Blocks.air, 0, 3);
+			world.setBlock(x, y, z, Blocks.AIR, 0, 3);
 		if(world.getBlock(x - 1, y, z).getMaterial() != Material.AIR && TFC_Core.isRawStone(world.getBlock(x - 1, y, z)))
 			world.setBlock(x - 1, y, z, block, meta, 3);
 		if(world.getBlock(x + 1, y, z).getMaterial() != Material.AIR && TFC_Core.isRawStone(world.getBlock(x + 1, y, z)))
@@ -182,7 +182,7 @@ public class WorldGenFissure implements IWorldGenerator
 		float downChance = 75;
 		while(yCoord > minTunnel)
 		{
-			if(world.getBlock(xCoord, yCoord, zCoord) == Blocks.bedrock)
+			if(world.getBlock(xCoord, yCoord, zCoord) == Blocks.BEDROCK)
 				break;
 			if(random.nextFloat() < downChance / 100f)
 			{
@@ -200,7 +200,7 @@ public class WorldGenFissure implements IWorldGenerator
 				}
 			}
 
-			world.setBlock(xCoord, yCoord, zCoord, fillBlock != null ? fillBlock : Blocks.air, 0, 0x2);
+			world.setBlock(xCoord, yCoord, zCoord, fillBlock != null ? fillBlock : Blocks.AIR, 0, 0x2);
 
 			if(fillBlock != null && world.getBlock(xCoord+1, yCoord, zCoord).getMaterial() != fillBlock.getMaterial())
 				world.setBlock(xCoord+1, yCoord, zCoord, rockLayer.block, rockLayer.meta, 2);

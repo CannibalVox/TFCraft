@@ -163,13 +163,13 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 												if(TFC_Core.isSoilOrGravel(blockArray[index2+1]))
 												{
 													for(int upCount = 1; TFC_Core.isSoilOrGravel(blockArray[index2+upCount]); upCount++)
-													{blockArray[index2+upCount] = Blocks.air;}
+													{blockArray[index2+upCount] = Blocks.AIR;}
 												}
 
 												if (var49 < 10)
-													blockArray[index2] = Blocks.lava;
+													blockArray[index2] = Blocks.LAVA;
 												else
-													blockArray[index2] = Blocks.air;
+													blockArray[index2] = Blocks.AIR;
 											}
 										}
 

@@ -41,7 +41,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 			boolean surroundSolids = TFC_Core.isSurroundedSolid(world, x, y, z);
 			// Attempt to create forge
 			if (block == TFCBlocks.charcoal && world.getBlockMetadata(x, y, z) > 6 ||
-				block == Blocks.coal_block)
+				block == Blocks.COAL_BLOCK)
 			{
 				if (TFC_Core.isSurroundedStone(world, x, y, z) && surroundSolids)
 				{

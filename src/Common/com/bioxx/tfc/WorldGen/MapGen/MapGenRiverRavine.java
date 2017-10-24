@@ -166,7 +166,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 													}
 													else
 													{
-														blockArray[var47] = Blocks.air;
+														blockArray[var47] = Blocks.AIR;
 														//metaArray[var47] = 0;
 													}
 												}

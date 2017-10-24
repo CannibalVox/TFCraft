@@ -143,7 +143,7 @@ public class TFCProvider extends WorldProvider
 				int chance = (int)Math.floor(Math.max(1, 6f-temp));
 				if(id == TFCBlocks.ice && worldObj.rand.nextInt(chance) == 0)
 				{
-					if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
+					if (worldObj.getBlock(x, y + 1, z) == Blocks.SNOW)
 					{
 						int m = worldObj.getBlockMetadata(x, y + 1, z);
 						if (m > 0)

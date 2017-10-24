@@ -57,7 +57,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 		if (doDrain)
 		{
-			world.setBlock(x, y, z, Blocks.air);
+			world.setBlock(x, y, z, Blocks.AIR);
 		}
 
 		return new FluidStack(fluidType, FluidContainerRegistry.BUCKET_VOLUME);
@@ -159,7 +159,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 								this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) || 
 								this.isFlammable(world, i, j - 1, k) || this.isFlammable(world, i, j + 1, k))
 						{
-							world.setBlock(i, j, k, Blocks.fire);
+							world.setBlock(i, j, k, Blocks.FIRE);
 						}
 						else if (world.isSideSolid(i, j + 1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j - 1, k, ForgeDirection.UP) ||
 									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
@@ -186,7 +186,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 									this.isFlammable(world, x, y, z - 1) || this.isFlammable(world, x, y, z + 1) || 
 									this.isFlammable(world, x, y - 1, z) || this.isFlammable(world, x, y + 1, z))
 							{
-								world.setBlock(x, y, z, Blocks.fire);
+								world.setBlock(x, y, z, Blocks.FIRE);
 								return;
 							}
 						}
@@ -208,7 +208,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 
 							if (world.isAirBlock(x, y + 1, z) && this.isFlammable(world, x, y, z))
 							{
-								world.setBlock(x, y + 1, z, Blocks.fire);
+								world.setBlock(x, y + 1, z, Blocks.FIRE);
 							}
 						}
 					}
@@ -225,7 +225,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
      */
 	private boolean isFlammable(World world, int x, int y, int z)
     {
-		return Blocks.fire.getFlammability(world.getBlock(x, y, z)) > 0;
+		return Blocks.FIRE.getFlammability(world.getBlock(x, y, z)) > 0;
     }
 
 	/**

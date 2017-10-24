@@ -366,7 +366,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		{
 			Enchantment enchantment = aenchantment[j];
 			if (enchantment != null && enchantment.type != null)
-				Items.enchanted_book.func_92113_a(enchantment, containercreative.itemList);
+				Items.ENCHANTED_BOOK.func_92113_a(enchantment, containercreative.itemList);
 		}
 		updateFilteredItems(containercreative);
 	}
@@ -684,7 +684,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			List list = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 			CreativeTabs creativetabs = par1ItemStack.getItem().getCreativeTab();
 
-			if (creativetabs == null && par1ItemStack.getItem() == Items.enchanted_book)
+			if (creativetabs == null && par1ItemStack.getItem() == Items.ENCHANTED_BOOK)
 			{
 				Map map = EnchantmentHelper.getEnchantments(par1ItemStack);
 

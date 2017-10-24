@@ -42,7 +42,7 @@ public class TESRAnvil extends TESRBase
 		if (te.getStackInSlot(i) != null)
 		{
 			float[] pos = getLocation(dir, i, Block.getBlockById(te.stonePair[0]) != null);
-			if(Block.getBlockById(te.stonePair[0]) != Blocks.air)
+			if(Block.getBlockById(te.stonePair[0]) != Blocks.AIR)
 				pos[1] += 0.3f;
 			GL11.glPushMatrix(); //start
 			{

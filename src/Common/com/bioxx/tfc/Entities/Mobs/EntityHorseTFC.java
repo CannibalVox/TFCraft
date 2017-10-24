@@ -357,7 +357,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		float ageMod = TFC_Core.getPercentGrown(this);
 
 		this.entityDropItem(new ItemStack(TFCItems.hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
-		this.dropItem(Items.bone, (int) ((rand.nextInt(8) + 3) * ageMod));
+		this.dropItem(Items.BONE, (int) ((rand.nextInt(8) + 3) * ageMod));
 		if(this.getLeashed()){
 			this.entityDropItem(new ItemStack(TFCItems.rope), 0);
 		}
@@ -669,7 +669,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 			return true;
 		}
-		else if (itemstack != null && itemstack.getItem() == Items.spawn_egg)
+		else if (itemstack != null && itemstack.getItem() == Items.SPAWN_EGG)
 		{
 			return super.interact(player);
 		}
@@ -975,14 +975,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (nbttc.hasKey("SaddleItem", 10))
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("SaddleItem"));
-			if (itemstack != null && itemstack.getItem() == Items.saddle)
+			if (itemstack != null && itemstack.getItem() == Items.SADDLE)
 			{
 				this.horseChest.setInventorySlotContents(0, itemstack);
 			}
 		}
 		else if (nbttc.getBoolean("Saddle"))
 		{
-			this.horseChest.setInventorySlotContents(0, new ItemStack(Items.saddle));
+			this.horseChest.setInventorySlotContents(0, new ItemStack(Items.SADDLE));
 		}
 
 		this.updateSaddle();

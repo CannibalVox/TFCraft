@@ -50,11 +50,11 @@ public class StripChunkCommand extends CommandBase
 					for (int y = 0; y < 256; y++)
 					{
 						Block id = chunk.getBlock(x, y, z);
-						if (id != Blocks.air && id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.bedrock)
+						if (id != Blocks.AIR && id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.BEDROCK)
 						{
 							if (TFC_Core.isGround(id)) // Automatically replace ground blocks to help with performance
 							{
-								world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
+								world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.AIR, 0, 2);
 							}
 							else
 							{
@@ -72,7 +72,7 @@ public class StripChunkCommand extends CommandBase
 
 								if (!isOre)
 								{
-									world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
+									world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.AIR, 0, 2);
 								}
 							}
 						}
@@ -98,11 +98,11 @@ public class StripChunkCommand extends CommandBase
 							for (int y = 0; y < 256; y++)
 							{
 								Block id = chunk.getBlock(x, y, z);
-								if (id != Blocks.air && id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.bedrock)
+								if (id != Blocks.AIR && id != TFCBlocks.ore && id != TFCBlocks.ore2 && id != TFCBlocks.ore3 && id != Blocks.BEDROCK)
 								{
 									if (TFC_Core.isGround(id)) // Automatically replace ground blocks to help with performance
 									{
-										world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
+										world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.AIR, 0, 2);
 									}
 									else
 									{
@@ -120,7 +120,7 @@ public class StripChunkCommand extends CommandBase
 
 										if (!isOre)
 										{
-											world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
+											world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.AIR, 0, 2);
 										}
 									}
 								}

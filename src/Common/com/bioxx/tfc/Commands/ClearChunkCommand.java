@@ -47,8 +47,8 @@ public class ClearChunkCommand extends CommandBase
 						Block id = chunk.getBlock(x, y, z);
 						if (!TFC_Core.isRawStone(id))
 						{
-							if (id != Blocks.air)
-								world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
+							if (id != Blocks.AIR)
+								world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.AIR, 0, 2);
 						}
 						else
 							break; // don't scan deeper once we hit stone.
@@ -76,8 +76,8 @@ public class ClearChunkCommand extends CommandBase
 								Block id = chunk.getBlock(x, y, z);
 								if (!TFC_Core.isRawStone(id))
 								{
-									if (id != Blocks.air)
-										world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.air, 0, 2);
+									if (id != Blocks.AIR)
+										world.setBlock(x + (chunk.xPosition * 16), y, z + (chunk.zPosition * 16), Blocks.AIR, 0, 2);
 								}
 								else
 									break; // don't scan deeper once we hit stone.

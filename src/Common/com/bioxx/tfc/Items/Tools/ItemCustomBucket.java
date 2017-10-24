@@ -55,7 +55,7 @@ public class ItemCustomBucket extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		boolean isEmpty = this.bucketContents == Blocks.air;
+		boolean isEmpty = this.bucketContents == Blocks.AIR;
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, isEmpty);
 
 		if (mop == null)
@@ -146,7 +146,7 @@ public class ItemCustomBucket extends ItemTerra
 					return new ItemStack(TFCItems.woodenBucketEmpty);
 				}
 			}
-			else if (this.bucketContents == Blocks.air && mop.entityHit instanceof EntityCowTFC && ((EntityCowTFC)mop.entityHit).getGender() == GenderEnum.FEMALE)
+			else if (this.bucketContents == Blocks.AIR && mop.entityHit instanceof EntityCowTFC && ((EntityCowTFC)mop.entityHit).getGender() == GenderEnum.FEMALE)
 			{
 				return new ItemStack(TFCItems.woodenBucketMilk);
 			}
@@ -158,17 +158,17 @@ public class ItemCustomBucket extends ItemTerra
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		
-		boolean isEmpty = this.bucketContents == Blocks.air;
+		boolean isEmpty = this.bucketContents == Blocks.AIR;
 		int[][] map = {{0,-1,0},{0,1,0},{0,0,-1},{0,0,1},{-1,0,0},{1,0,0}};
 
-		if (!isEmpty && world.getBlock(x, y, z) != Blocks.cauldron && world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
+		if (!isEmpty && world.getBlock(x, y, z) != Blocks.CAULDRON && world.isAirBlock(x + map[side][0], y + map[side][1], z + map[side][2]))
 		{
 			world.setBlock( x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.freshWater, 2, 0x1 );
 			player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.woodenBucketEmpty));
 			return true;
 		}
 
-		if (!isEmpty && world.getBlock(x, y, z) == Blocks.cauldron)
+		if (!isEmpty && world.getBlock(x, y, z) == Blocks.CAULDRON)
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			if (meta < 3)
@@ -178,7 +178,7 @@ public class ItemCustomBucket extends ItemTerra
 					player.setCurrentItemOrArmor(0, new ItemStack(TFCItems.woodenBucketEmpty));
 				}
 				world.setBlockMetadataWithNotify(x, y, z, MathHelper.clamp_int(3, 0, 3), 2);
-				world.func_147453_f(x, y, z, Blocks.cauldron);
+				world.func_147453_f(x, y, z, Blocks.CAULDRON);
 
 				return true;
 			}

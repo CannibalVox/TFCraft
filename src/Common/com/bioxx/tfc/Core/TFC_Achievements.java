@@ -68,7 +68,7 @@ public class TFC_Achievements
 		achLimonite = createAchievement("achievement.achLimonite", "achLimonite", 5, -3, new ItemStack(TFCItems.oreChunk, 1, 11), achPickaxe);
 		achBronzeAge = createAchievement("achievement.achBronzeAge", "achBronzeAge", 4, 1, new ItemStack(TFCBlocks.anvil, 1, 2), achCopperAge);
 		achIronAge = createAchievement("achievement.achIronAge", "achIronAge", 5, 3, new ItemStack(TFCItems.rawBloom), achBronzeAge);
-		achPokeCreeper = createAchievement("achievement.achPokeCreeper", "achPokeCreeper", -3, -3, new ItemStack(Items.skull, 1, 4), null);
+		achPokeCreeper = createAchievement("achievement.achPokeCreeper", "achPokeCreeper", -3, -3, new ItemStack(Items.SKULL, 1, 4), null);
 		achBlastFurnace = createAchievement("achievement.achBlastFurnace", "achBlastFurnace", 6, 1, new ItemStack(TFCBlocks.blastFurnace), achIronAge);
 		achFireClay = createAchievement("achievement.achFireClay", "achFireClay", 5, -5, new ItemStack(TFCItems.clayBall, 1, 1), achQuern);
 		achCrucible = createAchievement("achievement.achCrucible", "achCrucible", 7, -5, new ItemStack(TFCBlocks.crucible), achFireClay);

@@ -155,7 +155,10 @@ public class BlockCustomWall extends BlockWall
 	public boolean canConnectWallTo(IBlockAccess access, int i, int j, int k)
 	{
 		Block block = access.getBlock(i, j, k);
-		if (block != this && block != Blocks.fence_gate && block != TFCBlocks.fenceGate && block != TFCBlocks.fenceGate2 && !(block instanceof BlockCustomWall))
+		if (block != this && block != Blocks.ACACIA_FENCE_GATE && block != Blocks.BIRCH_FENCE_GATE &&
+				block != Blocks.DARK_OAK_FENCE_GATE && block != Blocks.JUNGLE_FENCE_GATE &&
+				block != Blocks.OAK_FENCE_GATE && block != Blocks.SPRUCE_FENCE_GATE && block != TFCBlocks.fenceGate &&
+				block != TFCBlocks.fenceGate2 && !(block instanceof BlockCustomWall))
 			return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.GOURD : false;
 		else
 			return true;

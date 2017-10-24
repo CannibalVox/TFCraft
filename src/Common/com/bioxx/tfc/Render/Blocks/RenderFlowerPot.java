@@ -46,7 +46,7 @@ public class RenderFlowerPot implements ISimpleBlockRenderingHandler
 		renderer.renderFaceXNeg(block, x + 0.5F - r2, y, z, iicon);
 		renderer.renderFaceZPos(block, x, y, z - 0.5F + r2, iicon);
 		renderer.renderFaceZNeg(block, x, y, z + 0.5F - r2, iicon);
-		renderer.renderFaceYPos(block, x, y - 0.5F + r2 + 0.1875F, z, renderer.getBlockIcon(Blocks.dirt));
+		renderer.renderFaceYPos(block, x, y - 0.5F + r2 + 0.1875F, z, renderer.getBlockIcon(Blocks.DIRT));
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 
 		if (tileentity instanceof TileEntityFlowerPot)

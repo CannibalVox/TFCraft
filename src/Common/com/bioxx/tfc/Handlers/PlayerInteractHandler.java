@@ -86,7 +86,7 @@ public class PlayerInteractHandler
 		ItemStack is = item.getEntityItem();
 		EntityPlayer player = event.entityPlayer;
 
-		if (is.getItem() == Items.stick)
+		if (is.getItem() == Items.STICK)
 		{
 			int count = is.getCount();
 			item.delayBeforeCanPickup = 100;
@@ -97,7 +97,7 @@ public class PlayerInteractHandler
 			ItemStack tfcSticks = new ItemStack(TFCItems.stick, count);
 			player.inventory.addItemStackToInventory(tfcSticks);
 		}
-		else if (is.getItem() == Item.getItemFromBlock(Blocks.planks) && is.getItemDamage() == 0) // Only Oak
+		else if (is.getItem() == Item.getItemFromBlock(Blocks.PLANKS) && is.getItemDamage() == 0) // Only Oak
 		{
 			int count = is.getCount();
 			item.delayBeforeCanPickup = 100;
@@ -108,7 +108,7 @@ public class PlayerInteractHandler
 			ItemStack tfcPlanks = new ItemStack(TFCBlocks.planks, count);
 			player.inventory.addItemStackToInventory(tfcPlanks);
 		}
-		else if (is.getItem() == Item.getItemFromBlock(Blocks.lit_pumpkin))
+		else if (is.getItem() == Item.getItemFromBlock(Blocks.LIT_PUMPKIN))
 		{
 			int count = is.getCount();
 			item.delayBeforeCanPickup = 100;

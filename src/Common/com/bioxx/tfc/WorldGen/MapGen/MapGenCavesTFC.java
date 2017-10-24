@@ -153,7 +153,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								double var46 = (zCoord + chunkZ * 16 + 0.5D - k) / var29;
 								int index = (xCoord * 16 + zCoord) * 256 + yCoord;
 								boolean isGrass = false;
-								Block grassBlock = Blocks.air;
+								Block grassBlock = Blocks.AIR;
 								if (var59 * var59 + var46 * var46 < 1.0D)
 								{
 									for (int var50 = yCoord - 1; var50 >= var57; --var50)
@@ -171,7 +171,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												if(TFC_Core.isSoilOrGravel(idArray[index+1]))
 												{
 													for(int upCount = 1; TFC_Core.isSoilOrGravel(idArray[index+upCount]); upCount++)
-													{idArray[index+upCount] = Blocks.air;}
+													{idArray[index+upCount] = Blocks.AIR;}
 												}
 
 												if (var50 < 10 && TFC_Climate.getStability(this.worldObj, (int)worldX, (int)worldZ) == 1)
@@ -181,7 +181,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												}
 												else
 												{
-													idArray[index] = Blocks.air;
+													idArray[index] = Blocks.AIR;
 													//metaArray[index] = 0;
 													if (isGrass && TFC_Core.isDirt(idArray[index - 1]))
 													{

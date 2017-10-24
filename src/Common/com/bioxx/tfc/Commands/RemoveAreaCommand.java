@@ -43,8 +43,8 @@ public class RemoveAreaCommand extends CommandBase
 					for(int y = 0; y < 16; y++)
 					{
 						Block id = world.getBlock(x + (int)player.posX, y + (int)player.posY, z + (int)player.posZ);
-						if(id != Blocks.bedrock)
-							world.setBlock(x + (int)player.posX, y + (int)player.posY, z + (int)player.posZ, Blocks.air, 0, 2);
+						if(id != Blocks.BEDROCK)
+							world.setBlock(x + (int)player.posX, y + (int)player.posY, z + (int)player.posZ, Blocks.AIR, 0, 2);
 					}
 				}
 			}
@@ -62,8 +62,8 @@ public class RemoveAreaCommand extends CommandBase
 					for(int y = 0; y <= Integer.parseInt(params[1]); y++)
 					{
 						Block id = world.getBlock(x + (int)player.posX, y + (int)player.posY, z + (int)player.posZ);
-						if(id != Blocks.bedrock)
-							world.setBlock(x + (int)player.posX, y + (int)player.posY, z + (int)player.posZ, Blocks.air, 0, 2);
+						if(id != Blocks.BEDROCK)
+							world.setBlock(x + (int)player.posX, y + (int)player.posY, z + (int)player.posZ, Blocks.AIR, 0, 2);
 					}
 				}
 			}

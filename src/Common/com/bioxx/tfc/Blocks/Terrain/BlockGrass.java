@@ -121,22 +121,22 @@ public class BlockGrass extends BlockTerra
 		else if (side == 2) //-Z
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x, y - 1, z - 1)))
-				return isSnow(access, x, y - 1, z - 1) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
+				return isSnow(access, x, y - 1, z - 1) ? Blocks.SNOW.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 		else if (side == 3) //+Z
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x, y - 1, z + 1)))
-				return isSnow(access, x, y - 1, z + 1) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
+				return isSnow(access, x, y - 1, z + 1) ? Blocks.SNOW.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 		else if (side == 4) //-X
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x - 1, y - 1, z)))
-				return isSnow(access, x - 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
+				return isSnow(access, x - 1, y - 1, z) ? Blocks.SNOW.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 		else if (side == 5) //+X
 		{
 			if (TFCOptions.enableBetterGrass && TFC_Core.isGrass(access.getBlock(x + 1, y - 1, z)))
-				return isSnow(access, x + 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : grassTopTexture;
+				return isSnow(access, x + 1, y - 1, z) ? Blocks.SNOW.getBlockTextureFromSide(0) : grassTopTexture;
 		}
 
 		return iconGrassSideOverlay;
@@ -201,7 +201,7 @@ public class BlockGrass extends BlockTerra
 		if (!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			if(world.getBlock(i, j + 1, k) == Blocks.snow && !TFC_Core.isDryGrass(this))
+			if(world.getBlock(i, j + 1, k) == Blocks.SNOW && !TFC_Core.isDryGrass(this))
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(this), meta, 0x2);
 			}
@@ -242,7 +242,7 @@ public class BlockGrass extends BlockTerra
 				{
 					world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(this), meta, 2);
 				}
-				else if(TFC_Core.isGrass(this) && TFC_Core.isDryGrass(this) && (nearWater || rain>=500) && world.getBlock(i, j+1, k) != Blocks.snow)
+				else if(TFC_Core.isGrass(this) && TFC_Core.isDryGrass(this) && (nearWater || rain>=500) && world.getBlock(i, j+1, k) != Blocks.SNOW)
 				{
 					world.setBlock(i, j, k, TFC_Core.getTypeForGrassFromSoil(this), meta, 2);
 				}

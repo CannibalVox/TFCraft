@@ -60,7 +60,7 @@ public class RenderFlora
 		double d0 = z;
 		long i1;
 
-		if (block == Blocks.tallgrass)
+		if (block == Blocks.TALLGRASS)
 		{
 			i1 = x * 3129871 ^ z * 116129781L ^ y;
 			i1 = i1 * i1 * 42317861L + i1 * 11L;
@@ -68,7 +68,7 @@ public class RenderFlora
 			d2 += ((i1 >> 20 & 15L) / 15.0F - 1.0D) * 0.2D;
 			d0 += ((i1 >> 24 & 15L) / 15.0F - 0.5D) * 0.5D;
 		}
-		else if (block == Blocks.red_flower || block == Blocks.yellow_flower)
+		else if (block == Blocks.RED_FLOWER || block == Blocks.YELLOW_FLOWER)
 		{
 			i1 = x * 3129871 ^ z * 116129781L ^ y;
 			i1 = i1 * i1 * 42317861L + i1 * 11L;
