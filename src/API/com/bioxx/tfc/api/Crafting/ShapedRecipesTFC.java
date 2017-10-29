@@ -8,8 +8,9 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class ShapedRecipesTFC implements IRecipe
+public class ShapedRecipesTFC extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 	private int recipeWidth;
 	private int recipeHeight;
@@ -87,9 +88,8 @@ public class ShapedRecipesTFC implements IRecipe
 	}
 
 	@Override
-	public int getRecipeSize()
-	{
-		return recipeWidth * recipeHeight;
+	public boolean canFit(int width, int height) {
+		return (getRecipeWidth() <= width && getRecipeHeight() <= height);
 	}
 
     public int getRecipeWidth()

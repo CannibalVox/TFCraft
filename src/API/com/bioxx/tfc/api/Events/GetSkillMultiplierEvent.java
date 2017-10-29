@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import net.minecraftforge.event.entity.EntityEvent;
 
-import cpw.mods.fml.common.eventhandler.Cancelable;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
 @Cancelable
 public class GetSkillMultiplierEvent extends EntityEvent

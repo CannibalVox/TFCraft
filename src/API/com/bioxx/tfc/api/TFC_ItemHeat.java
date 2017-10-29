@@ -269,7 +269,7 @@ public class TFC_ItemHeat
 					if(temp <= 0)
 						comp.removeTag("temperature");
 					if(comp.hasNoTags())
-						is.stackTagCompound = null;
+						is.setTagCompound(null);
 				}
 			}
 		}
@@ -304,6 +304,6 @@ public class TFC_ItemHeat
 			is.getTagCompound().removeTag("temperature");
 		}
 		if(is.hasTagCompound() && is.getTagCompound().hasNoTags())
-			is.stackTagCompound = null;
+			is.setTagCompound(null);
 	}
 }

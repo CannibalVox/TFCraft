@@ -2,12 +2,11 @@ package com.bioxx.tfc.api.Events;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-
-import cpw.mods.fml.common.eventhandler.Cancelable;
-import cpw.mods.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 @Cancelable
-public class ItemCookEvent extends Event 
+public class ItemCookEvent extends Event
 {	
 	/**
 	 * The item which is currently being cooked.

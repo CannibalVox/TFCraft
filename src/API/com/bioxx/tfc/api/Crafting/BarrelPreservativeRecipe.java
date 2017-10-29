@@ -33,9 +33,7 @@ public class BarrelPreservativeRecipe {
 	
 	/***
 	 * Checks a barrel to see if it should be preserving. Allows Overriding this function in subclass
-	 * @param xCoord
-	 * @param yCoord
-	 * @param zCoord
+	 * @param barrel
 	 * @param fluid
 	 * @param itemStack
 	 * @param sealed

@@ -116,14 +116,15 @@ public class TEFireEntity extends NetworkTileEntity
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
+		nbt = super.writeToNBT(nbt);
 		nbt.setFloat("temperature", fireTemp);
 		nbt.setInteger("fuelTime", fuelTimeLeft);
 		nbt.setInteger("fuelTemp", fuelBurnTemp);
 		nbt.setInteger("bellowsAir", airFromBellows);
 		nbt.setInteger("fuelTasteProfile", fuelTasteProfile);
+		return nbt;
 	}
 
 	@Override

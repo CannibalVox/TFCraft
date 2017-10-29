@@ -31,10 +31,6 @@ public class RecipeSorterTFC implements Comparator
 		{
 			return -1;
 		}
-		if (irecipe1.getRecipeSize() < irecipe.getRecipeSize())
-		{
-			return -1;
-		}
-		return irecipe1.getRecipeSize() <= irecipe.getRecipeSize() ? 0 : 1;
+		return 0;
 	}
 }

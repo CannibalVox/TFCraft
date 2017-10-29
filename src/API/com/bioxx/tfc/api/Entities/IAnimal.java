@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 
 public interface IAnimal
 {
@@ -45,7 +45,7 @@ public interface IAnimal
 
 	int getAnimalTypeID();
 
-	Vec3 getAttackedVec();
+	Vec3d getAttackedVec();
 
 	int getBirthDay();
 
@@ -119,7 +119,7 @@ public interface IAnimal
 
 	void setAggressionMod(float aggression);
 
-	void setAttackedVec(Vec3 attackedVec);
+	void setAttackedVec(Vec3d attackedVec);
 
 	void setBirthDay(int day);
 	

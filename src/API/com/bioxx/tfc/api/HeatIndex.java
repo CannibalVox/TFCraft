@@ -114,17 +114,16 @@ public class HeatIndex
 			if(is.hasTagCompound())
 			{
 				NBTTagCompound nbt = is.getTagCompound();
-				for(Object o : in.getTagCompound().func_150296_c())
+				for(String key : in.getTagCompound().getKeySet())
 				{
-					NBTBase n = (NBTBase)o;
-					if(nbt.hasKey(n.toString()))
-						nbt.removeTag(n.toString());
-					nbt.func_150296_c().add(o);
+					if(nbt.hasKey(key))
+						nbt.removeTag(key);
+					nbt.setTag(key, in.getTagCompound().getTag(key));
 				}
 			}
 			else
 			{
-				is.setTagCompound(in.stackTagCompound);
+				is.setTagCompound(in.getTagCompound());
 				if(TFC_ItemHeat.hasTemp(is))
 					TFC_ItemHeat.setTemp(is, TFC_ItemHeat.getTemp(is)*0.9f);
 			}

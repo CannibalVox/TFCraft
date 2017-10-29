@@ -12,8 +12,9 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class ShapelessRecipesTFC implements IRecipe
+public class ShapelessRecipesTFC extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 	/** Is the ItemStack that you get when craft the recipe. */
 	private final ItemStack recipeOutput;
@@ -42,13 +43,10 @@ public class ShapelessRecipesTFC implements IRecipe
 		return this.recipeOutput;
 	}
 
-	/**
-	 * Returns the size of the recipe area
-	 */
 	@Override
-	public int getRecipeSize()
-	{
-		return this.recipeItems.size();
+	public boolean canFit(int width, int height) {
+		int totalSize = width*height;
+		return recipeItems.size() <= totalSize;
 	}
 
 	/**

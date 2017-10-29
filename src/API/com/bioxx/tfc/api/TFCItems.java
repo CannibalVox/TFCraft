@@ -5,9 +5,10 @@ import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import com.bioxx.tfc.TerraFirmaCraft;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TFCItems
 {
@@ -871,11 +872,12 @@ public class TFCItems
 
 	public static List<Item> foodList;
 
-	public static void registerItems()
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
 		TerraFirmaCraft.LOG.info("Registering Items");
 
-		GameRegistry.registerItem(goldPan, goldPan.getUnlocalizedName());
+		event.getRegistry().register(goldPan, goldPan.getUnlocalizedName());
 		GameRegistry.registerItem(sluiceItem, sluiceItem.getUnlocalizedName());
 
 		GameRegistry.registerItem(proPickBismuthBronze, proPickBismuthBronze.getUnlocalizedName());

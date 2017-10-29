@@ -1,6 +1,8 @@
 package com.bioxx.tfc.api.Crafting;
 
-public enum AnvilReq
+import net.minecraft.util.IStringSerializable;
+
+public enum AnvilReq implements IStringSerializable
 {
     STONE("Stone", 0),
     COPPER("Copper", 1),
@@ -25,6 +27,8 @@ public enum AnvilReq
         Name = n;
         Tier = tier;
     }
+
+    public String getName() { return Name; }
     
     public boolean matches(int tier)
     {

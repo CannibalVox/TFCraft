@@ -64,7 +64,7 @@ public class ChiselMode
 
     public int hasChisel(EntityPlayer player){
         int hasChisel = -1;
-        if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel) {
+        if(player.inventory.mainInventory.get(player.inventory.currentItem) != null && player.inventory.mainInventory.get(player.inventory.currentItem).getItem() instanceof ItemChisel) {
             hasChisel = player.inventory.currentItem;
         }
         return hasChisel;

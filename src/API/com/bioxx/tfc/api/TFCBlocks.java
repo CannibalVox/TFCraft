@@ -1,12 +1,17 @@
 package com.bioxx.tfc.api;
 
+import com.bioxx.tfc.api.Crafting.AnvilReq;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 
 import com.bioxx.tfc.api.Constant.Global;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.util.EnumFacing;
 
 public class TFCBlocks 
 {
+	public static final PropertyEnum ANVILREQ = PropertyEnum.create("anvilreq", AnvilReq.class);
 	public static int clayGrassRenderId;
 	public static int peatGrassRenderId;
 	public static int sulfurRenderId;
@@ -246,7 +251,7 @@ public class TFCBlocks
 
 	public static boolean isBlockAFence(Block block)
 	{
-		return block == fence || block == fence2 || BlockFence.func_149825_a(block);
+		return block == fence || block == fence2 || block instanceof BlockFence;
 	}
 
 	public static boolean canFenceConnectTo(Block block)
