@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.*;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -1203,11 +1204,6 @@ public class TFC_Core
 		r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
 		Food.adjustFlavor(is, r);
 		e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
-	}
-
-	public static Vec3 getEntityPos(Entity e)
-	{
-		return Vec3.createVectorHelper(e.posX, e.posY, e.posZ);
 	}
 
 	public static void giveItemToPlayer(ItemStack is, EntityPlayer player)

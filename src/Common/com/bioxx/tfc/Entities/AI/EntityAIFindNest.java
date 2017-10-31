@@ -51,7 +51,7 @@ public class EntityAIFindNest extends EntityAIBase
 		this.theCreature = eAnimal;
 		//this.movementSpeed = par2;
 		this.field_75404_b = par2;
-		this.theWorld = eAnimal.worldObj;
+		this.theWorld = eAnimal.world;
 		this.failureDepressionMap = new HashMap<String,Long>();
 		this.setMutexBits(5);
 	}
@@ -85,7 +85,7 @@ public class EntityAIFindNest extends EntityAIBase
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		if (this.theCreature.getDistanceSq(sitableBlockX + 0.5, sitableBlockY, sitableBlockZ + 0.5) < 0.2)
 			this.theCreature.getNavigator().clearPathEntity();
@@ -95,7 +95,7 @@ public class EntityAIFindNest extends EntityAIBase
 			this.end = false;
 			return end;
 		}
-		return this.currentTick <= this.maxSittingTicks && this.movement <= 60 && this.isSittableBlock(this.theCreature.worldObj, this.sitableBlockX, this.sitableBlockY, this.sitableBlockZ);
+		return this.currentTick <= this.maxSittingTicks && this.movement <= 60 && this.isSittableBlock(this.theCreature.world, this.sitableBlockX, this.sitableBlockY, this.sitableBlockZ);
 	}
 
 	protected boolean getNearbySitableBlockDistance()
@@ -109,7 +109,7 @@ public class EntityAIFindNest extends EntityAIBase
 			{
 				for(int l = i; l < i+4; l++)
 				{
-					if (this.isSittableBlock(this.theCreature.worldObj, j, l, k) && this.theCreature.worldObj.isAirBlock(j, l + 1, k))
+					if (this.isSittableBlock(this.theCreature.world, j, l, k) && this.theCreature.world.isAirBlock(j, l + 1, k))
 					{
 						double d1 = this.theCreature.getDistanceSq(j, l, k);
 
@@ -153,7 +153,7 @@ public class EntityAIFindNest extends EntityAIBase
 			this.compoundDistance += this.theCreature.getDistance(this.theCreature.lastTickPosX, this.theCreature.lastTickPosY, this.theCreature.lastTickPosZ);
 			if(this.currentTick - 40 > this.lastCheckedTick)
 			{
-				ArrayList<EntityChickenTFC> crowd = (ArrayList<EntityChickenTFC>) theCreature.worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, theCreature.boundingBox.expand(24, 2, 24));
+				ArrayList<EntityChickenTFC> crowd = (ArrayList<EntityChickenTFC>) theCreature.world.getEntitiesWithinAABB(EntityChickenTFC.class, theCreature.getEntityBoundingBox().expand(24, 2, 24));
 				ArrayList<EntityChickenTFC> invalid = new ArrayList<EntityChickenTFC>();
 				for(EntityChickenTFC chicken : crowd){
 					if(chicken.getGender().equals(GenderEnum.MALE) || chicken.isChild()){

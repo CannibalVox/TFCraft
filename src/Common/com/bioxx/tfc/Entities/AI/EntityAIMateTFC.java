@@ -58,7 +58,7 @@ public class EntityAIMateTFC extends EntityAIBase
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
 	@Override
-	public boolean continueExecuting ()
+	public boolean shouldContinueExecuting ()
 	{
 		return targetMate.getEntity().isEntityAlive() && targetMate.getInLove() && matingCounter < 60 && theAnimal.getInLove() && 
 				(targetMate.getGender() == GenderEnum.FEMALE && theAnimal.getGender() == GenderEnum.MALE || 
@@ -95,7 +95,7 @@ public class EntityAIMateTFC extends EntityAIBase
 	private IAnimal getLocalMate()
 	{
 		float f = 8F;
-		List list = theWorld.getEntitiesWithinAABB (theAnimal.getClass (), theAnimal.getEntity().boundingBox.expand (f, f, f));
+		List list = theWorld.getEntitiesWithinAABB ((Class)theAnimal.getClass (), theAnimal.getEntity().getEntityBoundingBox().expand (f, f, f));
 
 		for (Iterator iterator = list.iterator () ; iterator.hasNext () ;)
 		{

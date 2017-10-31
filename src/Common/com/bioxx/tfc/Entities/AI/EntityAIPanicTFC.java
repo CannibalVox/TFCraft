@@ -5,10 +5,9 @@ import java.util.List;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.util.Vec3;
 
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import net.minecraft.util.math.Vec3d;
 
 public class EntityAIPanicTFC extends EntityAIBase
 {
@@ -33,7 +32,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.theEntityCreature.getAITarget() == null && !this.theEntityCreature.isBurning() &&
+		if (this.theEntityCreature.getAttackTarget() == null && !this.theEntityCreature.isBurning() &&
 			(this.theEntityCreature instanceof IAnimal && ((IAnimal) this.theEntityCreature).getAttackedVec() == null ||
 				!(this.theEntityCreature instanceof IAnimal)))
 		{
@@ -41,9 +40,9 @@ public class EntityAIPanicTFC extends EntityAIBase
 		}
 		else
 		{
-			Vec3 attackedVec = this.theEntityCreature instanceof IAnimal ? ((IAnimal) this.theEntityCreature).getAttackedVec() : null;
+			Vec3d attackedVec = this.theEntityCreature instanceof IAnimal ? ((IAnimal) this.theEntityCreature).getAttackedVec() : null;
 			//TerraFirmaCraft.log.info(attackedVec != null);
-			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.theEntityCreature, 5, 4);
+			Vec3d vec3 = RandomPositionGenerator.findRandomTarget(this.theEntityCreature, 5, 4);
 			if (attackedVec != null)
 			{
 				if (this.theEntityCreature instanceof IAnimal)
@@ -56,13 +55,13 @@ public class EntityAIPanicTFC extends EntityAIBase
 			}
 			else
 			{
-				this.randPosX = vec3.xCoord;
-				this.randPosY = vec3.yCoord;
-				this.randPosZ = vec3.zCoord;
+				this.randPosX = vec3.x;
+				this.randPosY = vec3.y;
+				this.randPosZ = vec3.z;
 				if (alertHerd && this.theEntityCreature instanceof IAnimal)
 				{
-					List list = this.theEntityCreature.worldObj.getEntitiesWithinAABB(this.theEntityCreature.getClass(),
-							this.theEntityCreature.boundingBox.expand(8, 8, 8));
+					List list = this.theEntityCreature.world.getEntitiesWithinAABB(this.theEntityCreature.getClass(),
+							this.theEntityCreature.getEntityBoundingBox().expand(8, 8, 8));
 					for (Object entity : list)
 					{
 						//TerraFirmaCraft.log.info(entity);
@@ -74,12 +73,12 @@ public class EntityAIPanicTFC extends EntityAIBase
 		}
 	}
 
-	public Vec3 updateAttackVec(IAnimal theCreature, Vec3 attackedVec)
+	public Vec3d updateAttackVec(IAnimal theCreature, Vec3d attackedVec)
 	{
 		if (theCreature.getFearSource() != null &&
-			TFC_Core.getEntityPos(theEntityCreature).distanceTo(attackedVec) > this.theEntityCreature.getDistanceToEntity(theCreature.getFearSource()))
+			theEntityCreature.getPositionVector().distanceTo(attackedVec) > this.theEntityCreature.getDistanceToEntity(theCreature.getFearSource()))
 		{
-			Vec3 newVec = Vec3.createVectorHelper(theCreature.getFearSource().posX, theCreature.getFearSource().posY, theCreature.getFearSource().posZ);
+			Vec3d newVec = theCreature.getFearSource().getPositionVector();
 			theCreature.setAttackedVec(newVec);
 			return newVec;
 		}
@@ -99,7 +98,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return !this.theEntityCreature.getNavigator().noPath();
 	}

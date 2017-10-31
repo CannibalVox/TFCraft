@@ -9,16 +9,18 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
 
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
+import net.minecraft.util.math.Vec3d;
 
 public class EntityAIAvoidEntityTFC extends EntityAIBase
 {
-	public final IEntitySelector field_98218_a = new EntityAIAvoidEntitySelectorTFC(this);
+	public final EntityAIAvoidEntitySelectorTFC field_98218_a = new EntityAIAvoidEntitySelectorTFC(this);
 
 	/** The entity we are attached to */
 	private EntityCreature theEntity;
@@ -28,7 +30,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	private float distanceFromEntity;
 
 	/** The PathEntity of our entity */
-	private PathEntity entityPathEntity;
+	private Path entityPathEntity;
 
 	/** The PathNavigate of our entity */
 	private PathNavigate entityPathNavigate;
@@ -64,22 +66,22 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 			}
 		}
 
-		List list = this.theEntity.worldObj.selectEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand(this.distanceFromEntity, 3.0D, this.distanceFromEntity), this.field_98218_a);
+		List list = this.theEntity.world.getEntitiesWithinAABB(this.targetEntityClass, this.theEntity.getEntityBoundingBox().expand(this.distanceFromEntity, 3.0D, this.distanceFromEntity), this.field_98218_a::filter);
 
 		if (list.isEmpty())
 			return false;
 
 		this.closestLivingEntity = (Entity)list.get(0);
 
-		Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
+		Vec3d vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, this.closestLivingEntity.getPositionVector());
 		if (vec3 == null)
 			return false;
-		else if (this.closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity))
+		else if (this.closestLivingEntity.getDistanceSq(vec3.x, vec3.y, vec3.z) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity))
 			return false;
 		else
 		{
-			this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-			return this.entityPathEntity == null ? false : this.entityPathEntity.isDestinationSame(vec3);
+			this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.x, vec3.y, vec3.z);
+			return this.entityPathEntity == null ? false : this.entityPathEntity.getTarget()..isDestinationSame(vec3);
 		}
 	}
 

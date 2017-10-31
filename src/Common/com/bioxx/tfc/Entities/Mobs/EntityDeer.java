@@ -9,12 +9,16 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
@@ -59,7 +63,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	private float aggressionMod = 1;//How aggressive / obstinate the animal is
 	private float obedienceMod = 1; //How well the animal responds to commands.
 	private boolean inLove;
-	private Vec3 attackedVec;
+	private Vec3d attackedVec;
 	private Entity fearSource;
 	
 	private boolean wasRoped;
@@ -85,10 +89,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		running = false;
 
 		this.setSize(0.9F, 1.3F);
-		this.getNavigator().setAvoidsWater(true);
+		this.setPathPriority(PathNodeType.WATER, -1);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanicTFC(this, 0.68F,true));
-		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, 1.0f));
+		this.tasks.addTask(2, new EntityAIMateTFC(this, world, 1.0f));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
@@ -141,16 +145,16 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400);//MaxHealth
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		Entity entity = par1DamageSource.getEntity();
+		Entity entity = par1DamageSource.getImmediateSource();
 		if(entity != null)
 		{
-			setAttackedVec(Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ));
+			setAttackedVec(new Vec3d(entity.posX, entity.posY, entity.posZ));
 			setFearSource(entity);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
@@ -190,7 +194,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		case TOLERATEPLAYER: flag = familiarity > 40;break;
 		default: break;
 		}
-		if(!flag && player != null && !player.worldObj.isRemote){
+		if(!flag && player != null && !player.world.isRemote){
 			TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.notFamiliar"));
 		}
 		return flag;
@@ -210,7 +214,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
 		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
 		data.add(eAgeable.getEntityData().getFloat("MateObed"));
-		return new EntityDeer(worldObj, this, data);
+		return new EntityDeer(world, this, data);
 	}
 
 	/**
@@ -236,7 +240,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();	
+		super.entityInit();
 		this.dataWatcher.addObject(13, Integer.valueOf(0)); //sex (1 or 0)
 		this.dataWatcher.addObject(15, Integer.valueOf(0));		//age
 		
@@ -256,7 +260,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				stack.shrink(1);
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,stack);
 			}
-			worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+
+			world.playSound(ep, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 			this.hunger += 24000;
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
@@ -277,7 +282,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public Vec3 getAttackedVec()
+	public Vec3d getAttackedVec()
 	{
 		return attackedVec;
 	}
@@ -292,7 +297,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * Returns the sound this mob makes on death.
 	 */
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
 		return TFC_Sounds.DEERDEATH;
 	}
@@ -350,7 +355,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
-	protected String getHurtSound()
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_)
 	{
 		return TFC_Sounds.DEERHURT;
 	}
@@ -370,9 +375,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		if(getGender() == GenderEnum.MALE && isAdult() && worldObj.rand.nextInt(100) < 5)
+		if(getGender() == GenderEnum.MALE && isAdult() && world.rand.nextInt(100) < 5)
 			return TFC_Sounds.DEERCRY;
 		return TFC_Sounds.DEERSAY;
 	}
@@ -459,9 +464,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer player)
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 		{
 			if (player.isSneaking() && canFamiliarize())
 			{
@@ -473,14 +478,14 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				TFC_Core.sendInfoMessage(player, new ChatComponentTranslation("entity.pregnant"));
 			}
 		}
-		ItemStack itemstack = player.getHeldItem();
-		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
+		ItemStack itemstack = player.getHeldItem(hand);
+		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("ItemName")){
+			if(this.trySetName(itemstack.getTagCompound().getString("ItemName"), player)){
 				itemstack.shrink(1);
 			}
 			return true;
 		}
-		return super.interact(player);
+		return super.processInteract(player, hand);
 	}
 
 	@Override
@@ -493,9 +498,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * Returns true if the newer Entity AI code should be run
 	 */
 	@Override
-	protected boolean isAIEnabled()
+	public boolean isAIDisabled()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -561,7 +566,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		
 		this.handleFamiliarityUpdate();
 
-		if (!this.worldObj.isRemote && isPregnant())
+		if (!this.world.isRemote && isPregnant())
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
@@ -569,7 +574,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				baby.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
-				worldObj.spawnEntityInWorld(baby);
+				world.spawnEntity(baby);
 				baby.setAge(TFC_Time.getTotalDays());
 				pregnant = false;
 			}
@@ -578,7 +583,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		if(attackedVec != null)
 		{
 			//TerraFirmaCraft.log.info(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
-			Vec3 positionVec = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			Vec3d positionVec = new Vec3d(this.posX, this.posY, this.posZ);
 			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > Global.SEALEVEL)
 			{
 				this.setFearSource(null);
@@ -649,7 +654,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 	
 	@Override
-	public void setAttackedVec(Vec3 attackedVec)
+	public void setAttackedVec(Vec3d attackedVec)
 	{
 		this.attackedVec = attackedVec;
 	}
@@ -755,7 +760,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote)
+			if(!this.world.isRemote)
 			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 
