@@ -1,17 +1,15 @@
 package com.bioxx.tfc.api;
 
-import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.Blocks.Enums.AnvilMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 
 import com.bioxx.tfc.api.Constant.Global;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.util.EnumFacing;
 
 public class TFCBlocks 
 {
-	public static final PropertyEnum ANVILREQ = PropertyEnum.create("anvilreq", AnvilReq.class);
+	public static final PropertyEnum ANVILREQ = PropertyEnum.create("anvilreq", AnvilMaterial.class);
 	public static int clayGrassRenderId;
 	public static int peatGrassRenderId;
 	public static int sulfurRenderId;

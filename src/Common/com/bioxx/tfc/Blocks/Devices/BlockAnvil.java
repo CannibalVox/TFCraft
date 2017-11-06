@@ -1,83 +1,88 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import java.util.List;
-
+import com.bioxx.tfc.Helpers.SpanningBlockHelper;
+import com.bioxx.tfc.api.Constant.MaterialTier;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEAnvil;
-import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.Blocks.Enums.AnvilMaterial;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class BlockAnvil extends BlockTerraContainer
 {
-	private IIcon[] textureMapTop;
-	private IIcon[] textureMapSide;
-	private IIcon stoneAnvilIcon;
-	private int anvilId;
+	private int offset;
 
-	public BlockAnvil()
-	{
-		super(Material.IRON);
-		this.setCreativeTab(TFCTabs.TFC_DEVICES);
-	}
+	public static final String PROP_ANVIL_REQ = "anvilreq";
+	public static final PropertyEnum<EnumFacing> PROP_FACING = PropertyEnum.create("facing", EnumFacing.class, EnumFacing.EAST, EnumFacing.NORTH);
+
+	private static final AxisAlignedBB METAL_ANVIL_AABB = new AxisAlignedBB(0.2, 0, 0, 0.8, 0.6, 1);
+	private static final AxisAlignedBB STONE_ANVIL_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.9, 1);
+
+	public static final int ANVILS_PER_BLOCK=8;
 
 	public BlockAnvil(int offset)
 	{
-		this();
-		anvilId = offset;
+		super(Material.IRON);
+		this.setCreativeTab(TFCTabs.TFC_DEVICES);
+		this.offset = offset;
+		this.setDefaultState(getBlockState().getBaseState()
+                .withProperty((IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ), SpanningBlockHelper.spanFirst(AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK))
+                .withProperty(PROP_FACING, EnumFacing.EAST));
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this,
+                SpanningBlockHelper.spanEnum(PROP_ANVIL_REQ, AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK),
+                PROP_FACING);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
 	{
-		if(this == TFCBlocks.anvil)
-		{
-			for(int i = 1; i < 8; i++)
-				par3List.add(new ItemStack(this, 1, i));
-		}
-
-		if(this == TFCBlocks.anvil2)
-		{
-			for(int i = 0; i < 3; i++)
-				par3List.add(new ItemStack(this, 1, i));
-		}
+	    for (AnvilMaterial req : SpanningBlockHelper.listEnum(AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK)) {
+	        items.add(new ItemStack(this, 1, req.ordinal()));
+        }
 	}
 
 	@Override
-	public int damageDropped(int dmg)
+    public int damageDropped(IBlockState state)
 	{
-		return dmg & 7;
+	    IProperty<AnvilMaterial> prop = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
+		return state.getValue(prop).ordinal();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer entityPlayer, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if(world.isRemote)
 		{
@@ -85,193 +90,119 @@ public class BlockAnvil extends BlockTerraContainer
 		}
 		else
 		{
-			if((TEAnvil)world.getTileEntity(i, j, k)!=null)
+			TileEntity tileentity = world.getTileEntity(pos);
+
+			if (tileentity instanceof TEAnvil)
 			{
-				/*TEAnvil TEAnvil;
-				TEAnvil = (TEAnvil)world.getTileEntity(i, j, k);
-				ItemStack is = entityplayer.getCurrentEquippedItem();*/
-				entityplayer.openGui(TerraFirmaCraft.instance, 21, world, i, j, k);
+				entityPlayer.displayGui((TEAnvil)tileentity);
 			}
 			return true;
 		}
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
-		int meta = par1World.getBlockMetadata(par2, par3, par4);
-		int direction = getDirectionFromMetadata(meta);
-		TileEntity te = par1World.getTileEntity(par2, par3, par4);
+        IProperty<AnvilMaterial> anvilreqProp = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
+        AnvilMaterial anvilMaterial = blockState.getValue(anvilreqProp);
 
-		if (te instanceof TEAnvil)
-		{
-			TEAnvil teAnvil = (TEAnvil) te;
-			if (teAnvil.anvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.anvil2)
-			{
-				if(direction == 0) 
-					return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
-				else
-					return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
-			}
-			else
-			{
-				return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
-			}
-		}
-		return null;
+        if (anvilMaterial == AnvilMaterial.STONE)
+            return Block.FULL_BLOCK_AABB;
+        return super.getCollisionBoundingBox(blockState, worldIn, pos);
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int direction = getDirectionFromMetadata(meta);
-		TEAnvil te = (TEAnvil)world.getTileEntity(x, y, z);
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { ;
+        IProperty<AnvilMaterial> anvilreqProp = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
 
-		if(te.anvilTier != AnvilReq.STONE.Tier)
-		{
-			if(direction == 0)
-			{
-				this.setBlockBounds(0.2f, 0, 0, 0.8f, 0.6f, 1);
-				return AxisAlignedBB.getBoundingBox(x + 0.2, (double)y + 0, (double)z + 0, x + 0.8, y + 0.6, (double)z + 1);
-			}
-			else
-			{
-				this.setBlockBounds(0, 0, 0.2f, 1, 0.6f, 0.8f);
-				return AxisAlignedBB.getBoundingBox((double)x + 0, (double)y + 0, z + 0.2, (double)x + 1, y + 0.6, z + 0.8);
-			}
-		}
-		else
-		{
-			this.setBlockBounds(0, 0, 0, 1, 0.9F, 1);
-			return AxisAlignedBB.getBoundingBox((double)x + 0, (double)y + 0, (double)z + 0, (double)x + 1, (double)y + 0.9F, (double)z + 1);
-		}
-	}
+        AnvilMaterial anvilMaterial = state.getValue(anvilreqProp);
+        EnumFacing facing = state.getValue(PROP_FACING);
 
-	/**
-	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
-	 */
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
-	{
-		int meta = bAccess.getBlockMetadata(x, y, z);
-		int direction = getDirectionFromMetadata(meta);
-		TEAnvil te = (TEAnvil)bAccess.getTileEntity(x, y, z);
-
-		if(te.anvilTier != AnvilReq.STONE.Tier)
-		{
-			if(direction == 0)
-				this.setBlockBounds(0.2f, 0, 0, 0.8f, 0.6f, 1);
-			else
-				this.setBlockBounds(0, 0, 0.2f, 1, 0.6f, 0.8f);
-		}
-		else
-		{
-			this.setBlockBounds(0, 0, 0, 1, 0.9F, 1);
-		}
-	}
-
-	@Override
-	public IIcon getIcon(int i, int j)
-	{
-		int meta = getAnvilTypeFromMeta(j);
-
-		if (j == 0 && this == TFCBlocks.anvil)
-		{
-			return stoneAnvilIcon;
-		}
-		else
-		{
-			if(i == 0 || i == 1)
-				return textureMapTop[meta];
-			else
-				return textureMapSide[meta];
-		}
-	}
+        if (anvilMaterial != AnvilMaterial.STONE)
+        {
+            return METAL_ANVIL_AABB;
+        }
+        else
+        {
+            return STONE_ANVIL_AABB;
+        }
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		return true;
 	}
 
 	@Override
-	public int getRenderType()
+    public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return TFCBlocks.anvilRenderId;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
-		int type = BlockAnvil.getAnvilTypeFromMeta(l);
-		if(this == TFCBlocks.anvil)
-		{
-			if(type == 0)
-				return;
-		}
-		super.harvestBlock(world, entityplayer, i, j, k, type);
+        IProperty<AnvilMaterial> prop = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
+        if (state.getValue(prop) == AnvilMaterial.STONE)
+            return;
+
+		super.harvestBlock(worldIn, player, pos, state, te, stack);
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World par1World, int x, int y, int z, int meta, float par6, int par7)
+    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 	{
-		if (!par1World.isRemote)
-			this.dropBlockAsItem(par1World, x, y, z, new ItemStack(this, 1, meta));
+        IProperty<AnvilMaterial> prop = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
+        if (state.getValue(prop) == AnvilMaterial.STONE)
+            return;
+
+        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
 	}
 
 	@Override
-	protected void dropBlockAsItem(World par1World, int par2, int par3, int par4, ItemStack is)
-	{
-		if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
-		{
-			if(is.getItemDamage() == 0 && this == TFCBlocks.anvil)
-				return;
-			float f = 0.7F;
-			double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-			double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-			double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(par1World, par2 + d0, par3 + d1, par4 + d2, is);
-			entityitem.delayBeforeCanPickup = 10;
-			par1World.spawnEntityInWorld(entityitem);
-		}
-	}
-
-	@Override
-	public boolean isOpaqueCube()
+    public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is)
+    public IBlockState getStateFromMeta(int meta) {
+	    AnvilMaterial req = SpanningBlockHelper.spanFromMeta(AnvilMaterial.class, meta & 7, this.offset, 8);
+	    EnumFacing face = (meta & 8) == 0?EnumFacing.EAST:EnumFacing.NORTH;
+
+	    IProperty<AnvilMaterial> anvilreq = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
+	    return getBlockState().getBaseState().withProperty(anvilreq, req).withProperty(PROP_FACING, face);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        IProperty<AnvilMaterial> anvilreq = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
+
+        AnvilMaterial req = state.getValue(anvilreq);
+        EnumFacing face = state.getValue(PROP_FACING);
+
+        int meta = (face == EnumFacing.NORTH)?8:0;
+        return meta | SpanningBlockHelper.metaFromValue(req, this.offset, ANVILS_PER_BLOCK);
+    }
+
+	@Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
-		byte byte0 = 0;
-		if(l == 0)//+z
-			byte0 = 8;
-		if(l == 1)//-x
-			byte0 = 0;
-		if(l == 2)//-z
-			byte0 = 8;
-		if(l == 3)//+x
-			byte0 = 0;
-		byte0 += meta;
+	    IBlockState state = getStateFromMeta(meta % ANVILS_PER_BLOCK);
 
-		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
+		int l = MathHelper.floor(placer.rotationYaw * 4F / 360F + 0.5D) & 3;
+		EnumFacing face = EnumFacing.EAST;
+		if(l == 0 || l == 3)//+/-z
+			face = EnumFacing.NORTH;
 
-		TEAnvil te = (TEAnvil)world.getTileEntity(i, j, k);
-		if(this == TFCBlocks.anvil)
-			te.anvilTier = AnvilReq.getReqFromInt(meta).Tier;
-		else if(this == TFCBlocks.anvil2)
-			te.anvilTier = AnvilReq.getReqFromInt2(meta).Tier;
+		return state.withProperty(PROP_FACING, face);
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		TEAnvil var5 = (TEAnvil)world.getTileEntity(x, y, z);
+		TEAnvil var5 = (TEAnvil)world.getTileEntity(pos);
 
 		if (var5 != null)
 		{
@@ -285,7 +216,7 @@ public class BlockAnvil extends BlockTerraContainer
 					float var9 = world.rand.nextFloat() * 0.8F + 0.1F;
 					EntityItem var12;
 
-					for (float var10 = world.rand.nextFloat() * 0.8F + 0.1F; var7.getCount() > 0; world.spawnEntityInWorld(var12))
+					for (float var10 = world.rand.nextFloat() * 0.8F + 0.1F; var7.getCount() > 0; world.spawnEntity(var12))
 					{
 						int var11 = world.rand.nextInt(21) + 10;
 
@@ -293,24 +224,18 @@ public class BlockAnvil extends BlockTerraContainer
 							var11 = var7.getCount();
 						var7.shrink(var11);
 
-						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+						var12 = new EntityItem(world, pos.getX() + var8, pos.getY() + var9, pos.getZ() + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
 						float var13 = 0.05F;
 						var12.motionX = (float)world.rand.nextGaussian() * var13;
 						var12.motionY = (float)world.rand.nextGaussian() * var13 + 0.2F;
 						var12.motionZ = (float)world.rand.nextGaussian() * var13;
 						if (var7.hasTagCompound())
-							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+							var12.getItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 					}
 				}
 			}
 		}
-		super.breakBlock(world, x, y, z, block, metadata);
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
+		super.breakBlock(world, pos, state);
 	}
 
 	public static int getAnvilTypeFromMeta(int j)
@@ -335,46 +260,22 @@ public class BlockAnvil extends BlockTerraContainer
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister registerer)
-	{
-		textureMapTop = new IIcon[anvilId == 0 ? 8 : 3];
-		textureMapSide = new IIcon[anvilId == 0 ? 8 : 3];
-		for(int i = (anvilId == 0 ? 1 : 0); i < (anvilId == 0 ? 8 : 3); i++)
-		{
-			textureMapTop[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
-			textureMapSide[i] = registerer.registerIcon(Reference.MOD_ID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
-		}
-
-		stoneAnvilIcon = registerer.registerIcon(Reference.MOD_ID + ":" + "rocks/" + "Gabbro Raw");
-
-		TFC_Textures.anvilHit = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit");
-		TFC_Textures.anvilHitHeavy = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit Heavy");
-		TFC_Textures.anvilHitMedium = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit Medium");
-		TFC_Textures.anvilHitLight = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Hit Light");
-		TFC_Textures.anvilDraw = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Draw");
-		TFC_Textures.anvilPunch = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Punch");
-		TFC_Textures.anvilBend = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Bend");
-		TFC_Textures.anvilUpset = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Upset");
-		TFC_Textures.anvilShrink = registerer.registerIcon(Reference.MOD_ID + ":" + "Anvil Shrink");
-	}
-
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
 		return null;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, net.minecraft.client.particle.ParticleManager manager)
 	{
 		return true;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+	public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager)
 	{
-		return world.getBlock(x, y, z) == this;
+		return world.getBlockState(pos).getBlock() == this;
 	}
 }

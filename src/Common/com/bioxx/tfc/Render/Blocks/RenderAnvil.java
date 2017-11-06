@@ -10,7 +10,7 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.api.TFCBlocks;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.Blocks.Enums.AnvilMaterial;
 
 public class RenderAnvil implements ISimpleBlockRenderingHandler
 {
@@ -25,7 +25,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler
 			breaking = true;
 
 		TEAnvil te = (TEAnvil)blockAccess.getTileEntity(i, j, k);
-		if(te.anvilTier != AnvilReq.STONE.Tier)
+		if(te.anvilTier != AnvilMaterial.STONE.Tier)
 		{
 			if(direction == 0)//x
 			{

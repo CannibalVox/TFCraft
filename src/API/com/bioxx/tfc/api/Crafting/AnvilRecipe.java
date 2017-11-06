@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.Blocks.Enums.AnvilMaterial;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,13 +26,13 @@ public class AnvilRecipe
 	public List<String> skillsList = new ArrayList<String>();
 	public static int craftingBoundDefault = 50;
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilMaterial req, ItemStack result)
 	{
 		this(in, in2, p.toLowerCase(), 0, flux, req.Tier, result);
 		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilMaterial req, ItemStack result)
 	{
 		this(in, in2, p.toLowerCase(), 0, false, req.Tier, result);
 		this.craftingValue = 70 + new Random(TFC_Core.getSuperSeed(AnvilManager.world)+(in != null ? Item.getIdFromItem(in.getItem()) : 0) + (result != null ? Item.getIdFromItem(result.getItem()) : 0)).nextInt(craftingBoundDefault);
@@ -56,7 +57,7 @@ public class AnvilRecipe
 		skillsList.add(Global.SKILL_GENERAL_SMITHING);
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
+	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilMaterial req)
 	{
 		this(in, p, flux, req.Tier);
 	}
@@ -76,13 +77,13 @@ public class AnvilRecipe
 		this.plan = s;
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
+	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilMaterial req, ItemStack res)
 	{
 		this(in, p, req, res);
 		this.flux = flux;
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack p, AnvilReq req, ItemStack res)
+	public AnvilRecipe(ItemStack in, ItemStack p, AnvilMaterial req, ItemStack res)
 	{
 		input1 = in;
 		input2 = p;
@@ -123,7 +124,7 @@ public class AnvilRecipe
 		if(     areItemStacksEqual(input1, recipe.input1) && 
 				areItemStacksEqual(input2, recipe.input2) &&
 				plan.equals(recipe.plan) &&
-				AnvilReq.matches(anvilreq, recipe.anvilreq))
+				AnvilMaterial.matches(anvilreq, recipe.anvilreq))
 		{
 			return !this.flux || recipe.flux;
 		}
@@ -137,7 +138,7 @@ public class AnvilRecipe
 				areItemStacksEqual(input2, recipe.input2) &&
 				plan.equals(recipe.plan) &&
 				pr.rules[0].matches(rules, 0) && pr.rules[1].matches(rules, 1) && pr.rules[2].matches(rules, 2) && 
-				craftingValue == recipe.craftingValue && AnvilReq.matches(anvilreq, recipe.anvilreq))
+				craftingValue == recipe.craftingValue && AnvilMaterial.matches(anvilreq, recipe.anvilreq))
 			if(this.flux && recipe.flux)
 				return true;
 			else if (!this.flux)
@@ -148,7 +149,7 @@ public class AnvilRecipe
 	public boolean isComplete(AnvilRecipe recipe)
 	{
 		if(recipe.input1 == this.input1 && recipe.input2 == input2 && 
-				craftingValue == recipe.craftingValue && plan.equals(recipe.plan) && AnvilReq.matches(anvilreq, recipe.anvilreq))
+				craftingValue == recipe.craftingValue && plan.equals(recipe.plan) && AnvilMaterial.matches(anvilreq, recipe.anvilreq))
 			if(this.flux && recipe.flux)
 				return true;
 			else if (!this.flux)

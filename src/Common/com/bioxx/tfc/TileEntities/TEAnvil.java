@@ -35,7 +35,7 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.Blocks.Enums.AnvilMaterial;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
 
@@ -58,8 +58,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	//this is the fix the server receiving 3 packets whenever the player works an item.
 	private static final byte LAG_FIX_DELAY = 5;
 	public AnvilRecipe workRecipe;
-	//private AnvilRecipe workWeldRecipe;
-	public int anvilTier = AnvilReq.STONE.Tier; // Initialize to avoid NPE
 
 	public EntityPlayer lastWorker;
 
@@ -82,7 +80,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		itemCraftingValue = 0;
 		itemCraftingRules = new int[]{-1,-1,-1};
 		craftingValue = 0;
-		anvilTier = AnvilReq.STONE.Tier;
 		stonePair = new int[]{0,0};
 		craftingPlan = "";
 	}
@@ -581,7 +578,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public void closeInventory()
 	{
 		workRecipe = null;
-		if(!worldObj.isRemote && anvilItemStacks[HAMMER_SLOT] == null && this.anvilTier == AnvilReq.STONE.Tier)
+		if(!worldObj.isRemote && anvilItemStacks[HAMMER_SLOT] == null && this.anvilTier == AnvilMaterial.STONE.Tier)
 		{
 			ejectContents();
 			worldObj.setBlock(xCoord, yCoord, zCoord, Block.getBlockById(stonePair[0]), stonePair[1], 0x2);
