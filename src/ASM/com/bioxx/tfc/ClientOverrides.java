@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -21,6 +22,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import com.bioxx.tfc.Core.WeatherManager;
 import com.bioxx.tfc.api.Util.Helper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ClientOverrides 
@@ -36,6 +39,7 @@ public class ClientOverrides
 		int renderChunksTall = Helper.getInteger(renderG, "x","field_72763_n", "renderChunksTall", TFCASMLoadingPlugin.runtimeDeobf);
 		int renderChunksDeep = Helper.getInteger(renderG, "y","field_72764_o", "renderChunksDeep", TFCASMLoadingPlugin.runtimeDeobf);
 		int glRenderListBase = Helper.getInteger(renderG, "z","field_72778_p", "glRenderListBase", TFCASMLoadingPlugin.runtimeDeobf);
+
 		WorldRenderer[] worldRenderers = (WorldRenderer[])(Helper.getObject(renderG,"v", "field_72765_l", "worldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
 		WorldRenderer[] sortedWorldRenderers = (WorldRenderer[])(Helper.getObject(renderG, "u","field_72768_k", "sortedWorldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
 
@@ -75,7 +79,7 @@ public class ClientOverrides
 
 	public static void doRainClient(Random random, int rendererUpdateCount)
 	{
-		float f = Minecraft.getMinecraft().theWorld.getRainStrength(1.0F);
+		float f = Minecraft.getMinecraft().world.getRainStrength(1.0F);
 
 		if (!Minecraft.getMinecraft().gameSettings.fancyGraphics)
 		{
@@ -85,11 +89,11 @@ public class ClientOverrides
 		if (f != 0.0F)
 		{
 			random.setSeed(rendererUpdateCount * 312987231L);
-			EntityLivingBase entitylivingbase = Minecraft.getMinecraft().renderViewEntity;
-			WorldClient worldclient = Minecraft.getMinecraft().theWorld;
-			int i = MathHelper.floor_double(entitylivingbase.posX);
-			int j = MathHelper.floor_double(entitylivingbase.posY);
-			int k = MathHelper.floor_double(entitylivingbase.posZ);
+			EntityLivingBase entitylivingbase = Minecraft.getMinecraft().getRenderViewEntity();
+			WorldClient worldclient = Minecraft.getMinecraft().world;
+			int i = MathHelper.floor(entitylivingbase.posX);
+			int j = MathHelper.floor(entitylivingbase.posY);
+			int k = MathHelper.floor(entitylivingbase.posZ);
 			byte b0 = 10;
 			double d0 = 0.0D;
 			double d1 = 0.0D;
@@ -111,8 +115,8 @@ public class ClientOverrides
 				int x = i + random.nextInt(b0) - random.nextInt(b0);
 				int z = k + random.nextInt(b0) - random.nextInt(b0);
 				int y = worldclient.getPrecipitationHeight(x, z);
-				Block b = worldclient.getBlock(x, y - 1, z);
-				if(!WeatherManager.canSnow(Minecraft.getMinecraft().theWorld, x, y, z))
+				Block b = worldclient.getBlockState(x, y - 1, z);
+				if(!WeatherManager.canSnow(Minecraft.getMinecraft().world, x, y, z))
 				{
 					if (y <= j + b0 && y >= j - b0)
 					{
@@ -147,13 +151,13 @@ public class ClientOverrides
 			{
 				rainSoundCounter = 0;
 
-				if (d1 > entitylivingbase.posY + 1.0D && worldclient.getPrecipitationHeight(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posZ)) > MathHelper.floor_double(entitylivingbase.posY))
+				if (d1 > entitylivingbase.posY + 1.0D && worldclient.getPrecipitationHeight(MathHelper.floor(entitylivingbase.posX), MathHelper.floor(entitylivingbase.posZ)) > MathHelper.floor(entitylivingbase.posY))
 				{
-					Minecraft.getMinecraft().theWorld.playSound(d0, d1, d2, "ambient.weather.rain", 0.1F, 0.5F, false);
+					Minecraft.getMinecraft().world.playSound(d0, d1, d2, "ambient.weather.rain", 0.1F, 0.5F, false);
 				}
 				else
 				{
-					Minecraft.getMinecraft().theWorld.playSound(d0, d1, d2, "ambient.weather.rain", 0.2F, 1.0F, false);
+					Minecraft.getMinecraft().world.playSound(d0, d1, d2, "ambient.weather.rain", 0.2F, 1.0F, false);
 				}
 			}
 		}

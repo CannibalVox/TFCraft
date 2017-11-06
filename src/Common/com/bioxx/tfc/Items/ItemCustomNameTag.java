@@ -46,13 +46,13 @@ public class ItemCustomNameTag extends ItemTerra
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 
-		if(stack.stackTagCompound == null)
+		if(!stack.hasTagCompound())
 		{
-			stack.stackTagCompound = new NBTTagCompound();
+			stack.setTagCompound(new NBTTagCompound());
 		}
-		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("ItemName"))
+		if(stack.hasTagCompound() && !stack.getTagCompound().hasKey("ItemName"))
 		{
-			player.openGui(TerraFirmaCraft.instance, 48, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(TerraFirmaCraft.instance, 48, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 
 		return stack;
@@ -73,8 +73,8 @@ public class ItemCustomNameTag extends ItemTerra
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
 	{
-		if(is.hasTagCompound() && is.stackTagCompound.hasKey("ItemName"))
-			return is.stackTagCompound.getString("ItemName");
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("ItemName"))
+			return is.getTagCompound().getString("ItemName");
 		else return TFC_Core.translate("gui.Nametag");
 	}
 }
