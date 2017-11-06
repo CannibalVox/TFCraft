@@ -1,0 +1,49 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "terrafirmacraft:blocks/plants/Snowberry",
+      "particle": "terrafirmacraft:blocks/plants/Snowberry"
+    },
+    "custom": {
+      "minx": "1.6",
+      "minz": "1.6",
+      "maxx": "12.8",
+      "maxz": "12.8",
+      "maxy": "3.2"
+    },
+    "model": "terrafirmacraft:minecraft_cube_all",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "berry": {
+      "true": {
+        "textures": {
+          "all": "terrafirmacraft:blocks/plants/Snowberry Berry"
+        }
+      },
+      "false": {}
+    },
+    "east": {
+      "custom": {
+        "maxx": "16"
+      }
+    },
+    "west": {
+      "custom": {
+        "minx": "0"
+      }
+    },
+    "north": {
+      "custom": {
+        "minz": "0"
+      }
+    },
+    "south": {
+      "custom": {
+        "maxz": "16"
+      }
+    },
+    "up": { }
+  }
+}

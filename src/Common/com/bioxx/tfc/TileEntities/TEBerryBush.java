@@ -28,12 +28,13 @@ public class TEBerryBush extends NetworkTileEntity
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
-		nbt.setInteger("dayHarvested", dayHarvested);
-		nbt.setInteger("dayFruited", dayFruited);
-		nbt.setBoolean("hasFruit", hasFruit);
+		NBTTagCompound tag = super.writeToNBT(nbt);
+		tag.setInteger("dayHarvested", dayHarvested);
+		tag.setInteger("dayFruited", dayFruited);
+		tag.setBoolean("hasFruit", hasFruit);
+		return tag;
 	}
 
 	@Override
