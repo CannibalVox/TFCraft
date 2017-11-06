@@ -19,7 +19,7 @@ import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.AnvilRecipe;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.Blocks.Enums.AnvilMaterial;
 
 public class GuiPlanSelection extends GuiContainerTFC
 {
@@ -98,7 +98,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 		ArrayList planList = new ArrayList();
 		for (Object p : plans)
 		{
-			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, AnvilReq.getReqFromInt(anvilTE.anvilTier), null));
+			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilTE.anvilItemStacks[TEAnvil.INPUT1_SLOT], anvilTE.anvilItemStacks[TEAnvil.INPUT2_SLOT], (String) p, AnvilMaterial.getReqFromInt(anvilTE.anvilTier), null));
 
 			ar = handleMatchingRecipe(ar);
 			if (ar != null)

@@ -1,0 +1,82 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "terrafirmacraft:blocks/devices/Anvil_1_Top",
+      "side": "terrafirmacraft:blocks/devices/Anvil_1_Side"
+    },
+    "model": "terrafirmacraft:blocks/devices/anvil",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "anvilreq": {
+      "Stone": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/rocks/Gabbro Raw"
+        },
+        "model": "terrafirmacraft:blocks/devices/stone_anvil"
+      },
+      "Copper": {},
+      "Bronze": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_2_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_2_Side"
+        }
+      },
+      "Wrought Iron": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_3_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_3_Side"
+        }
+      },
+      "Steel": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_4_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_4_Side"
+        }
+      },
+      "Black Steel": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_5_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_5_Side"
+        }
+      },
+      "Red Steel": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_6_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_6_Side"
+        }
+      },
+      "Blue Steel": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_7_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_7_Side"
+        }
+      },
+      "Bismuth Bronze": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_8_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_8_Side"
+        }
+      },
+      "Black Bronze": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_9_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_9_Side"
+        }
+      },
+      "Rose Gold": {
+        "textures": {
+          "top": "terrafirmacraft:blocks/devices/Anvil_10_Top",
+          "side": "terrafirmacraft:blocks/devices/Anvil_10_Side"
+        }
+      }
+    },
+    "facing": {
+      "east": {},
+      "north": {
+        "y": -90
+      }
+    }
+  }
+}
