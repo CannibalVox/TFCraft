@@ -11,10 +11,13 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -35,6 +38,8 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInnateArmor
 {
@@ -47,17 +52,14 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(TFC_MobData.ZOMBIE_DAMAGE);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.ZOMBIE_HEALTH);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(TFC_MobData.ZOMBIE_DAMAGE);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(TFC_MobData.ZOMBIE_HEALTH);//MaxHealth
 	}
 
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		int x = MathHelper.floor_double(this.posX);
-		int y = MathHelper.floor_double(this.boundingBox.minY);
-		int z = MathHelper.floor_double(this.posZ);
-		Block b = this.worldObj.getBlock(x, y, z);
+		Block b = this.world.getBlockState(getPosition()).getBlock();
 
 		if(b == TFCBlocks.leaves || b == TFCBlocks.leaves2 || b == TFCBlocks.thatch)
 			return false;
@@ -110,39 +112,25 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		}
 	}
 
+	/**
+	 * Gives armor or weapon for entity based on given DifficultyInstance
+	 */
 	@Override
-	protected void addRandomArmor()
+	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	{
-		this.setCurrentItemOrArmor(0, null);
-		this.setCurrentItemOrArmor(1, null);
-		this.setCurrentItemOrArmor(2, null);
-		this.setCurrentItemOrArmor(3, null);
-		this.setCurrentItemOrArmor(4, null);
-
-		if (this.rand.nextFloat() < (this.worldObj.difficultySetting == EnumDifficulty.HARD ? 0.05F : 0.01F))
+		if (this.rand.nextFloat() < (this.world.getDifficulty() == EnumDifficulty.HARD ? 0.05F : 0.01F))
 		{
 			int var1 = this.rand.nextInt(3);
 			if (var1 == 0)
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.bronzePick));
+				this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFCItems.bronzePick));
 			else
-				this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.bronzeShovel));
+				this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFCItems.bronzeShovel));
 		}
 	}
 
 	@Override
-	protected void enchantEquipment()
+	protected void setEnchantmentBasedOnDifficulty(DifficultyInstance difficulty)
 	{
-	}
-
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void handleHealthUpdate(byte par1)
-	{
-		if (par1 == 16)
-			this.worldObj.playSoundEffect(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, "mob.zombie.remedy", 1.0F + this.rand.nextFloat(), this.rand.nextFloat() * 0.7F + 0.3F);
-		else
-			super.handleHealthUpdate(par1);
 	}
 
 	@Override
@@ -159,7 +147,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 		{
 			return false;
 		}
-		else if (this.worldObj.isRemote)
+		else if (this.world.isRemote)
 		{
 			return false;
 		}
