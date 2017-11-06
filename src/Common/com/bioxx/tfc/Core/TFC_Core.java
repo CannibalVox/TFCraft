@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.Entity;
@@ -386,8 +387,9 @@ public class TFC_Core
 				|| block == TFCBlocks.tilledSoil2;
 	}
 
-	public static boolean isGrass(Block block)
+	public static boolean isGrass(IBlockState state)
 	{
+		Block block = state.getBlock();
 		return block == TFCBlocks.grass
 				|| block == TFCBlocks.grass2
 				|| block == TFCBlocks.clayGrass
