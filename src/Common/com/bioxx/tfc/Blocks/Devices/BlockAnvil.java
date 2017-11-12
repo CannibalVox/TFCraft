@@ -47,21 +47,22 @@ public class BlockAnvil extends BlockTerraContainer
 
 	public static final int ANVILS_PER_BLOCK=8;
 
+	private IProperty<AnvilMaterial> anvilProperty;
+
 	public BlockAnvil(int offset)
 	{
 		super(Material.IRON);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.offset = offset;
 		this.setDefaultState(getBlockState().getBaseState()
-                .withProperty((IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ), SpanningBlockHelper.spanFirst(AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK))
+                .withProperty(anvilProperty, SpanningBlockHelper.spanFirst(AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK))
                 .withProperty(PROP_FACING, EnumFacing.EAST));
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this,
-                SpanningBlockHelper.spanEnum(PROP_ANVIL_REQ, AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK),
-                PROP_FACING);
+        anvilProperty = SpanningBlockHelper.spanEnum(PROP_ANVIL_REQ, AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK);
+		return new BlockStateContainer(this, anvilProperty, PROP_FACING);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -77,8 +78,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
     public int damageDropped(IBlockState state)
 	{
-	    IProperty<AnvilMaterial> prop = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-		return state.getValue(prop).ordinal();
+		return state.getValue(anvilProperty).ordinal();
 	}
 
 	@Override
@@ -103,8 +103,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
-        IProperty<AnvilMaterial> anvilreqProp = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-        AnvilMaterial anvilMaterial = blockState.getValue(anvilreqProp);
+        AnvilMaterial anvilMaterial = blockState.getValue(anvilProperty);
 
         if (anvilMaterial == AnvilMaterial.STONE)
             return Block.FULL_BLOCK_AABB;
@@ -113,9 +112,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 	@Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { ;
-        IProperty<AnvilMaterial> anvilreqProp = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-
-        AnvilMaterial anvilMaterial = state.getValue(anvilreqProp);
+        AnvilMaterial anvilMaterial = state.getValue(anvilProperty);
         EnumFacing facing = state.getValue(PROP_FACING);
 
         if (anvilMaterial != AnvilMaterial.STONE)
@@ -143,8 +140,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
-        IProperty<AnvilMaterial> prop = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-        if (state.getValue(prop) == AnvilMaterial.STONE)
+        if (state.getValue(anvilProperty) == AnvilMaterial.STONE)
             return;
 
 		super.harvestBlock(worldIn, player, pos, state, te, stack);
@@ -153,8 +149,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 	{
-        IProperty<AnvilMaterial> prop = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-        if (state.getValue(prop) == AnvilMaterial.STONE)
+        if (state.getValue(anvilProperty) == AnvilMaterial.STONE)
             return;
 
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
@@ -171,15 +166,12 @@ public class BlockAnvil extends BlockTerraContainer
 	    AnvilMaterial req = SpanningBlockHelper.spanFromMeta(AnvilMaterial.class, meta & 7, this.offset, 8);
 	    EnumFacing face = (meta & 8) == 0?EnumFacing.EAST:EnumFacing.NORTH;
 
-	    IProperty<AnvilMaterial> anvilreq = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-	    return getBlockState().getBaseState().withProperty(anvilreq, req).withProperty(PROP_FACING, face);
+	    return getBlockState().getBaseState().withProperty(anvilProperty, req).withProperty(PROP_FACING, face);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        IProperty<AnvilMaterial> anvilreq = (IProperty<AnvilMaterial>)getBlockState().getProperty(PROP_ANVIL_REQ);
-
-        AnvilMaterial req = state.getValue(anvilreq);
+        AnvilMaterial req = state.getValue(anvilProperty);
         EnumFacing face = state.getValue(PROP_FACING);
 
         int meta = (face == EnumFacing.NORTH)?8:0;
