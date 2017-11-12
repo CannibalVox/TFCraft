@@ -6,7 +6,6 @@ public class TEBerryBush extends NetworkTileEntity
 {
 	public int dayHarvested = -1000;
 	public int dayFruited = -1000;
-	public boolean hasFruit;
 
 	public TEBerryBush()
 	{
@@ -24,7 +23,6 @@ public class TEBerryBush extends NetworkTileEntity
 		super.readFromNBT(nbt);
 		dayHarvested = nbt.getInteger("dayHarvested");
 		dayFruited = nbt.getInteger("dayFruited");
-		hasFruit = nbt.getBoolean("hasFruit");
 	}
 
 	@Override
@@ -33,13 +31,11 @@ public class TEBerryBush extends NetworkTileEntity
 		NBTTagCompound tag = super.writeToNBT(nbt);
 		tag.setInteger("dayHarvested", dayHarvested);
 		tag.setInteger("dayFruited", dayFruited);
-		tag.setBoolean("hasFruit", hasFruit);
 		return tag;
 	}
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		this.hasFruit = nbt.getBoolean("hasFruit");
 	}
 
 	@Override
@@ -56,6 +52,5 @@ public class TEBerryBush extends NetworkTileEntity
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
-		nbt.setBoolean("hasFruit", hasFruit);
 	}
 }
