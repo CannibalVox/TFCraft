@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
@@ -148,7 +150,7 @@ public class ItemTerra extends Item implements ISize
 	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
 	 * return true if you want the item to be handled differently than the standard code. True will stop he standard TFC code from running.
 	 */
-	public boolean onUpdate(ItemStack is, World world, int x, int y, int z)
+	public boolean onUpdate(ItemStack is, World world, BlockPos pos)
 	{
 		return false;
 	}
@@ -162,9 +164,9 @@ public class ItemTerra extends Item implements ISize
 		{
 			if(((IEquipable)object.getItem()).getEquipType(object) == IEquipable.EquipType.BACK)
 			{
-				arraylist.add(EnumChatFormatting.LIGHT_PURPLE.toString()+TFC_Core.translate("gui.slot")+ 
-						EnumChatFormatting.GRAY.toString()+": " + 
-						EnumChatFormatting.WHITE.toString() + TFC_Core.translate("gui.slot.back"));
+				arraylist.add(ChatFormatting.LIGHT_PURPLE.toString()+TFC_Core.translate("gui.slot")+
+						ChatFormatting.GRAY.toString()+": " +
+						ChatFormatting.WHITE.toString() + TFC_Core.translate("gui.slot.back"));
 			}
 		}
 	}

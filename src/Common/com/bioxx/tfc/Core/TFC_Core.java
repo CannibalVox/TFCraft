@@ -1,11 +1,13 @@
 package com.bioxx.tfc.Core;
 
 import java.nio.ByteBuffer;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockStainedGlass;
@@ -26,19 +28,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.WorldInfo;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -68,13 +69,13 @@ public class TFC_Core
 
 	public static ChunkDataManager getCDM(World world)
 	{
-		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
+		int key = world.isRemote ? 128 | world.provider.getDimension() : world.provider.getDimension();
 		return cdmMap.get(key);
 	}
 
 	public static ChunkDataManager addCDM(World world)
 	{
-		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
+		int key = world.isRemote ? 128 | world.provider.getDimension() : world.provider.getDimension();
 		if(!cdmMap.containsKey(key))
 			return cdmMap.put(key, new ChunkDataManager(world));
 		else return cdmMap.get(key);
@@ -82,15 +83,14 @@ public class TFC_Core
 
 	public static ChunkDataManager removeCDM(World world)
 	{
-		int key = world.isRemote ? 128 | world.provider.dimensionId : world.provider.dimensionId;
+		int key = world.isRemote ? 128 | world.provider.getDimension() : world.provider.getDimension();
 		return cdmMap.remove(key);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static int getMouseX()
 	{
-		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth,
-				Minecraft.getMinecraft().displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
 		int i = scaledresolution.getScaledWidth();
 		int k = Mouse.getX() * i / Minecraft.getMinecraft().displayWidth;
 
@@ -100,17 +100,16 @@ public class TFC_Core
 	@SideOnly(Side.CLIENT)
 	public static int getMouseY()
 	{
-		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth,
-				Minecraft.getMinecraft().displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
 		int j = scaledresolution.getScaledHeight();
 		int l = j - Mouse.getY() * j / Minecraft.getMinecraft().displayHeight - 1;
 
 		return l;
 	}
 
-	public static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
+	public static Boolean isBlockAboveSolid(IBlockAccess blockAccess, BlockPos pos)
 	{
-		if(TerraFirmaCraft.proxy.getCurrentWorld().getBlock(i, j + 1, k).isOpaqueCube())
+		if(TerraFirmaCraft.proxy.getCurrentWorld().getBlockState(pos.up()).isOpaqueCube())
 			return true;
 		return false;
 	}
@@ -226,7 +225,7 @@ public class TFC_Core
 		return is;
 	}
 
-	public static void surroundWithLeaves(World world, int i, int j, int k, int meta, Random r)
+	public static void surroundWithLeaves(World world, BlockPos pos, IBlockState state)
 	{
 		for (int y = 2; y >= -2; y--)
 		{
@@ -234,8 +233,9 @@ public class TFC_Core
 			{
 				for (int z = 2; z >= -2; z--)
 				{
-					if(world.isAirBlock(i + x, j + y, k + z))
-						world.setBlock(i + x, j + y, k + z, TFCBlocks.leaves, meta, 2);
+				    BlockPos offsetPos = pos.east(x).south(z).up(y);
+					if(world.isAirBlock(offsetPos))
+						world.setBlockState(pos, state);
 				}
 			}
 		}
@@ -265,70 +265,78 @@ public class TFC_Core
 		}
 	}
 
-	public static boolean isRawStone(World world, int x, int y, int z)
+	public static boolean isRawStone(World world, BlockPos pos)
 	{
-		Block block = world.getBlock(x, y, z);
+		IBlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgEx
 				|| block == TFCBlocks.stoneIgIn
 				|| block == TFCBlocks.stoneSed
 				|| block == TFCBlocks.stoneMM;
 	}
 
-	public static boolean isSmoothStone(World world, int x, int y, int z)
+	public static boolean isSmoothStone(World world, BlockPos pos)
 	{
-		Block block = world.getBlock(x, y, z);
+	    IBlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgExSmooth
 				|| block == TFCBlocks.stoneIgInSmooth
 				|| block == TFCBlocks.stoneSedSmooth
 				|| block == TFCBlocks.stoneMMSmooth;
 	}
 
-	public static boolean isSmoothStone(Block block)
+	public static boolean isSmoothStone(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgExSmooth
 				|| block == TFCBlocks.stoneIgInSmooth
 				|| block == TFCBlocks.stoneSedSmooth
 				|| block == TFCBlocks.stoneMMSmooth;
 	}
 
-	public static boolean isBrickStone(Block block)
+	public static boolean isBrickStone(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgExBrick
 				|| block == TFCBlocks.stoneIgInBrick
 				|| block == TFCBlocks.stoneSedBrick
 				|| block == TFCBlocks.stoneMMBrick;
 	}
 
-	public static boolean isRawStone(Block block)
+	public static boolean isRawStone(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgEx
 				|| block == TFCBlocks.stoneIgIn
 				|| block == TFCBlocks.stoneSed
 				|| block == TFCBlocks.stoneMM;
 	}
 
-	public static boolean isOreStone(Block block)
+	public static boolean isOreStone(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.ore
 				|| block == TFCBlocks.ore2
 				|| block == TFCBlocks.ore3;
 	}
 
-	public static boolean isNaturalStone(Block block)
+	public static boolean isNaturalStone(IBlockState state)
 	{
-		return isRawStone( block ) || isOreStone( block );
+		return isRawStone( state ) || isOreStone( state );
 	}
 
-	public static boolean isCobbleStone(Block block)
+	public static boolean isCobbleStone(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgExCobble
 				|| block == TFCBlocks.stoneIgInCobble
 				|| block == TFCBlocks.stoneSedCobble
 				|| block == TFCBlocks.stoneMMCobble;
 	}
 
-	public static boolean isStoneIgEx(Block block)
+	public static boolean isStoneIgEx(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgEx
 				|| block == TFCBlocks.stoneIgExCobble
 				|| block == TFCBlocks.stoneIgExSmooth
@@ -339,8 +347,9 @@ public class TFC_Core
 				|| block == TFCBlocks.wallSmoothIgEx;
 	}
 
-	public static boolean isStoneIgIn(Block block)
+	public static boolean isStoneIgIn(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneIgIn
 				|| block == TFCBlocks.stoneIgInCobble
 				|| block == TFCBlocks.stoneIgInSmooth
@@ -351,8 +360,9 @@ public class TFC_Core
 				|| block == TFCBlocks.wallSmoothIgIn;
 	}
 
-	public static boolean isStoneSed(Block block)
+	public static boolean isStoneSed(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneSed
 				|| block == TFCBlocks.stoneSedCobble
 				|| block == TFCBlocks.stoneSedSmooth
@@ -363,8 +373,9 @@ public class TFC_Core
 				|| block == TFCBlocks.wallSmoothSed;
 	}
 
-	public static boolean isStoneMM(Block block)
+	public static boolean isStoneMM(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.stoneMM
 				|| block == TFCBlocks.stoneMMCobble
 				|| block == TFCBlocks.stoneMMSmooth
@@ -375,14 +386,16 @@ public class TFC_Core
 				|| block == TFCBlocks.wallSmoothMM;
 	}
 
-	public static boolean isDirt(Block block)
+	public static boolean isDirt(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.dirt
 				|| block == TFCBlocks.dirt2;
 	}
 
-	public static boolean isFarmland(Block block)
+	public static boolean isFarmland(IBlockState state)
 	{
+		Block block = state.getBlock();
 		return block == TFCBlocks.tilledSoil
 				|| block == TFCBlocks.tilledSoil2;
 	}
@@ -399,15 +412,17 @@ public class TFC_Core
 				|| block == TFCBlocks.dryGrass2;
 	}
 
-	public static boolean isGrassNormal(Block block)
+	public static boolean isGrassNormal(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.grass
 				|| block == TFCBlocks.grass2;
 	}
 
 
-	public static boolean isLushGrass(Block block)
+	public static boolean isLushGrass(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.grass
 				|| block == TFCBlocks.grass2
 				|| block == TFCBlocks.clayGrass
@@ -415,55 +430,64 @@ public class TFC_Core
 				|| block == TFCBlocks.peatGrass;
 	}
 
-	public static boolean isClayGrass(Block block)
+	public static boolean isClayGrass(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.clayGrass
 				|| block == TFCBlocks.clayGrass2;
 	}
 
-	public static boolean isPeatGrass(Block block)
+	public static boolean isPeatGrass(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.peatGrass;
 	}
 
-	public static boolean isDryGrass(Block block)
+	public static boolean isDryGrass(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.dryGrass
 				|| block == TFCBlocks.dryGrass2;
 	}
 
-	public static boolean isGrassType1(Block block)
+	public static boolean isGrassType1(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.grass
 				|| block == TFCBlocks.clayGrass
 				|| block == TFCBlocks.dryGrass;
 	}
 
-	public static boolean isGrassType2(Block block)
+	public static boolean isGrassType2(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.grass2
 				|| block == TFCBlocks.clayGrass2
 				|| block == TFCBlocks.dryGrass2;
 	}
 
-	public static boolean isClay(Block block)
+	public static boolean isClay(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.clay || block == TFCBlocks.clay2;
 	}
 
-	public static boolean isSand(Block block)
+	public static boolean isSand(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.sand
 				|| block == TFCBlocks.sand2;
 	}
 
-	public static boolean isPeat(Block block)
+	public static boolean isPeat(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.peat;
 	}
 
-	public static boolean isHotWater(Block block)
+	public static boolean isHotWater(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.hotWater || block == TFCBlocks.hotWaterStationary;
 	}
 
@@ -473,8 +497,9 @@ public class TFC_Core
 				|| isFreshWater(block);
 	}
 
-	public static boolean isWaterFlowing(Block block)
+	public static boolean isWaterFlowing(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.saltWater || block == TFCBlocks.freshWater;
 	}
 
@@ -525,26 +550,28 @@ public class TFC_Core
 				|| isGravel(block);
 	}
 
-	public static boolean isGravel(Block block)
+	public static boolean isGravel(IBlockState state)
 	{
+        Block block = state.getBlock();
 		return block == TFCBlocks.gravel || block == TFCBlocks.gravel2;
 	}
 
-	public static boolean isGround(Block block)
+	public static boolean isGround(IBlockState state)
 	{
-		return 	   isSoilOrGravel(block)
-				|| isRawStone(block)
-				|| isSand(block);
+		return 	   isSoilOrGravel(state)
+				|| isRawStone(state)
+				|| isSand(state);
 	}
 
-	public static boolean isGroundType1(Block block)
+	public static boolean isGroundType1(IBlockState state)
 	{
-		return isGrassType1(block) || block == TFCBlocks.dirt || block == TFCBlocks.gravel || block == TFCBlocks.sand;
+        Block block = state.getBlock();
+		return isGrassType1(state) || block == TFCBlocks.dirt || block == TFCBlocks.gravel || block == TFCBlocks.sand;
 	}
 
-	public static boolean isSoilWAILA(Block block)
+	public static boolean isSoilWAILA(IBlockState state)
 	{
-		return isDirt(block) || isGravel(block) || isSand(block) || isGrassNormal(block) || isDryGrass(block);
+		return isDirt(state) || isGravel(state) || isSand(state) || isGrassNormal(state) || isDryGrass(state);
 	}
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)
@@ -644,9 +671,9 @@ public class TFC_Core
 		return TFCBlocks.clayGrass2;
 	}
 
-	public static Block getTypeForClayGrass(Block block)
+	public static Block getTypeForClayGrass(IBlockState state)
 	{
-		if (TFC_Core.isGroundType1(block))
+		if (TFC_Core.isGroundType1(state))
 			return TFCBlocks.clayGrass;
 		return TFCBlocks.clayGrass2;
 	}
@@ -658,28 +685,29 @@ public class TFC_Core
 		return TFCBlocks.dirt2;
 	}
 
-	public static Block getTypeForDirtFromGrass(Block block)
+	public static Block getTypeForDirtFromGrass(IBlockState state)
 	{
-		if(TFC_Core.isDirt(block))
-			return block;
+        Block block = state.getBlock();
+		if(TFC_Core.isDirt(state))
+			return state.getBlock();
 		if (block == TFCBlocks.grass || block == TFCBlocks.dryGrass)
 			return TFCBlocks.dirt;
 		return TFCBlocks.dirt2;
 	}
 
-	public static Block getTypeForSoil(Block block)
+	public static Block getTypeForSoil(IBlockState state)
 	{
-		if (TFC_Core.isGrass(block))
+		if (TFC_Core.isGrass(state))
 		{
-			if (TFC_Core.isGrassType1(block))
+			if (TFC_Core.isGrassType1(state))
 				return TFCBlocks.dirt;
-			else if (TFC_Core.isGrassType2(block))
+			else if (TFC_Core.isGrassType2(state))
 				return TFCBlocks.dirt2;
-			else if (TFC_Core.isPeatGrass(block))
+			else if (TFC_Core.isPeatGrass(state))
 				return TFCBlocks.peat;
 		}
 
-		return block;
+		return state.getBlock();
 	}
 
 	public static Block getTypeForClay(int inMeta)
@@ -689,9 +717,9 @@ public class TFC_Core
 		return TFCBlocks.clay2;
 	}
 
-	public static Block getTypeForClay(Block block)
+	public static Block getTypeForClay(IBlockState state)
 	{
-		if (TFC_Core.isGroundType1(block))
+		if (TFC_Core.isGroundType1(state))
 			return TFCBlocks.clay;
 		return TFCBlocks.clay2;
 	}
@@ -710,18 +738,18 @@ public class TFC_Core
 		return TFCBlocks.gravel2;
 	}
 
-	public static int getRockLayerFromHeight(World world, int x, int y, int z)
+	public static int getRockLayerFromHeight(World world, BlockPos pos)
 	{
-		ChunkData cd = TFC_Core.getCDM(world).getData(x >> 4, z >> 4);
+		ChunkData cd = TFC_Core.getCDM(world).getData(pos.getX() >> 4, pos.getZ() >> 4);
 		if (cd != null)
 		{
 			int[] hm = cd.heightmap;
-			int localX = x & 15;
-			int localZ = z & 15;
+			int localX = pos.getX() & 15;
+			int localZ = pos.getZ() & 15;
 			int localY = localX + localZ * 16;
-			if (y <= TFCOptions.rockLayer3Height + hm[localY])
+			if (pos.getY() <= TFCOptions.rockLayer3Height + hm[localY])
 				return 2;
-			else if (y <= TFCOptions.rockLayer2Height + hm[localY])
+			else if (pos.getY() <= TFCOptions.rockLayer2Height + hm[localY])
 				return 1;
 			else
 				return 0;
@@ -729,20 +757,19 @@ public class TFC_Core
 		return 0;
 	}
 
-	public static boolean convertGrassToDirt(World world, int i, int j, int k)
+	public static boolean convertGrassToDirt(World world, BlockPos pos)
 	{
-		Block block = world.getBlock(i, j, k);
-		int meta = world.getBlockMetadata(i, j, k);
+		IBlockState block = world.getBlockState(pos);
 		if(TFC_Core.isGrass(block))
 		{
 			if(TFC_Core.isGrassType1(block))
 			{
-				world.setBlock(i, j, k, TFCBlocks.dirt, meta, 2);
+				world.setBlockState(pos, TFCBlocks.dirt, meta, 2);
 				return true;
 			}
 			else if(TFC_Core.isGrassType2(block))
 			{
-				world.setBlock(i, j, k, TFCBlocks.dirt2, meta, 2);
+				world.setBlockState(pos, TFCBlocks.dirt2, meta, 2);
 				return true;
 			}
 		}
@@ -840,101 +867,101 @@ public class TFC_Core
 		skills.writeNBT(player.getEntityData());
 	}
 
-	public static boolean isTopFaceSolid(World world, int x, int y, int z)
+	public static boolean isTopFaceSolid(World world, BlockPos pos)
 	{
-		if(world.getBlock(x, y, z).isNormalCube())
+		if(world.getBlockState(pos).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
+		else if(world.getBlockState(pos).getBlock() == TFCBlocks.metalSheet)
 		{
-			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(pos);
 			if(te.topExists())
 				return true;
 		}
-		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.UP);
+		return world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.UP);
 	}
 
-	public static boolean isBottomFaceSolid(World world, int x, int y, int z)
+	public static boolean isBottomFaceSolid(World world, BlockPos pos)
 	{
-		if(world.getBlock(x, y, z).isNormalCube())
+		if(world.getBlockState(pos).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
+		else if(world.getBlockState(pos) == TFCBlocks.metalSheet)
 		{
-			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(pos);
 			if(te.bottomExists())
 				return true;
 		}
-		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN);
+		return world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.DOWN);
 	}
 
-	public static boolean isNorthFaceSolid(World world, int x, int y, int z)
+	public static boolean isNorthFaceSolid(World world, BlockPos pos)
 	{
-		Block bid = world.getBlock(x, y, z);
+		IBlockState bid = world.getBlockState(pos);
 		if(bid.isNormalCube())
 			return true;
 		else if(bid == TFCBlocks.metalSheet)
 		{
-			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(pos);
 			if(te.northExists())
 				return true;
 		}
-		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.NORTH);
+		return world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.NORTH);
 	}
 
-	public static boolean isSouthFaceSolid(World world, int x, int y, int z)
+	public static boolean isSouthFaceSolid(World world, BlockPos pos)
 	{
-		if(world.getBlock(x, y, z).isNormalCube())
+		if(world.getBlockState(pos).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
+		else if(world.getBlockState(pos) == TFCBlocks.metalSheet)
 		{
-			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(pos);
 			if(te.southExists())
 				return true;
 		}
-		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.SOUTH);
+		return world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.SOUTH);
 	}
 
-	public static boolean isEastFaceSolid(World world, int x, int y, int z)
+	public static boolean isEastFaceSolid(World world, BlockPos pos)
 	{
-		if(world.getBlock(x, y, z).isNormalCube())
+		if(world.getBlockState(pos).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
+		else if(world.getBlockState(pos) == TFCBlocks.metalSheet)
 		{
-			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(pos);
 			if(te.eastExists())
 				return true;
 		}
-		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST);
+		return world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.EAST);
 	}
 
-	public static boolean isWestFaceSolid(World world, int x, int y, int z)
+	public static boolean isWestFaceSolid(World world, BlockPos pos)
 	{
-		if(world.getBlock(x, y, z).isNormalCube())
+		if(world.getBlockState(pos).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z) == TFCBlocks.metalSheet)
+		else if(world.getBlockState(pos) == TFCBlocks.metalSheet)
 		{
-			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(pos);
 			if(te.westExists())
 				return true;
 		}
-		return world.getBlock(x, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST);
+		return world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.WEST);
 	}
 
-	public static boolean isSurroundedSolid(World world, int x, int y, int z)
+	public static boolean isSurroundedSolid(World world, BlockPos pos)
 	{
-		return TFC_Core.isNorthFaceSolid(world, x, y, z + 1) &&
-				TFC_Core.isSouthFaceSolid(world, x, y, z - 1) &&
-				TFC_Core.isEastFaceSolid(world, x - 1, y, z) &&
-				TFC_Core.isWestFaceSolid(world, x + 1, y, z) &&
-				TFC_Core.isTopFaceSolid(world, x, y - 1, z);
+		return TFC_Core.isNorthFaceSolid(world, pos.south()) &&
+				TFC_Core.isSouthFaceSolid(world, pos.north()) &&
+				TFC_Core.isEastFaceSolid(world, pos.west()) &&
+				TFC_Core.isWestFaceSolid(world, pos.east()) &&
+				TFC_Core.isTopFaceSolid(world, pos.down());
 	}
 
-	public static boolean isSurroundedStone(World world, int x, int y, int z)
+	public static boolean isSurroundedStone(World world, BlockPos pos)
 	{
-		return world.getBlock(x, y, z + 1).getMaterial() == Material.ROCK &&
-				world.getBlock(x, y, z - 1).getMaterial() == Material.ROCK &&
-				world.getBlock(x - 1, y, z).getMaterial() == Material.ROCK &&
-				world.getBlock(x + 1, y, z).getMaterial() == Material.ROCK &&
-				world.getBlock(x, y - 1, z).getMaterial() == Material.ROCK;
+		return world.getBlockState(pos.south()).getMaterial() == Material.ROCK &&
+				world.getBlockState(pos.north()).getMaterial() == Material.ROCK &&
+				world.getBlockState(pos.west()).getMaterial() == Material.ROCK &&
+				world.getBlockState(pos.east()).getMaterial() == Material.ROCK &&
+				world.getBlockState(pos.down()).getMaterial() == Material.ROCK;
 	}
 
 	public static boolean isOreIron(ItemStack is)
@@ -944,7 +971,7 @@ public class TFC_Core
 
 	public static float getEntityMaxHealth(EntityLivingBase entity)
 	{
-		return (float) entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+		return (float) entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getAttributeValue();
 	}
 
 	public static float getPercentGrown(IAnimal animal)
@@ -991,25 +1018,25 @@ public class TFC_Core
 	 * This is the default item ticking method for use by all containers. Call
 	 * this if you don't want to do custom environmental decay math.
 	 */
-	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
+	public static void handleItemTicking(IInventory iinv, World world, BlockPos pos)
 	{
-		handleItemTicking(iinv, world, x, y, z, 1);
+		handleItemTicking(iinv, world, pos, 1);
 	}
 
 	/**
 	 * This is the default item ticking method for use by all containers. Call
 	 * this if you don't want to do custom environmental decay math.
 	 */
-	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z)
+	public static void handleItemTicking(ItemStack[] iinv, World world, BlockPos pos)
 	{
-		handleItemTicking(iinv, world, x, y, z, 1);
+		handleItemTicking(iinv, world, pos, 1);
 	}
 
 	/**
 	 * This version of the method assumes that the environmental decay modifier
 	 * has already been calculated.
 	 */
-	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecayFactor)
+	public static void handleItemTicking(IInventory iinv, World world, BlockPos pos, float environmentalDecayFactor)
 	{
 		for (int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
@@ -1024,11 +1051,11 @@ public class TFC_Core
 					iinv.setInventorySlotContents(i, null);
 					continue;
 				}
-				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z))
+				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, pos))
 					continue;
-				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
+				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, pos))
 					continue;
-				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
+				is = tickDecay(is, world, pos, environmentalDecayFactor, 1f);
 				if(is != null)
 					TFC_ItemHeat.handleItemHeat(is);
 				iinv.setInventorySlotContents(i, is);
@@ -1040,7 +1067,7 @@ public class TFC_Core
 	//Takes a small float in the range of 0.5 to 1.5. The resulting float would be of the form [0 0111111 [the byte] 0..0], such that the byte returned
 	//is the only unknown value
 	public static byte getByteFromSmallFloat(float f){
-		MathHelper.clamp_float(f, 0.5f, 1.5f);
+		MathHelper.clamp(f, 0.5f, 1.5f);
 		return (byte)((Float.floatToIntBits(f) >> 16) & 0xff);
 	}
 
@@ -1053,7 +1080,7 @@ public class TFC_Core
 	 * This version of the method assumes that the environmental decay modifier
 	 * has already been calculated.
 	 */
-	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
+	public static void handleItemTicking(IInventory iinv, World world, BlockPos pos, float environmentalDecayFactor, float baseDecayMod)
 	{
 		for (int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
@@ -1063,11 +1090,11 @@ public class TFC_Core
 
 			if (is != null)
 			{
-				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z))
+				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, pos))
 					continue;
-				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
+				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, pos))
 					continue;
-				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, baseDecayMod);
+				is = tickDecay(is, world, pos, environmentalDecayFactor, baseDecayMod);
 				if(is != null)
 					TFC_ItemHeat.handleItemHeat(is);
 				iinv.setInventorySlotContents(i, is);
@@ -1079,7 +1106,7 @@ public class TFC_Core
 	 * This version of the method assumes that the environmental decay modifier
 	 * has already been calculated.
 	 */
-	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z, float environmentalDecayFactor)
+	public static void handleItemTicking(ItemStack[] iinv, World world, BlockPos pos, float environmentalDecayFactor)
 	{
 		for (int i = 0; !world.isRemote && i < iinv.length; i++)
 		{
@@ -1089,11 +1116,11 @@ public class TFC_Core
 
 			if (is != null)
 			{
-				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z))
+				if (is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, pos))
 					continue;
-				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
+				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, pos))
 					continue;
-				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1);
+				is = tickDecay(is, world, pos, environmentalDecayFactor, 1);
 				if(is != null)
 					TFC_ItemHeat.handleItemHeat(is);
 				iinv[i] = is;
@@ -1102,12 +1129,7 @@ public class TFC_Core
 		}
 	}
 
-	/**
-	 * @param is
-	 * @param baseDecayMod
-	 * @param nbt
-	 */
-	public static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
+	public static ItemStack tickDecay(ItemStack is, World world, BlockPos pos, float environmentalDecayFactor, float baseDecayMod)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
 		if (nbt == null || !nbt.hasKey(Food.WEIGHT_TAG) || !nbt.hasKey(Food.DECAY_TAG))
@@ -1147,8 +1169,8 @@ public class TFC_Core
 			 * inventory
 			 */
 			//int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger(Food.DECAY_TIMER_TAG)));
-			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger(Food.DECAY_TIMER_TAG), x, y, z);
-			float temp = getCachedTemp(world, x, y, z, decayTimer);
+			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger(Food.DECAY_TIMER_TAG), pos);
+			float temp = getCachedTemp(world, pos, decayTimer);
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
 
 			if (decay < 0)
@@ -1176,7 +1198,7 @@ public class TFC_Core
 		if (Food.getDecay(is) / Food.getWeight(is) > 0.9f)
 		{
 			if(is.getItem() instanceof IFood)
-				is = ((IFood)is.getItem()).onDecayed(is, world, x, y, z);
+				is = ((IFood)is.getItem()).onDecayed(is, world, pos);
 			else
 				is.setCount(0);
 		}
@@ -1184,15 +1206,15 @@ public class TFC_Core
 		return is;
 	}
 
-	public static float getCachedTemp(World world, int x, int y, int z, int th)
+	public static float getCachedTemp(World world, BlockPos pos, int th)
 	{
-		float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(x, z, th);
+		float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(pos.getX(), pos.getZ(), th);
 		if(cacheTemp != Float.MIN_VALUE)
 		{
 			return cacheTemp;
 		}
-		float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,TFC_Time.getDayFromTotalHours(th), TFC_Time.getHourOfDayFromTotalHours(th), x, y, z);
-		addCachedTemp(world, x, z, th, temp);
+		float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,TFC_Time.getDayFromTotalHours(th), TFC_Time.getHourOfDayFromTotalHours(th), pos);
+		addCachedTemp(world, pos.getX(), pos.getZ(), th, temp);
 		return temp;
 	}
 
@@ -1207,15 +1229,15 @@ public class TFC_Core
 		ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), foodWeight);
 		r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
 		Food.adjustFlavor(is, r);
-		e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
+		e.capturedDrops.add(new EntityItem(e.getEntityWorld(), e.posX, e.posY, e.posZ, is));
 	}
 
 	public static void giveItemToPlayer(ItemStack is, EntityPlayer player)
 	{
-		if(player.worldObj.isRemote)
+		if(player.getEntityWorld().isRemote)
 			return;
 		EntityItem ei = player.entityDropItem(is, 1);
-		ei.delayBeforeCanPickup = 0;
+		ei.setNoPickupDelay();
 	}
 
 	public static boolean isFence(Block b)
@@ -1233,35 +1255,36 @@ public class TFC_Core
 		return b == TFCBlocks.woodSupportH || b == TFCBlocks.woodSupportH2;
 	}
 
-	public static boolean isOceanicBiome(int id)
+	public static boolean isOceanicBiome(Biome biome)
 	{
-		return id == TFCBiome.OCEAN.biomeID || id == TFCBiome.DEEP_OCEAN.biomeID;
+		return biome == TFCBiome.OCEAN || biome == TFCBiome.DEEP_OCEAN;
 	}
 
-	public static boolean isMountainBiome(int id)
+	public static boolean isMountainBiome(Biome biome)
 	{
-		return id == TFCBiome.MOUNTAINS.biomeID || id == TFCBiome.MOUNTAINS_EDGE.biomeID;
+		return biome == TFCBiome.MOUNTAINS || biome == TFCBiome.MOUNTAINS_EDGE;
 	}
 
-	public static boolean isBeachBiome(int id)
+	public static boolean isBeachBiome(Biome biome)
 	{
-		return id == TFCBiome.BEACH.biomeID || id == TFCBiome.GRAVEL_BEACH.biomeID;
+		return biome == TFCBiome.BEACH || biome == TFCBiome.GRAVEL_BEACH;
 	}
 
-	public static boolean isValidCharcoalPitCover(Block block)
+	public static boolean isValidCharcoalPitCover(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		if(Blocks.FIRE.getFlammability(block) > 0 && block != TFCBlocks.logPile) return false;
 
 		return block == TFCBlocks.logPile
-				|| isCobbleStone(block)
-				|| isBrickStone(block)
-				|| isSmoothStone(block)
-				|| isGround(block)
+				|| isCobbleStone(state)
+				|| isBrickStone(state)
+				|| isSmoothStone(state)
+				|| isGround(state)
 				|| block == Blocks.GLASS
 				|| block == Blocks.STAINED_GLASS
 				|| block == TFCBlocks.metalTrapDoor
 				|| block == Blocks.IRON_DOOR
-				|| block.isOpaqueCube();
+				|| state.isOpaqueCube();
 	}
 
 	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage)
@@ -1315,12 +1338,14 @@ public class TFC_Core
 		return null;
 	}
 
-	public static void destroyBlock(World world, int x, int y, int z)
+	public static void destroyBlock(World world, BlockPos pos)
 	{
-		if(world.getBlock(x, y, z) != Blocks.AIR)
+	    IBlockState state = world.getBlockState(pos);
+	    Block block = state.getBlock();
+		if(block != Blocks.AIR)
 		{
-			world.getBlock(x, y, z).dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y, z);
+			block.dropBlockAsItem(world, pos, state, 0);
+			world.setBlockToAir(pos);
 		}
 	}
 
@@ -1339,30 +1364,30 @@ public class TFC_Core
 		return i1 == i2 && d1 == d2;
 	}
 
-	public static boolean setBlockWithDrops(World world, int x, int y, int z, Block b, int meta)
+	public static boolean setBlockWithDrops(World world, BlockPos pos, Block b, int meta)
 	{
-		Block block = world.getBlock(x, y, z);
+		IBlockState state = world.getBlockState(pos);
 
-		if (block.getMaterial() != Material.AIR)
+		if (state.getMaterial() != Material.AIR)
 		{
-			int l = world.getBlockMetadata(x, y, z);
-			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (l << 12));
-			block.dropBlockAsItem(world, x, y, z, l, 0);
+			int l = state.getBlock().getMetaFromState(state);
+			world.playEvent(2001, pos, Block.getIdFromBlock(state.getBlock()) + (l << 12));
+			state.getBlock().dropBlockAsItem(world, pos, state, 0);
 		}
-		return world.setBlock(x, y, z, b, meta, 3);
+		return world.setBlockState(pos, b, meta, 3);
 	}
 
 	/**
 	 * This is a wrapper method for the vanilla world method with no MCP mapping
 	 */
-	public static boolean setBlockToAirWithDrops(World world, int x, int y, int z)
+	public static boolean setBlockToAirWithDrops(World world, BlockPos pos)
 	{
-		return world.func_147480_a(x, y, z, true);
+		return world.destroyBlock(pos, true);
 	}
 
-	public static boolean isWaterBiome(BiomeGenBase b)
+	public static boolean isWaterBiome(Biome b)
 	{
-		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.LAKE || b == TFCBiome.RIVER;
+		return TFC_Core.isBeachBiome(b) || TFC_Core.isOceanicBiome(b) || b == TFCBiome.LAKE || b == TFCBiome.RIVER;
 	}
 
 	public static String translate(String s)
@@ -1372,26 +1397,27 @@ public class TFC_Core
 
 	public static void sendInfoMessage(EntityPlayer player, IChatComponent text)
 	{
-		text.getChatStyle().setColor(EnumChatFormatting.GRAY).setItalic(true);
+		text.getChatStyle().setColor(ChatFormatting.GRAY).setItalic(true);
 		player.addChatComponentMessage(text);
 	}
 
 	public static long getSuperSeed(World w)
 	{
-		return w.getSeed()+w.getWorldInfo().getNBTTagCompound().getLong("superseed");
+		return w.getSeed()+w.getWorldInfo().getPlayerNBTTagCompound().getLong("superseed");
 	}
 	
-	public static boolean isExposedToRain(World world, int x, int y, int z)
+	public static boolean isExposedToRain(World world, BlockPos pos)
 	{
-		int highestY = world.getPrecipitationHeight(x, z) - 1;
+		BlockPos highest = world.getPrecipitationHeight(pos).down();
 		boolean isExposed = true;
-		if (world.canBlockSeeTheSky(x, y + 1, z)) // Either no blocks, or transparent blocks above.
+		if (world.canBlockSeeSky(pos.up())) // Either no blocks, or transparent blocks above.
 		{
 			// Glass blocks, or blocks with a solid top or bottom block the rain.
-			if (world.getBlock(x, highestY, z) instanceof BlockGlass
-					|| world.getBlock(x, highestY, z) instanceof BlockStainedGlass
-					|| world.isSideSolid(x, highestY, z, ForgeDirection.UP) 
-					|| world.isSideSolid(x, highestY, z, ForgeDirection.DOWN))
+            Block highestBlock = world.getBlockState(highest).getBlock();
+			if (highestBlock instanceof BlockGlass
+					|| highestBlock instanceof BlockStainedGlass
+					|| world.isSideSolid(highest, EnumFacing.UP)
+					|| world.isSideSolid(highest, EnumFacing.DOWN))
 				isExposed = false;
 		}
 		else // Can't see the sky

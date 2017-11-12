@@ -13,7 +13,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Entities.Mobs.*;
 import com.bioxx.tfc.WorldGen.Generators.Trees.*;
 
-public class TFCBiome extends BiomeGenBase
+public class TFCBiome extends Biome
 {
 	public static float riverDepthMin = -0.5F;
 	public static float riverDepthMax = -0.3F;
