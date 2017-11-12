@@ -467,7 +467,7 @@ public class TFC_Core
 		return block == TFCBlocks.hotWater || block == TFCBlocks.hotWaterStationary;
 	}
 
-	public static boolean isWater(Block block)
+	public static boolean isWater(IBlockState block)
 	{
 		return isSaltWater(block)
 				|| isFreshWater(block);
@@ -478,8 +478,9 @@ public class TFC_Core
 		return block == TFCBlocks.saltWater || block == TFCBlocks.freshWater;
 	}
 
-	public static boolean isSaltWater(Block block)
+	public static boolean isSaltWater(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.saltWater || block == TFCBlocks.saltWaterStationary;
 	}
 
@@ -489,8 +490,9 @@ public class TFC_Core
 				|| mat == Material.ICE && meta == 0;
 	}
 
-	public static boolean isFreshWater(Block block)
+	public static boolean isFreshWater(IBlockState state)
 	{
+	    Block block = state.getBlock();
 		return block == TFCBlocks.freshWater || block == TFCBlocks.freshWaterStationary;
 	}
 
@@ -506,7 +508,7 @@ public class TFC_Core
 				|| mat == Material.ICE && meta != 0;
 	}
 
-	public static boolean isSoil(Block block)
+	public static boolean isSoil(IBlockState block)
 	{
 		return isGrass(block)
 				|| isDirt(block)
@@ -514,7 +516,7 @@ public class TFC_Core
 				|| isPeat(block);
 	}
 
-	public static boolean isSoilOrGravel(Block block)
+	public static boolean isSoilOrGravel(IBlockState block)
 	{
 		return isGrass(block)
 				|| isDirt(block)
