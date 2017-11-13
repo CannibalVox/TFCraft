@@ -49,16 +49,6 @@ public abstract class BlockTerra extends Block
 		return false;
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)  
-	{
-		if(TFCOptions.enableDebugMode && world.isRemote)
-		{
-			int metadata = world.getBlockMetadata(x, y, z);
-			TerraFirmaCraft.LOG.info("Meta = " + (new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
-		}
-		return false;
-	}
 
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving)
 	{
