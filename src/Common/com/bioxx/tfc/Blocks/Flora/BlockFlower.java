@@ -3,46 +3,78 @@ package com.bioxx.tfc.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import com.bioxx.tfc.Blocks.Enums.FlowerSpecies;
+import com.bioxx.tfc.Helpers.SpanningBlockHelper;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class BlockFlower extends BlockTerra
 {
-	public String[] flowerNames;
-	@SideOnly(Side.CLIENT)
-	protected IIcon[] icons;
+    private static final IProperty<FlowerSpecies> PROP_SPECIES = PropertyEnum.create("species", FlowerSpecies.class);
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.3f, 0f, 0.3f, 0.7f, 0.6f, 0.7f);
 
 	public BlockFlower()
 	{
 		super(Material.PLANTS);
 		this.setTickRandomly(true);
-		float var4 = 0.2F;
-		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
-		flowerNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
+		this.setDefaultState(getBlockState().getBaseState().withProperty(PROP_SPECIES, FlowerSpecies.DANDELION));
 	}
 
-	public boolean canGrowConditions(World world, int x, int y, int z, int flowerMeta)
+    @Override
+    protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, PROP_SPECIES);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        for (FlowerSpecies species : FlowerSpecies.values()) {
+            items.add(new ItemStack(this, 1, species.ordinal()));
+        }
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        FlowerSpecies species = SpanningBlockHelper.spanFromMeta(FlowerSpecies.class, meta, 0, 0);
+        return getBlockState().getBaseState().withProperty(PROP_SPECIES, species);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
+        return BOUNDS;
+    }
+
+	public boolean canGrowConditions(World world, BlockPos pos, int flowerMeta)
 	{
-		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
-		float rain = TFC_Climate.getRainfall(world, x, 144, z);
-		float bioTemperature =TFC_Climate.getBioTemperatureHeight(world, x, y, z) ;
+		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(pos.getX(), pos.getZ()).floatdata1;
+		BlockPos highUp = pos.up(144-pos.getY());
+		float rain = TFC_Climate.getRainfall(world, highUp);
+		float bioTemperature =TFC_Climate.getBioTemperatureHeight(world, pos) ;
 		if(flowerMeta == 3 && bioTemperature > 20 && rain > 500 && evt < 2)
 		{
 			return true;
@@ -52,113 +84,73 @@ public class BlockFlower extends BlockTerra
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
-	/**
-	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-	 */
-	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
+	public int damageDropped(IBlockState state)
 	{
-		// Change to false if this block should not be added to the creative tab
-		Boolean addToCreative = true;
-
-		if(addToCreative)
-		{
-			for(int i = 0; i < flowerNames.length; i++)
-				list.add(new ItemStack(item, 1, i));
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta >= this.icons.length)
-			meta = 0;
-		return this.icons[meta];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register)
-	{
-		this.icons = new IIcon[flowerNames.length];
-
-		for (int i = 0; i < this.icons.length; ++i)
-		{
-			this.icons[i] = register.registerIcon(Reference.MOD_ID+":plants/"+flowerNames[i]);
-		}
-	}
-
-	@Override
-	public int damageDropped(int dmg)
-	{
-		return dmg;
+		return state.getValue(PROP_SPECIES).ordinal();
 	}
 
 	/**
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
+	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z));
+		return (world.getLight(pos) >= 8 || world.canSeeSky(pos)) && this.canThisPlantGrowOnThisBlock(world.getBlockState(pos.down()));
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		Block block = world.getBlock(x, y, z);
-		return (world.isAirBlock(x, y, z) || block.getMaterial().isReplaceable()) && this.canThisPlantGrowOnThisBlock(block);
+		IBlockState block = world.getBlockState(pos);
+		return (world.isAirBlock(pos) || block.getMaterial().isReplaceable()) && this.canThisPlantGrowOnThisBlock(block);
 	}
 
-	protected boolean canThisPlantGrowOnThisBlock(Block block)
+	protected boolean canThisPlantGrowOnThisBlock(IBlockState block)
 	{
 		return TFC_Core.isSoil(block) || TFC_Core.isFarmland(block);
 	}
 
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
+    {
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		return null;
+		this.checkAndDropBlock(world, pos);
 	}
 
 	@Override
-	public int getRenderType()
+	public void onNeighborChange(IBlockAccess access, BlockPos pos, BlockPos neighbor)
 	{
-		return 1;
+	    if (access instanceof World)
+		    this.checkAndDropBlock((World)access, pos);
 	}
 
-	@Override
-	public boolean isOpaqueCube()
+	protected void checkAndDropBlock(World world, BlockPos pos)
 	{
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
-	{
-		this.checkAndDropBlock(world, x, y, z);
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
-	{
-		this.checkAndDropBlock(world, x, y, z);
-	}
-
-	protected void checkAndDropBlock(World world, int x, int y, int z)
-	{
-		if (!this.canBlockStay(world, x, y, z))
+		if (!this.canBlockStay(world, pos))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, getBlockById(0), 0, 2);
+			world.destroyBlock(pos, true);
 		}
 	}
 }

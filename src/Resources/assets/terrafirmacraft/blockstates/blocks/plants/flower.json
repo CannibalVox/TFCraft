@@ -1,0 +1,89 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "cross": "terrafirmacraft:blocks/plants/flower_dandelion"
+    },
+    "model": "minecraft:cross",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "species": {
+      "dandelion": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_dandelion"
+        }
+      },
+      "allium": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_allium"
+        }
+      },
+      "blue_orchid": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_blue_orchid"
+        }
+      },
+      "butterfly_milkweed": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_butterfly_milkweed"
+        }
+      },
+      "calendula": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_calendula"
+        }
+      },
+      "houstonia": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_houstonia"
+        }
+      },
+      "meads_milkweed": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_meads_milkweed"
+        }
+      },
+      "nasturtium": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_nasturtium"
+        }
+      },
+      "oxeye_daisy": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_oxeye_daisy"
+        }
+      },
+      "tulip_red": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_tulip_red"
+        }
+      },
+      "rose": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_rose"
+        }
+      },
+      "tropical_milkweed": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_tropical_milkweed"
+        }
+      },
+      "tulip_orange": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_tulip_orange"
+        }
+      },
+      "tulip_white": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_tulip_white"
+        }
+      },
+      "tulip_pink": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/flower_tulip_pink"
+        }
+      }
+    }
+  }
+}
