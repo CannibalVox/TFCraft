@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "cross": "terrafirmacraft:blocks/plants/Golden Rod"
+    },
+    "model": "minecraft:cross",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "species": {
+      "Golden Rod": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/Golden Rod"
+        }
+      },
+      "Cat Tails": {
+        "textures": {
+          "cross": "terrafirmacraft:blocks/plants/Cat Tails"
+        }
+      }
+    }
+  }
+}
