@@ -58,10 +58,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		{
 			return TFC_CoreRender.renderForge(block, i, j, k, renderer);
 		}
-		else if (modelId == TFCBlocks.anvilRenderId)
-		{
-			return RenderAnvil.renderAnvil(block, i, j, k, renderer);
-		}
 		/* else if (modelId == TFCBlocks.IngotPileRenderId)
 		{
 			if(((BlockIngotPile)block).stack < 10){
@@ -105,10 +101,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		else if (modelId == TFCBlocks.detailedRenderId)
 		{
 			return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);
-		}
-		else if (modelId == TFCBlocks.waterPlantRenderId)
-		{
-			return TFC_CoreRender.renderSeaPlant(block, i, j, k, renderer);
 		}
 		return false;
 	}

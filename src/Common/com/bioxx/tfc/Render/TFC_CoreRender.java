@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,10 +19,8 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
-import com.bioxx.tfc.Render.Blocks.RenderFlora;
 import com.bioxx.tfc.TileEntities.TEFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TEPartial;
-import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.TFCOptions;
@@ -537,21 +534,6 @@ public class TFC_CoreRender
 			renderblocks.clearOverrideBlockTexture();
 		}
 		return true;
-	}
-
-	public static boolean renderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
-	{
-		boolean substrateRender = false;
-		boolean plantRender = false;
-		TileEntity te = renderblocks.blockAccess.getTileEntity(par2, par3, par4);
-		if(te instanceof TEWaterPlant){
-			TEWaterPlant wp = (TEWaterPlant) te;
-			if(wp.getBlockFromType() != null){
-				substrateRender = renderblocks.renderStandardBlockWithColorMultiplier(wp.getBlockFromType(), par2, par3, par4,1,1,1);
-				plantRender = RenderFlora.render(par1Block, par2, par3, par4, renderblocks);
-			}
-		}
-		return substrateRender && plantRender;
 	}
 
 	public static IIcon getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)
