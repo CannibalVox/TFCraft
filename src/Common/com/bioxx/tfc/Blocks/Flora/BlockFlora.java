@@ -109,7 +109,7 @@ public class BlockFlora extends BlockTerra
 	@Override
     public BlockRenderLayer getBlockLayer()
 	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	public boolean canBlockStay(World world, BlockPos pos)
