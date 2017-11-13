@@ -158,6 +158,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFC_DECORATION);
 		this.offset = offset;
+		speciesProperty = SpanningBlockHelper.injectSpanEnum(this, PROP_BERRY_SPECIES, BerrySpecies.class, this.offset, BERRIES_PER_BLOCK);
 		this.setDefaultState(getBlockState().getBaseState()
             .withProperty(speciesProperty, SpanningBlockHelper.spanFirst(BerrySpecies.class, offset, BERRIES_PER_BLOCK))
             .withProperty(PROP_FLOWERING, false).withProperty(NORTH, false).withProperty(SOUTH, false)
@@ -166,8 +167,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	@Override
     protected BlockStateContainer createBlockState() {
-	    speciesProperty = SpanningBlockHelper.spanEnum(PROP_BERRY_SPECIES, BerrySpecies.class, this.offset, BERRIES_PER_BLOCK);
-	    return new BlockStateContainer(this, speciesProperty, PROP_FLOWERING, NORTH, SOUTH, WEST, EAST, UP);
+	    return new BlockStateContainer(this, PROP_FLOWERING, NORTH, SOUTH, WEST, EAST, UP);
     }
 
 	@SideOnly(Side.CLIENT)

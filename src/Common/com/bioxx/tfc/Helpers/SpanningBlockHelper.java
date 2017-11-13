@@ -1,11 +1,17 @@
 package com.bioxx.tfc.Helpers;
 
+import com.bioxx.tfc.CommonProxy;
+import com.google.common.base.Throwables;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.IStringSerializable;
+import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 
 import java.lang.reflect.Array;
+import java.util.Collection;
 
 public class SpanningBlockHelper {
     public static <T extends Enum<T>, B extends Block> B[] initBlockArray(Class<T> enumClass, Class<B> blockClass, int count) {
@@ -14,8 +20,32 @@ public class SpanningBlockHelper {
         return (B[]) Array.newInstance(blockClass, indices);
     }
 
-    public static <T extends Enum<T> & IStringSerializable> IProperty<T> spanEnum(String name, Class<T> c, int offset, int count) {
-        return PropertyEnum.create(name, c, listEnum(c, offset, count));
+    public static <T extends Enum<T> & IStringSerializable> IProperty<T> injectSpanEnum(Block block, String name, Class<T> c, int offset, int count) {
+        IProperty<T> newProperty = PropertyEnum.create(name, c, listEnum(c, offset, count));
+        BlockStateContainer container = block.getBlockState();
+
+        BlockStateContainer.Builder builder = new BlockStateContainer.Builder(block);
+        builder.add(newProperty);
+        for (IProperty<?> property : container.getProperties()) {
+            builder.add(property);
+        }
+
+        if (container instanceof IExtendedBlockState) {
+            IExtendedBlockState extended = (IExtendedBlockState)container;
+            for (IUnlistedProperty<?> unlistedProperty : extended.getUnlistedNames()) {
+                builder.add(unlistedProperty);
+            }
+        }
+
+        BlockStateContainer newContainer = builder.build();
+
+        try {
+            CommonProxy.FIELD_BLOCK_STATE.set(block, newContainer);
+        } catch (Throwable e) {
+            Throwables.propagate(e);
+        }
+
+        return newProperty;
     }
 
     public static <T extends Enum<T>> T[] listEnum(Class<T> c, int offset, int count) {

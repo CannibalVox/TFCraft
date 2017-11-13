@@ -54,6 +54,7 @@ public class BlockAnvil extends BlockTerraContainer
 		super(Material.IRON);
 		this.setCreativeTab(TFCTabs.TFC_DEVICES);
 		this.offset = offset;
+        anvilProperty = SpanningBlockHelper.injectSpanEnum(this, PROP_ANVIL_REQ, AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK);
 		this.setDefaultState(getBlockState().getBaseState()
                 .withProperty(anvilProperty, SpanningBlockHelper.spanFirst(AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK))
                 .withProperty(PROP_FACING, EnumFacing.EAST));
@@ -61,8 +62,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-        anvilProperty = SpanningBlockHelper.spanEnum(PROP_ANVIL_REQ, AnvilMaterial.class, this.offset, ANVILS_PER_BLOCK);
-		return new BlockStateContainer(this, anvilProperty, PROP_FACING);
+		return new BlockStateContainer(this, PROP_FACING);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

@@ -1,5 +1,7 @@
 package com.bioxx.tfc;
 
+import com.google.common.base.Throwables;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -32,9 +34,30 @@ import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Tools.ChiselManager;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 public class CommonProxy
 {
+    public static Field FIELD_BLOCK_STATE;
+
+    //Make Minecraft Block statecontainer non-final
+	static {
+	    try {
+            Field modifiers = Field.class.getDeclaredField( "modifiers" );
+            modifiers.setAccessible( true );
+
+            FIELD_BLOCK_STATE = ReflectionHelper.findField( Block.class, "blockState", "field_176227_L" );
+            modifiers.set( FIELD_BLOCK_STATE, FIELD_BLOCK_STATE.getModifiers() & ( ~Modifier.FINAL ) );
+            FIELD_BLOCK_STATE.setAccessible(true);
+        } catch (Throwable e) {
+            Throwables.propagate(e);
+        }
+    }
+
+
 	public void registerFluidIcons()
 	{
 
