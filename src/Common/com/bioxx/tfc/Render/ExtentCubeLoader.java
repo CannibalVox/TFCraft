@@ -11,18 +11,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.animation.Animation;
 import net.minecraftforge.client.model.animation.ModelBlockAnimation;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import scala.util.parsing.input.StreamReader;
 
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 
 public class ExtentCubeLoader implements ICustomModelLoader {
