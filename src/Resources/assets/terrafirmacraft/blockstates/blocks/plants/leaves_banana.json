@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "leaves": "terrafirmacraft:blocks/wood/fruit trees/Banana Leaves",
+      "overlay": "terrafirmacraft:blocks/wood/fruit trees/Banana Leaves"
+    },
+    "model": "terrafirmacraft:blocks/flora/fruit_leaves",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "flowering": {
+      "empty": {
+        "textures": {
+          "overlay": "terrafirmacraft:blocks/wood/fruit trees/Banana Leaves"
+        }
+      },
+      "fruit": {
+        "textures": {
+          "overlay": "terrafirmacraft:blocks/wood/fruit trees/Banana Fruit"
+        }
+      },
+      "flowering": {
+        "textures": {
+          "overlay": "terrafirmacraft:blocks/wood/fruit trees/Banana Flowers"
+        }
+      }
+    }
+  }
+}

@@ -9,19 +9,6 @@ import com.google.common.collect.ObjectArrays;
 @SuppressWarnings("PMD")
 public class Global
 {
-	/* FruitTree Meta Names, also used for fruit items and FloraManager */
-	public static final String[] FRUIT_META_NAMES = new String[] {
-		"Red Apple", "Banana", "Orange", "Green Apple", "Lemon", "Olive", "Cherry", "Peach", "Plum"
-	};
-
-	/* Flower Meta Names
-	 * The first 10 flowers are from vanilla */
-	public static final String[] FLOWER_META_NAMES = new String[] {
-		"flower_rose", "flower_blue_orchid", "flower_allium", "flower_houstonia",
-		"flower_tulip_red", "flower_tulip_orange", "flower_tulip_white", "flower_tulip_pink", "flower_oxeye_daisy",
-		"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"
-	};
-
 	/* Fungi Meta Names
 	 * The first 2 are vanilla mushrooms */
 	public static final String[] FUNGI_META_NAMES = new String[] {

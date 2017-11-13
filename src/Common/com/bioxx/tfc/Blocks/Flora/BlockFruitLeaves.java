@@ -1,21 +1,30 @@
 package com.bioxx.tfc.Blocks.Flora;
 
+import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import com.bioxx.tfc.Blocks.Enums.FruitTreeSpecies;
+import com.bioxx.tfc.Helpers.SpanningBlockHelper;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -26,164 +35,164 @@ import com.bioxx.tfc.TileEntities.TEFruitLeaves;
 import com.bioxx.tfc.api.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class BlockFruitLeaves extends BlockTerraContainer
 {
-	//private int adjacentTreeBlocks[];
-	private String[] woodNames = Global.FRUIT_META_NAMES;
-	private IIcon[] icons = new IIcon[16];
-	//private IIcon[] iconsDead = new IIcon[16];
-	public static IIcon[] iconsFruit = new IIcon[16];
-	private IIcon[] iconsOpaque = new IIcon[16];
-	//private IIcon[] iconsDeadOpaque = new IIcon[16];
-	public static IIcon[] iconsFlowers = new IIcon[16];
+    private static final PropertyBool PROP_FRUIT = PropertyBool.create("fruit");
+    private static final String PROP_SPECIES_NAME = "species";
+    private IProperty<FruitTreeSpecies> PROP_SPECIES;
 
-	//private int offset;
+    private enum FloweringState implements IStringSerializable {
+        EMPTY("empty"),
+        FRUIT("fruit"),
+        FLOWERING("flowering");
+
+        private String name;
+        FloweringState (String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+    }
+
+    private static final IProperty<FloweringState> PROP_FLOWERING = PropertyEnum.create("flowering", FloweringState.class);
+    private static final int FRUITS_PER_BLOCK = 8;
+
+	private int offset;
 
 	public BlockFruitLeaves(int offset)
 	{
 		super(Material.LEAVES);
 		this.setTickRandomly(true);
-		//this.offset = offset;
+		this.offset = offset;
+        PROP_SPECIES = SpanningBlockHelper.injectSpanEnum(this, PROP_SPECIES_NAME, FruitTreeSpecies.class, this.offset, FRUITS_PER_BLOCK);
+        setDefaultState(getBlockState().getBaseState().withProperty(PROP_SPECIES, FruitTreeSpecies.BANANA)
+            .withProperty(PROP_FRUIT, false).withProperty(PROP_FLOWERING, FloweringState.EMPTY));
 	}
 
-	@Override
-	public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
-	{
-		return TerraFirmaCraft.proxy.foliageColorMultiplier(bAccess, x, y, z);
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, PROP_FRUIT, PROP_FLOWERING);
+    }
 
 	@Override
-	public int getRenderType()
-	{
-		return TFCBlocks.leavesFruitRenderId;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
+	public boolean isFullBlock(IBlockState state)
 	{
 		return false;
 	}
 
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-		if (TerraFirmaCraft.proxy.getGraphicsLevel())
-			return icons[meta & 7];
-		else
-			return iconsOpaque[meta & 7];
-	}
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
+    {
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+    {
+        for (FruitTreeSpecies species : FruitTreeSpecies.values()) {
+            items.add(new ItemStack(this, 1, species.ordinal()));
+        }
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        boolean hasFruit = (meta & 8) != 0;
+        FruitTreeSpecies species = SpanningBlockHelper.spanFromMeta(FruitTreeSpecies.class, meta, this.offset, FRUITS_PER_BLOCK);
+        return getBlockState().getBaseState().withProperty(PROP_SPECIES, species).withProperty(PROP_FRUIT, hasFruit);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        boolean hasFruit = state.getValue(PROP_FRUIT);
+        FruitTreeSpecies species = state.getValue(PROP_SPECIES);
+
+        int meta = SpanningBlockHelper.metaFromValue(species, this.offset, FRUITS_PER_BLOCK);
+        if (hasFruit)
+            meta |= 8;
+
+        return meta;
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        if (state.getValue(PROP_FRUIT))
+            return state.withProperty(PROP_FLOWERING, FloweringState.FRUIT);
+
+        FruitTreeSpecies species = state.getValue(PROP_SPECIES);
+        FloraManager manager = FloraManager.getInstance();
+        FloraIndex index = manager.findMatchingIndex(species.getName());
+        if(index != null)
+        {
+            if(index.inBloom(TFC_Time.getSeasonAdjustedMonth(pos.getZ())))//blooming
+                return state.withProperty(PROP_FLOWERING, FloweringState.FLOWERING);
+        }
+
+        return state.withProperty(PROP_FLOWERING, FloweringState.EMPTY);
+    }
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegisterer)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		for(int i = 0; i < 9; i++)
-		{
-			icons[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Leaves");
-			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Leaves Opaque");
-			//iconsDead[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
-			//iconsDeadOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsFruit[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Fruit");
-			iconsFlowers[i] = iconRegisterer.registerIcon(Reference.MOD_ID + ":" + "wood/fruit trees/" + woodNames[i] + " Flowers");
-		}
+		this.lifeCycle(world, pos, state);
 	}
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		return null;
-	}
-
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
-	{
-		return true;
-	}
-
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
-	{
-		this.lifeCycle(world, x, y, z);
-	}
-
-	private void lifeCycle(World world, int x, int y, int z)
+	private void lifeCycle(World world, BlockPos pos, IBlockState state)
 	{
 		if(!world.isRemote)
 		{
-			if (!canStay(world, x, y, z))
+			if (!canStay(world, pos))
 			{
-				destroyLeaves(world, x, y, z);
+				destroyLeaves(world, pos);
 				return;
 			}
 
 			Random rand = new Random();
-			int meta = world.getBlockMetadata(x, y, z);
-			int m = meta - 8;
+			FruitTreeSpecies species = state.getValue(PROP_SPECIES);
+			boolean hasFruit = state.getValue(PROP_FRUIT);
 
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = manager.findMatchingIndex(getType(this, m));
-			FloraIndex fi2 = manager.findMatchingIndex(getType(this, meta));
+			FloraIndex fi = manager.findMatchingIndex(species.getName());
 
-			float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
-			TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
-			if(te != null)
+			float temp = TFC_Climate.getHeightAdjustedTemp(world, pos);
+			TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(pos);
+			if(te != null && fi != null)
 			{
-				if(fi2 != null)
-				{
-					if(temp >= fi2.minTemp && temp < fi2.maxTemp)
-					{
-						if (fi2.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 1)
-						{
-							if(meta < 8)
-							{
-								meta += 8;
-								te.hasFruit = true;
-								te.dayFruited = TFC_Time.getTotalDays();
-							}
-							world.setBlockMetadataWithNotify(x, y, z, meta, 0x2);
-						}
-					}
-					else
-					{
-						if(meta >= 8 && rand.nextInt(10) == 0)
-						{
-							if(te.hasFruit)
-							{
-								te.hasFruit = false;
-								world.setBlockMetadataWithNotify(x, y, z, meta - 8, 0x2);
-							}
-						}
-					}
-				}
+			    if (hasFruit) {
+			        if (!fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(pos.getZ())) ||
+                            (rand.nextInt(10) == 0 && (temp < fi.minTemp || temp >= fi.maxTemp))) {
+			            world.setBlockState(pos, state.withProperty(PROP_FRUIT, false));
+                    }
+                } else {
+			        if (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(pos.getZ())) &&
+                            TFC_Time.getMonthsSinceDay(te.dayHarvested) > 1 &&
+                            temp >= fi.minTemp && temp < fi.maxTemp) {
 
-				if(fi != null)
-				{
-					if(!fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)))
-					{
-						if(world.getBlockMetadata(x, y, z) >= 8)
-						{
-							if(te.hasFruit)
-							{
-								te.hasFruit = false;
-								world.setBlockMetadataWithNotify(x, y, z, meta-8, 0x2); 
-							}
-						}
-					}
-				}
-
-				if (rand.nextInt(100) > 50)
-					world.markBlockForUpdate(x, y, z);
+			            te.dayFruited = TFC_Time.getTotalDays();
+			            world.setBlockState(pos, state.withProperty(PROP_FRUIT, true));
+                    }
+                }
 			}
 		}
 	}
 
-	public static boolean canStay(World world, int x, int y, int z)
+	public static boolean canStay(World world, BlockPos pos)
 	{
 		//Only leaf blocks that are within one block and on the same level or 1 above a branch or the top of the trunk
 		for (int i = 1; i >= -1; i--)
@@ -192,8 +201,9 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			{
 				for (int k = 1; k >= -1; k--)
 				{
-					if (world.getBlock(i + x, j + y, k + z) == TFCBlocks.fruitTreeWood &&
-							world.getBlock(i + x, j + y + 1, k + z) != TFCBlocks.fruitTreeWood) // Only branches or the top of the trunk
+				    BlockPos branchPos = pos.east(i).south(k).up(j);
+					if (world.getBlockState(branchPos).getBlock() == TFCBlocks.fruitTreeWood &&
+							world.getBlockState(branchPos.up()).getBlock() != TFCBlocks.fruitTreeWood) // Only branches or the top of the trunk
 						return true;
 				}
 			}
@@ -202,69 +212,48 @@ public class BlockFruitLeaves extends BlockTerraContainer
 		return false;
 	}
 
-	public static String getType(Block block, int meta)
+	@Override
+	public void onNeighborChange(IBlockAccess access, BlockPos pos, BlockPos neighbor)
 	{
-		if(block == TFCBlocks.fruitTreeLeaves)
-		{
-			switch(meta)
-			{
-			case 0: return Global.FRUIT_META_NAMES[0];
-			case 1: return Global.FRUIT_META_NAMES[1];
-			case 2: return Global.FRUIT_META_NAMES[2];
-			case 3: return Global.FRUIT_META_NAMES[3];
-			case 4: return Global.FRUIT_META_NAMES[4];
-			case 5: return Global.FRUIT_META_NAMES[5];
-			case 6: return Global.FRUIT_META_NAMES[6];
-			case 7: return Global.FRUIT_META_NAMES[7];
-			}
-		}
-		else
-		{
-			switch(meta)
-			{
-			case 0: return Global.FRUIT_META_NAMES[8];
-			}
-		}
-		return "";
+		super.onNeighborChange(access, pos, neighbor);
+
+		if (access instanceof  World)
+		    lifeCycle((World)access, pos, access.getBlockState(pos));
+	}
+
+	private void destroyLeaves(World world, BlockPos pos)
+	{
+		world.setBlockToAir(pos);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
-	{
-		super.onNeighborBlockChange(world, x, y, z, b);
-		lifeCycle(world, x, y, z);
-	}
-
-	private void destroyLeaves(World world, int x, int y, int z)
-	{
-		world.setBlockToAir(x, y, z);
-	}
-
-	@Override
-	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float dropChance, int fortune)
+    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 	{
 		// Intentionally Blank
 	}
 
 	/* Left-Click Harvest Fruit */
 	@Override
-	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityplayer)
+    public void onBlockClicked(World world, BlockPos pos, EntityPlayer entityplayer)
 	{
 		if (!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = manager.findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
+			IBlockState state = world.getBlockState(pos);
+			FruitTreeSpecies species = state.getValue(PROP_SPECIES);
+			boolean hasFruit = state.getValue(PROP_FRUIT);
 
-			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest((TFC_Time.getSeasonAdjustedMonth(z) + 11) % 12) && (meta & 8) == 8))
+			FloraManager manager = FloraManager.getInstance();
+			FloraIndex fi = manager.findMatchingIndex(species.getName());
+
+			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(pos.getZ())) || fi.inHarvest((TFC_Time.getSeasonAdjustedMonth(pos.getZ()) + 11) % 12) && hasFruit))
 			{
-				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
-				if (te != null && te.hasFruit)
+				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(pos);
+				if (te != null)
 				{
-					te.hasFruit = false;
 					te.dayHarvested = TFC_Time.getTotalDays();
-					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
-					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
+
+					world.setBlockState(pos, state.withProperty(PROP_FRUIT, false), 3);
+                    spawnAsEntity(world, pos, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
 				}
 			}
 		}
@@ -272,23 +261,24 @@ public class BlockFruitLeaves extends BlockTerraContainer
 
 	/* Right-Click Harvest Fruit */
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = manager.findMatchingIndex(getType(this, world.getBlockMetadata(x, y, z) & 7));
+		    FruitTreeSpecies species = state.getValue(PROP_SPECIES);
+		    boolean hasFruit = state.getValue(PROP_FRUIT);
 
-			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) || fi.inHarvest((TFC_Time.getSeasonAdjustedMonth(z) + 11) % 12) && (meta & 8) == 8))
+			FloraManager manager = FloraManager.getInstance();
+			FloraIndex fi = manager.findMatchingIndex(species.getName());
+
+			if (fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(pos.getZ())) || fi.inHarvest((TFC_Time.getSeasonAdjustedMonth(pos.getZ()) + 11) % 12) && hasFruit))
 			{
-				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
-				if(te != null && te.hasFruit)
+				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(pos);
+				if(te != null)
 				{
-					te.hasFruit = false;
 					te.dayHarvested = TFC_Time.getTotalDays();
-					world.setBlockMetadataWithNotify(x, y, z, meta - 8, 3);
-					dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
+					world.setBlockState(pos, state.withProperty(PROP_FRUIT, false), 3);
+					spawnAsEntity(world, pos, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(4 + (world.rand.nextFloat() * 12), 10)));
 					return true;
 				}
 			}
@@ -300,11 +290,5 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TEFruitLeaves();
-	}
-
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
-	{
-		return null;
 	}
 }
