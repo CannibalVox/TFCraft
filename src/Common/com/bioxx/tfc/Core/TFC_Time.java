@@ -85,7 +85,7 @@ public class TFC_Time
 		if(time < startTime)
 		{
 			world.getWorldInfo().setWorldTime(startTime);
-			world.getWorldInfo().incrementTotalWorldTime(startTime);
+			world.getWorldInfo().setWorldTotalTime(startTime);
 		}
 
 		int m = getMonth();
